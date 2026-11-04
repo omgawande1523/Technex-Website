@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TNX-26 Frontend
+
+The official frontend application for **TECHNEX 2026–27**, the annual technical festival of St. Vincent Pallotti College of Engineering & Technology, Nagpur.
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Next.js (App Router) | React framework |
+| React | UI development |
+| TypeScript | Type safety |
+| Tailwind CSS | Styling |
+| ESLint | Code quality |
+
+## Project Structure
+
+```text
+tnx26_frontend/
+├
+│
+├── src/
+│   ├── app/
+│   │   ├── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── globals.css
+│   │   ├── about/
+│   │   │   └── page.tsx
+│   │   ├── events/
+│   │   │   └── page.tsx
+│   │   ├── workshops/
+│   │   │   └── page.tsx
+│   │   ├── gallery/
+│   │   │   └── page.tsx
+│   │   ├── team/
+│   │   │   └── page.tsx
+│   │   ├── sponsors/
+│   │   │   └── page.tsx
+│   │   ├── contact/
+│   │   │   └── page.tsx
+│   │   
+│   │       
+│   │
+│   ├── components/
+│   │   ├── landing/
+│   │   ├── contact/
+│   │   ├── about/
+│   │   ├── events/
+│   │   ├── workshops/
+│   │   ├── gallery/
+│   │   ├── team/
+│   │   └── sponsors/
+│   │
+│   ├── hooks/
+│   ├── lib/
+│   ├── constants/
+│   ├── types/
+│   └── utils/
+│
+├── AGENTS.md
+├── package.json
+├── package-lock.json
+└── tsconfig.json
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 22 or later
+- npm
+- Git
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/NikitaBhushanwar/tnx26_frontend.git
+```
+
+### 2. Navigate into the project
+
+```bash
+cd tnx26_frontend
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Build production application |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-## Learn More
+## Application Routes
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Page |
+|---|---|
+| `/` | Home |
+| `/about` | About Technex |
+| `/events` | Events |
+| `/workshops` | Workshops |
+| `/gallery` | Gallery |
+| `/team` | Team |
+| `/sponsors` | Sponsors |
+| `/contact` | Contact |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Development Guidelines
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Keep reusable components inside `src/components`.
+2. Organize components by their respective features.
+3. Keep route-specific page implementations inside `src/app`.
+4. Use TypeScript for components, functions and data structures.
+5. Store static assets inside `public`.
+6. Keep environment variables and secrets out of Git.
+7. Follow the coding instructions defined in `AGENTS.md`.
+8. Prefer reusable, modular and maintainable implementations.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+git add .
+git commit -m "Describe your changes"
+git push origin main
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Repository
+
+**GitHub:** https://github.com/NikitaBhushanwar/tnx26_frontend
+
+---
