@@ -1,0 +1,184 @@
+.scene {
+  --ice: #e6c35c;
+  --accent: #ffdc78;
+  --mono: "Courier New", Courier, monospace;
+
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000 url("/permanent-bg.webp") center / cover no-repeat;
+  color: var(--ice);
+  cursor: crosshair;
+  font-family: var(--mono);
+}
+
+.webgl {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  touch-action: none;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 42%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+.brand {
+  position: fixed;
+  top: 1.5rem;
+  right: 2.2rem;
+  z-index: 10;
+  text-align: right;
+  line-height: 1.8;
+  pointer-events: none;
+}
+
+.brandPrimary {
+  color: #f6ead2;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.brandSecondary,
+.brandVolume {
+  font-size: 0.56rem;
+  letter-spacing: 0.26em;
+}
+
+.brandSecondary {
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.brandVolume {
+  opacity: 0.42;
+}
+
+.counter {
+  position: fixed;
+  bottom: 1.6rem;
+  left: 2.2rem;
+  z-index: 10;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  line-height: 2.1;
+  color: rgba(230, 195, 92, 0.55);
+  pointer-events: none;
+}
+
+.counterNumber {
+  color: #f6ead2;
+}
+
+.card {
+  position: fixed;
+  bottom: 2.4rem;
+  left: 50%;
+  z-index: 12;
+  min-width: 300px;
+  padding: 0.9rem 1.4rem;
+  transform: translate(-50%, 1.2rem);
+  border: 1px solid rgba(230, 195, 92, 0.22);
+  background: rgba(8, 6, 3, 0.72);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.card.on {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cardTitle {
+  color: #f6ead2;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+}
+
+.cardMeta {
+  margin-top: 0.35rem;
+  color: var(--accent);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  opacity: 0.75;
+}
+
+.cardEsc {
+  margin-top: 0.55rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.24em;
+  opacity: 0.4;
+}
+
+.fatal {
+  position: fixed;
+  inset: auto 50% 3.4rem 50%;
+  z-index: 20;
+  width: min(640px, calc(100% - 2rem));
+  padding: 1rem 1.4rem;
+  transform: translateX(-50%);
+  border: 1px solid rgba(217, 168, 78, 0.35);
+  background: rgba(8, 6, 3, 0.85);
+  font-family: var(--mono);
+  text-align: left;
+}
+
+.fatalTitle {
+  color: #f0d9a8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.fatalMessage {
+  margin-top: 0.4rem;
+  color: rgba(242, 193, 78, 0.95);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.fatalHelp {
+  margin-top: 0.45rem;
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  opacity: 0.55;
+}
+
+@media (max-width: 940px) {
+  .brand {
+    top: 1rem;
+    right: 1.1rem;
+  }
+
+  .counter {
+    bottom: 1.1rem;
+    left: 1.1rem;
+  }
+
+  .card {
+    width: calc(100% - 2.2rem);
+    min-width: 0;
+  }
+}

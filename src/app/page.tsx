@@ -1,14 +1,82 @@
-import Navbar from "../components/navigation/Navbar";
+"use client";
+
+import React, { useState } from "react";
+import ComicModal, { type ComicCardData } from "@/components/landing/ComicModal";
+import SupermanPrimeCanvas from "@/components/landing/SupermanPrimeCanvas";
+import UIOverlay from "@/components/landing/UIOverlay";
+import styles from "./landing.module.css";
+import AboutSection from "@/components/about/AboutSection";
+import aboutStyles from "@/components/about/about.module.css";
+
+type EntityForm = "humanoid" | "flying_machine" | "watercraft" | "neural_network";
 
 export default function Home() {
+  const [selectedComic, setSelectedComic] = useState<ComicCardData | null>(null);
+  const [entityForm, setEntityForm] = useState<EntityForm>("humanoid");
+
   return (
-    <>
-      <Navbar />
-      <div className="flex flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-        <h1 className="text-center text-7xl font-extrabold tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-8xl md:text-9xl">
-          TECHNEX
-        </h1>
+    <div className={styles.sitePage}>
+      <section
+      className={styles.landing}
+      style={{
+        position: "relative",
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 2,
+          pointerEvents: "auto",
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        <SupermanPrimeCanvas
+          onSelectComic={setSelectedComic}
+          bloomStrength={0.34}
+          glowIntensity={0.9}
+          theme="prime"
+          poseMode="hover"
+          showHalo={false}
+          showCape={false}
+          showRibbons={false}
+          showCards
+          showParticles={false}
+          cameraPreset="prime"
+          panelLayout="circular"
+          modelSource="male_body"
+          hologramSkinOpacity={0.65}
+          hologramNetworkIntensity={0.6}
+          hologramNodesBrightness={0.3}
+          hologramFlowSpeed={1}
+          hologramChestCoreRadiance={1.3}
+          showHologramAura={false}
+          showHologramScanline
+          entityForm={entityForm}
+          onEntityFormChange={setEntityForm}
+          autoTransform
+        />
       </div>
-    </>
+
+      <UIOverlay />
+      <ComicModal
+        card={selectedComic}
+        onClose={() => setSelectedComic(null)}
+      />
+      <a href="#about" className={styles.scrollCue} aria-label="Scroll down to About Us">
+        <span className={styles.scrollCueText}>SCROLL TO EXPLORE ABOUT US</span>
+        <span className={styles.scrollCueMouse}>
+          <span className={styles.scrollCueWheel} />
+        </span>
+      </a>
+      </section>
+      <main className={aboutStyles.aboutPage}>
+        <AboutSection />
+      </main>
+    </div>
   );
 }

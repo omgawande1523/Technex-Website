@@ -1,0 +1,38 @@
+/* ==========================================================================
+   SECTION HEADING BANNER STYLING (EXPANDED +1X SCALE)
+   ========================================================================== */
+
+.section-heading-banner-wrapper {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-heading-banner-svg {
+  width: 100%;
+  height: auto;
+  max-height: 88px;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8));
+  transition: transform 0.25s ease;
+}
+
+.section-heading-banner-wrapper:hover .section-heading-banner-svg {
+  transform: scale(1.02);
+}
+
+@media (max-width: 760px) {
+  .section-heading-banner-wrapper {
+    max-width: 540px;
+    margin-bottom: 2.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-heading-banner-wrapper {
+    max-width: 350px;
+    margin-bottom: 2.2rem;
+  }
+}

@@ -1,0 +1,525 @@
+.page {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100vh - 57px);
+  overflow: hidden;
+  padding: clamp(36px, 6vw, 64px) clamp(16px, 5vw, 48px) 72px;
+  background: #000;
+  color: #e2e8f0;
+}
+
+.backgroundGlow {
+  position: absolute;
+  z-index: -1;
+  top: 48px;
+  left: 50%;
+  width: min(600px, 90vw);
+  height: 300px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgb(0 240 255 / 10%);
+  filter: blur(140px);
+  pointer-events: none;
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: clamp(32px, 5vw, 56px);
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  color: #fff;
+  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-size: clamp(2.2rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 10px rgb(0 240 255 / 80%), 0 0 28px rgb(0 240 255 / 42%);
+}
+
+.titleRule {
+  width: clamp(112px, 20vw, 176px);
+  height: 2px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+  box-shadow: 0 0 12px #00f0ff;
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 1152px);
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: clamp(20px, 3.5vw, 48px);
+}
+
+.cardPerspective {
+  width: 100%;
+  aspect-ratio: 1024 / 796;
+  perspective: 1400px;
+  cursor: pointer;
+  outline: none;
+}
+
+.cardPerspective:focus-visible {
+  border-radius: 18px;
+  outline: 2px solid #00f0ff;
+  outline-offset: 3px;
+}
+
+.cardFlip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 650ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.cardBack {
+  transform: rotateY(180deg);
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  isolation: isolate;
+  user-select: none;
+}
+
+.frameArt,
+.frameGlow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.frameArt {
+  z-index: 10;
+  filter: drop-shadow(0 0 16px rgb(0 240 255 / 22%));
+  transition: filter 500ms;
+}
+
+.cardPerspective:hover .frameArt {
+  filter: drop-shadow(0 0 24px rgb(0 240 255 / 45%));
+}
+
+.frameGlow {
+  z-index: 11;
+  mix-blend-mode: screen;
+  animation: goldGlow 3.4s ease-in-out infinite;
+}
+
+.screen {
+  position: absolute;
+  z-index: 20;
+  top: 20.2%;
+  right: 10.6%;
+  bottom: 23.4%;
+  left: 13.6%;
+  overflow: hidden;
+  border: 1px solid rgb(0 240 255 / 20%);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #030a16, #02050d 60%, #010206);
+  box-shadow: inset 0 0 24px rgb(0 240 255 / 14%);
+}
+
+.backScreen {
+  background: linear-gradient(180deg, #020712, #01040a 60%, #000204);
+}
+
+.scanline {
+  position: absolute;
+  z-index: 3;
+  top: -15%;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+  box-shadow: 0 0 10px #00f0ff;
+  opacity: 0.35;
+  pointer-events: none;
+  animation: scanline 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.frameContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: clamp(8px, 1.35vw, 16px);
+}
+
+.frontContent {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+  gap: 3%;
+}
+
+.poster {
+  position: relative;
+  display: flex;
+  width: 42%;
+  flex: 0 0 42%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgb(0 240 255 / 70%);
+  border-radius: 8px;
+  background: #020a14;
+  box-shadow: 0 0 16px rgb(0 240 255 / 30%), inset 0 0 12px rgb(0 240 255 / 20%);
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+  object-fit: contain;
+  transition: transform 500ms;
+}
+
+.cardPerspective:hover .poster img {
+  transform: scale(1.05);
+}
+
+.posterShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgb(1 4 10 / 80%), transparent 50%, rgb(1 4 10 / 15%));
+  pointer-events: none;
+}
+
+.posterCaption {
+  position: absolute;
+  bottom: 6px;
+  left: 8px;
+  color: rgb(0 240 255 / 90%);
+  font-family: "Share Tech Mono", monospace;
+  font-size: clamp(6px, 0.65vw, 8px);
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+.workshopInfo {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.workshopIntro {
+  min-width: 0;
+}
+
+.category {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+  padding: 3px 8px;
+  overflow: hidden;
+  border: 1px solid rgb(255 170 0 / 80%);
+  border-radius: 999px;
+  background: rgb(24 14 2 / 90%);
+  box-shadow: 0 0 8px rgb(255 170 0 / 30%);
+  color: #ffaa00;
+  font-family: "Share Tech Mono", monospace;
+  font-size: clamp(7px, 0.75vw, 10px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryDot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: #ffaa00;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.workshopTitle {
+  margin: 0;
+  color: #fff;
+  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-size: clamp(14px, 2vw, 26px);
+  font-weight: 900;
+  letter-spacing: 0.025em;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+.workshopTitle span {
+  display: block;
+  text-shadow: 0 0 10px rgb(255 255 255 / 80%);
+}
+
+.workshopTitle .titleHighlight {
+  color: #00f0ff;
+  text-shadow: 0 0 16px #00f0ff;
+}
+
+.description {
+  display: -webkit-box;
+  margin: 7px 0 0;
+  overflow: hidden;
+  color: #e5e7eb;
+  font-family: "Rajdhani", "Arial Narrow", sans-serif;
+  font-size: clamp(10px, 1.1vw, 14px);
+  font-weight: 500;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.actions {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.exploreButton,
+.registerButton {
+  min-width: 0;
+  height: clamp(25px, 3vw, 36px);
+  padding: 0 4px;
+  clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+  cursor: pointer;
+  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-size: clamp(8px, 0.85vw, 11px);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  transition: filter 200ms, transform 200ms;
+}
+
+.exploreButton:hover,
+.registerButton:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+.exploreButton {
+  border: 0;
+  background: linear-gradient(180deg, #ffe033, #ffc400 55%, #e69d00);
+  box-shadow: 0 0 10px rgb(255 196 0 / 50%);
+  color: #1c1204;
+  animation: goldPulse 2.8s ease-in-out infinite;
+}
+
+.registerButton {
+  border: 1px solid #e11d48;
+  background: linear-gradient(180deg, #300617, #20040f 50%, #140209);
+  box-shadow: 0 0 8px rgb(225 29 72 / 45%);
+  color: #fff;
+  animation: redPulse 2.4s ease-in-out infinite;
+}
+
+.registered {
+  border-color: #00ff88;
+  background: linear-gradient(180deg, #052615, #03180d 50%, #010d07);
+  box-shadow: 0 0 10px rgb(0 255 136 / 55%);
+  color: #00ff88;
+  font-size: clamp(7px, 0.75vw, 10px);
+  letter-spacing: 0.02em;
+  animation: greenPulse 2.4s ease-in-out infinite;
+}
+
+.backContent {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px;
+  text-align: center;
+}
+
+.backTitle {
+  width: 100%;
+  margin: 0;
+  padding: 0 4px 6px;
+  border-bottom: 1px solid rgb(0 240 255 / 30%);
+  color: #fff;
+  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-size: clamp(11px, 1.3vw, 17px);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.backDescription {
+  max-width: 95%;
+  margin: auto;
+  color: #f3f4f6;
+  font-family: "Rajdhani", "Arial Narrow", sans-serif;
+  font-size: clamp(12px, 1.5vw, 19px);
+  line-height: 1.45;
+}
+
+.returnHint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #9ca3af;
+  font-family: "Share Tech Mono", monospace;
+  font-size: clamp(8px, 0.85vw, 11px);
+  letter-spacing: 0.08em;
+}
+
+.returnHint span {
+  color: #00f0ff;
+  font-size: 15px;
+}
+
+@keyframes scanline {
+  0% {
+    top: -15%;
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    top: 115%;
+    opacity: 0;
+  }
+}
+
+@keyframes goldGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 4px rgb(255 185 0 / 35%));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgb(255 195 0 / 90%)) brightness(1.2);
+  }
+}
+
+@keyframes goldPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgb(255 196 0 / 45%));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgb(255 215 0 / 85%));
+  }
+}
+
+@keyframes redPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgb(225 29 72 / 45%));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgb(255 42 109 / 80%));
+  }
+}
+
+@keyframes greenPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgb(0 255 136 / 45%));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgb(0 255 136 / 80%));
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    min-height: calc(100vh - 57px);
+    padding-top: 36px;
+  }
+
+  .grid {
+    max-width: 520px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .posterCaption {
+    font-size: 7px;
+  }
+
+  .category {
+    font-size: 8px;
+  }
+
+  .workshopTitle {
+    font-size: clamp(14px, 4vw, 21px);
+  }
+
+  .description {
+    font-size: clamp(10px, 2.8vw, 11px);
+    line-height: 1.2;
+    -webkit-line-clamp: 2;
+  }
+
+  .exploreButton,
+  .registerButton {
+    font-size: clamp(8px, 2.3vw, 11px);
+  }
+
+  .backTitle {
+    font-size: clamp(12px, 3.2vw, 17px);
+  }
+
+  .backDescription {
+    font-size: clamp(13px, 3.6vw, 19px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frameGlow,
+  .scanline,
+  .categoryDot,
+  .exploreButton,
+  .registerButton,
+  .registered {
+    animation: none;
+  }
+
+  .cardFlip {
+    transition-duration: 1ms;
+  }
+}

@@ -1,8 +1,25 @@
 @import "tailwindcss";
-
+@font-face {
+  font-family: "Barge";
+  src: url("/fonts/Barge-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barge";
+  src: url("/fonts/Barge-BlackItalic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+* {
+  box-sizing: border-box;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-barge: "Barge", "Outfit", sans-serif;
 }
 
 @theme inline {
@@ -23,4 +40,34 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.sidebar-icon-btn:hover {
+  background: rgba(217, 173, 98, 0.22) !important;
+  border-color: rgba(217, 173, 98, 0.65) !important;
+  color: #d9ad62 !important;
+  transform: scale(1.1);
+  box-shadow: 0 0 16px rgba(217, 173, 98, 0.35);
+}
+
+.group:hover .sidebar-tooltip,
+.group:hover .sidebar-tooltip-left {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.group:hover .sidebar-tooltip {
+  transform: translateY(-50%) translateX(4px) !important;
+}
+
+.group:hover .sidebar-tooltip-left {
+  transform: translateY(-50%) translateX(-4px) !important;
+}
+
+.nav-link-btn:hover {
+  background: rgba(217, 173, 98, 0.16) !important;
+  border-color: rgba(217, 173, 98, 0.45) !important;
+  color: #d9ad62 !important;
+  box-shadow: 0 0 16px rgba(217, 173, 98, 0.25);
+  transform: scale(1.04);
 }
