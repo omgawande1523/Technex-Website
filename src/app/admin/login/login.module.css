@@ -1,0 +1,162 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: #080808;
+  color: #f5f5f5;
+}
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  border: 1px solid #292929;
+  border-radius: 18px;
+  background: #111111;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.brand {
+  color: #d5ae65;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #999999;
+  font-size: 14px;
+}
+
+.googleButton,
+.submitButton {
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.googleButton {
+  border: 1px solid #393939;
+  background: #191919;
+  color: white;
+}
+
+.submitButton {
+  border: none;
+  background: #d5ae65;
+  color: #111111;
+}
+
+.googleButton:disabled,
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 25px 0;
+  color: #777777;
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #333333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: #cccccc;
+  font-size: 13px;
+}
+
+.input {
+  width: 100%;
+  height: 46px;
+  padding: 0 13px;
+  border: 1px solid #353535;
+  border-radius: 7px;
+  outline: none;
+  background: #191919;
+  color: white;
+  font-size: 14px;
+}
+
+.input:focus {
+  border-color: #d5ae65;
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
+.passwordInput {
+  padding-right: 70px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #d5ae65;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.error {
+  padding: 11px;
+  border: 1px solid #713737;
+  border-radius: 7px;
+  background: #2a1717;
+  color: #ff9999;
+  font-size: 13px;
+}
+
+.footer {
+  margin-top: 26px;
+  text-align: center;
+  color: #777777;
+  font-size: 12px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 22px;
+  }
+}

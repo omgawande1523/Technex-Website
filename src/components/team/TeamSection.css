@@ -1,0 +1,85 @@
+/* ==========================================================================
+   TECHNEX SVPCET - TEAM SECTION STYLING
+   ========================================================================== */
+
+.technex-section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 4.5rem;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Responsive Cards Grid */
+.technex-cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.technex-cards-grid .cyber-card-wrapper {
+  flex: 0 1 280px;
+}
+
+/* 5-Member Sections (Mentors & Website Developers: 3 on top, 2 centered in middle) */
+.technex-cards-grid.grid-5-members {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Tablet Layout */
+@media (max-width: 1400px) {
+  .technex-cards-grid {
+    gap: 24px;
+  }
+
+  .technex-cards-grid .cyber-card-wrapper {
+    flex: 0 1 250px;
+  }
+
+  .technex-cards-grid.grid-5-members {
+    max-width: 860px;
+  }
+
+  .technex-section {
+    margin-bottom: 4rem;
+    padding: 0 1.2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .technex-cards-grid {
+    gap: 20px;
+  }
+
+  .technex-cards-grid .cyber-card-wrapper {
+    flex: 0 1 230px;
+  }
+
+  .technex-section {
+    margin-bottom: 3.2rem;
+  }
+}
+
+/* Mobile Layout */
+@media (max-width: 580px) {
+  .technex-cards-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .technex-cards-grid .cyber-card-wrapper {
+    flex: 1 1 100%;
+    max-width: 270px;
+  }
+
+  .technex-section {
+    margin-bottom: 2.8rem;
+    padding: 0 0.8rem;
+  }
+}

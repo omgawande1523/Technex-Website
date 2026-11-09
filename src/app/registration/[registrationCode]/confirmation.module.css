@@ -1,0 +1,471 @@
+
+.page {
+  min-height: 100svh;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #08080b url("/assets/bg/registration-bg.webp")
+    center center / cover no-repeat;
+  color: #fff;
+  padding: 20px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 8, 0.82);
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 790px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* HEADER */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo {
+  width: 175px;
+  height: auto;
+  object-fit: contain;
+}
+
+.tagline {
+  color: #aaa3b2;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+/* HERO */
+
+.hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.successIcon {
+  width: 55px;
+  height: 55px;
+  border: 1px solid rgba(255, 204, 55, 0.5);
+  background: rgba(255, 204, 55, 0.09);
+  border-radius: 50%;
+  color: #ffcf42;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eyebrow {
+  color: #b7b0bf;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.hero h1 {
+  font-size: clamp(27px, 3.4vw, 43px);
+  line-height: 1.08;
+  font-weight: 850;
+  letter-spacing: -1.5px;
+  margin: 2px 0;
+}
+
+.hero h1 span {
+  color: #ffcf42;
+}
+
+.hero p {
+  color: #aaa3b2;
+  font-size: 12px;
+  line-height: 1.6;
+  max-width: 470px;
+  margin: 0;
+}
+
+/* COMMON CARDS */
+
+.codeCard,
+.detailsCard {
+  width: 100%;
+  background: rgba(20, 17, 25, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 2px solid #ffcf42;
+  border-radius: 13px;
+  padding: 17px 22px;
+  backdrop-filter: blur(15px);
+}
+
+/* REGISTRATION CODE */
+
+.codeCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.cardLabel {
+  display: block;
+  color: #aaa3b2;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.codeCard h2 {
+  color: #ffcf42;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  margin: 7px 0 3px;
+}
+
+.codeCard p {
+  color: #928b9a;
+  font-size: 11px;
+  margin: 0;
+}
+
+.copyButton {
+  border: 1px solid rgba(255, 207, 66, 0.5);
+  border-radius: 7px;
+  background: rgba(255, 207, 66, 0.1);
+  color: #ffcf42;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 15px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.copyButton:hover {
+  background: rgba(255, 207, 66, 0.2);
+}
+
+/* EVENT + PAYMENT */
+
+.detailsCard {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 22px;
+  align-items: center;
+}
+
+.eventSection h2 {
+  font-size: 22px;
+  line-height: 1.25;
+  margin: 9px 0;
+}
+
+.eventType {
+  display: inline-block;
+  color: #ffcf42;
+  background: rgba(255, 207, 66, 0.1);
+  border: 1px solid rgba(255, 207, 66, 0.35);
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.divider {
+  display: none;
+}
+
+.paymentSection {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  padding-left: 22px;
+}
+
+.paymentHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.successStatus {
+  color: #45d69a;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pendingStatus {
+  color: #ffbd55;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.paymentAmount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 13px 0;
+  padding: 12px;
+  background: rgba(255, 207, 66, 0.1);
+  border-left: 3px solid #ffcf42;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+.paymentAmount span {
+  color: #aaa3b2;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.paymentAmount strong {
+  color: #ffcf42;
+  font-size: 23px;
+}
+
+.paymentRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+.paymentRow span {
+  color: #aaa3b2;
+}
+
+.paymentRow strong {
+  color: #fff;
+  text-transform: capitalize;
+}
+
+/* FOOTER */
+
+.footer {
+  color: #9992a0;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+/* STATES */
+
+.loading,
+.error {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-align: center;
+}
+
+.error {
+  color: #ff7777;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+  .page {
+    height: auto;
+    min-height: 100svh;
+    overflow-y: auto;
+    padding: 28px 16px;
+  }
+
+  .container {
+    gap: 20px;
+  }
+
+  .logo {
+    width: 145px;
+  }
+
+  .hero h1 {
+    font-size: clamp(26px, 8vw, 36px);
+  }
+
+  .hero p {
+    max-width: 320px;
+  }
+
+  .codeCard,
+  .detailsCard {
+    padding: 17px;
+  }
+
+  .codeCard h2 {
+    font-size: 17px;
+    word-break: break-word;
+  }
+
+  .copyButton {
+    padding: 9px;
+  }
+
+  .detailsCard {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .divider {
+    display: block;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .paymentSection {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 651px) {
+  .container {
+    gap: 9px;
+  }
+
+  .successIcon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .hero {
+    gap: 5px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 10px;
+  }
+
+  .codeCard,
+  .detailsCard {
+    padding: 12px 18px;
+  }
+
+  .logo {
+    width: 145px;
+  }
+}
+
+
+/* DOWNLOAD RECEIPT */
+
+.receiptButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border: 1px solid #ffcf42;
+  border-radius: 7px;
+  background: #ffcf42;
+  color: #111;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.receiptButton:hover {
+  background: transparent;
+  color: #ffcf42;
+}
+
+.receiptButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* PRINT / SAVE AS PDF */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+    
+  }
+
+  .page {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+  }
+
+  .overlay {
+    display: none !important;
+  }
+
+  .container {
+    max-height: none !important;
+    width: 100% !important;
+  }
+
+  .footer,
+  .copyButton,
+  .receiptButton {
+    display: none !important;
+  }
+
+  .codeCard,
+  .detailsCard {
+    background: white !important;
+    color: black !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+
+  .hero h1,
+  .eventSection h2,
+  .paymentRow strong {
+    color: black !important;
+  }
+
+  .hero h1 span,
+  .codeCard h2,
+  .paymentAmount strong {
+    color: #a87900 !important;
+  }
+
+  .cardLabel,
+  .codeCard p,
+  .paymentRow span {
+    color: #555 !important;
+  }
+
+  .paymentAmount {
+    background: #f5f1e5 !important;
+  }
+}
