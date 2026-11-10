@@ -620,8 +620,8 @@ export default function SupermanPrimeCanvas({
 
     let isCancelled = false;
     let animationFrameId: number;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const width = container.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 390);
+    const height = container.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 844);
 
     // 1. Scene
     const scene = new THREE.Scene();
@@ -643,15 +643,48 @@ export default function SupermanPrimeCanvas({
       camera.setViewOffset(width, height, -width * 0.18, 0, width, height);
     }
 
-    // 3. Renderer
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-      preserveDrawingBuffer: false,
-    });
+    // 3. Robust WebGLRenderer creation with cross-device fallbacks
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: !isMobile,
+        alpha: true,
+        powerPreference: isMobile ? 'default' : 'high-performance',
+        preserveDrawingBuffer: false,
+        failIfMajorPerformanceCaveat: false,
+      });
+    } catch (e1) {
+      console.warn('Initial WebGLRenderer creation failed, attempting fallback options:', e1);
+      try {
+        renderer = new THREE.WebGLRenderer({
+          antialias: false,
+          alpha: true,
+          powerPreference: 'default',
+          precision: 'mediump',
+          preserveDrawingBuffer: false,
+          failIfMajorPerformanceCaveat: false,
+        });
+      } catch (e2) {
+        console.error('All WebGLRenderer attempts failed:', e2);
+        setLoadingProgress(100);
+        isLoadedRef.current = true;
+        setIsLoaded(true);
+        return;
+      }
+    }
+
+    const handleContextLost = (event: Event) => {
+      event.preventDefault();
+      console.warn('WebGL context lost.');
+    };
+    const handleContextRestored = () => {
+      console.info('WebGL context restored.');
+    };
+    renderer.domElement.addEventListener('webglcontextlost', handleContextLost, false);
+    renderer.domElement.addEventListener('webglcontextrestored', handleContextRestored, false);
+
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, width < 768 ? 1.5 : 2));
+    renderer.setPixelRatio(Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, width < 768 ? 1.5 : 2));
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
@@ -696,24 +729,32 @@ export default function SupermanPrimeCanvas({
 
     controls.addEventListener('start', handleControlsStart);
 
-    // 5. Post-Processing: UnrealBloomPass tuned for high-contrast celestial gold
-    const renderPass = new RenderPass(scene, camera);
-    renderPass.clearColor = new THREE.Color(0, 0, 0);
-    renderPass.clearAlpha = 0;
-    const bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(width, height),
-      0.34, // strength (crisp celestial glow, no foggy blowout)
-      0.26, // radius
-      0.94  // threshold (only sharp starbursts & core nodes bloom)
-    );
-    bloomPassRef.current = bloomPass;
-    const outputPass = new OutputPass();
+    // 5. Post-Processing: Desktop only (on mobile, direct renderer bypasses all offscreen buffers for 100% alpha stability and 60fps)
+    let composer: EffectComposer | null = null;
+    if (!isMobile) {
+      try {
+        const renderPass = new RenderPass(scene, camera);
+        renderPass.clearColor = new THREE.Color(0, 0, 0);
+        renderPass.clearAlpha = 0;
+        const bloomPass = new UnrealBloomPass(
+          new THREE.Vector2(width, height),
+          0.34, // strength
+          0.26, // radius
+          0.94  // threshold
+        );
+        bloomPassRef.current = bloomPass;
+        const outputPass = new OutputPass();
 
-    const composer = new EffectComposer(renderer);
-    composer.addPass(renderPass);
-    composer.addPass(bloomPass);
-    composer.addPass(outputPass);
-    composerRef.current = composer;
+        composer = new EffectComposer(renderer);
+        composer.addPass(renderPass);
+        composer.addPass(bloomPass);
+        composer.addPass(outputPass);
+        composerRef.current = composer;
+      } catch (err) {
+        console.warn('EffectComposer creation failed, falling back to direct renderer:', err);
+        composer = null;
+      }
+    }
 
     // 6. Lighting: Tuned for dramatic muscular definition and golden specular luster
     // Subtle neutral dark ambient
@@ -741,7 +782,11 @@ export default function SupermanPrimeCanvas({
     scene.add(portalLight);
 
     // 7. Celestial Spherical Environment Map (Enables true liquid-gold PBR specular reflections)
-    createCelestialEnvironmentMap(renderer, scene);
+    try {
+      createCelestialEnvironmentMap(renderer, scene);
+    } catch (err) {
+      console.warn('Environment map generation warning:', err);
+    }
 
     // 8. Ground Energy Portal (Concentric Rings under feet)
     const portalGroup = createPortalRings();
@@ -762,7 +807,11 @@ export default function SupermanPrimeCanvas({
     // 13. Load 3D Model (male_body-compressed.glb by default, with fallback/toggle)
     setLoadingProgress(35);
     const gltfLoader = new GLTFLoader();
-    gltfLoader.setMeshoptDecoder(MeshoptDecoder);
+    try {
+      gltfLoader.setMeshoptDecoder(MeshoptDecoder);
+    } catch (err) {
+      console.warn('MeshoptDecoder setup warning:', err);
+    }
 
     const isMaleBody = (modelSource || 'male_body') === 'male_body';
     const modelPath = isMaleBody ? '/models/male_body-compressed.glb' : '/models/superman_prime.glb';
@@ -1059,243 +1108,268 @@ export default function SupermanPrimeCanvas({
       return wrapper;
     };
 
-    // Load humanoid primary model first for instant non-blocking initial render
-    setLoadingProgress(25);
-    gltfLoader.load(
-      modelPath,
-      (humanoidGltf) => {
-        if (isCancelled) return;
-        setLoadingProgress(90);
-
-        // ---------------------------------------------------------------------
-        // 1. SETUP HUMANOID MODEL (male_body.glb / superman_prime.glb)
-        // ---------------------------------------------------------------------
-        const model = humanoidGltf.scene;
-
-        if (isMaleBody) {
-          model.updateMatrixWorld(true);
-          let sourceGeom: THREE.BufferGeometry | null = null;
-          model.traverse((child) => {
-            if ((child as THREE.Mesh).isMesh) {
-              const mesh = child as THREE.Mesh;
-              mesh.castShadow = true;
-              mesh.receiveShadow = true;
-              mesh.material = goldBodyMaterial;
-              if (mesh.geometry && !mesh.geometry.attributes.normal) {
-                mesh.geometry.computeVertexNormals();
-              }
-              if (!sourceGeom && mesh.geometry) {
-                // Clone geometry and apply mesh transform relative to model root
-                // to support both raw and quantized/compressed glTFs (EXT_meshopt_compression)
-                const cloned = mesh.geometry.clone();
-                mesh.updateWorldMatrix(true, false);
-                const relMatrix = new THREE.Matrix4().copy(model.matrixWorld).invert().multiply(mesh.matrixWorld);
-                cloned.applyMatrix4(relMatrix);
-                if (!cloned.attributes.normal) {
-                  cloned.computeVertexNormals();
-                }
-
-                // Ensure UV coordinates exist for holographic contour shaders
-                if (!cloned.attributes.uv) {
-                  const pos = cloned.attributes.position;
-                  const uvs = new Float32Array(pos.count * 2);
-                  for (let i = 0; i < pos.count; i++) {
-                    const x = pos.getX(i);
-                    const y = pos.getY(i);
-                    const z = pos.getZ(i);
-                    const u = (Math.atan2(x, z) / Math.PI) * 0.5 + 0.5;
-                    const v = Math.min(1.0, Math.max(0.0, (y - 0.58) / 180.0));
-                    uvs[i * 2] = u;
-                    uvs[i * 2 + 1] = v;
-                  }
-                  cloned.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
-                }
-
-                sourceGeom = cloned;
-              }
-            }
-          });
-
-          model.scale.set(0.0132, 0.0132, 0.0132);
-          model.position.set(0, 0.02, 0);
-          humanoidContainer.add(model);
-
-          if (sourceGeom) {
-            const holo = buildHolographicHumanoid(sourceGeom, 0.0132, 0.02);
-            humanoidContainer.add(holo.group);
-            holographicLayersRef.current = holo;
-
-            holo.setSkinOpacity(hologramSkinOpacityRef.current);
-            holo.setNetworkIntensity(hologramNetworkIntensityRef.current);
-            holo.setNodesBrightness(hologramNodesBrightnessRef.current);
-            holo.setFlowSpeed(hologramFlowSpeedRef.current);
-            holo.setChestCoreRadiance(hologramChestCoreRadianceRef.current);
-            holo.setAuraVisible(showHologramAuraRef.current);
-            holo.setScanlineEnabled(showHologramScanlineRef.current);
-            holo.setThemeColor(new THREE.Color(customUniformsRef.current.uThemeColor.value));
-          }
-
-          haloGroupRef.current = null;
-          capeGroupRef.current = null;
-          capeMeshRef.current = null;
-        } else {
-          model.traverse((child) => {
-            if ((child as THREE.Mesh).isMesh) {
-              const mesh = child as THREE.Mesh;
-              mesh.castShadow = true;
-              mesh.receiveShadow = true;
-              mesh.material = (mesh.name === 'Beta_Joints') ? goldJointsMaterial : goldBodyMaterial;
-            }
-          });
-
-          model.scale.set(1.4, 1.4, 1.4);
-          model.position.set(0, 0.05, 0);
-          humanoidContainer.add(model);
-
-          const headBone = model.getObjectByName('mixamorigHead');
-          const spine2Bone = model.getObjectByName('mixamorigSpine2');
-
-          if (headBone) {
-            const hair = createHeroicHair();
-            headBone.add(hair);
-            const eyes = createCelestialEyes();
-            headBone.add(eyes);
-          }
-
-          if (spine2Bone) {
-            const chestCore = createChestSunCore();
-            spine2Bone.add(chestCore);
-            chestCore.position.set(0, 0.15, 0.14);
-
-            const chestLight = new THREE.PointLight(0xffea60, 1.2, 2.5, 1.2);
-            chestCore.add(chestLight);
-            chestCoreLightRef.current = chestLight;
-          }
-
-          const mixer = new THREE.AnimationMixer(model);
-          mixerRef.current = mixer;
-
-          if (humanoidGltf.animations && humanoidGltf.animations.length > 0) {
-            const walkClip = humanoidGltf.animations[0];
-            const hipPosTrack = walkClip.tracks.find((t) => t.name.includes('Hips.position'));
-            if (hipPosTrack) {
-              for (let i = 2; i < hipPosTrack.values.length; i += 3) {
-                hipPosTrack.values[i] = 0;
-              }
-            }
-            const walkAction = mixer.clipAction(walkClip);
-            walkActionRef.current = walkAction;
-            walkAction.play();
-            walkAction.paused = true;
-            walkAction.time = 0.62;
-            mixer.update(0);
-          }
-        }
-
-        // Apply theme and dismiss loading screen immediately (< 1s initial load)
-        applyThemeRef.current(themeRef.current);
+    // Safety timeout: Guarantee that the loading screen is never stuck for more than 3.5s
+    const safetyTimeout = setTimeout(() => {
+      if (!isLoadedRef.current) {
+        console.info('Scene safety timeout reached: dismissing loading overlay');
         setLoadingProgress(100);
         isLoadedRef.current = true;
         setIsLoaded(true);
         if (typeof window !== 'undefined') {
           (window as unknown as { __SCENE_LOADED__: boolean }).__SCENE_LOADED__ = true;
         }
-
-        // ---------------------------------------------------------------------
-        // Stream remaining 3 models in the background asynchronously
-        // ---------------------------------------------------------------------
-        Promise.all([
-          gltfLoader.loadAsync('/models/flying_machine-compressed.glb'),
-          gltfLoader.loadAsync('/models/paddle_boat-compressed.glb'),
-          gltfLoader.loadAsync('/models/artificial_neural_network_ann-compressed.glb'),
-        ])
-          .then(([machineGltf, boatGltf, annGltf]) => {
-            if (isCancelled) return;
-
-            // 2. SETUP FLYING MACHINE MODEL (/models/flying_machine-compressed.glb)
-            const machineWrapper = setupEntityModel(
-              machineGltf.scene,
-              4.5,
-              flyingMachineMaterialsRef.current,
-              flyingMachineWireMeshesRef.current,
-              flyingMachineNodesRef.current
-            );
-            machineWrapper.position.set(0, 1.70, 0);
-            machineWrapper.rotation.y = -Math.PI / 2;
-            machineWrapper.rotation.x = 0.38;
-
-            const machineUnderGlow = new THREE.PointLight(0xffea60, 0.7, 4.0, 1.5);
-            machineUnderGlow.position.set(0, 0.95, 0);
-            flyingMachineContainer.add(machineUnderGlow);
-            flyingMachineGlowLightsRef.current.push(machineUnderGlow);
-
-            flyingMachineContainer.add(machineWrapper);
-            flyingMachineWrapperRef.current = machineWrapper;
-
-            // 3. SETUP WATERCRAFT MODEL (/models/paddle_boat-compressed.glb)
-            const boatWrapper = setupEntityModel(
-              boatGltf.scene,
-              2.2,
-              watercraftMaterialsRef.current,
-              watercraftWireMeshesRef.current,
-              watercraftNodesRef.current
-            );
-            boatWrapper.position.set(0, 1.95, 0);
-            boatWrapper.rotation.y = -0.35;
-
-            const boatUnderGlow = new THREE.PointLight(0xffea60, 0.6, 3.5, 1.5);
-            boatUnderGlow.position.set(0, 1.20, 0);
-            watercraftContainer.add(boatUnderGlow);
-            watercraftGlowLightsRef.current.push(boatUnderGlow);
-
-            watercraftContainer.add(boatWrapper);
-            watercraftWrapperRef.current = boatWrapper;
-
-            // 4. SETUP NEURAL NETWORK MODEL (/models/artificial_neural_network_ann-compressed.glb)
-            const annWrapper = setupEntityModel(
-              annGltf.scene,
-              2.0,
-              neuralNetworkMaterialsRef.current,
-              neuralNetworkWireMeshesRef.current,
-              neuralNetworkNodesRef.current
-            );
-            annWrapper.position.set(0, 2.00, 0);
-            annWrapper.rotation.x = 0.25;
-
-            const annUnderGlow = new THREE.PointLight(0xffea60, 0.7, 3.5, 1.5);
-            annUnderGlow.position.set(0, 1.25, 0);
-            neuralNetworkContainer.add(annUnderGlow);
-            neuralNetworkGlowLightsRef.current.push(annUnderGlow);
-
-            neuralNetworkContainer.add(annWrapper);
-            neuralNetworkWrapperRef.current = annWrapper;
-
-            secondaryModelsLoadedRef.current = true;
-            applyThemeRef.current(themeRef.current);
-          })
-          .catch((err) => {
-            console.warn('Background secondary models stream warning:', err);
-          });
-      },
-      (xhr) => {
-        if (xhr.total > 0) {
-          const pct = Math.round(25 + (xhr.loaded / xhr.total) * 65);
-          setLoadingProgress(Math.min(pct, 90));
-        }
-      },
-      (err) => {
-        if (isCancelled) return;
-        console.error('Failed to load primary humanoid model:', err);
-        isLoadedRef.current = true;
-        setIsLoaded(true);
       }
-    );
+    }, 3500);
+
+    // Load humanoid primary model first for instant non-blocking initial render with automatic fallback
+    const loadHumanoidModel = (targetPath: string, isFallback: boolean = false) => {
+      setLoadingProgress(25);
+      gltfLoader.load(
+        targetPath,
+        (humanoidGltf) => {
+          if (isCancelled) return;
+          setLoadingProgress(90);
+
+          // ---------------------------------------------------------------------
+          // 1. SETUP HUMANOID MODEL (male_body.glb / superman_prime.glb)
+          // ---------------------------------------------------------------------
+          const model = humanoidGltf.scene;
+
+          if (isMaleBody && !isFallback) {
+            model.updateMatrixWorld(true);
+            let sourceGeom: THREE.BufferGeometry | null = null;
+            model.traverse((child) => {
+              if ((child as THREE.Mesh).isMesh) {
+                const mesh = child as THREE.Mesh;
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                mesh.material = goldBodyMaterial;
+                if (mesh.geometry && !mesh.geometry.attributes.normal) {
+                  mesh.geometry.computeVertexNormals();
+                }
+                if (!sourceGeom && mesh.geometry) {
+                  // Clone geometry and apply mesh transform relative to model root
+                  const cloned = mesh.geometry.clone();
+                  mesh.updateWorldMatrix(true, false);
+                  const relMatrix = new THREE.Matrix4().copy(model.matrixWorld).invert().multiply(mesh.matrixWorld);
+                  cloned.applyMatrix4(relMatrix);
+                  if (!cloned.attributes.normal) {
+                    cloned.computeVertexNormals();
+                  }
+
+                  // Ensure UV coordinates exist for holographic contour shaders
+                  if (!cloned.attributes.uv) {
+                    const pos = cloned.attributes.position;
+                    const uvs = new Float32Array(pos.count * 2);
+                    for (let i = 0; i < pos.count; i++) {
+                      const x = pos.getX(i);
+                      const y = pos.getY(i);
+                      const z = pos.getZ(i);
+                      const u = (Math.atan2(x, z) / Math.PI) * 0.5 + 0.5;
+                      const v = Math.min(1.0, Math.max(0.0, (y - 0.58) / 180.0));
+                      uvs[i * 2] = u;
+                      uvs[i * 2 + 1] = v;
+                    }
+                    cloned.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+                  }
+
+                  sourceGeom = cloned;
+                }
+              }
+            });
+
+            model.scale.set(0.0132, 0.0132, 0.0132);
+            model.position.set(0, 0.02, 0);
+            humanoidContainer.add(model);
+
+            if (sourceGeom) {
+              try {
+                const holo = buildHolographicHumanoid(sourceGeom, 0.0132, 0.02);
+                humanoidContainer.add(holo.group);
+                holographicLayersRef.current = holo;
+
+                holo.setSkinOpacity(hologramSkinOpacityRef.current);
+                holo.setNetworkIntensity(hologramNetworkIntensityRef.current);
+                holo.setNodesBrightness(hologramNodesBrightnessRef.current);
+                holo.setFlowSpeed(hologramFlowSpeedRef.current);
+                holo.setChestCoreRadiance(hologramChestCoreRadianceRef.current);
+                holo.setAuraVisible(showHologramAuraRef.current);
+                holo.setScanlineEnabled(showHologramScanlineRef.current);
+                holo.setThemeColor(new THREE.Color(customUniformsRef.current.uThemeColor.value));
+              } catch (holoErr) {
+                console.warn('Holographic shader layers generation warning:', holoErr);
+              }
+            }
+
+            haloGroupRef.current = null;
+            capeGroupRef.current = null;
+            capeMeshRef.current = null;
+          } else {
+            model.traverse((child) => {
+              if ((child as THREE.Mesh).isMesh) {
+                const mesh = child as THREE.Mesh;
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                mesh.material = (mesh.name === 'Beta_Joints') ? goldJointsMaterial : goldBodyMaterial;
+              }
+            });
+
+            model.scale.set(1.4, 1.4, 1.4);
+            model.position.set(0, 0.05, 0);
+            humanoidContainer.add(model);
+
+            const headBone = model.getObjectByName('mixamorigHead');
+            const spine2Bone = model.getObjectByName('mixamorigSpine2');
+
+            if (headBone) {
+              const hair = createHeroicHair();
+              headBone.add(hair);
+              const eyes = createCelestialEyes();
+              headBone.add(eyes);
+            }
+
+            if (spine2Bone) {
+              const chestCore = createChestSunCore();
+              spine2Bone.add(chestCore);
+              chestCore.position.set(0, 0.15, 0.14);
+
+              const chestLight = new THREE.PointLight(0xffea60, 1.2, 2.5, 1.2);
+              chestCore.add(chestLight);
+              chestCoreLightRef.current = chestLight;
+            }
+
+            const mixer = new THREE.AnimationMixer(model);
+            mixerRef.current = mixer;
+
+            if (humanoidGltf.animations && humanoidGltf.animations.length > 0) {
+              const walkClip = humanoidGltf.animations[0];
+              const hipPosTrack = walkClip.tracks.find((t) => t.name.includes('Hips.position'));
+              if (hipPosTrack) {
+                for (let i = 2; i < hipPosTrack.values.length; i += 3) {
+                  hipPosTrack.values[i] = 0;
+                }
+              }
+              const walkAction = mixer.clipAction(walkClip);
+              walkActionRef.current = walkAction;
+              walkAction.play();
+              walkAction.paused = true;
+              walkAction.time = 0.62;
+              mixer.update(0);
+            }
+          }
+
+          // Apply theme and dismiss loading screen immediately (< 1s initial load)
+          applyThemeRef.current(themeRef.current);
+          setLoadingProgress(100);
+          isLoadedRef.current = true;
+          setIsLoaded(true);
+          if (typeof window !== 'undefined') {
+            (window as unknown as { __SCENE_LOADED__: boolean }).__SCENE_LOADED__ = true;
+          }
+
+          // ---------------------------------------------------------------------
+          // Stream remaining 3 models in the background asynchronously
+          // ---------------------------------------------------------------------
+          Promise.all([
+            gltfLoader.loadAsync('/models/flying_machine-compressed.glb'),
+            gltfLoader.loadAsync('/models/paddle_boat-compressed.glb'),
+            gltfLoader.loadAsync('/models/artificial_neural_network_ann-compressed.glb'),
+          ])
+            .then(([machineGltf, boatGltf, annGltf]) => {
+              if (isCancelled) return;
+
+              // 2. SETUP FLYING MACHINE MODEL (/models/flying_machine-compressed.glb)
+              const machineWrapper = setupEntityModel(
+                machineGltf.scene,
+                4.5,
+                flyingMachineMaterialsRef.current,
+                flyingMachineWireMeshesRef.current,
+                flyingMachineNodesRef.current
+              );
+              machineWrapper.position.set(0, 1.70, 0);
+              machineWrapper.rotation.y = -Math.PI / 2;
+              machineWrapper.rotation.x = 0.38;
+
+              const machineUnderGlow = new THREE.PointLight(0xffea60, 0.7, 4.0, 1.5);
+              machineUnderGlow.position.set(0, 0.95, 0);
+              flyingMachineContainer.add(machineUnderGlow);
+              flyingMachineGlowLightsRef.current.push(machineUnderGlow);
+
+              flyingMachineContainer.add(machineWrapper);
+              flyingMachineWrapperRef.current = machineWrapper;
+
+              // 3. SETUP WATERCRAFT MODEL (/models/paddle_boat-compressed.glb)
+              const boatWrapper = setupEntityModel(
+                boatGltf.scene,
+                2.2,
+                watercraftMaterialsRef.current,
+                watercraftWireMeshesRef.current,
+                watercraftNodesRef.current
+              );
+              boatWrapper.position.set(0, 1.95, 0);
+              boatWrapper.rotation.y = -0.35;
+
+              const boatUnderGlow = new THREE.PointLight(0xffea60, 0.6, 3.5, 1.5);
+              boatUnderGlow.position.set(0, 1.20, 0);
+              watercraftContainer.add(boatUnderGlow);
+              watercraftGlowLightsRef.current.push(boatUnderGlow);
+
+              watercraftContainer.add(boatWrapper);
+              watercraftWrapperRef.current = boatWrapper;
+
+              // 4. SETUP NEURAL NETWORK MODEL (/models/artificial_neural_network_ann-compressed.glb)
+              const annWrapper = setupEntityModel(
+                annGltf.scene,
+                2.0,
+                neuralNetworkMaterialsRef.current,
+                neuralNetworkWireMeshesRef.current,
+                neuralNetworkNodesRef.current
+              );
+              annWrapper.position.set(0, 2.00, 0);
+              annWrapper.rotation.x = 0.25;
+
+              const annUnderGlow = new THREE.PointLight(0xffea60, 0.7, 3.5, 1.5);
+              annUnderGlow.position.set(0, 1.25, 0);
+              neuralNetworkContainer.add(annUnderGlow);
+              neuralNetworkGlowLightsRef.current.push(annUnderGlow);
+
+              neuralNetworkContainer.add(annWrapper);
+              neuralNetworkWrapperRef.current = annWrapper;
+
+              secondaryModelsLoadedRef.current = true;
+              applyThemeRef.current(themeRef.current);
+            })
+            .catch((err) => {
+              console.warn('Background secondary models stream warning:', err);
+            });
+        },
+        (xhr) => {
+          if (xhr.total > 0) {
+            const pct = Math.round(25 + (xhr.loaded / xhr.total) * 65);
+            setLoadingProgress(Math.min(pct, 90));
+          }
+        },
+        (err) => {
+          if (isCancelled) return;
+          console.error(`Failed to load humanoid model from ${targetPath}:`, err);
+          if (!isFallback && targetPath !== '/models/superman_prime.glb') {
+            console.info('Attempting fallback to /models/superman_prime.glb');
+            loadHumanoidModel('/models/superman_prime.glb', true);
+          } else {
+            isLoadedRef.current = true;
+            setIsLoaded(true);
+          }
+        }
+      );
+    };
+
+    loadHumanoidModel(modelPath);
 
     // Resize handler
     const handleResize = () => {
-      if (!containerRef.current || !renderer || !camera || !composer) return;
-      const w = containerRef.current.clientWidth;
-      const h = containerRef.current.clientHeight;
+      if (!containerRef.current || !renderer || !camera) return;
+      const w = containerRef.current.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 390);
+      const h = containerRef.current.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 844);
       const isMob = w <= 860;
       camera.aspect = w / h;
       camera.fov = isMob ? 46 : 42;
@@ -1306,7 +1380,9 @@ export default function SupermanPrimeCanvas({
       }
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
-      composer.setSize(w, h);
+      if (composer) {
+        composer.setSize(w, h);
+      }
     };
     window.addEventListener('resize', handleResize);
 
@@ -1760,7 +1836,15 @@ export default function SupermanPrimeCanvas({
         controls.update(delta);
       }
 
-      composer.render();
+      if (composer && !isMobile) {
+        try {
+          composer.render();
+        } catch (renderErr) {
+          renderer.render(scene, camera);
+        }
+      } else {
+        renderer.render(scene, camera);
+      }
     };
 
     const viewportObserver = new IntersectionObserver(
@@ -1799,15 +1883,21 @@ export default function SupermanPrimeCanvas({
     return () => {
       isCancelled = true;
       isVisible = false;
+      clearTimeout(safetyTimeout);
       viewportObserver.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
+      renderer.domElement.removeEventListener('webglcontextrestored', handleContextRestored);
       if (cardsGroupRef.current?.userData?.dispose) {
         cardsGroupRef.current.userData.dispose();
       }
       controls.removeEventListener('start', handleControlsStart);
       controls.dispose();
+      if (composer) {
+        composer.dispose();
+      }
       renderer.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -3203,16 +3293,25 @@ function createFloatingComicPanels(
       hasChimed: false,
     };
 
-    // Initially hidden until launch time arrives
-    cardMesh.visible = false;
-    cardMesh.scale.set(0.001, 0.001, 0.001);
+    // Check mobile state for instant placement
+    const isMobileCard = domElement.clientWidth <= 860 || (typeof window !== 'undefined' && window.innerWidth <= 860);
+    if (isMobileCard) {
+      cardMesh.visible = true;
+      cardMesh.scale.set(t.scale, t.scale, t.scale);
+      cardMesh.userData.hasLanded = true;
+      cardMesh.userData.hasChimed = true;
+    } else {
+      cardMesh.visible = false;
+      cardMesh.scale.set(0.001, 0.001, 0.001);
+    }
 
     carouselPivotGroup.add(cardMesh);
     cardMeshes.push(cardMesh);
   });
 
+  const isMobileGroup = domElement.clientWidth <= 860 || (typeof window !== 'undefined' && window.innerWidth <= 860);
   cardsGroup.userData.cardMeshes = cardMeshes;
-  cardsGroup.userData.isIntroActive = true;
+  cardsGroup.userData.isIntroActive = !isMobileGroup;
   cardsGroup.userData.finishIntro = () => {
     cardsGroup.userData.isIntroActive = false;
     cardMeshes.forEach((card) => {
