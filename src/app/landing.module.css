@@ -214,7 +214,7 @@
   min-height: 100vh;
   overflow-x: clip;
   background-color: #000;
-  background-image: url("/permanent-bg.webp");
+  background-image: url("/assets/bg/permanent-bg.webp");
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -223,7 +223,7 @@
 
 @media (max-width: 860px) {
   .sitePage {
-    background-image: url("/permanent-bg-mobile.webp");
+    background-image: url("/assets/bg/permanent-bg-mobile.webp");
     background-attachment: scroll;
   }
 }

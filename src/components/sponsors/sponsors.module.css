@@ -5,13 +5,13 @@
 .page {
   min-height: 100vh;
   overflow: clip;
-  background: #000 url("/permanent-bg.webp") center / cover fixed no-repeat;
+  background: #000 url("/assets/bg/permanent-bg.webp") center / cover fixed no-repeat;
   font-family: var(--font-outfit), sans-serif;
 }
 
 @media (max-width: 860px) {
   .page {
-    background-image: url("/permanent-bg-mobile.webp");
+    background-image: url("/assets/bg/permanent-bg-mobile.webp");
     background-attachment: scroll;
   }
 }

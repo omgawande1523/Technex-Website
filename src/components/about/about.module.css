@@ -7,12 +7,12 @@
 
 .standalone {
   padding-top: 120px;
-  background: #06040a url("/permanent-bg.webp") center top / cover fixed no-repeat;
+  background: #06040a url("/assets/bg/permanent-bg.webp") center top / cover fixed no-repeat;
 }
 
 @media (max-width: 860px) {
   .standalone {
-    background-image: url("/permanent-bg-mobile.webp");
+    background-image: url("/assets/bg/permanent-bg-mobile.webp");
     background-attachment: scroll;
   }
 }

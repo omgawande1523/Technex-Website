@@ -215,18 +215,6 @@ export default function AdminShell({
             </Link>
           )}
 
-          <Link
-            href="/admin/settings"
-            className={`${styles.navItem} ${
-              pathname.startsWith("/admin/settings")
-                ? styles.navActive
-                : ""
-            }`}
-            onClick={() => setMenuOpen(false)}
-          >
-            <span className={styles.navIcon}>⚙</span>
-            Settings
-          </Link>
         </nav>
 
         <div className={styles.sidebarFooter}>

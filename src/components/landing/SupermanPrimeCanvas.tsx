@@ -308,8 +308,12 @@ export default function SupermanPrimeCanvas({
   useEffect(() => {
     if (onCaptureRef) {
       onCaptureRef.current = () => {
-        if (!rendererRef.current || !composerRef.current) return;
-        composerRef.current.render();
+        if (!rendererRef.current || !sceneRef.current || !cameraRef.current) return;
+        if (composerRef.current) {
+          composerRef.current.render();
+        } else {
+          rendererRef.current.render(sceneRef.current, cameraRef.current);
+        }
         const canvas = document.createElement('canvas');
         canvas.width = rendererRef.current.domElement.width;
         canvas.height = rendererRef.current.domElement.height;
@@ -647,9 +651,9 @@ export default function SupermanPrimeCanvas({
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
-        antialias: !isMobile,
+        antialias: true,
         alpha: true,
-        powerPreference: isMobile ? 'default' : 'high-performance',
+        powerPreference: 'default',
         preserveDrawingBuffer: false,
         failIfMajorPerformanceCaveat: false,
       });
@@ -729,31 +733,29 @@ export default function SupermanPrimeCanvas({
 
     controls.addEventListener('start', handleControlsStart);
 
-    // 5. Post-Processing: Desktop only (on mobile, direct renderer bypasses all offscreen buffers for 100% alpha stability and 60fps)
+    // 5. Post-Processing: UnrealBloomPass tuned for high-contrast celestial gold
     let composer: EffectComposer | null = null;
-    if (!isMobile) {
-      try {
-        const renderPass = new RenderPass(scene, camera);
-        renderPass.clearColor = new THREE.Color(0, 0, 0);
-        renderPass.clearAlpha = 0;
-        const bloomPass = new UnrealBloomPass(
-          new THREE.Vector2(width, height),
-          0.34, // strength
-          0.26, // radius
-          0.94  // threshold
-        );
-        bloomPassRef.current = bloomPass;
-        const outputPass = new OutputPass();
+    try {
+      const renderPass = new RenderPass(scene, camera);
+      renderPass.clearColor = new THREE.Color(0, 0, 0);
+      renderPass.clearAlpha = 0;
+      const bloomPass = new UnrealBloomPass(
+        new THREE.Vector2(width, height),
+        bloomStrength || 0.36, // strength (crisp celestial glow, no foggy blowout)
+        0.26, // radius
+        0.88  // threshold (sharp starbursts, cybernetic wireframes & core nodes bloom)
+      );
+      bloomPassRef.current = bloomPass;
+      const outputPass = new OutputPass();
 
-        composer = new EffectComposer(renderer);
-        composer.addPass(renderPass);
-        composer.addPass(bloomPass);
-        composer.addPass(outputPass);
-        composerRef.current = composer;
-      } catch (err) {
-        console.warn('EffectComposer creation failed, falling back to direct renderer:', err);
-        composer = null;
-      }
+      composer = new EffectComposer(renderer);
+      composer.addPass(renderPass);
+      composer.addPass(bloomPass);
+      composer.addPass(outputPass);
+      composerRef.current = composer;
+    } catch (err) {
+      console.warn('EffectComposer creation failed, falling back to direct renderer:', err);
+      composer = null;
     }
 
     // 6. Lighting: Tuned for dramatic muscular definition and golden specular luster
@@ -1836,10 +1838,10 @@ export default function SupermanPrimeCanvas({
         controls.update(delta);
       }
 
-      if (composer && !isMobile) {
+      if (composer) {
         try {
           composer.render();
-        } catch (renderErr) {
+        } catch {
           renderer.render(scene, camera);
         }
       } else {
