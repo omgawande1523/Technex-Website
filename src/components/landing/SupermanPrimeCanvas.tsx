@@ -748,6 +748,17 @@ export default function SupermanPrimeCanvas({
       bloomPassRef.current = bloomPass;
       const outputPass = new OutputPass();
 
+      // Guarantee that the 3D entity, golden bloom halo, cybernetic wireframe, glowing nodes,
+      // and comic cards are 100% solid and visible across all laptop and desktop compositors,
+      // preventing the transparent canvas from squashing additive bloom into 3% opacity ghosts.
+      outputPass.material.fragmentShader = outputPass.material.fragmentShader.replace(
+        /}\s*$/,
+        `  float maxColor = max(gl_FragColor.r, max(gl_FragColor.g, gl_FragColor.b));
+  float lumAlpha = smoothstep(0.002, 0.08, maxColor);
+  gl_FragColor.a = max(gl_FragColor.a, lumAlpha);
+}`
+      );
+
       composer = new EffectComposer(renderer);
       composer.addPass(renderPass);
       composer.addPass(bloomPass);
