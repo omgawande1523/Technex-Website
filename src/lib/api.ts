@@ -45,6 +45,30 @@ export type PublicEventForm = {
   formFields: EventFormField[];
 };
 
+export type PublicWorkshopForm = {
+  workshop: {
+    id: string;
+    name: string;
+    slug: string;
+    description: string | null;
+    feeAmountPaise: number;
+    registrationOpen: boolean;
+    registrationOpensAt: string | null;
+    registrationClosesAt: string | null;
+    canRegister: boolean;
+  };
+  formFields: EventFormField[];
+};
+
+export type WorkshopFeeQuote = {
+  workshopSlug: string;
+  feeType: "per_participant";
+  feeAmountPaise: number;
+  participantCount: 1;
+  totalAmountPaise: number;
+  currency: "INR";
+};
+
 export type FeeQuote = {
   eventSlug: string;
   feeType: "free" | "per_participant" | "per_team";
@@ -171,7 +195,52 @@ export async function submitRegistration(
 
   return result.data;
 }
+// Fetch public workshop configuration and dynamic form fields.
+export async function getWorkshopRegistrationForm(
+  slug: string,
+): Promise<PublicWorkshopForm> {
+  const result = await apiRequest<PublicWorkshopForm>(
+    `/api/public/workshops/${encodeURIComponent(slug)}/form`,
+    { method: "GET" },
+  );
 
+  return result.data;
+}
+
+// Fetch authoritative workshop fee.
+export async function getWorkshopFeeQuote(
+  slug: string,
+): Promise<WorkshopFeeQuote> {
+  const result = await apiRequest<WorkshopFeeQuote>(
+    `/api/public/workshops/${encodeURIComponent(slug)}/quote`,
+    {
+      method: "POST",
+      body: JSON.stringify({}),
+    },
+  );
+
+  return result.data;
+}
+
+// Submit individual workshop registration.
+export async function submitWorkshopRegistration(
+  slug: string,
+  input: IndividualRegistrationInput,
+  idempotencyKey: string,
+): Promise<RegistrationResult> {
+  const result = await apiRequest<RegistrationResult>(
+    `/api/public/workshops/${encodeURIComponent(slug)}/register`,
+    {
+      method: "POST",
+      headers: {
+        "Idempotency-Key": idempotencyKey,
+      },
+      body: JSON.stringify(input),
+    },
+  );
+
+  return result.data;
+}
 
 export type PaymentOrder = {
   paymentId: string;

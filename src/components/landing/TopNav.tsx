@@ -41,15 +41,14 @@ export default function TopNav() {
         pointerEvents: 'auto',
       }}
     >
-      {/* LEFT SECTION: LOGO + "TECHNEX 26-27" + WORKSHOPS + EVENTS */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
-        {/* BRAND LOGO & TITLE */}
+      {/* LEFT SECTION: BRAND LOGO ONLY ON MOBILE (+ TITLE ON DESKTOP) */}
+      <div style={{ display: 'flex', alignItems: 'center', zIndex: 10 }}>
         <Link
           href="/"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '14px',
+            gap: '12px',
             textDecoration: 'none',
             outline: 'none',
           }}
@@ -60,8 +59,8 @@ export default function TopNav() {
           <div
             style={{
               position: 'relative',
-              width: '44px',
-              height: '44px',
+              width: '42px',
+              height: '42px',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
@@ -82,11 +81,11 @@ export default function TopNav() {
             />
           </div>
 
-          {/* TECHNEX 26-27 Text in Barge font */}
+          {/* TECHNEX 26-27 Text in Barge font - hidden on mobile, visible on desktop */}
           <span
             style={{
               fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-              fontSize: '22px',
+              fontSize: '20px',
               fontWeight: 900,
               letterSpacing: '0.04em',
               color: '#ffffff',
@@ -95,68 +94,70 @@ export default function TopNav() {
               textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 173, 98, 0.25)',
               transition: 'color 0.3s ease, text-shadow 0.3s ease',
             }}
-            className="group-hover:text-[#d9ad62]"
+            className="group-hover:text-[#d9ad62] hidden md:inline"
           >
             TECHNEX 26-27
           </span>
         </Link>
-
-        {/* Subtle Vertical Divider in Champagne Gold */}
-        <div
-          style={{
-            width: '1px',
-            height: '24px',
-            backgroundColor: 'rgba(217, 173, 98, 0.28)',
-          }}
-          className="hidden sm:block"
-        />
-
-        {/* NAVIGATION LABELS: WORKSHOPS & EVENTS */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Link
-            href="/workshops"
-            style={{
-              fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-              fontSize: '14.5px',
-              fontWeight: 800,
-              letterSpacing: '0.08em',
-              color: '#f8fafc',
-              textDecoration: 'none',
-              textTransform: 'uppercase',
-              padding: '7px 14px',
-              borderRadius: '8px',
-              transition: 'all 0.25s ease',
-              border: '1px solid transparent',
-            }}
-            className="nav-link-btn"
-          >
-            WORKSHOPS
-          </Link>
-
-          <Link
-            href="/events"
-            style={{
-              fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-              fontSize: '14.5px',
-              fontWeight: 800,
-              letterSpacing: '0.08em',
-              color: '#f8fafc',
-              textDecoration: 'none',
-              textTransform: 'uppercase',
-              padding: '7px 14px',
-              borderRadius: '8px',
-              transition: 'all 0.25s ease',
-              border: '1px solid transparent',
-            }}
-            className="nav-link-btn"
-          >
-            EVENTS
-          </Link>
-        </nav>
       </div>
 
-      {/* RIGHT SECTION: FULLSCREEN ONLY (Zero sound logic / buttons) */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      {/* CENTER SECTION: WORKSHOPS & EVENTS (centered in both mobile & desktop) */}
+      <nav
+        style={{
+          position: 'absolute',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          whiteSpace: 'nowrap',
+          zIndex: 10,
+        }}
+        aria-label="Main Navigation"
+      >
+        <Link
+          href="/workshops"
+          style={{
+            fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
+            fontSize: '13.5px',
+            fontWeight: 800,
+            letterSpacing: '0.08em',
+            color: '#f8fafc',
+            textDecoration: 'none',
+            textTransform: 'uppercase',
+            padding: '7px 14px',
+            borderRadius: '8px',
+            transition: 'all 0.25s ease',
+            border: '1px solid transparent',
+          }}
+          className="nav-link-btn"
+        >
+          WORKSHOPS
+        </Link>
+
+        <Link
+          href="/events"
+          style={{
+            fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
+            fontSize: '13.5px',
+            fontWeight: 800,
+            letterSpacing: '0.08em',
+            color: '#f8fafc',
+            textDecoration: 'none',
+            textTransform: 'uppercase',
+            padding: '7px 14px',
+            borderRadius: '8px',
+            transition: 'all 0.25s ease',
+            border: '1px solid transparent',
+          }}
+          className="nav-link-btn"
+        >
+          EVENTS
+        </Link>
+      </nav>
+
+      {/* RIGHT SECTION: FULLSCREEN ONLY */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', zIndex: 10 }}>
         {/* Fullscreen Toggle */}
         <button
           onClick={toggleFullscreen}

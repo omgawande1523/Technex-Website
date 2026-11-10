@@ -9,6 +9,13 @@
   font-family: var(--font-outfit), sans-serif;
 }
 
+@media (max-width: 860px) {
+  .page {
+    background-image: url("/permanent-bg-mobile.webp");
+    background-attachment: scroll;
+  }
+}
+
 .page :global(.font-orbitron) {
   font-family: var(--font-barge), 'Barge', var(--font-outfit), sans-serif;
 }

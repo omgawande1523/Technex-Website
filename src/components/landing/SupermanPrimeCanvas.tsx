@@ -58,7 +58,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: "Leonardo da Vinci's Flying Machine (1485)",
     innovation: 'Supersonic Aircraft & Reusable Orbital Shuttles',
     era: 'Renaissance Blueprint ➔ Mach 3+ Aerospace',
-    image: '/comics/panel_alien_world.jpg',
+    image: '/comics/panel_alien_world.webp',
     caption: 'Leonardo da Vinci Ornithopter (1485) ➔ Modern Aeroplanes & Hypersonic Jets',
     lore: 'In 1485, Leonardo da Vinci sketched the "Codice del Volo", conceiving mechanical bird wings (Ala Meccanica) and aerial screws. For centuries this remained an impossible dream until aerodynamics, jet propulsion, and supersonic aerospace turned his visionary parchment into Mach 3+ hypersonic flight and orbital exploration.',
   },
@@ -68,7 +68,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Human Brain & Biological Synaptic Pathways',
     innovation: 'Artificial Neural Networks & Quantum Deep Learning',
     era: 'Biological Neurons ➔ Synthetic Machine Intelligence',
-    image: '/comics/panel_city.jpg',
+    image: '/comics/panel_city.webp',
     caption: 'Biological Synapses & Neurons ➔ Artificial Deep Neural Networks & AI',
     lore: 'The biological human brain, powered by 86 billion interconnected neurons and electrochemical synaptic gaps, was nature’s greatest computing marvel. Inspired by biological cognition, scientists engineered artificial neural networks, tensor microchips, and transformer architectures that now decode languages, generate art, and power autonomous discovery.',
   },
@@ -78,7 +78,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Primitive Reed Boats & Polynesian Outriggers',
     innovation: 'Autonomous Mega-Ships & Nuclear Arctic Vessels',
     era: 'Ancient Ocean Voyages ➔ Satellite-Guided Fleets',
-    image: '/comics/panel_classic.jpg',
+    image: '/comics/panel_classic.webp',
     caption: 'Primitive Wood & Reed Watercraft ➔ Autonomous Mega-Vessels & Modern Ships',
     lore: 'Humanity first navigated the perilous oceans on dugout logs, Polynesian outrigger canoes, and Egyptian papyrus watercraft guided solely by constellations. That primal desire to cross the horizon has evolved into 400-meter autonomous container mega-ships, nuclear icebreakers, and satellite-synchronized oceanic global fleets.',
   },
@@ -88,7 +88,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Wooden Counting Abacus & Babbage Analytical Engine',
     innovation: 'Cryogenic Superconducting Quantum Computers',
     era: 'Mechanical Gears (1642) ➔ Quantum Superconductors',
-    image: '/comics/panel_explosion.jpg',
+    image: '/comics/panel_explosion.webp',
     caption: 'Bead Abacus & Pascaline Gears ➔ Quantum Supercomputing Chandeliers',
     lore: 'From the tactile beads of the counting abacus to Blaise Pascal’s geared Pascaline (1642) and Charles Babbage’s steam-driven Analytical Engine (1837), humankind strove to mechanize calculations. Today, that journey culminates in cryogenic quantum processors using entangled qubits in superposition to calculate complexities beyond all classical machines.',
   },
@@ -98,7 +98,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: "Galileo's 1609 Optical Spyglass & Astrolabe",
     innovation: 'James Webb Space Telescope (JWST) & Interstellar Probes',
     era: '17th-Century Lens ➔ Infrared Deep Space Telescopes',
-    image: '/comics/panel_helmet.jpg',
+    image: '/comics/panel_helmet.webp',
     caption: 'Galileo Handheld Spyglass ➔ 6.5m Golden Beryllium Mirror Observatory',
     lore: 'In 1609, Galileo Galilei trained a handmade brass-and-leather spyglass toward Jupiter, discovering celestial moons and redefining humanity’s place in the universe. Four centuries later, the James Webb Space Telescope orbits 1.5 million kilometers into the void, unfurling 18 gold-coated beryllium hexagons to witness the birth of the earliest stars.',
   },
@@ -108,7 +108,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Primitive Wood Fire Torch & Edison Incandescent Bulb',
     innovation: 'Magnetic Confinement Nuclear Fusion Tokamak',
     era: 'Open Flame Combustion ➔ Artificial Sun Fusion Energy',
-    image: '/comics/panel_legion.jpg',
+    image: '/comics/panel_legion.webp',
     caption: 'Primitive Fire & Oil Lamps ➔ Magnetic Fusion Plasma & Laser Photonics',
     lore: 'The spark of a primitive wooden fire torch half a million years ago gave our ancestors light and survival, followed millennia later by Thomas Edison’s carbon filament light bulb. Today, humankind is harnessing the power of the stars themselves through magnetic confinement fusion tokamaks and laser photonics—producing boundless clean energy on Earth.',
   },
@@ -118,7 +118,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Tribal Smoke Signals, Pigeon Post & Morse Telegraph',
     innovation: 'Global Satellite Mesh Constellations & Laser Comms',
     era: 'Hilltop Signals & Telegraph ➔ Instant Global Quantum Network',
-    image: '/comics/panel_nebula.jpg',
+    image: '/comics/panel_nebula.webp',
     caption: 'Smoke Signals & Carrier Pigeons ➔ Orbital Satellite Laser Networks',
     lore: 'When distance separated civilizations, messages were relayed through hilltop smoke signals, homing pigeons, and early Morse electric telegraphs. Today, dense constellations of low-Earth orbit satellites linked by infrared laser beams wrap our planet in a seamless web, transmitting billions of gigabytes across continents in mere milliseconds.',
   },
@@ -128,7 +128,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Ancient Herbal Botany, Mortar & Pestle Apothecary',
     innovation: 'CRISPR-Cas9 Molecular Precision Gene Editing',
     era: 'Medicinal Plant Tinctures ➔ Nanomedicine & Genome Editing',
-    image: '/comics/panel_starship.jpg',
+    image: '/comics/panel_starship.webp',
     caption: 'Herbal Mortar & Pestle ➔ CRISPR-Cas9 Molecular Gene Engineering',
     lore: 'For millennia, ancient healers turned to wild plants, willow bark, and alchemical distillations to treat human illness. Today, molecular biologists operate directly upon the 3-billion-base-pair genetic code with CRISPR-Cas9 molecular scissors, reprogramming disease vectors, tailoring mRNA vaccines, and engineering cellular nanorobots.',
   },
@@ -138,7 +138,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Mesopotamian Solid Wooden Wheel & Sumerian Chariot',
     innovation: 'Supersonic Vacuum Maglev Hyperloops & Orbit Rovers',
     era: '3500 BCE Solid Wheel ➔ Frictionless Hyperloop & Space Rovers',
-    image: '/comics/panel_supersun.jpg',
+    image: '/comics/panel_supersun.webp',
     caption: 'Mesopotamian Wooden Wheel ➔ Magnetic Levitation Hyperloop & Planetary Rovers',
     lore: 'Invented in ancient Mesopotamia around 3500 BCE, the wooden wheel fundamentally unlocked human trade and movement across continents. Through horse-drawn chariots and early steam locomotives, that same kinetic ingenuity now achieves frictionless 1000 km/h magnetic levitation in vacuum hyperloop tunnels and autonomous rovers rolling on Mars.',
   },
@@ -278,6 +278,7 @@ export default function SupermanPrimeCanvas({
     uGlowIntensity: { value: 1.5 },
     uThemeColor: { value: new THREE.Color(0xd9ad62) },
   });
+  const secondaryModelsLoadedRef = useRef<boolean>(false);
 
   useEffect(() => {
     onEntityFormChangeRef.current = onEntityFormChange;
@@ -533,27 +534,34 @@ export default function SupermanPrimeCanvas({
       const targetLook = new THREE.Vector3(0, 1.35, 0);
       let isOrbit = false;
 
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 860;
+
       switch (preset) {
-        case 'prime': // Finalized panoramic amphitheater view (Image 2 with slightly reduced zoom)
-          targetPos.set(-4.95, 3.55, 7.55);
-          targetLook.set(0.15, 1.25, 0);
+        case 'prime': // Finalized panoramic amphitheater view
+          if (isMobile) {
+            targetPos.set(-5.6, 4.2, 11.2);
+            targetLook.set(0, 1.25, 0);
+          } else {
+            targetPos.set(-4.95, 3.55, 7.55);
+            targetLook.set(0.15, 1.25, 0);
+          }
           ctrl.autoRotate = false;
           ctrl.enabled = true;
           break;
         case 'closeup': // Heroic chest & halo portrait
-          targetPos.set(0, 1.9, 2.1);
+          targetPos.set(0, 1.9, isMobile ? 3.0 : 2.1);
           targetLook.set(0, 1.85, 0);
           ctrl.autoRotate = false;
           ctrl.enabled = true;
           break;
         case 'full': // Full body with floor portal and cosmic ribbons
-          targetPos.set(0, 1.2, 6.2);
+          targetPos.set(0, 1.2, isMobile ? 8.8 : 6.2);
           targetLook.set(0, 1.1, 0);
           ctrl.autoRotate = false;
           ctrl.enabled = true;
           break;
         case 'lowangle': // Epic god-like looking upward
-          targetPos.set(0, 0.2, 3.8);
+          targetPos.set(0, 0.2, isMobile ? 5.2 : 3.8);
           targetLook.set(0, 1.8, 0);
           ctrl.autoRotate = false;
           ctrl.enabled = true;
@@ -562,7 +570,7 @@ export default function SupermanPrimeCanvas({
           isOrbit = true;
           ctrl.autoRotate = false;
           ctrl.enabled = false;
-          const orbitR = 5.2;
+          const orbitR = isMobile ? 7.6 : 5.2;
           const orbitY = 1.48;
           const maxHalfArc = (Math.PI / 2) * 0.92; // Majestic frontal amphitheater arc (~165°-180°)
           const dx = cam.position.x;
@@ -619,12 +627,18 @@ export default function SupermanPrimeCanvas({
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    // 2. Camera: Wide panoramic amphitheater framing with slightly reduced zoom (positioned on the right)
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 150);
-    camera.position.set(-4.95, 3.55, 7.55);
+    // 2. Camera: Wide panoramic amphitheater framing with calibrated mobile zoom
+    const isMobile = width <= 860;
+    const initialFov = isMobile ? 46 : 42;
+    const camera = new THREE.PerspectiveCamera(initialFov, width / height, 0.1, 150);
+    if (isMobile) {
+      camera.position.set(-5.6, 4.2, 11.2);
+    } else {
+      camera.position.set(-4.95, 3.55, 7.55);
+    }
     cameraRef.current = camera;
 
-    // Shift view offset so the 3D entity & amphitheater is framed on the right side of the page
+    // Shift view offset so the 3D entity & amphitheater is framed on the right side of the page on desktop
     if (width > 860) {
       camera.setViewOffset(width, height, -width * 0.18, 0, width, height);
     }
@@ -634,10 +648,10 @@ export default function SupermanPrimeCanvas({
       antialias: true,
       alpha: true,
       powerPreference: 'high-performance',
-      preserveDrawingBuffer: true,
+      preserveDrawingBuffer: false,
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, width < 768 ? 1.5 : 2));
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
@@ -649,9 +663,17 @@ export default function SupermanPrimeCanvas({
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.target.set(0.15, 1.25, 0);
-    controls.minDistance = 1.2;
-    controls.maxDistance = 18;
+    if (isMobile) {
+      controls.target.set(0, 1.25, 0);
+      controls.minDistance = 3.0;
+      controls.maxDistance = 22;
+      renderer.domElement.style.touchAction = 'none';
+      controls.enableZoom = true;
+    } else {
+      controls.target.set(0.15, 1.25, 0);
+      controls.minDistance = 1.2;
+      controls.maxDistance = 18;
+    }
     controls.maxPolarAngle = Math.PI / 2 + 0.18;
     controlsRef.current = controls;
 
@@ -874,16 +896,176 @@ export default function SupermanPrimeCanvas({
     entityGroup.add(shockMesh);
     morphShockwaveRef.current = shockMesh;
 
-    // Load all 4 entity models in parallel
-    Promise.all([
-      gltfLoader.loadAsync(modelPath),
-      gltfLoader.loadAsync('/models/flying_machine-compressed.glb'),
-      gltfLoader.loadAsync('/models/paddle_boat-compressed.glb'),
-      gltfLoader.loadAsync('/models/artificial_neural_network_ann-compressed.glb'),
-    ])
-      .then(([humanoidGltf, machineGltf, boatGltf, annGltf]) => {
+    // Helper to setup and wrap entity models with golden skin, wireframe mesh & glowing junction nodes
+    const setupEntityModel = (
+      modelScene: THREE.Group,
+      targetDim: number,
+      materialsList: THREE.Material[],
+      wireMeshesList: THREE.LineSegments[],
+      nodesList: THREE.Points[]
+    ): THREE.Group => {
+      modelScene.updateMatrixWorld(true);
+      const b = new THREE.Box3().setFromObject(modelScene);
+      const c = new THREE.Vector3();
+      b.getCenter(c);
+      const s = new THREE.Vector3();
+      b.getSize(s);
+      const maxD = Math.max(s.x, s.y, s.z);
+      const scale = targetDim / (maxD || 1);
+      modelScene.position.set(-c.x, -c.y, -c.z);
+
+      modelScene.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          const mesh = child as THREE.Mesh;
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+
+          if (mesh.geometry) {
+            mesh.geometry.computeVertexNormals();
+          }
+
+          // 1. Golden Celestial Physical Skin Material (cloned directly from humanoid body material for 100% color/reflection parity)
+          const goldMat = goldBodyMaterial.clone();
+          injectGoldShader(goldMat);
+          mesh.material = goldMat;
+          materialsList.push(goldMat);
+          materialsRef.current.push(goldMat);
+
+          // 2. Holographic Cybernetic Wireframe Mesh with traveling pulse & scanline shader
+          // Skip dense tube sweeps (>25k verts) so they remain clean golden synaptic fibers without cage blowout
+          if (mesh.geometry.attributes.position && mesh.geometry.attributes.position.count <= 25000) {
+            const wireGeom = new THREE.WireframeGeometry(mesh.geometry);
+            const wireUniforms = {
+              uTime: { value: 0 },
+              uNetworkIntensity: { value: hologramNetworkIntensityRef.current },
+              uFlowSpeed: { value: hologramFlowSpeedRef.current },
+              uGoldColor: customUniformsRef.current.uThemeColor,
+              uCoreColor: { value: new THREE.Color(0xfffae0) },
+              uScanlineEnabled: { value: showHologramScanlineRef.current ? 1.0 : 0.0 },
+            };
+            const wireMat = new THREE.ShaderMaterial({
+              transparent: true,
+              blending: THREE.AdditiveBlending,
+              depthWrite: false,
+              uniforms: wireUniforms,
+              vertexShader: `
+                varying vec3 vWorldPosition;
+                void main() {
+                  vec4 worldPos = modelMatrix * vec4(position, 1.0);
+                  vWorldPosition = worldPos.xyz;
+                  gl_Position = projectionMatrix * viewMatrix * worldPos;
+                }
+              `,
+              fragmentShader: `
+                uniform float uTime;
+                uniform float uNetworkIntensity;
+                uniform float uFlowSpeed;
+                uniform float uScanlineEnabled;
+                uniform vec3 uGoldColor;
+                uniform vec3 uCoreColor;
+                varying vec3 vWorldPosition;
+
+                void main() {
+                  float dist = length(vWorldPosition);
+                  float wave = sin(dist * 10.0 - uTime * uFlowSpeed * 3.8);
+                  float pulse = pow(max(0.0, wave), 5.0);
+
+                  // Smooth vertical holographic scan sweep
+                  float scanPeriod = fract(uTime * 0.15);
+                  float scanY = scanPeriod * 3.5 - 0.2;
+                  float scanWave = smoothstep(0.09, 0.0, abs(vWorldPosition.y - scanY)) * uScanlineEnabled;
+
+                  // Subtle, delicate lines to prevent blinding overlap
+                  float baseAlpha = 0.05 * uNetworkIntensity;
+                  float pulseAlpha = (pulse * 0.16 + scanWave * 0.20) * uNetworkIntensity;
+                  float totalAlpha = clamp(baseAlpha + pulseAlpha, 0.0, 0.55);
+
+                  vec3 col = mix(uGoldColor, uCoreColor, clamp(pulse * 0.7 + scanWave * 0.5, 0.0, 0.6));
+                  gl_FragColor = vec4(col * totalAlpha, totalAlpha);
+                }
+              `,
+            });
+            const wireMesh = new THREE.LineSegments(wireGeom, wireMat);
+            wireMesh.userData.uniforms = wireUniforms;
+            wireMesh.visible = hologramNetworkIntensityRef.current > 0.01;
+            wireMeshesList.push(wireMesh);
+            mesh.add(wireMesh);
+          }
+
+          // 3. Holographic Cosmic Junction Nodes (Sampled topological vertex points)
+          if (mesh.geometry && mesh.geometry.attributes.position && mesh.geometry.attributes.position.count <= 25000) {
+            const posAttr = mesh.geometry.attributes.position;
+            const sampleStep = Math.max(1, Math.floor(posAttr.count / 25));
+            const nodePositions: number[] = [];
+            for (let i = 0; i < posAttr.count; i += sampleStep) {
+              nodePositions.push(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
+            }
+            if (nodePositions.length > 0) {
+              const nodeGeom = new THREE.BufferGeometry();
+              nodeGeom.setAttribute('position', new THREE.Float32BufferAttribute(nodePositions, 3));
+              const nodeUniforms = {
+                uTime: { value: 0 },
+                uNodesBrightness: { value: hologramNodesBrightnessRef.current },
+                uFlowSpeed: { value: hologramFlowSpeedRef.current },
+                uGoldColor: customUniformsRef.current.uThemeColor,
+                uCoreColor: { value: new THREE.Color(0xfffae0) },
+              };
+              const nodeMat = new THREE.ShaderMaterial({
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+                uniforms: nodeUniforms,
+                vertexShader: `
+                  uniform float uTime;
+                  uniform float uFlowSpeed;
+                  varying float vPulse;
+                  void main() {
+                    vec4 worldPos = modelMatrix * vec4(position, 1.0);
+                    float dist = length(worldPos.xyz);
+                    vPulse = pow(max(0.0, sin(dist * 8.0 - uTime * uFlowSpeed * 3.5)), 4.0);
+                    vec4 mvPosition = viewMatrix * worldPos;
+                    gl_PointSize = (5.0 + vPulse * 3.5) * (1.0 / max(0.2, -mvPosition.z));
+                    gl_Position = projectionMatrix * mvPosition;
+                  }
+                `,
+                fragmentShader: `
+                  uniform vec3 uGoldColor;
+                  uniform vec3 uCoreColor;
+                  uniform float uNodesBrightness;
+                  varying float vPulse;
+                  void main() {
+                    vec2 coord = gl_PointCoord - vec2(0.5);
+                    float dist = length(coord);
+                    if (dist > 0.5) discard;
+                    float intensity = (1.0 - smoothstep(0.0, 0.5, dist)) * (0.20 + vPulse * 0.35) * uNodesBrightness;
+                    vec3 col = mix(uGoldColor, uCoreColor, clamp(vPulse * 0.7, 0.0, 0.5));
+                    gl_FragColor = vec4(col * intensity, intensity);
+                  }
+                `,
+              });
+              const nodesMesh = new THREE.Points(nodeGeom, nodeMat);
+              nodesMesh.userData.uniforms = nodeUniforms;
+              nodesMesh.visible = hologramNodesBrightnessRef.current > 0.01;
+              nodesList.push(nodesMesh);
+              mesh.add(nodesMesh);
+            }
+          }
+        }
+      });
+
+      const wrapper = new THREE.Group();
+      wrapper.scale.set(scale, scale, scale);
+      wrapper.add(modelScene);
+      return wrapper;
+    };
+
+    // Load humanoid primary model first for instant non-blocking initial render
+    setLoadingProgress(25);
+    gltfLoader.load(
+      modelPath,
+      (humanoidGltf) => {
         if (isCancelled) return;
-        setLoadingProgress(85);
+        setLoadingProgress(90);
 
         // ---------------------------------------------------------------------
         // 1. SETUP HUMANOID MODEL (male_body.glb / superman_prime.glb)
@@ -1010,260 +1192,113 @@ export default function SupermanPrimeCanvas({
           }
         }
 
-        // Helper to setup and wrap entity models with golden skin & holographic wireframe mesh
-        // Helper to setup and wrap entity models with golden skin, wireframe mesh & glowing junction nodes
-        const setupEntityModel = (
-          modelScene: THREE.Group,
-          targetDim: number,
-          materialsList: THREE.Material[],
-          wireMeshesList: THREE.LineSegments[],
-          nodesList: THREE.Points[]
-        ): THREE.Group => {
-          modelScene.updateMatrixWorld(true);
-          const b = new THREE.Box3().setFromObject(modelScene);
-          const c = new THREE.Vector3();
-          b.getCenter(c);
-          const s = new THREE.Vector3();
-          b.getSize(s);
-          const maxD = Math.max(s.x, s.y, s.z);
-          const scale = targetDim / (maxD || 1);
-          modelScene.position.set(-c.x, -c.y, -c.z);
-
-          modelScene.traverse((child) => {
-            if ((child as THREE.Mesh).isMesh) {
-              const mesh = child as THREE.Mesh;
-              mesh.castShadow = true;
-              mesh.receiveShadow = true;
-
-              if (mesh.geometry) {
-                mesh.geometry.computeVertexNormals();
-              }
-
-              // 1. Golden Celestial Physical Skin Material (cloned directly from humanoid body material for 100% color/reflection parity)
-              const goldMat = goldBodyMaterial.clone();
-              injectGoldShader(goldMat);
-              mesh.material = goldMat;
-              materialsList.push(goldMat);
-              materialsRef.current.push(goldMat);
-
-              // 2. Holographic Cybernetic Wireframe Mesh with traveling pulse & scanline shader
-              // Skip dense tube sweeps (>25k verts) so they remain clean golden synaptic fibers without cage blowout
-              if (mesh.geometry.attributes.position && mesh.geometry.attributes.position.count <= 25000) {
-                const wireGeom = new THREE.WireframeGeometry(mesh.geometry);
-                const wireUniforms = {
-                  uTime: { value: 0 },
-                  uNetworkIntensity: { value: hologramNetworkIntensityRef.current },
-                  uFlowSpeed: { value: hologramFlowSpeedRef.current },
-                  uGoldColor: customUniformsRef.current.uThemeColor,
-                  uCoreColor: { value: new THREE.Color(0xfffae0) },
-                  uScanlineEnabled: { value: showHologramScanlineRef.current ? 1.0 : 0.0 },
-                };
-                const wireMat = new THREE.ShaderMaterial({
-                  transparent: true,
-                  blending: THREE.AdditiveBlending,
-                  depthWrite: false,
-                  uniforms: wireUniforms,
-                  vertexShader: `
-                    varying vec3 vWorldPosition;
-                    void main() {
-                      vec4 worldPos = modelMatrix * vec4(position, 1.0);
-                      vWorldPosition = worldPos.xyz;
-                      gl_Position = projectionMatrix * viewMatrix * worldPos;
-                    }
-                  `,
-                  fragmentShader: `
-                    uniform float uTime;
-                    uniform float uNetworkIntensity;
-                    uniform float uFlowSpeed;
-                    uniform float uScanlineEnabled;
-                    uniform vec3 uGoldColor;
-                    uniform vec3 uCoreColor;
-                    varying vec3 vWorldPosition;
-
-                    void main() {
-                      float dist = length(vWorldPosition);
-                      float wave = sin(dist * 10.0 - uTime * uFlowSpeed * 3.8);
-                      float pulse = pow(max(0.0, wave), 5.0);
-
-                      // Smooth vertical holographic scan sweep
-                      float scanPeriod = fract(uTime * 0.15);
-                      float scanY = scanPeriod * 3.5 - 0.2;
-                      float scanWave = smoothstep(0.09, 0.0, abs(vWorldPosition.y - scanY)) * uScanlineEnabled;
-
-                      // Subtle, delicate lines to prevent blinding overlap
-                      float baseAlpha = 0.05 * uNetworkIntensity;
-                      float pulseAlpha = (pulse * 0.16 + scanWave * 0.20) * uNetworkIntensity;
-                      float totalAlpha = clamp(baseAlpha + pulseAlpha, 0.0, 0.55);
-
-                      vec3 col = mix(uGoldColor, uCoreColor, clamp(pulse * 0.7 + scanWave * 0.5, 0.0, 0.6));
-                      gl_FragColor = vec4(col * totalAlpha, totalAlpha);
-                    }
-                  `,
-                });
-                const wireMesh = new THREE.LineSegments(wireGeom, wireMat);
-                wireMesh.userData.uniforms = wireUniforms;
-                wireMesh.visible = hologramNetworkIntensityRef.current > 0.01;
-                wireMeshesList.push(wireMesh);
-                mesh.add(wireMesh);
-              }
-
-              // 3. Holographic Cosmic Junction Nodes (Sampled topological vertex points)
-              if (mesh.geometry && mesh.geometry.attributes.position && mesh.geometry.attributes.position.count <= 25000) {
-                const posAttr = mesh.geometry.attributes.position;
-                const sampleStep = Math.max(1, Math.floor(posAttr.count / 25));
-                const nodePositions: number[] = [];
-                for (let i = 0; i < posAttr.count; i += sampleStep) {
-                  nodePositions.push(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
-                }
-                if (nodePositions.length > 0) {
-                  const nodeGeom = new THREE.BufferGeometry();
-                  nodeGeom.setAttribute('position', new THREE.Float32BufferAttribute(nodePositions, 3));
-                  const nodeUniforms = {
-                    uTime: { value: 0 },
-                    uNodesBrightness: { value: hologramNodesBrightnessRef.current },
-                    uFlowSpeed: { value: hologramFlowSpeedRef.current },
-                    uGoldColor: customUniformsRef.current.uThemeColor,
-                    uCoreColor: { value: new THREE.Color(0xfffae0) },
-                  };
-                  const nodeMat = new THREE.ShaderMaterial({
-                    transparent: true,
-                    blending: THREE.AdditiveBlending,
-                    depthWrite: false,
-                    uniforms: nodeUniforms,
-                    vertexShader: `
-                      uniform float uTime;
-                      uniform float uFlowSpeed;
-                      varying float vPulse;
-                      void main() {
-                        vec4 worldPos = modelMatrix * vec4(position, 1.0);
-                        float dist = length(worldPos.xyz);
-                        vPulse = pow(max(0.0, sin(dist * 8.0 - uTime * uFlowSpeed * 3.5)), 4.0);
-                        vec4 mvPosition = viewMatrix * worldPos;
-                        gl_PointSize = (5.0 + vPulse * 3.5) * (1.0 / max(0.2, -mvPosition.z));
-                        gl_Position = projectionMatrix * mvPosition;
-                      }
-                    `,
-                    fragmentShader: `
-                      uniform vec3 uGoldColor;
-                      uniform vec3 uCoreColor;
-                      uniform float uNodesBrightness;
-                      varying float vPulse;
-                      void main() {
-                        vec2 coord = gl_PointCoord - vec2(0.5);
-                        float dist = length(coord);
-                        if (dist > 0.5) discard;
-                        float intensity = (1.0 - smoothstep(0.0, 0.5, dist)) * (0.20 + vPulse * 0.35) * uNodesBrightness;
-                        vec3 col = mix(uGoldColor, uCoreColor, clamp(vPulse * 0.7, 0.0, 0.5));
-                        gl_FragColor = vec4(col * intensity, intensity);
-                      }
-                    `,
-                  });
-                  const nodesMesh = new THREE.Points(nodeGeom, nodeMat);
-                  nodesMesh.userData.uniforms = nodeUniforms;
-                  nodesMesh.visible = hologramNodesBrightnessRef.current > 0.01;
-                  nodesList.push(nodesMesh);
-                  mesh.add(nodesMesh);
-                }
-              }
-            }
-          });
-
-          const wrapper = new THREE.Group();
-          wrapper.scale.set(scale, scale, scale);
-          wrapper.add(modelScene);
-          return wrapper;
-        };
-
-        // ---------------------------------------------------------------------
-        // 2. SETUP FLYING MACHINE MODEL (/models/flying_machine-compressed.glb)
-        // ---------------------------------------------------------------------
-        const machineWrapper = setupEntityModel(
-          machineGltf.scene,
-          4.5,
-          flyingMachineMaterialsRef.current,
-          flyingMachineWireMeshesRef.current,
-          flyingMachineNodesRef.current
-        );
-        machineWrapper.position.set(0, 1.70, 0);
-        machineWrapper.rotation.y = -Math.PI / 2;
-        machineWrapper.rotation.x = 0.38;
-
-        // Subtle warm underglow (models inherit master scene lighting, no duplicate blast lights)
-        const machineUnderGlow = new THREE.PointLight(0xffea60, 0.7, 4.0, 1.5);
-        machineUnderGlow.position.set(0, 0.95, 0);
-        flyingMachineContainer.add(machineUnderGlow);
-        flyingMachineGlowLightsRef.current.push(machineUnderGlow);
-
-        flyingMachineContainer.add(machineWrapper);
-        flyingMachineWrapperRef.current = machineWrapper;
-
-        // ---------------------------------------------------------------------
-        // 3. SETUP WATERCRAFT MODEL (/models/paddle_boat-compressed.glb)
-        // ---------------------------------------------------------------------
-        const boatWrapper = setupEntityModel(
-          boatGltf.scene,
-          2.2, // Reduced dimension for balanced, compact visual scale
-          watercraftMaterialsRef.current,
-          watercraftWireMeshesRef.current,
-          watercraftNodesRef.current
-        );
-        boatWrapper.position.set(0, 1.95, 0);
-        boatWrapper.rotation.y = -0.35;
-
-        // Subtle warm underglow (models inherit master scene lighting, no duplicate blast lights)
-        const boatUnderGlow = new THREE.PointLight(0xffea60, 0.6, 3.5, 1.5);
-        boatUnderGlow.position.set(0, 1.20, 0);
-        watercraftContainer.add(boatUnderGlow);
-        watercraftGlowLightsRef.current.push(boatUnderGlow);
-
-        watercraftContainer.add(boatWrapper);
-        watercraftWrapperRef.current = boatWrapper;
-
-        // ---------------------------------------------------------------------
-        // 4. SETUP NEURAL NETWORK MODEL (/models/artificial_neural_network_ann-compressed.glb)
-        // ---------------------------------------------------------------------
-        const annWrapper = setupEntityModel(
-          annGltf.scene,
-          2.0, // Reduced dimension for jewel-like quantum tensor sphere scale
-          neuralNetworkMaterialsRef.current,
-          neuralNetworkWireMeshesRef.current,
-          neuralNetworkNodesRef.current
-        );
-        annWrapper.position.set(0, 2.00, 0);
-        annWrapper.rotation.x = 0.25;
-
-        // Subtle warm underglow (models inherit master scene lighting, no duplicate blast lights)
-        const annUnderGlow = new THREE.PointLight(0xffea60, 0.7, 3.5, 1.5);
-        annUnderGlow.position.set(0, 1.25, 0);
-        neuralNetworkContainer.add(annUnderGlow);
-        neuralNetworkGlowLightsRef.current.push(annUnderGlow);
-
-        neuralNetworkContainer.add(annWrapper);
-        neuralNetworkWrapperRef.current = annWrapper;
-
-        // Synchronize all newly created materials and lights with the active theme
+        // Apply theme and dismiss loading screen immediately (< 1s initial load)
         applyThemeRef.current(themeRef.current);
-
         setLoadingProgress(100);
         isLoadedRef.current = true;
         setIsLoaded(true);
         if (typeof window !== 'undefined') {
           (window as unknown as { __SCENE_LOADED__: boolean }).__SCENE_LOADED__ = true;
         }
-      })
-      .catch((err) => {
+
+        // ---------------------------------------------------------------------
+        // Stream remaining 3 models in the background asynchronously
+        // ---------------------------------------------------------------------
+        Promise.all([
+          gltfLoader.loadAsync('/models/flying_machine-compressed.glb'),
+          gltfLoader.loadAsync('/models/paddle_boat-compressed.glb'),
+          gltfLoader.loadAsync('/models/artificial_neural_network_ann-compressed.glb'),
+        ])
+          .then(([machineGltf, boatGltf, annGltf]) => {
+            if (isCancelled) return;
+
+            // 2. SETUP FLYING MACHINE MODEL (/models/flying_machine-compressed.glb)
+            const machineWrapper = setupEntityModel(
+              machineGltf.scene,
+              4.5,
+              flyingMachineMaterialsRef.current,
+              flyingMachineWireMeshesRef.current,
+              flyingMachineNodesRef.current
+            );
+            machineWrapper.position.set(0, 1.70, 0);
+            machineWrapper.rotation.y = -Math.PI / 2;
+            machineWrapper.rotation.x = 0.38;
+
+            const machineUnderGlow = new THREE.PointLight(0xffea60, 0.7, 4.0, 1.5);
+            machineUnderGlow.position.set(0, 0.95, 0);
+            flyingMachineContainer.add(machineUnderGlow);
+            flyingMachineGlowLightsRef.current.push(machineUnderGlow);
+
+            flyingMachineContainer.add(machineWrapper);
+            flyingMachineWrapperRef.current = machineWrapper;
+
+            // 3. SETUP WATERCRAFT MODEL (/models/paddle_boat-compressed.glb)
+            const boatWrapper = setupEntityModel(
+              boatGltf.scene,
+              2.2,
+              watercraftMaterialsRef.current,
+              watercraftWireMeshesRef.current,
+              watercraftNodesRef.current
+            );
+            boatWrapper.position.set(0, 1.95, 0);
+            boatWrapper.rotation.y = -0.35;
+
+            const boatUnderGlow = new THREE.PointLight(0xffea60, 0.6, 3.5, 1.5);
+            boatUnderGlow.position.set(0, 1.20, 0);
+            watercraftContainer.add(boatUnderGlow);
+            watercraftGlowLightsRef.current.push(boatUnderGlow);
+
+            watercraftContainer.add(boatWrapper);
+            watercraftWrapperRef.current = boatWrapper;
+
+            // 4. SETUP NEURAL NETWORK MODEL (/models/artificial_neural_network_ann-compressed.glb)
+            const annWrapper = setupEntityModel(
+              annGltf.scene,
+              2.0,
+              neuralNetworkMaterialsRef.current,
+              neuralNetworkWireMeshesRef.current,
+              neuralNetworkNodesRef.current
+            );
+            annWrapper.position.set(0, 2.00, 0);
+            annWrapper.rotation.x = 0.25;
+
+            const annUnderGlow = new THREE.PointLight(0xffea60, 0.7, 3.5, 1.5);
+            annUnderGlow.position.set(0, 1.25, 0);
+            neuralNetworkContainer.add(annUnderGlow);
+            neuralNetworkGlowLightsRef.current.push(annUnderGlow);
+
+            neuralNetworkContainer.add(annWrapper);
+            neuralNetworkWrapperRef.current = annWrapper;
+
+            secondaryModelsLoadedRef.current = true;
+            applyThemeRef.current(themeRef.current);
+          })
+          .catch((err) => {
+            console.warn('Background secondary models stream warning:', err);
+          });
+      },
+      (xhr) => {
+        if (xhr.total > 0) {
+          const pct = Math.round(25 + (xhr.loaded / xhr.total) * 65);
+          setLoadingProgress(Math.min(pct, 90));
+        }
+      },
+      (err) => {
         if (isCancelled) return;
-        console.error('Failed to load models:', err);
+        console.error('Failed to load primary humanoid model:', err);
         isLoadedRef.current = true;
         setIsLoaded(true);
-      });
+      }
+    );
 
     // Resize handler
     const handleResize = () => {
       if (!containerRef.current || !renderer || !camera || !composer) return;
       const w = containerRef.current.clientWidth;
       const h = containerRef.current.clientHeight;
+      const isMob = w <= 860;
       camera.aspect = w / h;
+      camera.fov = isMob ? 46 : 42;
       if (w > 860) {
         camera.setViewOffset(w, h, -w * 0.18, 0, w, h);
       } else {
@@ -1275,12 +1310,24 @@ export default function SupermanPrimeCanvas({
     };
     window.addEventListener('resize', handleResize);
 
-    // 17. Render Loop
-    const clock = new THREE.Clock();
+    // 17. Render Loop with Viewport Visibility Observer (Pauses when scrolled into #about)
+    let isVisible = true;
+    let isRunning = false;
+    let lastTime = performance.now();
+    let accumulatedTime = 0;
+
     const animate = () => {
+      if (!isVisible) {
+        isRunning = false;
+        return;
+      }
+      isRunning = true;
       animationFrameId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
-      const time = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      accumulatedTime += delta;
+      const time = accumulatedTime;
 
       // Update uniforms
       customUniformsRef.current.uTime.value = time;
@@ -1470,8 +1517,12 @@ export default function SupermanPrimeCanvas({
         } else if (autoTransformRef.current) {
           formStayTimerRef.current += delta;
           if (formStayTimerRef.current >= HOLD_SECS) {
-            formStayTimerRef.current = 0.0;
             const nextIdx = (currentFormIdxRef.current + 1) % 4;
+            if (nextIdx !== 0 && !secondaryModelsLoadedRef.current) {
+              formStayTimerRef.current = HOLD_SECS - 1.0;
+              return;
+            }
+            formStayTimerRef.current = 0.0;
             currentFormIdxRef.current = targetFormIdxRef.current;
             targetFormIdxRef.current = nextIdx;
             isTransitioningRef.current = true;
@@ -1711,10 +1762,45 @@ export default function SupermanPrimeCanvas({
 
       composer.render();
     };
+
+    const viewportObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !isRunning && !document.hidden) {
+            lastTime = performance.now();
+            animate();
+          }
+        });
+      },
+      { threshold: 0.02 }
+    );
+
+    if (container) {
+      viewportObserver.observe(container);
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isVisible = false;
+        isRunning = false;
+      } else {
+        isVisible = true;
+        if (!isRunning) {
+          lastTime = performance.now();
+          animate();
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     animate();
 
     return () => {
       isCancelled = true;
+      isVisible = false;
+      viewportObserver.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       if (cardsGroupRef.current?.userData?.dispose) {
@@ -3157,45 +3243,53 @@ function createFloatingComicPanels(
   const mouse = new THREE.Vector2();
   let hoveredMesh: THREE.Mesh | null = null;
 
-  // Horizontal drag-to-spin interaction for the 3D carousel
+  // Pointer and Touch drag-to-spin & tap-to-open interaction for the 3D carousel
   let isPointerDown = false;
   let isDraggingCard = false;
   let previousClientX = 0;
+  let previousClientY = 0;
   let dragDelta = 0;
+  let pointerStartTime = 0;
+  let pointerStartPos = { x: 0, y: 0 };
 
-  const handlePointerDown = (e: MouseEvent) => {
+  const startPointer = (clientX: number, clientY: number) => {
     if (cardsGroup.userData.finishIntro) {
       cardsGroup.userData.finishIntro();
     }
     isPointerDown = true;
-    previousClientX = e.clientX;
+    previousClientX = clientX;
+    previousClientY = clientY;
     dragDelta = 0;
+    pointerStartTime = performance.now();
+    pointerStartPos = { x: clientX, y: clientY };
 
     const rect = domElement.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(cardMeshes);
     isDraggingCard = intersects.length > 0;
   };
 
-  const handlePointerMove = (e: MouseEvent) => {
+  const movePointer = (clientX: number, clientY: number) => {
     const rect = domElement.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
 
     if (isPointerDown) {
-      const dx = e.clientX - previousClientX;
-      previousClientX = e.clientX;
-      dragDelta += Math.abs(dx);
-      if (dragDelta > 5) {
+      const dx = clientX - previousClientX;
+      const dy = clientY - previousClientY;
+      previousClientX = clientX;
+      previousClientY = clientY;
+      dragDelta += Math.hypot(dx, dy);
+      if (dragDelta > 6) {
         cardsGroup.userData.isDragging = true;
         if (typeof window !== 'undefined') {
           window.dispatchEvent(new CustomEvent('user-3d-interacted'));
         }
       }
       if (isDraggingCard) {
-        carouselPivotGroup.rotation.y += dx * 0.005;
+        carouselPivotGroup.rotation.y += dx * 0.0055;
       }
     }
 
@@ -3229,22 +3323,20 @@ function createFloatingComicPanels(
     }
   };
 
-  const handlePointerUp = () => {
+  const endPointer = () => {
     isPointerDown = false;
     setTimeout(() => {
       cardsGroup.userData.isDragging = false;
-    }, 50);
+    }, 60);
   };
 
-  const handleClick = (e: MouseEvent) => {
+  const selectCardAt = (clientX: number, clientY: number) => {
     if (cardsGroup.userData.finishIntro) {
       cardsGroup.userData.finishIntro();
     }
-    if (dragDelta > 6) return; // Ignore drag operations
-
     const rect = domElement.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(cardMeshes);
@@ -3261,16 +3353,56 @@ function createFloatingComicPanels(
     }
   };
 
-  domElement.addEventListener('mousedown', handlePointerDown);
-  domElement.addEventListener('mousemove', handlePointerMove);
-  window.addEventListener('mouseup', handlePointerUp);
+  const handleMouseDown = (e: MouseEvent) => {
+    startPointer(e.clientX, e.clientY);
+  };
+  const handleMouseMove = (e: MouseEvent) => {
+    movePointer(e.clientX, e.clientY);
+  };
+  const handleMouseUp = () => {
+    endPointer();
+  };
+  const handleClick = (e: MouseEvent) => {
+    if (dragDelta > 8) return;
+    selectCardAt(e.clientX, e.clientY);
+  };
+
+  const handleTouchStart = (e: TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    startPointer(t.clientX, t.clientY);
+  };
+  const handleTouchMove = (e: TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    movePointer(t.clientX, t.clientY);
+  };
+  const handleTouchEnd = (e: TouchEvent) => {
+    endPointer();
+    const elapsed = performance.now() - pointerStartTime;
+    if (dragDelta < 14 && elapsed < 500) {
+      selectCardAt(pointerStartPos.x, pointerStartPos.y);
+    }
+  };
+
+  domElement.addEventListener('mousedown', handleMouseDown);
+  domElement.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('mouseup', handleMouseUp);
   domElement.addEventListener('click', handleClick);
 
+  domElement.addEventListener('touchstart', handleTouchStart, { passive: true });
+  domElement.addEventListener('touchmove', handleTouchMove, { passive: true });
+  domElement.addEventListener('touchend', handleTouchEnd, { passive: true });
+
   cardsGroup.userData.dispose = () => {
-    domElement.removeEventListener('mousedown', handlePointerDown);
-    domElement.removeEventListener('mousemove', handlePointerMove);
-    window.removeEventListener('mouseup', handlePointerUp);
+    domElement.removeEventListener('mousedown', handleMouseDown);
+    domElement.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseup', handleMouseUp);
     domElement.removeEventListener('click', handleClick);
+
+    domElement.removeEventListener('touchstart', handleTouchStart);
+    domElement.removeEventListener('touchmove', handleTouchMove);
+    domElement.removeEventListener('touchend', handleTouchEnd);
   };
 
   return cardsGroup;

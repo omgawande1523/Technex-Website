@@ -10,6 +10,13 @@
   background: #06040a url("/permanent-bg.webp") center top / cover fixed no-repeat;
 }
 
+@media (max-width: 860px) {
+  .standalone {
+    background-image: url("/permanent-bg-mobile.webp");
+    background-attachment: scroll;
+  }
+}
+
 .aboutPage :global(.about-main-title),
 .aboutPage :global(.stat-title),
 .aboutPage :global(.stat-subtitle),

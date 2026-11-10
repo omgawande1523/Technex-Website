@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/navigation/Navbar";
-import LeftSidebar from "@/components/landing/LeftSidebar";
-import RightSidebar from "@/components/landing/RightSidebar";
+import SiteChrome from "@/components/navigation/SiteChrome";
 import {
   eventDisplayFont,
   eventTextFont,
@@ -33,9 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${eventDisplayFont.variable} ${eventTextFont.variable} ${landingBodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <LeftSidebar />
-        <RightSidebar />
+        <SiteChrome />
         {children}
       </body>
     </html>

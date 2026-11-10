@@ -28,6 +28,7 @@ const navigation = [
   { label: "Workshops", href: "/admin/workshops", icon: "▦" },
   { label: "Participants", href: "/admin/participants", icon: "♙" },
   { label: "Payments", href: "/admin/payments", icon: "₹" },
+  { label: "Audit Logs", href: "/admin/audit-logs", icon: "⚡" },
 ];
 
 function getRoleLabel(role: AdminRole) {
@@ -131,14 +132,19 @@ export default function AdminShell({
     .slice(0, 2)
     .toUpperCase();
 
-  const visibleNavigation = navigation.filter((item) => {
-    if (admin.role === "event_head") {
-      return !["/admin/payments"].includes(item.href);
-    }
+ const visibleNavigation = navigation.filter((item) => {
+  // Audit Logs: Superadmin only
+  if (item.href === "/admin/audit-logs") {
+    return admin.role === "superadmin";
+  }
 
-    return true;
-  });
+  // Payments: Superadmin and Coordinator only
+  if (item.href === "/admin/payments") {
+    return admin.role !== "event_head";
+  }
 
+  return true;
+});
   return (
     <div className={styles.shell}>
       {menuOpen && (
