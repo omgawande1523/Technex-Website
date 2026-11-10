@@ -654,7 +654,7 @@ export default function SupermanPrimeCanvas({
         antialias: true,
         alpha: true,
         powerPreference: 'default',
-        preserveDrawingBuffer: false,
+        preserveDrawingBuffer: true,
         failIfMajorPerformanceCaveat: false,
       });
     } catch (e1) {
@@ -665,7 +665,7 @@ export default function SupermanPrimeCanvas({
           alpha: true,
           powerPreference: 'default',
           precision: 'mediump',
-          preserveDrawingBuffer: false,
+          preserveDrawingBuffer: true,
           failIfMajorPerformanceCaveat: false,
         });
       } catch (e2) {
@@ -1388,6 +1388,15 @@ export default function SupermanPrimeCanvas({
     };
     window.addEventListener('resize', handleResize);
 
+    const resizeObserver = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(() => {
+          handleResize();
+        })
+      : null;
+    if (container && resizeObserver) {
+      resizeObserver.observe(container);
+    }
+
     // 17. Render Loop with Viewport Visibility Observer (Pauses when scrolled into #about)
     let isVisible = true;
     let isRunning = false;
@@ -1598,17 +1607,17 @@ export default function SupermanPrimeCanvas({
             const nextIdx = (currentFormIdxRef.current + 1) % 4;
             if (nextIdx !== 0 && !secondaryModelsLoadedRef.current) {
               formStayTimerRef.current = HOLD_SECS - 1.0;
-              return;
+            } else {
+              formStayTimerRef.current = 0.0;
+              currentFormIdxRef.current = targetFormIdxRef.current;
+              targetFormIdxRef.current = nextIdx;
+              isTransitioningRef.current = true;
+              transitionProgressRef.current = 0.0;
+              const nextForm = FORMS_SEQUENCE[nextIdx];
+              prevEntityFormRef.current = nextForm;
+              onEntityFormChangeRef.current?.(nextForm);
+              playChimeForForm(nextForm);
             }
-            formStayTimerRef.current = 0.0;
-            currentFormIdxRef.current = targetFormIdxRef.current;
-            targetFormIdxRef.current = nextIdx;
-            isTransitioningRef.current = true;
-            transitionProgressRef.current = 0.0;
-            const nextForm = FORMS_SEQUENCE[nextIdx];
-            prevEntityFormRef.current = nextForm;
-            onEntityFormChangeRef.current?.(nextForm);
-            playChimeForForm(nextForm);
           }
         }
       }
@@ -1890,6 +1899,7 @@ export default function SupermanPrimeCanvas({
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      resizeObserver?.disconnect();
       renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
       renderer.domElement.removeEventListener('webglcontextrestored', handleContextRestored);
       if (cardsGroupRef.current?.userData?.dispose) {
@@ -3295,25 +3305,16 @@ function createFloatingComicPanels(
       hasChimed: false,
     };
 
-    // Check mobile state for instant placement
-    const isMobileCard = domElement.clientWidth <= 860 || (typeof window !== 'undefined' && window.innerWidth <= 860);
-    if (isMobileCard) {
-      cardMesh.visible = true;
-      cardMesh.scale.set(t.scale, t.scale, t.scale);
-      cardMesh.userData.hasLanded = true;
-      cardMesh.userData.hasChimed = true;
-    } else {
-      cardMesh.visible = false;
-      cardMesh.scale.set(0.001, 0.001, 0.001);
-    }
+    // Initially hidden until launch time arrives in entrance swoop animation
+    cardMesh.visible = false;
+    cardMesh.scale.set(0.001, 0.001, 0.001);
 
     carouselPivotGroup.add(cardMesh);
     cardMeshes.push(cardMesh);
   });
 
-  const isMobileGroup = domElement.clientWidth <= 860 || (typeof window !== 'undefined' && window.innerWidth <= 860);
   cardsGroup.userData.cardMeshes = cardMeshes;
-  cardsGroup.userData.isIntroActive = !isMobileGroup;
+  cardsGroup.userData.isIntroActive = true;
   cardsGroup.userData.finishIntro = () => {
     cardsGroup.userData.isIntroActive = false;
     cardMeshes.forEach((card) => {
