@@ -108,7 +108,7 @@ export function buildHolographicHumanoid(
 
         float alpha = clamp((fresnel * 0.12 + scanWave * 0.30) * uSkinOpacity, 0.0, 0.45);
 
-        gl_FragColor = vec4(finalColor * alpha, alpha);
+        gl_FragColor = vec4(finalColor * alpha, clamp(alpha * 2.0, 0.0, 0.85));
       }
     `,
   });
@@ -164,7 +164,7 @@ export function buildHolographicHumanoid(
         float totalAlpha = clamp(baseAlpha + pulseAlpha, 0.0, 0.45);
 
         vec3 col = mix(uGoldColor, uCoreColor, clamp(pulse * 0.6, 0.0, 0.5));
-        gl_FragColor = vec4(col * totalAlpha, totalAlpha);
+        gl_FragColor = vec4(col * totalAlpha, clamp(totalAlpha * 2.2, 0.0, 0.85));
       }
     `,
   });
@@ -405,7 +405,7 @@ export function buildHolographicHumanoid(
         float glow = core + corona;
 
         vec3 col = mix(uGoldColor, uCoreColor, clamp(core * 0.6, 0.0, 0.5));
-        gl_FragColor = vec4(col * vBrightness, glow * clamp(vBrightness, 0.0, 0.35));
+        gl_FragColor = vec4(col * vBrightness, clamp(glow * vBrightness * 2.0, 0.0, 0.90));
       }
     `,
   });

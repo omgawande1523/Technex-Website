@@ -759,7 +759,19 @@ export default function SupermanPrimeCanvas({
 }`
       );
 
-      composer = new EffectComposer(renderer);
+      // Safe cross-device render target: Use HalfFloatType on WebGL2 devices that support it,
+      // and smoothly fallback to UnsignedByteType on WebGL1 or budget devices so EffectComposer never crashes
+      const isFloatSupported = renderer.capabilities.isWebGL2 || !!renderer.extensions.get('OES_texture_half_float');
+      const targetType = isFloatSupported ? THREE.HalfFloatType : THREE.UnsignedByteType;
+      const renderTarget = new THREE.WebGLRenderTarget(width, height, {
+        type: targetType,
+        format: THREE.RGBAFormat,
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        generateMipmaps: false,
+      });
+
+      composer = new EffectComposer(renderer, renderTarget);
       composer.addPass(renderPass);
       composer.addPass(bloomPass);
       composer.addPass(outputPass);
@@ -898,6 +910,7 @@ export default function SupermanPrimeCanvas({
           vec3 rimGlow = uThemeColor * fresnel * uGlowIntensity * 0.14;
 
           gl_FragColor.rgb += rimGlow;
+          gl_FragColor.a = 1.0;
           `
         );
       };
@@ -1043,7 +1056,7 @@ export default function SupermanPrimeCanvas({
                   float totalAlpha = clamp(baseAlpha + pulseAlpha, 0.0, 0.55);
 
                   vec3 col = mix(uGoldColor, uCoreColor, clamp(pulse * 0.7 + scanWave * 0.5, 0.0, 0.6));
-                  gl_FragColor = vec4(col * totalAlpha, totalAlpha);
+                  gl_FragColor = vec4(col * totalAlpha, clamp(totalAlpha * 2.5, 0.0, 0.90));
                 }
               `,
             });
@@ -1101,7 +1114,7 @@ export default function SupermanPrimeCanvas({
                     if (dist > 0.5) discard;
                     float intensity = (1.0 - smoothstep(0.0, 0.5, dist)) * (0.20 + vPulse * 0.35) * uNodesBrightness;
                     vec3 col = mix(uGoldColor, uCoreColor, clamp(vPulse * 0.7, 0.0, 0.5));
-                    gl_FragColor = vec4(col * intensity, intensity);
+                    gl_FragColor = vec4(col * intensity, clamp(intensity * 3.0, 0.0, 0.95));
                   }
                 `,
               });
@@ -1121,7 +1134,7 @@ export default function SupermanPrimeCanvas({
       return wrapper;
     };
 
-    // Safety timeout: Guarantee that the loading screen is never stuck for more than 3.5s
+    // Safety timeout: Guarantee that the loading screen is never stuck for more than 10s on slow networks
     const safetyTimeout = setTimeout(() => {
       if (!isLoadedRef.current) {
         console.info('Scene safety timeout reached: dismissing loading overlay');
@@ -1132,7 +1145,7 @@ export default function SupermanPrimeCanvas({
           (window as unknown as { __SCENE_LOADED__: boolean }).__SCENE_LOADED__ = true;
         }
       }
-    }, 3500);
+    }, 10000);
 
     // Load humanoid primary model first for instant non-blocking initial render with automatic fallback
     const loadHumanoidModel = (targetPath: string, isFallback: boolean = false) => {
