@@ -261,6 +261,7 @@ export default function SupermanPrimeCanvas({
   const isInitialCameraMountRef = useRef(true);
   const holographicLayersRef = useRef<HolographicLayers | null>(null);
   const materialsRef = useRef<THREE.MeshPhysicalMaterial[]>([]);
+  const proxyHeroRef = useRef<THREE.Group | null>(null);
   const haloGroupRef = useRef<THREE.Group | null>(null);
   const capeGroupRef = useRef<THREE.Group | null>(null);
   const capeMeshRef = useRef<THREE.Mesh | null>(null);
@@ -648,24 +649,51 @@ export default function SupermanPrimeCanvas({
     }
 
     // 3. Robust WebGLRenderer creation with cross-device fallbacks
+    const canvas = document.createElement('canvas');
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.display = 'block';
+
+    const contextAttributes: WebGLContextAttributes = {
+      alpha: true,
+      antialias: true,
+      depth: true,
+      stencil: false,
+      powerPreference: 'default',
+      preserveDrawingBuffer: false,
+      failIfMajorPerformanceCaveat: false,
+    };
+
+    let gl: WebGLRenderingContext | WebGL2RenderingContext | null = null;
+    try {
+      gl = (canvas.getContext('webgl2', contextAttributes) ||
+            canvas.getContext('webgl', contextAttributes) ||
+            canvas.getContext('experimental-webgl', contextAttributes)) as any;
+    } catch (e) {
+      console.warn('WebGL context creation warning:', e);
+    }
+
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
+        canvas,
+        context: gl || undefined,
         antialias: true,
         alpha: true,
         powerPreference: 'default',
-        preserveDrawingBuffer: true,
+        preserveDrawingBuffer: false,
         failIfMajorPerformanceCaveat: false,
       });
     } catch (e1) {
       console.warn('Initial WebGLRenderer creation failed, attempting fallback options:', e1);
       try {
         renderer = new THREE.WebGLRenderer({
+          canvas,
           antialias: false,
           alpha: true,
           powerPreference: 'default',
           precision: 'mediump',
-          preserveDrawingBuffer: true,
+          preserveDrawingBuffer: false,
           failIfMajorPerformanceCaveat: false,
         });
       } catch (e2) {
@@ -733,12 +761,23 @@ export default function SupermanPrimeCanvas({
 
     controls.addEventListener('start', handleControlsStart);
 
-    // 5. Post-Processing: UnrealBloomPass tuned for high-contrast celestial gold
+    // 5. Post-Processing: UnrealBloomPass tuned for high-contrast celestial gold with foolproof universal fallback
     let composer: EffectComposer | null = null;
     try {
+      const glCtx = renderer.getContext();
+      // Accurate check for float render targets:
+      // In WebGL2: requires EXT_color_buffer_float
+      // In WebGL1: requires OES_texture_half_float + EXT_color_buffer_half_float
+      const hasFloatRT = renderer.capabilities.isWebGL2
+        ? !!glCtx.getExtension('EXT_color_buffer_float')
+        : (!!glCtx.getExtension('OES_texture_half_float') && !!glCtx.getExtension('EXT_color_buffer_half_float'));
+
+      const targetType = hasFloatRT ? THREE.HalfFloatType : THREE.UnsignedByteType;
+
       const renderPass = new RenderPass(scene, camera);
       renderPass.clearColor = new THREE.Color(0, 0, 0);
       renderPass.clearAlpha = 0;
+
       const bloomPass = new UnrealBloomPass(
         new THREE.Vector2(width, height),
         bloomStrength || 0.36, // strength (crisp celestial glow, no foggy blowout)
@@ -746,6 +785,26 @@ export default function SupermanPrimeCanvas({
         0.88  // threshold (sharp starbursts, cybernetic wireframes & core nodes bloom)
       );
       bloomPassRef.current = bloomPass;
+
+      // When float render targets are not supported on budget or integrated GPUs,
+      // adapt UnrealBloomPass's internal render targets so framebuffers never fail.
+      if (!hasFloatRT) {
+        bloomPass.renderTargetBright.dispose();
+        bloomPass.renderTargetBright = new THREE.WebGLRenderTarget(
+          Math.max(1, Math.round(width / 2)),
+          Math.max(1, Math.round(height / 2)),
+          { type: THREE.UnsignedByteType, depthBuffer: false }
+        );
+        for (let i = 0; i < bloomPass.nMips; i++) {
+          const rw = Math.max(1, Math.round(width / Math.pow(2, i + 1)));
+          const rh = Math.max(1, Math.round(height / Math.pow(2, i + 1)));
+          bloomPass.renderTargetsHorizontal[i].dispose();
+          bloomPass.renderTargetsHorizontal[i] = new THREE.WebGLRenderTarget(rw, rh, { type: THREE.UnsignedByteType, depthBuffer: false });
+          bloomPass.renderTargetsVertical[i].dispose();
+          bloomPass.renderTargetsVertical[i] = new THREE.WebGLRenderTarget(rw, rh, { type: THREE.UnsignedByteType, depthBuffer: false });
+        }
+      }
+
       const outputPass = new OutputPass();
 
       // Guarantee that the 3D entity, golden bloom halo, cybernetic wireframe, glowing nodes,
@@ -754,15 +813,12 @@ export default function SupermanPrimeCanvas({
       outputPass.material.fragmentShader = outputPass.material.fragmentShader.replace(
         /}\s*$/,
         `  float maxColor = max(gl_FragColor.r, max(gl_FragColor.g, gl_FragColor.b));
-  float lumAlpha = smoothstep(0.002, 0.08, maxColor);
+  float lumAlpha = smoothstep(0.001, 0.04, maxColor);
   gl_FragColor.a = max(gl_FragColor.a, lumAlpha);
 }`
       );
+      outputPass.material.needsUpdate = true;
 
-      // Safe cross-device render target: Use HalfFloatType on WebGL2 devices that support it,
-      // and smoothly fallback to UnsignedByteType on WebGL1 or budget devices so EffectComposer never crashes
-      const isFloatSupported = renderer.capabilities.isWebGL2 || !!renderer.extensions.get('OES_texture_half_float');
-      const targetType = isFloatSupported ? THREE.HalfFloatType : THREE.UnsignedByteType;
       const renderTarget = new THREE.WebGLRenderTarget(width, height, {
         type: targetType,
         format: THREE.RGBAFormat,
@@ -775,10 +831,21 @@ export default function SupermanPrimeCanvas({
       composer.addPass(renderPass);
       composer.addPass(bloomPass);
       composer.addPass(outputPass);
-      composerRef.current = composer;
+
+      // Verify composer works without GL errors on this hardware
+      composer.render();
+      const testGlErr = glCtx.getError();
+      if (testGlErr !== 0) {
+        console.warn('Composer initial test produced GL error:', testGlErr, 'falling back to direct rendering');
+        composer.dispose();
+        composer = null;
+      } else {
+        composerRef.current = composer;
+      }
     } catch (err) {
       console.warn('EffectComposer creation failed, falling back to direct renderer:', err);
       composer = null;
+      composerRef.current = null;
     }
 
     // 6. Lighting: Tuned for dramatic muscular definition and golden specular luster
@@ -930,6 +997,11 @@ export default function SupermanPrimeCanvas({
     humanoidContainer.scale.set(1.15, 1.15, 1.15);
     entityGroup.add(humanoidContainer);
     humanoidContainerRef.current = humanoidContainer;
+
+    // Instant procedural celestial proxy hero guarantees zero empty frames on any device or network speed
+    const proxyHero = createCelestialProxyHero(goldBodyMaterial);
+    humanoidContainer.add(proxyHero);
+    proxyHeroRef.current = proxyHero;
 
     const flyingMachineContainer = new THREE.Group();
     entityGroup.add(flyingMachineContainer);
@@ -1134,6 +1206,16 @@ export default function SupermanPrimeCanvas({
       return wrapper;
     };
 
+    // Fast initial overlay dismissal so cards intro swoop and golden portal are immediately visible
+    const initialDismissTimeout = setTimeout(() => {
+      setLoadingProgress(100);
+      setIsLoaded(true);
+      isLoadedRef.current = true;
+      if (typeof window !== 'undefined') {
+        (window as unknown as { __SCENE_LOADED__: boolean }).__SCENE_LOADED__ = true;
+      }
+    }, 600);
+
     // Safety timeout: Guarantee that the loading screen is never stuck for more than 10s on slow networks
     const safetyTimeout = setTimeout(() => {
       if (!isLoadedRef.current) {
@@ -1204,6 +1286,11 @@ export default function SupermanPrimeCanvas({
               }
             });
 
+            if (proxyHeroRef.current) {
+              humanoidContainer.remove(proxyHeroRef.current);
+              proxyHeroRef.current = null;
+            }
+
             model.scale.set(0.0132, 0.0132, 0.0132);
             model.position.set(0, 0.02, 0);
             humanoidContainer.add(model);
@@ -1227,10 +1314,19 @@ export default function SupermanPrimeCanvas({
               }
             }
 
-            haloGroupRef.current = null;
+            // Divine Celestial Halo behind Superman Prime / Technex Hero
+            const divineHalo = createDivineHalo();
+            divineHalo.position.set(0, 1.82, -0.06);
+            humanoidContainer.add(divineHalo);
+            haloGroupRef.current = divineHalo;
+
             capeGroupRef.current = null;
             capeMeshRef.current = null;
           } else {
+            if (proxyHeroRef.current) {
+              humanoidContainer.remove(proxyHeroRef.current);
+              proxyHeroRef.current = null;
+            }
             model.traverse((child) => {
               if ((child as THREE.Mesh).isMesh) {
                 const mesh = child as THREE.Mesh;
@@ -1871,13 +1967,17 @@ export default function SupermanPrimeCanvas({
         controls.update(delta);
       }
 
-      if (composer) {
+      let renderedOk = false;
+      if (composerRef.current) {
         try {
-          composer.render();
-        } catch {
-          renderer.render(scene, camera);
+          composerRef.current.render();
+          renderedOk = true;
+        } catch (renderErr) {
+          console.warn('Composer render failed, permanently falling back to direct renderer:', renderErr);
+          composerRef.current = null;
         }
-      } else {
+      }
+      if (!renderedOk) {
         renderer.render(scene, camera);
       }
     };
@@ -1918,6 +2018,7 @@ export default function SupermanPrimeCanvas({
     return () => {
       isCancelled = true;
       isVisible = false;
+      clearTimeout(initialDismissTimeout);
       clearTimeout(safetyTimeout);
       viewportObserver.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
@@ -1931,8 +2032,10 @@ export default function SupermanPrimeCanvas({
       }
       controls.removeEventListener('start', handleControlsStart);
       controls.dispose();
-      if (composer) {
-        composer.dispose();
+      if (composerRef.current) {
+        try {
+          composerRef.current.dispose();
+        } catch {}
       }
       renderer.dispose();
       if (container.contains(renderer.domElement)) {
@@ -2412,6 +2515,84 @@ function createChestSunCore(): THREE.Group {
   coreGroup.add(glowMesh);
 
   return coreGroup;
+}
+
+/**
+ * Creates an instant stylized celestial proxy hero that renders immediately
+ * from frame 0 while high-detail GLB assets download asynchronously.
+ * Guarantees zero blank screen and 100% visibility across all devices.
+ */
+function createCelestialProxyHero(goldMaterial: THREE.MeshPhysicalMaterial): THREE.Group {
+  const proxy = new THREE.Group();
+  proxy.name = 'celestial_proxy_hero';
+
+  // Torso
+  const torsoGeom = new THREE.CylinderGeometry(0.24, 0.16, 0.65, 16);
+  const torsoMesh = new THREE.Mesh(torsoGeom, goldMaterial);
+  torsoMesh.position.set(0, 1.35, 0);
+  proxy.add(torsoMesh);
+
+  // Chest
+  const chestGeom = new THREE.SphereGeometry(0.22, 16, 16);
+  chestGeom.scale(1.15, 0.85, 0.85);
+  const chestMesh = new THREE.Mesh(chestGeom, goldMaterial);
+  chestMesh.position.set(0, 1.55, 0.02);
+  proxy.add(chestMesh);
+
+  // Head
+  const headGeom = new THREE.SphereGeometry(0.12, 16, 16);
+  const headMesh = new THREE.Mesh(headGeom, goldMaterial);
+  headMesh.position.set(0, 1.82, 0);
+  proxy.add(headMesh);
+
+  // Pelvis / Hips
+  const hipsGeom = new THREE.CylinderGeometry(0.17, 0.15, 0.22, 16);
+  const hipsMesh = new THREE.Mesh(hipsGeom, goldMaterial);
+  hipsMesh.position.set(0, 0.95, 0);
+  proxy.add(hipsMesh);
+
+  // Legs
+  const legGeom = new THREE.CylinderGeometry(0.075, 0.05, 0.85, 12);
+  const leftLeg = new THREE.Mesh(legGeom, goldMaterial);
+  leftLeg.position.set(-0.11, 0.45, 0);
+  const rightLeg = new THREE.Mesh(legGeom, goldMaterial);
+  rightLeg.position.set(0.11, 0.45, 0);
+  proxy.add(leftLeg, rightLeg);
+
+  // Arms
+  const armGeom = new THREE.CylinderGeometry(0.065, 0.045, 0.68, 12);
+  const leftArm = new THREE.Mesh(armGeom, goldMaterial);
+  leftArm.position.set(-0.32, 1.30, 0);
+  leftArm.rotation.z = 0.18;
+  const rightArm = new THREE.Mesh(armGeom, goldMaterial);
+  rightArm.position.set(0.32, 1.30, 0);
+  rightArm.rotation.z = -0.18;
+  proxy.add(leftArm, rightArm);
+
+  // Golden cybernetic wireframe overlay
+  [torsoMesh, chestMesh, headMesh].forEach((mesh) => {
+    const wireGeom = new THREE.WireframeGeometry(mesh.geometry);
+    const wireMat = new THREE.LineBasicMaterial({
+      color: 0xffea77,
+      transparent: true,
+      opacity: 0.55,
+      blending: THREE.AdditiveBlending,
+    });
+    const wire = new THREE.LineSegments(wireGeom, wireMat);
+    mesh.add(wire);
+  });
+
+  // Radiant Chest Sun Core
+  const chestCore = createChestSunCore();
+  chestCore.position.set(0, 1.55, 0.16);
+  proxy.add(chestCore);
+
+  // Divine Celestial Halo behind head
+  const halo = createDivineHalo();
+  halo.position.set(0, 1.82, -0.05);
+  proxy.add(halo);
+
+  return proxy;
 }
 
 /**
@@ -3323,7 +3504,7 @@ function createFloatingComicPanels(
       targetScale: t.scale,
       isHovered: false,
       flightCurve,
-      startDelay: 0.12 + idx * 0.14,
+      startDelay: 0.35 + idx * 0.15,
       duration: 2.25,
       hasLanded: false,
       hasChimed: false,

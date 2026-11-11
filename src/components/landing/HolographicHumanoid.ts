@@ -322,7 +322,7 @@ export function buildHolographicHumanoid(
         float intensity = clamp((restingCurrent + pulse * 0.25) * uNetworkIntensity, 0.0, 0.40);
 
         vec3 col = mix(uGoldColor, uCoreColor, clamp(pulse * 0.6, 0.0, 0.5));
-        gl_FragColor = vec4(col * intensity, intensity);
+        gl_FragColor = vec4(col * intensity, clamp(intensity * 2.2, 0.0, 0.85));
       }
     `,
   });
