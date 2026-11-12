@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { KeyboardEvent, MouseEvent } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { EVENT_LIST_SCROLL_KEY } from "@/constants/events";
 import type { EventItem, IconKind } from "@/types/event";
@@ -53,7 +54,16 @@ const Icon = ({ k }: { k: IconKind }) => (
   </svg>
 );
 
-export default function EventDetail({ event: e }: { event: EventItem }) {
+export default function EventDetail({
+  event: e,
+  backHref,
+  backLabel = "← Back to all events",
+}: {
+  event: EventItem;
+  /** Optional explicit destination for the back button (e.g. "/workshops"). */
+  backHref?: string;
+  backLabel?: string;
+}) {
   const router = useRouter();
 
   useEffect(() => {
@@ -72,6 +82,10 @@ export default function EventDetail({ event: e }: { event: EventItem }) {
   const imgSrc = imgFailed || !e.image ? FALLBACK_IMAGE : e.image;
 
   const backToEvents = () => {
+    if (backHref) {
+      router.push(backHref);
+      return;
+    }
     if (sessionStorage.getItem(EVENT_LIST_SCROLL_KEY) !== null) {
       router.back();
       return;
@@ -115,7 +129,7 @@ export default function EventDetail({ event: e }: { event: EventItem }) {
       <TerrainBackground />
       <main className="page">
         <button className="btn line back-events" type="button" onClick={backToEvents}>
-          ← Back to all events
+          {backLabel}
         </button>
 
         <header className="head">
@@ -130,7 +144,13 @@ export default function EventDetail({ event: e }: { event: EventItem }) {
               <span>“{e.quote}”</span>
             </div>
             {e.registerUrl ? (
-              <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">Register now <span className="register-arrow" aria-hidden="true">↗</span></a>
+              e.registerUrl.startsWith("/") ? (
+                <Link className="btn gold register-refined" href={e.registerUrl}>
+                  Register now <span className="register-arrow" aria-hidden="true">↗</span>
+                </Link>
+              ) : (
+                <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">Register now <span className="register-arrow" aria-hidden="true">↗</span></a>
+              )
             ) : (
               <span className="btn gold register-refined" aria-disabled="true">Registration TBA</span>
             )}

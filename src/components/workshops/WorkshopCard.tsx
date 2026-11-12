@@ -1,7 +1,13 @@
+
 "use client";
 
-import { useState, type KeyboardEvent, type MouseEvent } from "react";
+import {
+  useState,
+  type KeyboardEvent,
+  type MouseEvent,
+} from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import type { Workshop } from "@/types/workshop";
 import CardFrame from "./CardFrame";
 import styles from "./workshops.module.css";
@@ -10,19 +16,43 @@ interface WorkshopCardProps {
   workshop: Workshop;
 }
 
-export default function WorkshopCard({ workshop }: WorkshopCardProps) {
+export default function WorkshopCard({
+  workshop,
+}: WorkshopCardProps) {
+  const router = useRouter();
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
 
-  const flipCard = () => setIsFlipped((flipped) => !flipped);
+  // Keep the existing card flip animation.
+  const flipCard = () => {
+    setIsFlipped((flipped) => !flipped);
+  };
+
+  // Prevent button clicks from flipping the card.
   const stopAndRun =
-    (action: () => void) => (event: MouseEvent<HTMLButtonElement>) => {
+    (action: () => void) =>
+    (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
       event.stopPropagation();
       action();
     };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+  // Open the corresponding Workshop Details page.
+  const handleExplore = () => {
+    const slug = encodeURIComponent(String(workshop.id));
+    router.push(`/workshops/${slug}`);
+  };
+
+  // Open the corresponding Workshop Registration page.
+  const handleRegister = () => {
+    const slug = encodeURIComponent(String(workshop.id));
+    router.push(`/workshops/${slug}/register`);
+  };
+
+  const handleKeyDown = (
+    event: KeyboardEvent<HTMLDivElement>
+  ) => {
     if (event.target !== event.currentTarget) return;
+
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       flipCard();
@@ -38,11 +68,16 @@ export default function WorkshopCard({ workshop }: WorkshopCardProps) {
       className={styles.cardPerspective}
       role="group"
       tabIndex={0}
-      aria-label={`${workshop.title}. Press Enter or Space to view details.`}
+      aria-label={`${workshop.title}. Press Enter or Space to flip the card.`}
       onClick={flipCard}
       onKeyDown={handleKeyDown}
     >
-      <div className={`${styles.cardFlip} ${isFlipped ? styles.flipped : ""}`}>
+      <div
+        className={`${styles.cardFlip} ${
+          isFlipped ? styles.flipped : ""
+        }`}
+      >
+        {/* FRONT SIDE */}
         <div className={styles.cardFace}>
           <CardFrame>
             <div className={styles.frontContent}>
@@ -53,42 +88,61 @@ export default function WorkshopCard({ workshop }: WorkshopCardProps) {
                   fill
                   sizes="(max-width: 640px) 220px, 22vw"
                 />
+
                 <div className={styles.posterShade} />
-                <span className={styles.posterCaption}>ARTIFACT // SCHEMATIC</span>
+
+                <span className={styles.posterCaption}>
+                  ARTIFACT // SCHEMATIC
+                </span>
               </div>
 
               <div className={styles.workshopInfo}>
                 <div className={styles.workshopIntro}>
                   {workshop.category && (
                     <span className={styles.category}>
-                      <span className={styles.categoryDot} />
+                      <span
+                        className={styles.categoryDot}
+                      />
                       {workshop.category}
                     </span>
                   )}
+
                   <h2 className={styles.workshopTitle}>
-                    {titleLead && <span>{titleLead}</span>}
-                    <span className={styles.titleHighlight}>{titleLast}</span>
+                    {titleLead && (
+                      <span>{titleLead}</span>
+                    )}
+
+                    <span
+                      className={styles.titleHighlight}
+                    >
+                      {titleLast}
+                    </span>
                   </h2>
-                  <p className={styles.description}>{workshop.description}</p>
+
+                  <p className={styles.description}>
+                    {workshop.description}
+                  </p>
                 </div>
 
                 <div className={styles.actions}>
+                  {/* EXPLORE BUTTON */}
                   <button
                     className={styles.exploreButton}
                     type="button"
-                    onClick={stopAndRun(flipCard)}
+                    onClick={stopAndRun(handleExplore)}
                     aria-label={`Explore ${workshop.title}`}
                   >
                     EXPLORE
                   </button>
+
+                  {/* REGISTER BUTTON */}
                   <button
-                    className={`${styles.registerButton} ${
-                      isRegistered ? styles.registered : ""
-                    }`}
+                    className={styles.registerButton}
                     type="button"
-                    onClick={stopAndRun(() => setIsRegistered((value) => !value))}
+                    onClick={stopAndRun(handleRegister)}
+                    aria-label={`Register for ${workshop.title}`}
                   >
-                    {isRegistered ? "REGISTERED" : "REGISTER"}
+                    REGISTER
                   </button>
                 </div>
               </div>
@@ -96,13 +150,23 @@ export default function WorkshopCard({ workshop }: WorkshopCardProps) {
           </CardFrame>
         </div>
 
-        <div className={`${styles.cardFace} ${styles.cardBack}`}>
+        {/* BACK SIDE */}
+        <div
+          className={`${styles.cardFace} ${styles.cardBack}`}
+        >
           <CardFrame isBack>
             <div className={styles.backContent}>
-              <h2 className={styles.backTitle}>{workshop.title}</h2>
-              <p className={styles.backDescription}>{workshop.description}</p>
+              <h2 className={styles.backTitle}>
+                {workshop.title}
+              </h2>
+
+              <p className={styles.backDescription}>
+                {workshop.description}
+              </p>
+
               <span className={styles.returnHint}>
-                <span aria-hidden="true">⟳</span> CLICK TO RETURN
+                <span aria-hidden="true">⟳</span>
+                {" "}CLICK TO RETURN
               </span>
             </div>
           </CardFrame>
