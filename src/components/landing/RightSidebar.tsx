@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   InstagramIcon,
   YoutubeIcon,
@@ -50,7 +50,48 @@ const RIGHT_SOCIAL_ITEMS: SocialItem[] = [
 ];
 
 export default function RightSidebar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setMobileOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
   return (
+    <> 
+      <style>{`
+        @media (max-width: 767px) {
+          .site-right-sidebar {
+            right: 8px !important;
+            top: 96px !important;
+            transform: none !important;
+            padding: 5px !important;
+            border-radius: 15px !important;
+            gap: 5px !important;
+            background: rgba(12, 10, 16, .88) !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,.38) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            max-height: calc(100dvh - 190px);
+            overflow-y: auto;
+            scrollbar-width: none;
+          }
+          .site-right-sidebar::-webkit-scrollbar { display: none; }
+          .site-right-sidebar .sidebar-icon-btn {
+            width: 35px !important;
+            height: 35px !important;
+            border-radius: 10px !important;
+          }
+          .site-right-sidebar .sidebar-tooltip,
+          .site-right-sidebar .sidebar-tooltip-left { display: none !important; }
+          .site-right-sidebar .sidebar-nav-items[data-open='false'] { display: none !important; }
+          .site-right-sidebar .sidebar-nav-items { display: flex; flex-direction: column; gap: 6px; }
+          .site-right-sidebar .mobile-sidebar-toggle { display: flex !important; }
+        }
+        @media (min-width: 768px) {
+          .site-right-sidebar .mobile-sidebar-toggle { display: none !important; }
+          .site-right-sidebar .sidebar-nav-items { display: contents !important; }
+        }
+      `}</style>
     <aside
       className="site-right-sidebar"
       style={{
@@ -74,6 +115,17 @@ export default function RightSidebar() {
         pointerEvents: 'auto',
       }}
     >
+      <button
+        type="button"
+        className="mobile-sidebar-toggle"
+        aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={mobileOpen}
+        onClick={() => setMobileOpen((v) => !v)}
+        style={{ display: 'none', width: 35, height: 35, alignItems: 'center', justifyContent: 'center', borderRadius: 10, background: 'rgba(217,173,98,.14)', border: '1px solid rgba(217,173,98,.38)', color: '#f1cf89', cursor: 'pointer', fontSize: 20, lineHeight: 1 }}
+      >
+        {mobileOpen ? '×' : '☰'}
+      </button>
+      <div className="sidebar-nav-items" data-open={mobileOpen}>
       {RIGHT_SOCIAL_ITEMS.map((item) => {
         const IconComponent = item.icon;
         return (
@@ -134,6 +186,8 @@ export default function RightSidebar() {
           </div>
         );
       })}
+      </div>
     </aside>
+    </>
   );
 }

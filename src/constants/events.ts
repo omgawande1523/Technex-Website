@@ -91,7 +91,7 @@ export const events: EventItem[] = [
   {
     id: '06',
     slug: 'ctf',
-    title: 'CTF',
+    title: 'APEX CTF',
     tag: 'Cyber',
     source: 'The Imitation Game (2014)',
     concept: 'The story of Alan Turing and the effort to decipher Enigma-encrypted messages.',
@@ -101,7 +101,7 @@ export const events: EventItem[] = [
   {
     id: '07',
     slug: 'build-the-brand',
-    title: 'Build The Brand',
+    title: 'Bizcon 2026 ',
     tag: 'Expo',
     source: 'Shark Tank',
     concept: 'Entrepreneurs present innovative business ideas to investors.',
@@ -151,7 +151,7 @@ export const events: EventItem[] = [
   {
     id: '12',
     slug: 'ai-agent-arena',
-    title: 'AI Agent Arena',
+    title: 'Agentic Arena',
     tag: 'AI',
     source: 'J.A.R.V.I.S. — Marvel’s Iron Man',
     concept: 'An intelligent AI assistant that understands commands, analyses information and helps execute complex tasks.',
