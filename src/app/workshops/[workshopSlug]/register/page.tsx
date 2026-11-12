@@ -1,5 +1,6 @@
 import WorkshopRegistrationForm from "./workshop-registration-form";
 import "@/app/register/[eventSlug]/registration.css";
+import { getEventTheme } from "@/lib/event-themes";
 
 type PageProps = {
   params: Promise<{
@@ -11,17 +12,20 @@ export default async function WorkshopRegisterPage({
   params,
 }: PageProps) {
   const { workshopSlug } = await params;
+  const theme = getEventTheme(workshopSlug);
+
+  const themeStyle = {
+    "--event-accent": theme.accent,
+    "--event-accent-secondary": theme.accentSecondary,
+    "--event-accent-tertiary": theme.accentTertiary,
+    "--event-accent-soft": theme.accentSoft,
+    "--event-accent-border": theme.accentBorder,
+  } as React.CSSProperties;
 
   return (
     <main
       className="registration-page"
-      style={
-        {
-          "--event-accent": "#e7a83e",
-          "--event-accent-soft": "rgba(231, 168, 62, 0.12)",
-          "--event-accent-border": "rgba(231, 168, 62, 0.35)",
-        } as React.CSSProperties
-      }
+      style={themeStyle}
     >
       <div className="registration-background" />
       <div className="registration-overlay" />

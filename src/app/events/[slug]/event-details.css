@@ -57,7 +57,15 @@
 /* header */
 
 
-.hack-detail-root .head{ display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex: none; }
+.hack-detail-root .head{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  gap: 10px;
+  flex: none;
+}
+
+.hack-detail-root .titleblock{ grid-column: 1 / 4; }
 
 
 .hack-detail-root .head > *{ min-width: 0; }
@@ -89,7 +97,30 @@
 .hack-detail-root .tag{ color: var(--gold-hi); font-size: clamp(0.58rem, 2.4vw, 0.92rem); letter-spacing: 0.28em; text-transform: uppercase; }
 
 
-.hack-detail-root .headright{ display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.hack-detail-root .headright{
+  grid-column: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 0;
+}
+
+.hack-detail-root .head-actions{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.hack-detail-root .head-actions .register-refined{
+  width: 100% !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+.hack-detail-root .head-actions .collaboration{ width: 100%; }
 
 
 .hack-detail-root .ghost{ text-align: right; }
@@ -394,8 +425,10 @@
 
 
 @media  (max-width: 980px) {.hack-detail-root .page{ height: auto; min-height: 100dvh; }
-.hack-detail-root .head{ flex-direction: column; align-items: flex-start; gap: 12px; }
-.hack-detail-root .headright{ width: 100%; justify-content: space-between; }
+.hack-detail-root .head{ display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.hack-detail-root .titleblock{ width: 100%; }
+.hack-detail-root .headright{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; width: 100%; gap: 10px; }
+.hack-detail-root .head-actions{ grid-column: 2; width: 100%; gap: 10px; }
 .hack-detail-root .ghost{ text-align: left; }
 .hack-detail-root .stats{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .hack-detail-root .tabs{ overflow-x: auto; scrollbar-width: none; }
@@ -409,6 +442,11 @@
 
 
 @media  (max-width: 560px) {.hack-detail-root .page{ padding: 108px 12px 28px; }
+.hack-detail-root .head-actions .register-refined{ padding-inline: 12px !important; }
+.hack-detail-root .collaboration{ width: 100%; min-width: 0; flex: none; padding: 10px 8px; gap: 5px; }
+.hack-detail-root .collaboration > span{ font-size: 0.52rem; }
+.hack-detail-root .collaboration-logo{ width: 56px; height: 56px; }
+.hack-detail-root .collaboration strong{ font-size: 0.68rem; }
 .hack-detail-root .ghost b{ font-size: 1.7rem; }
 .hack-detail-root .btn{ padding: 11px 18px; }
 .hack-detail-root .stat{ padding: 10px; gap: 8px; }
@@ -506,6 +544,42 @@
 
 .hack-detail-root .perks .who strong{ color: var(--gold-hi); }
 
+.hack-detail-root .collaboration{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 260px;
+  flex: none;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(120deg, rgba(227,185,92,.1), rgba(227,185,92,.035));
+  text-align: center;
+}
+
+.hack-detail-root .collaboration > span{
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hack-detail-root .collaboration-logo{
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.hack-detail-root .collaboration strong{
+  color: var(--gold-hi);
+  font-size: 0.9rem;
+  line-height: 1.15;
+}
+
 
 
 /* ===== Register button: stands out from the gold tabs ===== */
@@ -532,6 +606,8 @@
 
 
 .hack-detail-root .headright .btn.gold::after{ content: "  →"; position: static; background: none; transform: none; animation: none; }
+
+.hack-detail-root .headright .btn.gold.register-refined::after{ content: none; }
 
 
 @keyframes ctapulse {

@@ -2,10 +2,10 @@
 .form {
   width: 100%;
   padding: 28px;
-  background: linear-gradient(145deg, #142b47 0%, #102541 100%);
-  border: 1px solid #294361;
+  background: linear-gradient(145deg, #282828 0%, #232323 100%);
+  border: 1px solid #404040;
   border-radius: 13px;
-  color: #f3f5f8;
+  color: #f5f5f5;
 }
 
 .formHeader {
@@ -33,7 +33,7 @@
 
 .subheading {
   margin-top: 8px;
-  color: #96a9bd;
+  color: #a6a6a6;
   font-size: 13px;
   line-height: 1.6;
 }
@@ -44,7 +44,7 @@
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  background: #253b54;
+  background: #383838;
   border: 1px solid #94794a;
   border-radius: 12px;
   color: #e8c987;
@@ -68,7 +68,7 @@
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  background: #34435a;
+  background: #414141;
   border: 1px solid #8f774b;
   border-radius: 9px;
   color: #e8c987;
@@ -77,21 +77,21 @@
 }
 
 .sectionHeading h3 {
-  color: #f0f4f8;
+  color: #f3f3f3;
   font-size: 15px;
   font-weight: 700;
 }
 
 .sectionHeading p {
   margin-top: 5px;
-  color: #91a4ba;
+  color: #a2a2a2;
   font-size: 11px;
   line-height: 1.5;
 }
 
 .divider {
   height: 1px;
-  background: #304760;
+  background: #444444;
 }
 
 .grid {
@@ -108,7 +108,7 @@
 }
 
 .field > span {
-  color: #c8d4e1;
+  color: #d2d2d2;
   font-size: 12px;
   font-weight: 650;
 }
@@ -119,7 +119,7 @@
 }
 
 .field small {
-  color: #8297af;
+  color: #949494;
   font-size: 10px;
   line-height: 1.5;
 }
@@ -129,9 +129,9 @@
   width: 100%;
   min-width: 0;
   padding: 12px 13px;
-  background: #091a2d;
-  color: #f3f5f8;
-  border: 1px solid #354e68;
+  background: #181818;
+  color: #f5f5f5;
+  border: 1px solid #4b4b4b;
   border-radius: 7px;
   outline: none;
   font-family: inherit;
@@ -145,13 +145,13 @@
 
 .input::placeholder,
 .textarea::placeholder {
-  color: #61758c;
+  color: #727272;
 }
 
 .input:focus,
 .textarea:focus {
   border-color: #d5ae65;
-  background: #0c2036;
+  background: #1d1d1d;
 }
 
 .textarea {
@@ -180,15 +180,15 @@
   align-items: center;
   gap: 13px;
   padding: 17px;
-  background: #0e2137;
-  border: 1px solid #344c65;
+  background: #1f1f1f;
+  border: 1px solid #494949;
   border-radius: 9px;
   cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .checkboxCard:hover {
-  background: #172f4a;
+  background: #2c2c2c;
   border-color: #8c754a;
 }
 
@@ -205,9 +205,9 @@
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  border: 1px solid #63788e;
+  border: 1px solid #757575;
   border-radius: 5px;
-  background: #091a2d;
+  background: #181818;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -218,7 +218,7 @@
 
 .checkboxCard input:checked + .customCheckbox::after {
   content: "✓";
-  color: #14253a;
+  color: #232323;
   font-size: 13px;
   font-weight: 900;
 }
@@ -236,12 +236,12 @@
 }
 
 .checkboxContent strong {
-  color: #eaf0f6;
+  color: #efefef;
   font-size: 12px;
 }
 
 .checkboxContent small {
-  color: #8fa3ba;
+  color: #a0a0a0;
   font-size: 10px;
   line-height: 1.5;
 }
@@ -279,11 +279,11 @@
   gap: 15px;
   margin-top: 25px;
   padding-top: 21px;
-  border-top: 1px solid #304760;
+  border-top: 1px solid #444444;
 }
 
 .formFooter p {
-  color: #8fa3ba;
+  color: #a0a0a0;
   font-size: 11px;
 }
 
@@ -301,7 +301,7 @@
   background: #d5ae65;
   border: 1px solid #e8c987;
   border-radius: 7px;
-  color: #172438;
+  color: #232323;
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
@@ -386,5 +386,153 @@
 
   .submitButton {
     width: 100%;
+  }
+}
+
+.form {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(20px, 3vw, 30px);
+  border-color: #414141;
+  border-radius: 15px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(213, 174, 101, 0.075), transparent 38%),
+    linear-gradient(145deg, #252525, #1d1d1d);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+}
+
+.formHeader {
+  align-items: flex-start;
+  padding-bottom: 22px;
+}
+
+.eyebrow {
+  color: #e0bd79;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.heading {
+  font-size: clamp(21px, 2.4vw, 27px);
+  letter-spacing: -0.65px;
+}
+
+.subheading {
+  max-width: 620px;
+  color: #ababab;
+  font-size: 12px;
+}
+
+.headerIcon {
+  width: 48px;
+  height: 48px;
+  border-color: rgba(232, 201, 135, 0.4);
+  border-radius: 13px;
+  background: linear-gradient(145deg, rgba(213, 174, 101, 0.16), rgba(213, 174, 101, 0.035));
+  box-shadow: 0 7px 20px rgba(213, 174, 101, 0.08);
+}
+
+.section {
+  padding: 21px 0;
+}
+
+.sectionHeading {
+  gap: 12px;
+  margin-bottom: 19px;
+}
+
+.sectionNumber {
+  border-color: rgba(213, 174, 101, 0.42);
+  border-radius: 10px;
+  background: rgba(213, 174, 101, 0.1);
+  color: #f0d99e;
+}
+
+.sectionHeading h3 {
+  font-size: 14px;
+}
+
+.sectionHeading p {
+  color: #a7a7a7;
+  font-size: 10px;
+}
+
+.divider {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.grid {
+  gap: 18px;
+}
+
+.field {
+  gap: 8px;
+}
+
+.field > span {
+  color: #d3d3d3;
+  font-size: 11px;
+}
+
+.field small {
+  color: #969696;
+}
+
+.input,
+.textarea {
+  border-color: #484848;
+  border-radius: 8px;
+  background: #1b1b1b;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.input:hover,
+.textarea:hover {
+  border-color: #606060;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #d5ae65;
+  background: #202020;
+  box-shadow: 0 0 0 3px rgba(213, 174, 101, 0.09);
+}
+
+.checkboxCard {
+  border-color: #454545;
+  border-radius: 10px;
+  background: rgba(10, 10, 10, 0.3);
+}
+
+.checkboxCard:hover {
+  border-color: rgba(213, 174, 101, 0.48);
+  background: rgba(213, 174, 101, 0.045);
+}
+
+.customCheckbox {
+  border-color: #777777;
+  border-radius: 6px;
+}
+
+.formFooter {
+  border-top-color: rgba(255, 255, 255, 0.09);
+}
+
+.submitButton {
+  min-height: 44px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(213, 174, 101, 0.12);
+  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 24px rgba(213, 174, 101, 0.19);
+}
+
+@media (max-width: 520px) {
+  .form {
+    padding: 17px;
+    border-radius: 12px;
   }
 }

@@ -3,50 +3,59 @@ import type { Workshop } from "@/types/workshop";
 export const workshops: Workshop[] = [
   {
     id: "hackathon",
+    slug: "hackathon",
     title: "Hackathon Workshop",
     category: "SOFTWARE & DEV",
     description:
       "Build next-gen applications with modern tech and smart frameworks.",
-    image: "/assets/workshops/hackathon-laptop.png",
+    cover: "/assets/workshops/hackathon_cover.webp",
+    character: "/assets/workshops/hackathon_avatar1.webp",
+    accent: "violet",
   },
   {
-    id: "gameathon",
-    title: "Gameathon Workshop",
-    category: "GAME DESIGN",
+    id: "coastal-clash",
+    slug: "coastal-clash",
+    title: "Coastal Clash Workshop",
+    category: "RC BOAT DESIGN",
     description:
-      "Learn the basics of game design, coding, and creating your own playable project.",
-    image: "/assets/workshops/gameathon-vr.png",
+      "Learn the engineering behind stable, high-speed RC boats.",
+    cover: "/assets/workshops/coastal_cover.webp",
+    character: "/assets/workshops/coastal_avatar.webp",
+    accent: "blue",
   },
   {
     id: "envision",
+    slug: "envision",
     title: "Envision Workshop",
     category: "DATA & ANALYTICS",
     description:
       "Explore data collection, preprocessing, and visualization in a hands-on session.",
-    image: "/assets/workshops/envision-arm.png",
+    cover: "/assets/workshops/envision_cover.webp",
+    character: "/assets/workshops/envision_avatar.webp",
+    accent: "green",
   },
   {
     id: "designx",
+    slug: "designx",
     title: "DesignX Workshop",
     category: "DIGITAL DESIGN",
     description:
       "Discover digital design practices for creating efficient infrastructure models.",
-    image: "/assets/workshops/designx-starship.png",
+    cover: "/assets/workshops/designx_cover.webp",
+    character: "/assets/workshops/designx_avatar.webp",
+    accent: "blue",
   },
+
   {
-    id: "coastal-clash",
-    title: "Coastal Clash Workshop",
-    category: "ROBOTICS & RC",
+    id: "apex-ctf",
+    slug: "apex-ctf",
+    title: "Apex CTF Workshop",
+    category: "CYBERSECURITY & HACKING",
     description:
-      "Learn the engineering behind stable, high-speed RC boats.",
-    image: "/assets/workshops/coastal-clash-boat.png",
+      "Dive into the world of cybersecurity with hands-on Capture The Flag challenges.",
+    cover: "/assets/workshops/ctf_cover.webp",
+    character: "/assets/workshops/ctf_avatar.webp",
+    accent: "red",
   },
-  {
-    id: "mind2market",
-    title: "Mind2Market Workshop",
-    category: "COMPETITIVE CODING",
-    description:
-      "Solve challenging coding problems and compete with the best programmers.",
-    image: "/assets/workshops/mind2market-rover.png",
-  },
+ 
 ];

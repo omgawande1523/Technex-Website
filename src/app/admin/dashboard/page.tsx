@@ -1,6 +1,14 @@
 
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import {
+  ArrowUpRight,
+  CalendarDays,
+  ClipboardList,
+  CreditCard,
+  Presentation,
+  UsersRound,
+} from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import styles from "./dashboard.module.css";
 
@@ -58,6 +66,32 @@ type DistributionItem = {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+function getRegistrationStatusClass(status: string) {
+  const normalizedStatus = status.toLowerCase().replaceAll("_", " ");
+
+  if (normalizedStatus.includes("confirm") || normalizedStatus === "paid") {
+    return styles.statusConfirmed;
+  }
+  if (normalizedStatus.includes("pending")) {
+    return styles.statusPending;
+  }
+  if (
+    normalizedStatus.includes("fail") ||
+    normalizedStatus.includes("reject") ||
+    normalizedStatus.includes("cancel")
+  ) {
+    return styles.statusAttention;
+  }
+  if (normalizedStatus.includes("refund")) {
+    return styles.statusRefunded;
+  }
+  if (normalizedStatus.includes("process")) {
+    return styles.statusProcessing;
+  }
+
+  return styles.statusDefault;
+}
+
 export default async function AdminDashboardPage() {
   const supabase = await createSupabaseServerClient();
 
@@ -110,6 +144,7 @@ export default async function AdminDashboardPage() {
   const statistics = [
     {
       label: "Total Registrations",
+      icon: ClipboardList,
       value: stats.registrations.total,
       description:
         admin.role === "superadmin"
@@ -118,11 +153,13 @@ export default async function AdminDashboardPage() {
     },
     {
       label: "Total Teams",
+      icon: UsersRound,
       value: stats.teams,
       description: "Registrations for team events",
     },
     {
       label: "Total Participants",
+      icon: UsersRound,
       value: stats.participants,
       description: "Active participants in confirmed registrations",
     },
@@ -130,6 +167,7 @@ export default async function AdminDashboardPage() {
       ? [
           {
             label: "Total Revenue",
+            icon: CreditCard,
             value: new Intl.NumberFormat("en-IN", {
               style: "currency",
               currency: "INR",
@@ -178,10 +216,11 @@ export default async function AdminDashboardPage() {
     });
 
   return (
-    <div>
+    <div className={styles.overview}>
       <section>
         <div className={styles.dashboardHeading}>
           <div>
+            <div className={styles.pageEyebrow}>ADMINISTRATION / OVERVIEW</div>
             <h1 className={styles.pageTitle}>Overview</h1>
             <p className={styles.pageSubtitle}>
               Welcome to the TECHNEX 2026 administration dashboard.
@@ -192,27 +231,42 @@ export default async function AdminDashboardPage() {
         <h2 className={styles.sectionHeading}>Event Overview</h2>
 
         <div className={styles.statsGrid}>
-          {statistics.map((stat) => (
-            <article key={stat.label} className={styles.statCard}>
-              <div className={styles.statLabel}>{stat.label}</div>
-              <div className={styles.statValue}>
-                {typeof stat.value === "number"
-                  ? stat.value.toLocaleString("en-IN")
-                  : stat.value}
-              </div>
-              <div className={styles.statDescription}>
-                {stat.description}
-              </div>
-            </article>
-          ))}
+          {statistics.map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <article key={stat.label} className={styles.statCard}>
+                <div className={styles.statHeader}>
+                  <div className={styles.statLabel}>{stat.label}</div>
+                  <span className={styles.statIcon}>
+                    <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
+                  </span>
+                </div>
+                <div className={styles.statValue}>
+                  {typeof stat.value === "number"
+                    ? stat.value.toLocaleString("en-IN")
+                    : stat.value}
+                </div>
+                <div className={styles.statDescription}>
+                  {stat.description}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
       <section className={styles.panel} style={{ marginTop: 22 }}>
-        <h2 className={styles.panelTitle}>Recent Registrations</h2>
-        <p className={styles.panelDescription}>
-          Latest registrations across your accessible events and workshops.
-        </p>
+        <div className={styles.panelHeader}>
+          <span className={styles.panelIcon}>
+            <ClipboardList size={17} strokeWidth={1.8} aria-hidden="true" />
+          </span>
+          <div>
+            <h2 className={styles.panelTitle}>Recent Registrations</h2>
+            <p className={styles.panelDescription}>
+              Latest registrations across your accessible events and workshops.
+            </p>
+          </div>
+        </div>
 
         <div className={styles.eventList}>
           {!stats.recentRegistrations ||
@@ -244,7 +298,9 @@ export default async function AdminDashboardPage() {
                       registration.currency,
                     )}
                   </strong>
-                  <div className={styles.registrationStatus}>
+                  <div
+                    className={`${styles.registrationStatus} ${getRegistrationStatusClass(registration.status)}`}
+                  >
                     {registration.status.replaceAll("_", " ")}
                   </div>
                   <div className={styles.eventType}>
@@ -261,17 +317,24 @@ export default async function AdminDashboardPage() {
             href="/admin/registrations"
             className={styles.quickLink}
           >
-            View All Registrations →
+            View All Registrations <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </section>
 
       <section className={styles.contentGrid}>
         <article className={styles.panel}>
-          <h2 className={styles.panelTitle}>Registration Analytics</h2>
-          <p className={styles.panelDescription}>
-            Registration statistics across TECHNEX events.
-          </p>
+          <div className={styles.panelHeader}>
+            <span className={styles.panelIcon}>
+              <CalendarDays size={17} strokeWidth={1.8} aria-hidden="true" />
+            </span>
+            <div>
+              <h2 className={styles.panelTitle}>Registration Analytics</h2>
+              <p className={styles.panelDescription}>
+                Registration statistics across TECHNEX events.
+              </p>
+            </div>
+          </div>
 
           <div className={styles.eventList}>
             {stats.events.length === 0 ? (
@@ -296,7 +359,9 @@ export default async function AdminDashboardPage() {
                     {admin.role === "superadmin" && (
                       <>
                         <br />
-                        {event.confirmedRegistrations} confirmed
+                        <span className={`${styles.registrationStatus} ${styles.statusConfirmed}`}>
+                          {event.confirmedRegistrations} confirmed
+                        </span>
                       </>
                     )}
                   </div>
@@ -307,10 +372,17 @@ export default async function AdminDashboardPage() {
         </article>
 
         <article className={styles.panel}>
-          <h2 className={styles.panelTitle}>Workshop Analytics</h2>
-          <p className={styles.panelDescription}>
-            Registration statistics across TECHNEX workshops.
-          </p>
+          <div className={styles.panelHeader}>
+            <span className={styles.panelIcon}>
+              <Presentation size={17} strokeWidth={1.8} aria-hidden="true" />
+            </span>
+            <div>
+              <h2 className={styles.panelTitle}>Workshop Analytics</h2>
+              <p className={styles.panelDescription}>
+                Registration statistics across TECHNEX workshops.
+              </p>
+            </div>
+          </div>
 
           <div className={styles.eventList}>
             {!stats.workshops || stats.workshops.length === 0 ? (
@@ -336,7 +408,9 @@ export default async function AdminDashboardPage() {
                     {admin.role === "superadmin" && (
                       <>
                         <br />
-                        {workshop.confirmedRegistrations} confirmed
+                        <span className={`${styles.registrationStatus} ${styles.statusConfirmed}`}>
+                          {workshop.confirmedRegistrations} confirmed
+                        </span>
                       </>
                     )}
                   </div>
@@ -347,10 +421,17 @@ export default async function AdminDashboardPage() {
         </article>
 
         <article className={styles.panel}>
-          <h2 className={styles.panelTitle}>Event Distribution</h2>
-          <p className={styles.panelDescription}>
-            Registrations by event format.
-          </p>
+          <div className={styles.panelHeader}>
+            <span className={styles.panelIcon}>
+              <ClipboardList size={17} strokeWidth={1.8} aria-hidden="true" />
+            </span>
+            <div>
+              <h2 className={styles.panelTitle}>Event Distribution</h2>
+              <p className={styles.panelDescription}>
+                Registrations by event format.
+              </p>
+            </div>
+          </div>
 
           {eventDistribution.length === 0 ||
           totalCategoryRegistrations === 0 ? (
@@ -394,29 +475,44 @@ export default async function AdminDashboardPage() {
       </section>
 
       <section className={styles.panel} style={{ marginTop: 22 }}>
-        <h2 className={styles.panelTitle}>Quick Access</h2>
-        <p className={styles.panelDescription}>
-          Manage the TECHNEX administration workspace.
-        </p>
+        <div className={styles.panelHeader}>
+          <span className={styles.panelIcon}>
+            <ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true" />
+          </span>
+          <div>
+            <h2 className={styles.panelTitle}>Quick Access</h2>
+            <p className={styles.panelDescription}>
+              Manage the TECHNEX administration workspace.
+            </p>
+          </div>
+        </div>
 
         <div className={styles.quickLinks}>
           <Link href="/admin/events" className={styles.quickLink}>
-            <span>◇</span>
+            <span className={styles.quickLinkIcon}>
+              <CalendarDays size={19} strokeWidth={1.8} aria-hidden="true" />
+            </span>
             <div>
               <strong>Manage Events</strong>
               <small>View and manage accessible events</small>
             </div>
-            <span className={styles.quickArrow}>→</span>
+            <span className={styles.quickArrow}>
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </span>
           </Link>
 
           {admin.role === "superadmin" && (
             <Link href="/admin/team" className={styles.quickLink}>
-              <span>♧</span>
+              <span className={styles.quickLinkIcon}>
+                <UsersRound size={19} strokeWidth={1.8} aria-hidden="true" />
+              </span>
               <div>
                 <strong>Team Management</strong>
                 <small>Manage administrators and access</small>
               </div>
-              <span className={styles.quickArrow}>→</span>
+              <span className={styles.quickArrow}>
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </span>
             </Link>
           )}
         </div>

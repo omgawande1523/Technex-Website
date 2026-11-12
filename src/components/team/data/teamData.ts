@@ -3,7 +3,23 @@
  * Updated Team Roster across 4 core sections
  */
 
-export const teamSections = [
+export interface TeamMember {
+  id: string;
+  name: string;
+  designation: string;
+  email: string;
+  linkedin: string;
+  instagram?: string;
+  image: string;
+}
+
+export interface TeamSectionData {
+  id: string;
+  title: string;
+  members: TeamMember[];
+}
+
+export const teamSections: TeamSectionData[] = [
   {
     id: 'faculty-mentors',
     title: 'Faculty Mentors',
@@ -12,24 +28,24 @@ export const teamSections = [
         id: 'fm-1',
         name: 'Dr. Manoj V. Bramhe',
         designation: 'III Cell Coordinator',
-        email: 'mbramhe@stvincentngp.edu.in',
-        linkedin: 'https://www.linkedin.com/in/dr-manoj-bramhe-b6645318',
+        email: 'hodce@stvincentngp.edu.in',
+        linkedin: 'https://www.linkedin.com/in/manoj-bramhe-72406b13/',
         image: '/assets/team/faculty-manoj-bramhe.webp',
       },
       {
         id: 'fm-2',
         name: 'Dr. Deepali K. Borakhede',
         designation: 'Faculty Advisor',
-        email: 'dborakhede@stvincentngp.edu.in',
-        linkedin: 'https://www.linkedin.com/in/dr-deepali-borakhede-3b3a3022',
+        email: 'dborakhade@stvincentngp.edu.in',
+        linkedin: 'https://www.linkedin.com/in/dr-deepali-borakhade-167a10132/',
         image: '/assets/team/faculty-deepali-borakhede.webp',
       },
       {
         id: 'fm-3',
         name: 'Prof. Shankar G. Gadhve',
         designation: 'Faculty Coordinator',
-        email: 'sgadhve@stvincentngp.edu.in',
-        linkedin: 'https://www.linkedin.com/in/shankar-gadhve-60867448',
+        email: 'sgadve@stvincentngp.edu.in',
+        linkedin: 'https://www.linkedin.com/in/shankar-gadhve-741613b8/',
         image: '/assets/team/faculty-shankar-gadhve.webp',
       },
       {
@@ -37,7 +53,7 @@ export const teamSections = [
         name: 'Dr. Suyog U. Dhote',
         designation: 'Faculty Co-coordinator',
         email: 'sdhote@stvincentngp.edu.in',
-        linkedin: 'https://www.linkedin.com/in/suyog-dhote-83215919',
+        linkedin: 'https://www.linkedin.com/in/dr-suyog-uttamrao-dhote-347b1b5a/',
         image: '/assets/team/faculty-suyog-dhote.webp',
       },
     ],
@@ -48,44 +64,50 @@ export const teamSections = [
     members: [
       {
         id: 'm-1',
-        name: 'Kartik Rao',
+        name: 'Kartik Rao Barnala',
         designation: 'Mentor',
-        email: '',
-        linkedin: 'https://www.linkedin.com/in/kartik-rao',
+        email: 'kartikbarnala.23@stvincentngp.edu.in',
+        linkedin: 'https://www.linkedin.com/in/kartik-rao-barnala-992174292/',
+        instagram: '#',
         image: '',
       },
       {
         id: 'm-2',
         name: 'Gunjan Dhore',
         designation: 'Mentor',
-        email: '',
-        linkedin: 'https://www.linkedin.com/in/gunjan-dhore',
+        email: 'gunjandhore.23@stvincentngp.edu.in',
+        linkedin: 'https://www.linkedin.com/in/gunjan-dhore-641305285/',
+        instagram: 'https://www.instagram.com/_gunjan_d1105/?hl=en',
         image: '',
       },
       {
         id: 'm-3',
         name: 'Bhumika Verma',
         designation: 'Mentor',
-        email: '',
-        linkedin: 'https://www.linkedin.com/in/bhumika-verma',
+        email: 'bhumikaverma.23@stvincentngp.edu.in',
+        linkedin: 'https://www.linkedin.com/in/bhumikaverma04/',
+        instagram: 'https://www.instagram.com/bhumiika__v/?hl=en',
         image: '',
       },
       {
         id: 'm-4',
         name: 'Kelvin Cherian',
         designation: 'Mentor',
-        email: '',
-        linkedin: 'https://www.linkedin.com/in/kelvin-cherian',
+        email: 'kelvincherian@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/kelvin-cherian/',
+        instagram: 'https://www.instagram.com/kelvin.rar/',
         image: '',
       },
       {
         id: 'm-5',
-        name: 'Vaibhav Verma',
+        name: 'Vaibhav Varma',
         designation: 'Mentor',
-        email: '',
-        linkedin: 'https://www.linkedin.com/in/vaibhav-verma',
+        email: 'vaibhavvarma.23@stvincentngp.edu.in',
+        linkedin: 'https://www.linkedin.com/in/vaibhav-varma-62a697388/',
+        instagram: 'https://www.instagram.com/vaibhavvarma04?igsh=MWxwbDVydGhhbHJmeA%3D%3D&utm_source=qr',
         image: '',
       },
+      
     ],
   },
   {
@@ -112,16 +134,18 @@ export const teamSections = [
         id: 'lt-3',
         name: 'Swadhin Upadhyay',
         designation: 'Co-coordinator',
-        email: '',
-        linkedin: 'https://www.linkedin.com/in/swadhin-upadhyay',
+        email: 'swadhin457@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/swadhin-upadhyay-9728a8303/',
+        instagram: 'https://www.instagram.com/swadhin.axe?igsh=cjZudG12cDAyNXpz',
         image: '',
       },
       {
         id: 'lt-4',
         name: 'Dhanshri Wanjari',
         designation: 'Co-coordinator',
-        email: '',
-        linkedin: 'https://www.linkedin.com/in/dhanshri-wanjari',
+        email: 'dhanshriwanjari4009@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/dhanshri-w-828484314/',
+        instagram: 'https://www.instagram.com/dhanshrii_06?igsh=c2d1c3ltZ2YzNHpo',
         image: '',
       },
       {
@@ -149,15 +173,16 @@ export const teamSections = [
       {
         id: 'wd-1',
         name: 'Nikita Bhushanwar',
-        designation: 'Website Developer',
-        email: '',
-        linkedin: 'https://www.linkedin.com/in/nikita-bhushanwar',
+        designation: 'Website Head',
+        email: 'nikitabhushanwar03@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/nikita-bhushanwar-a57847369',
+        instagram: '#',
         image: '',
       },
       {
         id: 'wd-2',
         name: 'Ved Korde',
-        designation: 'Website Developer',
+        designation: 'Website Co-Head',
         email: '',
         linkedin: 'https://www.linkedin.com/in/ved-korde',
         image: '',
@@ -165,7 +190,7 @@ export const teamSections = [
       {
         id: 'wd-3',
         name: 'Harsh Selsurkar',
-        designation: 'Website Developer',
+        designation: 'Website Member',
         email: '',
         linkedin: 'https://www.linkedin.com/in/harsh-selsurkar',
         image: '',
@@ -173,7 +198,7 @@ export const teamSections = [
       {
         id: 'wd-4',
         name: 'Harsh Lokhande',
-        designation: 'Website Developer',
+        designation: 'Website Member',
         email: '',
         linkedin: 'https://www.linkedin.com/in/harsh-lokhande',
         image: '',
@@ -181,7 +206,7 @@ export const teamSections = [
       {
         id: 'wd-5',
         name: 'Preshit Borkar',
-        designation: 'Website Developer',
+        designation: 'Website Member',
         email: '',
         linkedin: 'https://www.linkedin.com/in/preshit-borkar',
         image: '',

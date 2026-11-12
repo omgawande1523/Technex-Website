@@ -6,7 +6,7 @@
   --gold: #f2b84b;
   --gold-hot: #ffd98a;
   --steel: rgba(205, 214, 228, 0.9);
-  --side: 72px; /* sidebar width (collapsed) */
+  --side: 80px; /* sidebar width (collapsed) */
 
   /* ── gold palette sampled from your reference frame ── */
   --g-hi: #f6e2b4; /* bright highlight */
@@ -949,7 +949,7 @@ body:has(.ev-root) {
 }
 .ev-side:hover,
 .ev-side:focus-within {
-  width: 232px;
+  width: 240px;
 }
 
 .ev-side-brand {
@@ -1685,6 +1685,16 @@ body:has(.ev-root) {
   justify-content: space-between;
   gap: 10px;
 }
+.ev-out-csi {
+  width: clamp(72px, 8vw, 112px);
+  height: clamp(72px, 8vw, 112px);
+  flex: none;
+  border: 2px solid rgba(235, 186, 94, 0.75);
+  border-radius: 50%;
+  background: #fff;
+  object-fit: cover;
+  box-shadow: 0 0 24px rgba(242, 184, 75, 0.2);
+}
 .ev-out .ev-num {
   font-family: var(--f-title);
   font-weight: 700;
@@ -1936,6 +1946,12 @@ body:has(.ev-root) {
   }
   .ev-out .ev-num {
     font-size: clamp(2.3rem, 10vw, 3.1rem);
+  }
+  .ev-out-csi {
+    width: 56px;
+    height: 56px;
+    flex-basis: 100%;
+    align-self: flex-start;
   }
   .ev-out .ev-title {
     flex: 1 1 100%;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import WorkshopCard from "@/components/workshops/WorkshopCard";
 import { workshops } from "@/constants/workshops";
-import styles from "@/components/workshops/workshops.module.css";
+import "./workshops.css";
 
 export const metadata: Metadata = {
   title: "Workshops | TECHNEX",
@@ -10,19 +10,18 @@ export const metadata: Metadata = {
 
 export default function WorkshopsPage() {
   return (
-    <>
-      <main className={styles.page}>
-        <div className={styles.backgroundGlow} aria-hidden="true" />
-        <header className={styles.header}>
-          <h1>WORKSHOPS</h1>
-          <div className={styles.titleRule} />
+    <div className="workshop-page-wrapper">
+      <main className="page-shell">
+        <header className="page-header">
+          <h1>Workshops</h1>
         </header>
-        <section className={styles.grid} aria-label="Available workshops">
+
+        <section className="workshop-grid" aria-label="Featured workshops">
           {workshops.map((workshop) => (
-            <WorkshopCard key={workshop.id} workshop={workshop} />
+            <WorkshopCard key={workshop.id || workshop.cover} workshop={workshop} />
           ))}
         </section>
       </main>
-    </>
+    </div>
   );
 }

@@ -109,17 +109,16 @@ export default function TopNav() {
           transform: 'translateX(-50%)',
           display: 'flex',
           alignItems: 'center',
-          gap: '10px',
           whiteSpace: 'nowrap',
           zIndex: 10,
         }}
+        className="site-main-navigation"
         aria-label="Main Navigation"
       >
         <Link
           href="/workshops"
           style={{
             fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-            fontSize: '13.5px',
             fontWeight: 800,
             letterSpacing: '0.08em',
             color: '#f8fafc',
@@ -139,7 +138,6 @@ export default function TopNav() {
           href="/events"
           style={{
             fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-            fontSize: '13.5px',
             fontWeight: 800,
             letterSpacing: '0.08em',
             color: '#f8fafc',
@@ -154,6 +152,8 @@ export default function TopNav() {
         >
           EVENTS
         </Link>
+
+
       </nav>
 
       {/* RIGHT SECTION: FULLSCREEN ONLY */}

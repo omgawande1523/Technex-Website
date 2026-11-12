@@ -89,7 +89,7 @@ export default async function AdminEventsPage() {
         Events Management
       </h1>
 
-      <p style={{ color: "#9aabba", marginTop: "8px" }}>
+      <p style={{ color: "#a2a2a2", marginTop: "8px" }}>
         View and manage all TECHNEX events.
       </p>
 
