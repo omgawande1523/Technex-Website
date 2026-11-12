@@ -9,6 +9,7 @@ import {
 
 type PaymentCheckoutProps = {
   registrationCode: string;
+  description?: string;
   onPaymentResponse: (response: RazorpayPaymentResponse) => void;
 };
 
@@ -62,6 +63,7 @@ const loadRazorpayScript = (): Promise<boolean> => {
 
 export default function PaymentCheckout({
   registrationCode,
+  description = "TECHNEX Registration",
   onPaymentResponse,
 }: PaymentCheckoutProps) {
   const [loading, setLoading] = useState(false);
@@ -78,7 +80,6 @@ export default function PaymentCheckout({
         throw new Error("Unable to load Razorpay Checkout.");
       }
 
-      // The backend determines the actual amount and creates the order.
       const order = await createPaymentOrder(registrationCode);
 
       const options: RazorpayOptions = {
@@ -86,12 +87,10 @@ export default function PaymentCheckout({
         amount: order.amount,
         currency: order.currency,
         name: "TECHNEX 2026",
-        description: "Event Registration",
+        description,
         order_id: order.orderId,
 
         handler: (response) => {
-          // Pass the response for backend verification.
-          // Do not treat this callback as payment confirmation.
           setLoading(false);
           onPaymentResponse(response);
         },

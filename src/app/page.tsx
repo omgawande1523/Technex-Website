@@ -5,8 +5,6 @@ import ComicModal, { type ComicCardData } from "@/components/landing/ComicModal"
 import SupermanPrimeCanvas from "@/components/landing/SupermanPrimeCanvas";
 import UIOverlay from "@/components/landing/UIOverlay";
 import styles from "./landing.module.css";
-import AboutSection from "@/components/about/AboutSection";
-import aboutStyles from "@/components/about/about.module.css";
 
 type EntityForm = "humanoid" | "flying_machine" | "watercraft" | "neural_network";
 
@@ -17,66 +15,57 @@ export default function Home() {
   return (
     <div className={styles.sitePage}>
       <section
-      className={styles.landing}
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
-      <div
+        className={styles.landing}
         style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 2,
-          pointerEvents: "auto",
+          position: "relative",
           width: "100vw",
           height: "100vh",
+          overflow: "hidden",
         }}
       >
-        <SupermanPrimeCanvas
-          onSelectComic={setSelectedComic}
-          bloomStrength={0.34}
-          glowIntensity={0.9}
-          theme="prime"
-          poseMode="hover"
-          showHalo={false}
-          showCape={false}
-          showRibbons={false}
-          showCards
-          showParticles={false}
-          cameraPreset="prime"
-          panelLayout="circular"
-          modelSource="male_body"
-          hologramSkinOpacity={0.65}
-          hologramNetworkIntensity={0.6}
-          hologramNodesBrightness={0.3}
-          hologramFlowSpeed={1}
-          hologramChestCoreRadiance={1.3}
-          showHologramAura={false}
-          showHologramScanline
-          entityForm={entityForm}
-          onEntityFormChange={setEntityForm}
-          autoTransform
-        />
-      </div>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 2,
+            pointerEvents: "auto",
+            width: "100vw",
+            height: "100vh",
+          }}
+        >
+          <SupermanPrimeCanvas
+            onSelectComic={setSelectedComic}
+            bloomStrength={0.34}
+            glowIntensity={0.9}
+            theme="prime"
+            poseMode="hover"
+            showHalo={false}
+            showCape={false}
+            showRibbons={false}
+            showCards
+            showParticles={false}
+            cameraPreset="prime"
+            panelLayout="circular"
+            modelSource="male_body"
+            hologramSkinOpacity={0.65}
+            hologramNetworkIntensity={0.6}
+            hologramNodesBrightness={0.3}
+            hologramFlowSpeed={1}
+            hologramChestCoreRadiance={1.3}
+            showHologramAura={false}
+            showHologramScanline
+            entityForm={entityForm}
+            onEntityFormChange={setEntityForm}
+            autoTransform
+          />
+        </div>
 
-      <UIOverlay />
-      <ComicModal
-        card={selectedComic}
-        onClose={() => setSelectedComic(null)}
-      />
-      <a href="#about" className={styles.scrollCue} aria-label="Scroll down to About Us">
-        <span className={styles.scrollCueText}>SCROLL TO EXPLORE ABOUT US</span>
-        <span className={styles.scrollCueMouse}>
-          <span className={styles.scrollCueWheel} />
-        </span>
-      </a>
+        <UIOverlay />
+        <ComicModal
+          card={selectedComic}
+          onClose={() => setSelectedComic(null)}
+        />
       </section>
-      <main className={aboutStyles.aboutPage}>
-        <AboutSection />
-      </main>
     </div>
   );
 }

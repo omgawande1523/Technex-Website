@@ -66,9 +66,9 @@ export default function UIOverlay() {
     >
       {/* BOTTOM CENTER: INTERACTIVE 3D MULTIVERSE HINT POPUP */}
       <div
+        className="ui-3d-controls-container"
         style={{
           position: 'absolute',
-          bottom: '26px',
           left: '50%',
           transform: 'translateX(-50%)',
           pointerEvents: 'none',
@@ -78,6 +78,7 @@ export default function UIOverlay() {
           width: '100%',
           maxWidth: '680px',
           padding: '0 16px',
+          zIndex: 30,
         }}
       >
         {/* Expanded Interactive Guide Popup */}

@@ -58,7 +58,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: "Leonardo da Vinci's Flying Machine (1485)",
     innovation: 'Supersonic Aircraft & Reusable Orbital Shuttles',
     era: 'Renaissance Blueprint ➔ Mach 3+ Aerospace',
-    image: '/comics/panel_alien_world.jpg',
+    image: '/comics/panel_alien_world.webp',
     caption: 'Leonardo da Vinci Ornithopter (1485) ➔ Modern Aeroplanes & Hypersonic Jets',
     lore: 'In 1485, Leonardo da Vinci sketched the "Codice del Volo", conceiving mechanical bird wings (Ala Meccanica) and aerial screws. For centuries this remained an impossible dream until aerodynamics, jet propulsion, and supersonic aerospace turned his visionary parchment into Mach 3+ hypersonic flight and orbital exploration.',
   },
@@ -68,7 +68,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Human Brain & Biological Synaptic Pathways',
     innovation: 'Artificial Neural Networks & Quantum Deep Learning',
     era: 'Biological Neurons ➔ Synthetic Machine Intelligence',
-    image: '/comics/panel_city.jpg',
+    image: '/comics/panel_city.webp',
     caption: 'Biological Synapses & Neurons ➔ Artificial Deep Neural Networks & AI',
     lore: 'The biological human brain, powered by 86 billion interconnected neurons and electrochemical synaptic gaps, was nature’s greatest computing marvel. Inspired by biological cognition, scientists engineered artificial neural networks, tensor microchips, and transformer architectures that now decode languages, generate art, and power autonomous discovery.',
   },
@@ -78,7 +78,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Primitive Reed Boats & Polynesian Outriggers',
     innovation: 'Autonomous Mega-Ships & Nuclear Arctic Vessels',
     era: 'Ancient Ocean Voyages ➔ Satellite-Guided Fleets',
-    image: '/comics/panel_classic.jpg',
+    image: '/comics/panel_classic.webp',
     caption: 'Primitive Wood & Reed Watercraft ➔ Autonomous Mega-Vessels & Modern Ships',
     lore: 'Humanity first navigated the perilous oceans on dugout logs, Polynesian outrigger canoes, and Egyptian papyrus watercraft guided solely by constellations. That primal desire to cross the horizon has evolved into 400-meter autonomous container mega-ships, nuclear icebreakers, and satellite-synchronized oceanic global fleets.',
   },
@@ -88,7 +88,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Wooden Counting Abacus & Babbage Analytical Engine',
     innovation: 'Cryogenic Superconducting Quantum Computers',
     era: 'Mechanical Gears (1642) ➔ Quantum Superconductors',
-    image: '/comics/panel_explosion.jpg',
+    image: '/comics/panel_explosion.webp',
     caption: 'Bead Abacus & Pascaline Gears ➔ Quantum Supercomputing Chandeliers',
     lore: 'From the tactile beads of the counting abacus to Blaise Pascal’s geared Pascaline (1642) and Charles Babbage’s steam-driven Analytical Engine (1837), humankind strove to mechanize calculations. Today, that journey culminates in cryogenic quantum processors using entangled qubits in superposition to calculate complexities beyond all classical machines.',
   },
@@ -98,7 +98,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: "Galileo's 1609 Optical Spyglass & Astrolabe",
     innovation: 'James Webb Space Telescope (JWST) & Interstellar Probes',
     era: '17th-Century Lens ➔ Infrared Deep Space Telescopes',
-    image: '/comics/panel_helmet.jpg',
+    image: '/comics/panel_helmet.webp',
     caption: 'Galileo Handheld Spyglass ➔ 6.5m Golden Beryllium Mirror Observatory',
     lore: 'In 1609, Galileo Galilei trained a handmade brass-and-leather spyglass toward Jupiter, discovering celestial moons and redefining humanity’s place in the universe. Four centuries later, the James Webb Space Telescope orbits 1.5 million kilometers into the void, unfurling 18 gold-coated beryllium hexagons to witness the birth of the earliest stars.',
   },
@@ -108,7 +108,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Primitive Wood Fire Torch & Edison Incandescent Bulb',
     innovation: 'Magnetic Confinement Nuclear Fusion Tokamak',
     era: 'Open Flame Combustion ➔ Artificial Sun Fusion Energy',
-    image: '/comics/panel_legion.jpg',
+    image: '/comics/panel_legion.webp',
     caption: 'Primitive Fire & Oil Lamps ➔ Magnetic Fusion Plasma & Laser Photonics',
     lore: 'The spark of a primitive wooden fire torch half a million years ago gave our ancestors light and survival, followed millennia later by Thomas Edison’s carbon filament light bulb. Today, humankind is harnessing the power of the stars themselves through magnetic confinement fusion tokamaks and laser photonics—producing boundless clean energy on Earth.',
   },
@@ -118,7 +118,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Tribal Smoke Signals, Pigeon Post & Morse Telegraph',
     innovation: 'Global Satellite Mesh Constellations & Laser Comms',
     era: 'Hilltop Signals & Telegraph ➔ Instant Global Quantum Network',
-    image: '/comics/panel_nebula.jpg',
+    image: '/comics/panel_nebula.webp',
     caption: 'Smoke Signals & Carrier Pigeons ➔ Orbital Satellite Laser Networks',
     lore: 'When distance separated civilizations, messages were relayed through hilltop smoke signals, homing pigeons, and early Morse electric telegraphs. Today, dense constellations of low-Earth orbit satellites linked by infrared laser beams wrap our planet in a seamless web, transmitting billions of gigabytes across continents in mere milliseconds.',
   },
@@ -128,7 +128,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Ancient Herbal Botany, Mortar & Pestle Apothecary',
     innovation: 'CRISPR-Cas9 Molecular Precision Gene Editing',
     era: 'Medicinal Plant Tinctures ➔ Nanomedicine & Genome Editing',
-    image: '/comics/panel_starship.jpg',
+    image: '/comics/panel_starship.webp',
     caption: 'Herbal Mortar & Pestle ➔ CRISPR-Cas9 Molecular Gene Engineering',
     lore: 'For millennia, ancient healers turned to wild plants, willow bark, and alchemical distillations to treat human illness. Today, molecular biologists operate directly upon the 3-billion-base-pair genetic code with CRISPR-Cas9 molecular scissors, reprogramming disease vectors, tailoring mRNA vaccines, and engineering cellular nanorobots.',
   },
@@ -138,7 +138,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Mesopotamian Solid Wooden Wheel & Sumerian Chariot',
     innovation: 'Supersonic Vacuum Maglev Hyperloops & Orbit Rovers',
     era: '3500 BCE Solid Wheel ➔ Frictionless Hyperloop & Space Rovers',
-    image: '/comics/panel_supersun.jpg',
+    image: '/comics/panel_supersun.webp',
     caption: 'Mesopotamian Wooden Wheel ➔ Magnetic Levitation Hyperloop & Planetary Rovers',
     lore: 'Invented in ancient Mesopotamia around 3500 BCE, the wooden wheel fundamentally unlocked human trade and movement across continents. Through horse-drawn chariots and early steam locomotives, that same kinetic ingenuity now achieves frictionless 1000 km/h magnetic levitation in vacuum hyperloop tunnels and autonomous rovers rolling on Mars.',
   },
@@ -261,6 +261,7 @@ export default function SupermanPrimeCanvas({
   const isInitialCameraMountRef = useRef(true);
   const holographicLayersRef = useRef<HolographicLayers | null>(null);
   const materialsRef = useRef<THREE.MeshPhysicalMaterial[]>([]);
+  const proxyHeroRef = useRef<THREE.Group | null>(null);
   const haloGroupRef = useRef<THREE.Group | null>(null);
   const capeGroupRef = useRef<THREE.Group | null>(null);
   const capeMeshRef = useRef<THREE.Mesh | null>(null);
@@ -278,6 +279,7 @@ export default function SupermanPrimeCanvas({
     uGlowIntensity: { value: 1.5 },
     uThemeColor: { value: new THREE.Color(0xd9ad62) },
   });
+  const secondaryModelsLoadedRef = useRef<boolean>(false);
 
   useEffect(() => {
     onEntityFormChangeRef.current = onEntityFormChange;
@@ -307,8 +309,12 @@ export default function SupermanPrimeCanvas({
   useEffect(() => {
     if (onCaptureRef) {
       onCaptureRef.current = () => {
-        if (!rendererRef.current || !composerRef.current) return;
-        composerRef.current.render();
+        if (!rendererRef.current || !sceneRef.current || !cameraRef.current) return;
+        if (composerRef.current) {
+          composerRef.current.render();
+        } else {
+          rendererRef.current.render(sceneRef.current, cameraRef.current);
+        }
         const canvas = document.createElement('canvas');
         canvas.width = rendererRef.current.domElement.width;
         canvas.height = rendererRef.current.domElement.height;
@@ -533,27 +539,34 @@ export default function SupermanPrimeCanvas({
       const targetLook = new THREE.Vector3(0, 1.35, 0);
       let isOrbit = false;
 
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 860;
+
       switch (preset) {
-        case 'prime': // Finalized panoramic amphitheater view (Image 2 with slightly reduced zoom)
-          targetPos.set(-4.95, 3.55, 7.55);
-          targetLook.set(0.15, 1.25, 0);
+        case 'prime': // Finalized panoramic amphitheater view
+          if (isMobile) {
+            targetPos.set(-5.6, 4.2, 11.2);
+            targetLook.set(0, 1.25, 0);
+          } else {
+            targetPos.set(-4.95, 3.55, 7.55);
+            targetLook.set(0.15, 1.25, 0);
+          }
           ctrl.autoRotate = false;
           ctrl.enabled = true;
           break;
         case 'closeup': // Heroic chest & halo portrait
-          targetPos.set(0, 1.9, 2.1);
+          targetPos.set(0, 1.9, isMobile ? 3.0 : 2.1);
           targetLook.set(0, 1.85, 0);
           ctrl.autoRotate = false;
           ctrl.enabled = true;
           break;
         case 'full': // Full body with floor portal and cosmic ribbons
-          targetPos.set(0, 1.2, 6.2);
+          targetPos.set(0, 1.2, isMobile ? 8.8 : 6.2);
           targetLook.set(0, 1.1, 0);
           ctrl.autoRotate = false;
           ctrl.enabled = true;
           break;
         case 'lowangle': // Epic god-like looking upward
-          targetPos.set(0, 0.2, 3.8);
+          targetPos.set(0, 0.2, isMobile ? 5.2 : 3.8);
           targetLook.set(0, 1.8, 0);
           ctrl.autoRotate = false;
           ctrl.enabled = true;
@@ -562,7 +575,7 @@ export default function SupermanPrimeCanvas({
           isOrbit = true;
           ctrl.autoRotate = false;
           ctrl.enabled = false;
-          const orbitR = 5.2;
+          const orbitR = isMobile ? 7.6 : 5.2;
           const orbitY = 1.48;
           const maxHalfArc = (Math.PI / 2) * 0.92; // Majestic frontal amphitheater arc (~165°-180°)
           const dx = cam.position.x;
@@ -612,32 +625,98 @@ export default function SupermanPrimeCanvas({
 
     let isCancelled = false;
     let animationFrameId: number;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const width = container.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 390);
+    const height = container.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 844);
 
     // 1. Scene
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    // 2. Camera: Wide panoramic amphitheater framing with slightly reduced zoom (positioned on the right)
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 150);
-    camera.position.set(-4.95, 3.55, 7.55);
+    // 2. Camera: Wide panoramic amphitheater framing with calibrated mobile zoom
+    const isMobile = width <= 860;
+    const initialFov = isMobile ? 46 : 42;
+    const camera = new THREE.PerspectiveCamera(initialFov, width / height, 0.1, 150);
+    if (isMobile) {
+      camera.position.set(-5.6, 4.2, 11.2);
+    } else {
+      camera.position.set(-4.95, 3.55, 7.55);
+    }
     cameraRef.current = camera;
 
-    // Shift view offset so the 3D entity & amphitheater is framed on the right side of the page
+    // Shift view offset so the 3D entity & amphitheater is framed on the right side of the page on desktop
     if (width > 860) {
       camera.setViewOffset(width, height, -width * 0.18, 0, width, height);
     }
 
-    // 3. Renderer
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+    // 3. Robust WebGLRenderer creation with cross-device fallbacks
+    const canvas = document.createElement('canvas');
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.display = 'block';
+
+    const contextAttributes: WebGLContextAttributes = {
       alpha: true,
-      powerPreference: 'high-performance',
-      preserveDrawingBuffer: true,
-    });
+      antialias: true,
+      depth: true,
+      stencil: false,
+      powerPreference: 'default',
+      preserveDrawingBuffer: false,
+      failIfMajorPerformanceCaveat: false,
+    };
+
+    let gl: WebGLRenderingContext | WebGL2RenderingContext | null = null;
+    try {
+      gl = (canvas.getContext('webgl2', contextAttributes) ||
+            canvas.getContext('webgl', contextAttributes) ||
+            canvas.getContext('experimental-webgl', contextAttributes)) as any;
+    } catch (e) {
+      console.warn('WebGL context creation warning:', e);
+    }
+
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        context: gl || undefined,
+        antialias: true,
+        alpha: true,
+        powerPreference: 'default',
+        preserveDrawingBuffer: false,
+        failIfMajorPerformanceCaveat: false,
+      });
+    } catch (e1) {
+      console.warn('Initial WebGLRenderer creation failed, attempting fallback options:', e1);
+      try {
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: false,
+          alpha: true,
+          powerPreference: 'default',
+          precision: 'mediump',
+          preserveDrawingBuffer: false,
+          failIfMajorPerformanceCaveat: false,
+        });
+      } catch (e2) {
+        console.error('All WebGLRenderer attempts failed:', e2);
+        setLoadingProgress(100);
+        isLoadedRef.current = true;
+        setIsLoaded(true);
+        return;
+      }
+    }
+
+    const handleContextLost = (event: Event) => {
+      event.preventDefault();
+      console.warn('WebGL context lost.');
+    };
+    const handleContextRestored = () => {
+      console.info('WebGL context restored.');
+    };
+    renderer.domElement.addEventListener('webglcontextlost', handleContextLost, false);
+    renderer.domElement.addEventListener('webglcontextrestored', handleContextRestored, false);
+
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, width < 768 ? 1.5 : 2));
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
@@ -649,9 +728,17 @@ export default function SupermanPrimeCanvas({
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.target.set(0.15, 1.25, 0);
-    controls.minDistance = 1.2;
-    controls.maxDistance = 18;
+    if (isMobile) {
+      controls.target.set(0, 1.25, 0);
+      controls.minDistance = 3.0;
+      controls.maxDistance = 22;
+      renderer.domElement.style.touchAction = 'none';
+      controls.enableZoom = true;
+    } else {
+      controls.target.set(0.15, 1.25, 0);
+      controls.minDistance = 1.2;
+      controls.maxDistance = 18;
+    }
     controls.maxPolarAngle = Math.PI / 2 + 0.18;
     controlsRef.current = controls;
 
@@ -674,24 +761,92 @@ export default function SupermanPrimeCanvas({
 
     controls.addEventListener('start', handleControlsStart);
 
-    // 5. Post-Processing: UnrealBloomPass tuned for high-contrast celestial gold
-    const renderPass = new RenderPass(scene, camera);
-    renderPass.clearColor = new THREE.Color(0, 0, 0);
-    renderPass.clearAlpha = 0;
-    const bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(width, height),
-      0.34, // strength (crisp celestial glow, no foggy blowout)
-      0.26, // radius
-      0.94  // threshold (only sharp starbursts & core nodes bloom)
-    );
-    bloomPassRef.current = bloomPass;
-    const outputPass = new OutputPass();
+    // 5. Post-Processing: UnrealBloomPass tuned for high-contrast celestial gold with foolproof universal fallback
+    let composer: EffectComposer | null = null;
+    try {
+      const glCtx = renderer.getContext();
+      // Accurate check for float render targets:
+      // In WebGL2: requires EXT_color_buffer_float
+      // In WebGL1: requires OES_texture_half_float + EXT_color_buffer_half_float
+      const hasFloatRT = renderer.capabilities.isWebGL2
+        ? !!glCtx.getExtension('EXT_color_buffer_float')
+        : (!!glCtx.getExtension('OES_texture_half_float') && !!glCtx.getExtension('EXT_color_buffer_half_float'));
 
-    const composer = new EffectComposer(renderer);
-    composer.addPass(renderPass);
-    composer.addPass(bloomPass);
-    composer.addPass(outputPass);
-    composerRef.current = composer;
+      const targetType = hasFloatRT ? THREE.HalfFloatType : THREE.UnsignedByteType;
+
+      const renderPass = new RenderPass(scene, camera);
+      renderPass.clearColor = new THREE.Color(0, 0, 0);
+      renderPass.clearAlpha = 0;
+
+      const bloomPass = new UnrealBloomPass(
+        new THREE.Vector2(width, height),
+        bloomStrength || 0.36, // strength (crisp celestial glow, no foggy blowout)
+        0.26, // radius
+        0.88  // threshold (sharp starbursts, cybernetic wireframes & core nodes bloom)
+      );
+      bloomPassRef.current = bloomPass;
+
+      // When float render targets are not supported on budget or integrated GPUs,
+      // adapt UnrealBloomPass's internal render targets so framebuffers never fail.
+      if (!hasFloatRT) {
+        bloomPass.renderTargetBright.dispose();
+        bloomPass.renderTargetBright = new THREE.WebGLRenderTarget(
+          Math.max(1, Math.round(width / 2)),
+          Math.max(1, Math.round(height / 2)),
+          { type: THREE.UnsignedByteType, depthBuffer: false }
+        );
+        for (let i = 0; i < bloomPass.nMips; i++) {
+          const rw = Math.max(1, Math.round(width / Math.pow(2, i + 1)));
+          const rh = Math.max(1, Math.round(height / Math.pow(2, i + 1)));
+          bloomPass.renderTargetsHorizontal[i].dispose();
+          bloomPass.renderTargetsHorizontal[i] = new THREE.WebGLRenderTarget(rw, rh, { type: THREE.UnsignedByteType, depthBuffer: false });
+          bloomPass.renderTargetsVertical[i].dispose();
+          bloomPass.renderTargetsVertical[i] = new THREE.WebGLRenderTarget(rw, rh, { type: THREE.UnsignedByteType, depthBuffer: false });
+        }
+      }
+
+      const outputPass = new OutputPass();
+
+      // Guarantee that the 3D entity, golden bloom halo, cybernetic wireframe, glowing nodes,
+      // and comic cards are 100% solid and visible across all laptop and desktop compositors,
+      // preventing the transparent canvas from squashing additive bloom into 3% opacity ghosts.
+      outputPass.material.fragmentShader = outputPass.material.fragmentShader.replace(
+        /}\s*$/,
+        `  float maxColor = max(gl_FragColor.r, max(gl_FragColor.g, gl_FragColor.b));
+  float lumAlpha = smoothstep(0.001, 0.04, maxColor);
+  gl_FragColor.a = max(gl_FragColor.a, lumAlpha);
+}`
+      );
+      outputPass.material.needsUpdate = true;
+
+      const renderTarget = new THREE.WebGLRenderTarget(width, height, {
+        type: targetType,
+        format: THREE.RGBAFormat,
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        generateMipmaps: false,
+      });
+
+      composer = new EffectComposer(renderer, renderTarget);
+      composer.addPass(renderPass);
+      composer.addPass(bloomPass);
+      composer.addPass(outputPass);
+
+      // Verify composer works without GL errors on this hardware
+      composer.render();
+      const testGlErr = glCtx.getError();
+      if (testGlErr !== 0) {
+        console.warn('Composer initial test produced GL error:', testGlErr, 'falling back to direct rendering');
+        composer.dispose();
+        composer = null;
+      } else {
+        composerRef.current = composer;
+      }
+    } catch (err) {
+      console.warn('EffectComposer creation failed, falling back to direct renderer:', err);
+      composer = null;
+      composerRef.current = null;
+    }
 
     // 6. Lighting: Tuned for dramatic muscular definition and golden specular luster
     // Subtle neutral dark ambient
@@ -719,7 +874,11 @@ export default function SupermanPrimeCanvas({
     scene.add(portalLight);
 
     // 7. Celestial Spherical Environment Map (Enables true liquid-gold PBR specular reflections)
-    createCelestialEnvironmentMap(renderer, scene);
+    try {
+      createCelestialEnvironmentMap(renderer, scene);
+    } catch (err) {
+      console.warn('Environment map generation warning:', err);
+    }
 
     // 8. Ground Energy Portal (Concentric Rings under feet)
     const portalGroup = createPortalRings();
@@ -740,7 +899,11 @@ export default function SupermanPrimeCanvas({
     // 13. Load 3D Model (male_body-compressed.glb by default, with fallback/toggle)
     setLoadingProgress(35);
     const gltfLoader = new GLTFLoader();
-    gltfLoader.setMeshoptDecoder(MeshoptDecoder);
+    try {
+      gltfLoader.setMeshoptDecoder(MeshoptDecoder);
+    } catch (err) {
+      console.warn('MeshoptDecoder setup warning:', err);
+    }
 
     const isMaleBody = (modelSource || 'male_body') === 'male_body';
     const modelPath = isMaleBody ? '/models/male_body-compressed.glb' : '/models/superman_prime.glb';
@@ -814,6 +977,7 @@ export default function SupermanPrimeCanvas({
           vec3 rimGlow = uThemeColor * fresnel * uGlowIntensity * 0.14;
 
           gl_FragColor.rgb += rimGlow;
+          gl_FragColor.a = 1.0;
           `
         );
       };
@@ -833,6 +997,11 @@ export default function SupermanPrimeCanvas({
     humanoidContainer.scale.set(1.15, 1.15, 1.15);
     entityGroup.add(humanoidContainer);
     humanoidContainerRef.current = humanoidContainer;
+
+    // Instant procedural celestial proxy hero guarantees zero empty frames on any device or network speed
+    const proxyHero = createCelestialProxyHero(goldBodyMaterial);
+    humanoidContainer.add(proxyHero);
+    proxyHeroRef.current = proxyHero;
 
     const flyingMachineContainer = new THREE.Group();
     entityGroup.add(flyingMachineContainer);
@@ -874,396 +1043,458 @@ export default function SupermanPrimeCanvas({
     entityGroup.add(shockMesh);
     morphShockwaveRef.current = shockMesh;
 
-    // Load all 4 entity models in parallel
-    Promise.all([
-      gltfLoader.loadAsync(modelPath),
-      gltfLoader.loadAsync('/models/flying_machine-compressed.glb'),
-      gltfLoader.loadAsync('/models/paddle_boat-compressed.glb'),
-      gltfLoader.loadAsync('/models/artificial_neural_network_ann-compressed.glb'),
-    ])
-      .then(([humanoidGltf, machineGltf, boatGltf, annGltf]) => {
-        if (isCancelled) return;
-        setLoadingProgress(85);
+    // Helper to setup and wrap entity models with golden skin, wireframe mesh & glowing junction nodes
+    const setupEntityModel = (
+      modelScene: THREE.Group,
+      targetDim: number,
+      materialsList: THREE.Material[],
+      wireMeshesList: THREE.LineSegments[],
+      nodesList: THREE.Points[]
+    ): THREE.Group => {
+      modelScene.updateMatrixWorld(true);
+      const b = new THREE.Box3().setFromObject(modelScene);
+      const c = new THREE.Vector3();
+      b.getCenter(c);
+      const s = new THREE.Vector3();
+      b.getSize(s);
+      const maxD = Math.max(s.x, s.y, s.z);
+      const scale = targetDim / (maxD || 1);
+      modelScene.position.set(-c.x, -c.y, -c.z);
 
-        // ---------------------------------------------------------------------
-        // 1. SETUP HUMANOID MODEL (male_body.glb / superman_prime.glb)
-        // ---------------------------------------------------------------------
-        const model = humanoidGltf.scene;
+      modelScene.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          const mesh = child as THREE.Mesh;
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
 
-        if (isMaleBody) {
-          model.updateMatrixWorld(true);
-          let sourceGeom: THREE.BufferGeometry | null = null;
-          model.traverse((child) => {
-            if ((child as THREE.Mesh).isMesh) {
-              const mesh = child as THREE.Mesh;
-              mesh.castShadow = true;
-              mesh.receiveShadow = true;
-              mesh.material = goldBodyMaterial;
-              if (mesh.geometry && !mesh.geometry.attributes.normal) {
-                mesh.geometry.computeVertexNormals();
-              }
-              if (!sourceGeom && mesh.geometry) {
-                // Clone geometry and apply mesh transform relative to model root
-                // to support both raw and quantized/compressed glTFs (EXT_meshopt_compression)
-                const cloned = mesh.geometry.clone();
-                mesh.updateWorldMatrix(true, false);
-                const relMatrix = new THREE.Matrix4().copy(model.matrixWorld).invert().multiply(mesh.matrixWorld);
-                cloned.applyMatrix4(relMatrix);
-                if (!cloned.attributes.normal) {
-                  cloned.computeVertexNormals();
+          if (mesh.geometry) {
+            mesh.geometry.computeVertexNormals();
+          }
+
+          // 1. Golden Celestial Physical Skin Material (cloned directly from humanoid body material for 100% color/reflection parity)
+          const goldMat = goldBodyMaterial.clone();
+          injectGoldShader(goldMat);
+          mesh.material = goldMat;
+          materialsList.push(goldMat);
+          materialsRef.current.push(goldMat);
+
+          // 2. Holographic Cybernetic Wireframe Mesh with traveling pulse & scanline shader
+          // Skip dense tube sweeps (>25k verts) so they remain clean golden synaptic fibers without cage blowout
+          if (mesh.geometry.attributes.position && mesh.geometry.attributes.position.count <= 25000) {
+            const wireGeom = new THREE.WireframeGeometry(mesh.geometry);
+            const wireUniforms = {
+              uTime: { value: 0 },
+              uNetworkIntensity: { value: hologramNetworkIntensityRef.current },
+              uFlowSpeed: { value: hologramFlowSpeedRef.current },
+              uGoldColor: customUniformsRef.current.uThemeColor,
+              uCoreColor: { value: new THREE.Color(0xfffae0) },
+              uScanlineEnabled: { value: showHologramScanlineRef.current ? 1.0 : 0.0 },
+            };
+            const wireMat = new THREE.ShaderMaterial({
+              transparent: true,
+              blending: THREE.AdditiveBlending,
+              depthWrite: false,
+              uniforms: wireUniforms,
+              vertexShader: `
+                varying vec3 vWorldPosition;
+                void main() {
+                  vec4 worldPos = modelMatrix * vec4(position, 1.0);
+                  vWorldPosition = worldPos.xyz;
+                  gl_Position = projectionMatrix * viewMatrix * worldPos;
                 }
+              `,
+              fragmentShader: `
+                uniform float uTime;
+                uniform float uNetworkIntensity;
+                uniform float uFlowSpeed;
+                uniform float uScanlineEnabled;
+                uniform vec3 uGoldColor;
+                uniform vec3 uCoreColor;
+                varying vec3 vWorldPosition;
 
-                // Ensure UV coordinates exist for holographic contour shaders
-                if (!cloned.attributes.uv) {
-                  const pos = cloned.attributes.position;
-                  const uvs = new Float32Array(pos.count * 2);
-                  for (let i = 0; i < pos.count; i++) {
-                    const x = pos.getX(i);
-                    const y = pos.getY(i);
-                    const z = pos.getZ(i);
-                    const u = (Math.atan2(x, z) / Math.PI) * 0.5 + 0.5;
-                    const v = Math.min(1.0, Math.max(0.0, (y - 0.58) / 180.0));
-                    uvs[i * 2] = u;
-                    uvs[i * 2 + 1] = v;
+                void main() {
+                  float dist = length(vWorldPosition);
+                  float wave = sin(dist * 10.0 - uTime * uFlowSpeed * 3.8);
+                  float pulse = pow(max(0.0, wave), 5.0);
+
+                  // Smooth vertical holographic scan sweep
+                  float scanPeriod = fract(uTime * 0.15);
+                  float scanY = scanPeriod * 3.5 - 0.2;
+                  float scanWave = smoothstep(0.09, 0.0, abs(vWorldPosition.y - scanY)) * uScanlineEnabled;
+
+                  // Subtle, delicate lines to prevent blinding overlap
+                  float baseAlpha = 0.05 * uNetworkIntensity;
+                  float pulseAlpha = (pulse * 0.16 + scanWave * 0.20) * uNetworkIntensity;
+                  float totalAlpha = clamp(baseAlpha + pulseAlpha, 0.0, 0.55);
+
+                  vec3 col = mix(uGoldColor, uCoreColor, clamp(pulse * 0.7 + scanWave * 0.5, 0.0, 0.6));
+                  gl_FragColor = vec4(col * totalAlpha, clamp(totalAlpha * 2.5, 0.0, 0.90));
+                }
+              `,
+            });
+            const wireMesh = new THREE.LineSegments(wireGeom, wireMat);
+            wireMesh.userData.uniforms = wireUniforms;
+            wireMesh.visible = hologramNetworkIntensityRef.current > 0.01;
+            wireMeshesList.push(wireMesh);
+            mesh.add(wireMesh);
+          }
+
+          // 3. Holographic Cosmic Junction Nodes (Sampled topological vertex points)
+          if (mesh.geometry && mesh.geometry.attributes.position && mesh.geometry.attributes.position.count <= 25000) {
+            const posAttr = mesh.geometry.attributes.position;
+            const sampleStep = Math.max(1, Math.floor(posAttr.count / 25));
+            const nodePositions: number[] = [];
+            for (let i = 0; i < posAttr.count; i += sampleStep) {
+              nodePositions.push(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
+            }
+            if (nodePositions.length > 0) {
+              const nodeGeom = new THREE.BufferGeometry();
+              nodeGeom.setAttribute('position', new THREE.Float32BufferAttribute(nodePositions, 3));
+              const nodeUniforms = {
+                uTime: { value: 0 },
+                uNodesBrightness: { value: hologramNodesBrightnessRef.current },
+                uFlowSpeed: { value: hologramFlowSpeedRef.current },
+                uGoldColor: customUniformsRef.current.uThemeColor,
+                uCoreColor: { value: new THREE.Color(0xfffae0) },
+              };
+              const nodeMat = new THREE.ShaderMaterial({
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+                uniforms: nodeUniforms,
+                vertexShader: `
+                  uniform float uTime;
+                  uniform float uFlowSpeed;
+                  varying float vPulse;
+                  void main() {
+                    vec4 worldPos = modelMatrix * vec4(position, 1.0);
+                    float dist = length(worldPos.xyz);
+                    vPulse = pow(max(0.0, sin(dist * 8.0 - uTime * uFlowSpeed * 3.5)), 4.0);
+                    vec4 mvPosition = viewMatrix * worldPos;
+                    gl_PointSize = (5.0 + vPulse * 3.5) * (1.0 / max(0.2, -mvPosition.z));
+                    gl_Position = projectionMatrix * mvPosition;
                   }
-                  cloned.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
-                }
-
-                sourceGeom = cloned;
-              }
+                `,
+                fragmentShader: `
+                  uniform vec3 uGoldColor;
+                  uniform vec3 uCoreColor;
+                  uniform float uNodesBrightness;
+                  varying float vPulse;
+                  void main() {
+                    vec2 coord = gl_PointCoord - vec2(0.5);
+                    float dist = length(coord);
+                    if (dist > 0.5) discard;
+                    float intensity = (1.0 - smoothstep(0.0, 0.5, dist)) * (0.20 + vPulse * 0.35) * uNodesBrightness;
+                    vec3 col = mix(uGoldColor, uCoreColor, clamp(vPulse * 0.7, 0.0, 0.5));
+                    gl_FragColor = vec4(col * intensity, clamp(intensity * 3.0, 0.0, 0.95));
+                  }
+                `,
+              });
+              const nodesMesh = new THREE.Points(nodeGeom, nodeMat);
+              nodesMesh.userData.uniforms = nodeUniforms;
+              nodesMesh.visible = hologramNodesBrightnessRef.current > 0.01;
+              nodesList.push(nodesMesh);
+              mesh.add(nodesMesh);
             }
-          });
-
-          model.scale.set(0.0132, 0.0132, 0.0132);
-          model.position.set(0, 0.02, 0);
-          humanoidContainer.add(model);
-
-          if (sourceGeom) {
-            const holo = buildHolographicHumanoid(sourceGeom, 0.0132, 0.02);
-            humanoidContainer.add(holo.group);
-            holographicLayersRef.current = holo;
-
-            holo.setSkinOpacity(hologramSkinOpacityRef.current);
-            holo.setNetworkIntensity(hologramNetworkIntensityRef.current);
-            holo.setNodesBrightness(hologramNodesBrightnessRef.current);
-            holo.setFlowSpeed(hologramFlowSpeedRef.current);
-            holo.setChestCoreRadiance(hologramChestCoreRadianceRef.current);
-            holo.setAuraVisible(showHologramAuraRef.current);
-            holo.setScanlineEnabled(showHologramScanlineRef.current);
-            holo.setThemeColor(new THREE.Color(customUniformsRef.current.uThemeColor.value));
-          }
-
-          haloGroupRef.current = null;
-          capeGroupRef.current = null;
-          capeMeshRef.current = null;
-        } else {
-          model.traverse((child) => {
-            if ((child as THREE.Mesh).isMesh) {
-              const mesh = child as THREE.Mesh;
-              mesh.castShadow = true;
-              mesh.receiveShadow = true;
-              mesh.material = (mesh.name === 'Beta_Joints') ? goldJointsMaterial : goldBodyMaterial;
-            }
-          });
-
-          model.scale.set(1.4, 1.4, 1.4);
-          model.position.set(0, 0.05, 0);
-          humanoidContainer.add(model);
-
-          const headBone = model.getObjectByName('mixamorigHead');
-          const spine2Bone = model.getObjectByName('mixamorigSpine2');
-
-          if (headBone) {
-            const hair = createHeroicHair();
-            headBone.add(hair);
-            const eyes = createCelestialEyes();
-            headBone.add(eyes);
-          }
-
-          if (spine2Bone) {
-            const chestCore = createChestSunCore();
-            spine2Bone.add(chestCore);
-            chestCore.position.set(0, 0.15, 0.14);
-
-            const chestLight = new THREE.PointLight(0xffea60, 1.2, 2.5, 1.2);
-            chestCore.add(chestLight);
-            chestCoreLightRef.current = chestLight;
-          }
-
-          const mixer = new THREE.AnimationMixer(model);
-          mixerRef.current = mixer;
-
-          if (humanoidGltf.animations && humanoidGltf.animations.length > 0) {
-            const walkClip = humanoidGltf.animations[0];
-            const hipPosTrack = walkClip.tracks.find((t) => t.name.includes('Hips.position'));
-            if (hipPosTrack) {
-              for (let i = 2; i < hipPosTrack.values.length; i += 3) {
-                hipPosTrack.values[i] = 0;
-              }
-            }
-            const walkAction = mixer.clipAction(walkClip);
-            walkActionRef.current = walkAction;
-            walkAction.play();
-            walkAction.paused = true;
-            walkAction.time = 0.62;
-            mixer.update(0);
           }
         }
+      });
 
-        // Helper to setup and wrap entity models with golden skin & holographic wireframe mesh
-        // Helper to setup and wrap entity models with golden skin, wireframe mesh & glowing junction nodes
-        const setupEntityModel = (
-          modelScene: THREE.Group,
-          targetDim: number,
-          materialsList: THREE.Material[],
-          wireMeshesList: THREE.LineSegments[],
-          nodesList: THREE.Points[]
-        ): THREE.Group => {
-          modelScene.updateMatrixWorld(true);
-          const b = new THREE.Box3().setFromObject(modelScene);
-          const c = new THREE.Vector3();
-          b.getCenter(c);
-          const s = new THREE.Vector3();
-          b.getSize(s);
-          const maxD = Math.max(s.x, s.y, s.z);
-          const scale = targetDim / (maxD || 1);
-          modelScene.position.set(-c.x, -c.y, -c.z);
+      const wrapper = new THREE.Group();
+      wrapper.scale.set(scale, scale, scale);
+      wrapper.add(modelScene);
+      return wrapper;
+    };
 
-          modelScene.traverse((child) => {
-            if ((child as THREE.Mesh).isMesh) {
-              const mesh = child as THREE.Mesh;
-              mesh.castShadow = true;
-              mesh.receiveShadow = true;
+    // Fast initial overlay dismissal so cards intro swoop and golden portal are immediately visible
+    const initialDismissTimeout = setTimeout(() => {
+      setLoadingProgress(100);
+      setIsLoaded(true);
+      isLoadedRef.current = true;
+      if (typeof window !== 'undefined') {
+        (window as unknown as { __SCENE_LOADED__: boolean }).__SCENE_LOADED__ = true;
+      }
+    }, 600);
 
-              if (mesh.geometry) {
-                mesh.geometry.computeVertexNormals();
-              }
-
-              // 1. Golden Celestial Physical Skin Material (cloned directly from humanoid body material for 100% color/reflection parity)
-              const goldMat = goldBodyMaterial.clone();
-              injectGoldShader(goldMat);
-              mesh.material = goldMat;
-              materialsList.push(goldMat);
-              materialsRef.current.push(goldMat);
-
-              // 2. Holographic Cybernetic Wireframe Mesh with traveling pulse & scanline shader
-              // Skip dense tube sweeps (>25k verts) so they remain clean golden synaptic fibers without cage blowout
-              if (mesh.geometry.attributes.position && mesh.geometry.attributes.position.count <= 25000) {
-                const wireGeom = new THREE.WireframeGeometry(mesh.geometry);
-                const wireUniforms = {
-                  uTime: { value: 0 },
-                  uNetworkIntensity: { value: hologramNetworkIntensityRef.current },
-                  uFlowSpeed: { value: hologramFlowSpeedRef.current },
-                  uGoldColor: customUniformsRef.current.uThemeColor,
-                  uCoreColor: { value: new THREE.Color(0xfffae0) },
-                  uScanlineEnabled: { value: showHologramScanlineRef.current ? 1.0 : 0.0 },
-                };
-                const wireMat = new THREE.ShaderMaterial({
-                  transparent: true,
-                  blending: THREE.AdditiveBlending,
-                  depthWrite: false,
-                  uniforms: wireUniforms,
-                  vertexShader: `
-                    varying vec3 vWorldPosition;
-                    void main() {
-                      vec4 worldPos = modelMatrix * vec4(position, 1.0);
-                      vWorldPosition = worldPos.xyz;
-                      gl_Position = projectionMatrix * viewMatrix * worldPos;
-                    }
-                  `,
-                  fragmentShader: `
-                    uniform float uTime;
-                    uniform float uNetworkIntensity;
-                    uniform float uFlowSpeed;
-                    uniform float uScanlineEnabled;
-                    uniform vec3 uGoldColor;
-                    uniform vec3 uCoreColor;
-                    varying vec3 vWorldPosition;
-
-                    void main() {
-                      float dist = length(vWorldPosition);
-                      float wave = sin(dist * 10.0 - uTime * uFlowSpeed * 3.8);
-                      float pulse = pow(max(0.0, wave), 5.0);
-
-                      // Smooth vertical holographic scan sweep
-                      float scanPeriod = fract(uTime * 0.15);
-                      float scanY = scanPeriod * 3.5 - 0.2;
-                      float scanWave = smoothstep(0.09, 0.0, abs(vWorldPosition.y - scanY)) * uScanlineEnabled;
-
-                      // Subtle, delicate lines to prevent blinding overlap
-                      float baseAlpha = 0.05 * uNetworkIntensity;
-                      float pulseAlpha = (pulse * 0.16 + scanWave * 0.20) * uNetworkIntensity;
-                      float totalAlpha = clamp(baseAlpha + pulseAlpha, 0.0, 0.55);
-
-                      vec3 col = mix(uGoldColor, uCoreColor, clamp(pulse * 0.7 + scanWave * 0.5, 0.0, 0.6));
-                      gl_FragColor = vec4(col * totalAlpha, totalAlpha);
-                    }
-                  `,
-                });
-                const wireMesh = new THREE.LineSegments(wireGeom, wireMat);
-                wireMesh.userData.uniforms = wireUniforms;
-                wireMesh.visible = hologramNetworkIntensityRef.current > 0.01;
-                wireMeshesList.push(wireMesh);
-                mesh.add(wireMesh);
-              }
-
-              // 3. Holographic Cosmic Junction Nodes (Sampled topological vertex points)
-              if (mesh.geometry && mesh.geometry.attributes.position && mesh.geometry.attributes.position.count <= 25000) {
-                const posAttr = mesh.geometry.attributes.position;
-                const sampleStep = Math.max(1, Math.floor(posAttr.count / 25));
-                const nodePositions: number[] = [];
-                for (let i = 0; i < posAttr.count; i += sampleStep) {
-                  nodePositions.push(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
-                }
-                if (nodePositions.length > 0) {
-                  const nodeGeom = new THREE.BufferGeometry();
-                  nodeGeom.setAttribute('position', new THREE.Float32BufferAttribute(nodePositions, 3));
-                  const nodeUniforms = {
-                    uTime: { value: 0 },
-                    uNodesBrightness: { value: hologramNodesBrightnessRef.current },
-                    uFlowSpeed: { value: hologramFlowSpeedRef.current },
-                    uGoldColor: customUniformsRef.current.uThemeColor,
-                    uCoreColor: { value: new THREE.Color(0xfffae0) },
-                  };
-                  const nodeMat = new THREE.ShaderMaterial({
-                    transparent: true,
-                    blending: THREE.AdditiveBlending,
-                    depthWrite: false,
-                    uniforms: nodeUniforms,
-                    vertexShader: `
-                      uniform float uTime;
-                      uniform float uFlowSpeed;
-                      varying float vPulse;
-                      void main() {
-                        vec4 worldPos = modelMatrix * vec4(position, 1.0);
-                        float dist = length(worldPos.xyz);
-                        vPulse = pow(max(0.0, sin(dist * 8.0 - uTime * uFlowSpeed * 3.5)), 4.0);
-                        vec4 mvPosition = viewMatrix * worldPos;
-                        gl_PointSize = (5.0 + vPulse * 3.5) * (1.0 / max(0.2, -mvPosition.z));
-                        gl_Position = projectionMatrix * mvPosition;
-                      }
-                    `,
-                    fragmentShader: `
-                      uniform vec3 uGoldColor;
-                      uniform vec3 uCoreColor;
-                      uniform float uNodesBrightness;
-                      varying float vPulse;
-                      void main() {
-                        vec2 coord = gl_PointCoord - vec2(0.5);
-                        float dist = length(coord);
-                        if (dist > 0.5) discard;
-                        float intensity = (1.0 - smoothstep(0.0, 0.5, dist)) * (0.20 + vPulse * 0.35) * uNodesBrightness;
-                        vec3 col = mix(uGoldColor, uCoreColor, clamp(vPulse * 0.7, 0.0, 0.5));
-                        gl_FragColor = vec4(col * intensity, intensity);
-                      }
-                    `,
-                  });
-                  const nodesMesh = new THREE.Points(nodeGeom, nodeMat);
-                  nodesMesh.userData.uniforms = nodeUniforms;
-                  nodesMesh.visible = hologramNodesBrightnessRef.current > 0.01;
-                  nodesList.push(nodesMesh);
-                  mesh.add(nodesMesh);
-                }
-              }
-            }
-          });
-
-          const wrapper = new THREE.Group();
-          wrapper.scale.set(scale, scale, scale);
-          wrapper.add(modelScene);
-          return wrapper;
-        };
-
-        // ---------------------------------------------------------------------
-        // 2. SETUP FLYING MACHINE MODEL (/models/flying_machine-compressed.glb)
-        // ---------------------------------------------------------------------
-        const machineWrapper = setupEntityModel(
-          machineGltf.scene,
-          4.5,
-          flyingMachineMaterialsRef.current,
-          flyingMachineWireMeshesRef.current,
-          flyingMachineNodesRef.current
-        );
-        machineWrapper.position.set(0, 1.70, 0);
-        machineWrapper.rotation.y = -Math.PI / 2;
-        machineWrapper.rotation.x = 0.38;
-
-        // Subtle warm underglow (models inherit master scene lighting, no duplicate blast lights)
-        const machineUnderGlow = new THREE.PointLight(0xffea60, 0.7, 4.0, 1.5);
-        machineUnderGlow.position.set(0, 0.95, 0);
-        flyingMachineContainer.add(machineUnderGlow);
-        flyingMachineGlowLightsRef.current.push(machineUnderGlow);
-
-        flyingMachineContainer.add(machineWrapper);
-        flyingMachineWrapperRef.current = machineWrapper;
-
-        // ---------------------------------------------------------------------
-        // 3. SETUP WATERCRAFT MODEL (/models/paddle_boat-compressed.glb)
-        // ---------------------------------------------------------------------
-        const boatWrapper = setupEntityModel(
-          boatGltf.scene,
-          2.2, // Reduced dimension for balanced, compact visual scale
-          watercraftMaterialsRef.current,
-          watercraftWireMeshesRef.current,
-          watercraftNodesRef.current
-        );
-        boatWrapper.position.set(0, 1.95, 0);
-        boatWrapper.rotation.y = -0.35;
-
-        // Subtle warm underglow (models inherit master scene lighting, no duplicate blast lights)
-        const boatUnderGlow = new THREE.PointLight(0xffea60, 0.6, 3.5, 1.5);
-        boatUnderGlow.position.set(0, 1.20, 0);
-        watercraftContainer.add(boatUnderGlow);
-        watercraftGlowLightsRef.current.push(boatUnderGlow);
-
-        watercraftContainer.add(boatWrapper);
-        watercraftWrapperRef.current = boatWrapper;
-
-        // ---------------------------------------------------------------------
-        // 4. SETUP NEURAL NETWORK MODEL (/models/artificial_neural_network_ann-compressed.glb)
-        // ---------------------------------------------------------------------
-        const annWrapper = setupEntityModel(
-          annGltf.scene,
-          2.0, // Reduced dimension for jewel-like quantum tensor sphere scale
-          neuralNetworkMaterialsRef.current,
-          neuralNetworkWireMeshesRef.current,
-          neuralNetworkNodesRef.current
-        );
-        annWrapper.position.set(0, 2.00, 0);
-        annWrapper.rotation.x = 0.25;
-
-        // Subtle warm underglow (models inherit master scene lighting, no duplicate blast lights)
-        const annUnderGlow = new THREE.PointLight(0xffea60, 0.7, 3.5, 1.5);
-        annUnderGlow.position.set(0, 1.25, 0);
-        neuralNetworkContainer.add(annUnderGlow);
-        neuralNetworkGlowLightsRef.current.push(annUnderGlow);
-
-        neuralNetworkContainer.add(annWrapper);
-        neuralNetworkWrapperRef.current = annWrapper;
-
-        // Synchronize all newly created materials and lights with the active theme
-        applyThemeRef.current(themeRef.current);
-
+    // Safety timeout: Guarantee that the loading screen is never stuck for more than 10s on slow networks
+    const safetyTimeout = setTimeout(() => {
+      if (!isLoadedRef.current) {
+        console.info('Scene safety timeout reached: dismissing loading overlay');
         setLoadingProgress(100);
         isLoadedRef.current = true;
         setIsLoaded(true);
         if (typeof window !== 'undefined') {
           (window as unknown as { __SCENE_LOADED__: boolean }).__SCENE_LOADED__ = true;
         }
-      })
-      .catch((err) => {
-        if (isCancelled) return;
-        console.error('Failed to load models:', err);
-        isLoadedRef.current = true;
-        setIsLoaded(true);
-      });
+      }
+    }, 10000);
+
+    // Load humanoid primary model first for instant non-blocking initial render with automatic fallback
+    const loadHumanoidModel = (targetPath: string, isFallback: boolean = false) => {
+      setLoadingProgress(25);
+      gltfLoader.load(
+        targetPath,
+        (humanoidGltf) => {
+          if (isCancelled) return;
+          setLoadingProgress(90);
+
+          // ---------------------------------------------------------------------
+          // 1. SETUP HUMANOID MODEL (male_body.glb / superman_prime.glb)
+          // ---------------------------------------------------------------------
+          const model = humanoidGltf.scene;
+
+          if (isMaleBody && !isFallback) {
+            model.updateMatrixWorld(true);
+            let sourceGeom: THREE.BufferGeometry | null = null;
+            model.traverse((child) => {
+              if ((child as THREE.Mesh).isMesh) {
+                const mesh = child as THREE.Mesh;
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                mesh.material = goldBodyMaterial;
+                if (mesh.geometry && !mesh.geometry.attributes.normal) {
+                  mesh.geometry.computeVertexNormals();
+                }
+                if (!sourceGeom && mesh.geometry) {
+                  // Clone geometry and apply mesh transform relative to model root
+                  const cloned = mesh.geometry.clone();
+                  mesh.updateWorldMatrix(true, false);
+                  const relMatrix = new THREE.Matrix4().copy(model.matrixWorld).invert().multiply(mesh.matrixWorld);
+                  cloned.applyMatrix4(relMatrix);
+                  if (!cloned.attributes.normal) {
+                    cloned.computeVertexNormals();
+                  }
+
+                  // Ensure UV coordinates exist for holographic contour shaders
+                  if (!cloned.attributes.uv) {
+                    const pos = cloned.attributes.position;
+                    const uvs = new Float32Array(pos.count * 2);
+                    for (let i = 0; i < pos.count; i++) {
+                      const x = pos.getX(i);
+                      const y = pos.getY(i);
+                      const z = pos.getZ(i);
+                      const u = (Math.atan2(x, z) / Math.PI) * 0.5 + 0.5;
+                      const v = Math.min(1.0, Math.max(0.0, (y - 0.58) / 180.0));
+                      uvs[i * 2] = u;
+                      uvs[i * 2 + 1] = v;
+                    }
+                    cloned.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+                  }
+
+                  sourceGeom = cloned;
+                }
+              }
+            });
+
+            if (proxyHeroRef.current) {
+              humanoidContainer.remove(proxyHeroRef.current);
+              proxyHeroRef.current = null;
+            }
+
+            model.scale.set(0.0132, 0.0132, 0.0132);
+            model.position.set(0, 0.02, 0);
+            humanoidContainer.add(model);
+
+            if (sourceGeom) {
+              try {
+                const holo = buildHolographicHumanoid(sourceGeom, 0.0132, 0.02);
+                humanoidContainer.add(holo.group);
+                holographicLayersRef.current = holo;
+
+                holo.setSkinOpacity(hologramSkinOpacityRef.current);
+                holo.setNetworkIntensity(hologramNetworkIntensityRef.current);
+                holo.setNodesBrightness(hologramNodesBrightnessRef.current);
+                holo.setFlowSpeed(hologramFlowSpeedRef.current);
+                holo.setChestCoreRadiance(hologramChestCoreRadianceRef.current);
+                holo.setAuraVisible(showHologramAuraRef.current);
+                holo.setScanlineEnabled(showHologramScanlineRef.current);
+                holo.setThemeColor(new THREE.Color(customUniformsRef.current.uThemeColor.value));
+              } catch (holoErr) {
+                console.warn('Holographic shader layers generation warning:', holoErr);
+              }
+            }
+
+            // Divine Celestial Halo behind Superman Prime / Technex Hero
+            const divineHalo = createDivineHalo();
+            divineHalo.position.set(0, 1.82, -0.06);
+            humanoidContainer.add(divineHalo);
+            haloGroupRef.current = divineHalo;
+
+            capeGroupRef.current = null;
+            capeMeshRef.current = null;
+          } else {
+            if (proxyHeroRef.current) {
+              humanoidContainer.remove(proxyHeroRef.current);
+              proxyHeroRef.current = null;
+            }
+            model.traverse((child) => {
+              if ((child as THREE.Mesh).isMesh) {
+                const mesh = child as THREE.Mesh;
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                mesh.material = (mesh.name === 'Beta_Joints') ? goldJointsMaterial : goldBodyMaterial;
+              }
+            });
+
+            model.scale.set(1.4, 1.4, 1.4);
+            model.position.set(0, 0.05, 0);
+            humanoidContainer.add(model);
+
+            const headBone = model.getObjectByName('mixamorigHead');
+            const spine2Bone = model.getObjectByName('mixamorigSpine2');
+
+            if (headBone) {
+              const hair = createHeroicHair();
+              headBone.add(hair);
+              const eyes = createCelestialEyes();
+              headBone.add(eyes);
+            }
+
+            if (spine2Bone) {
+              const chestCore = createChestSunCore();
+              spine2Bone.add(chestCore);
+              chestCore.position.set(0, 0.15, 0.14);
+
+              const chestLight = new THREE.PointLight(0xffea60, 1.2, 2.5, 1.2);
+              chestCore.add(chestLight);
+              chestCoreLightRef.current = chestLight;
+            }
+
+            const mixer = new THREE.AnimationMixer(model);
+            mixerRef.current = mixer;
+
+            if (humanoidGltf.animations && humanoidGltf.animations.length > 0) {
+              const walkClip = humanoidGltf.animations[0];
+              const hipPosTrack = walkClip.tracks.find((t) => t.name.includes('Hips.position'));
+              if (hipPosTrack) {
+                for (let i = 2; i < hipPosTrack.values.length; i += 3) {
+                  hipPosTrack.values[i] = 0;
+                }
+              }
+              const walkAction = mixer.clipAction(walkClip);
+              walkActionRef.current = walkAction;
+              walkAction.play();
+              walkAction.paused = true;
+              walkAction.time = 0.62;
+              mixer.update(0);
+            }
+          }
+
+          // Apply theme and dismiss loading screen immediately (< 1s initial load)
+          applyThemeRef.current(themeRef.current);
+          setLoadingProgress(100);
+          isLoadedRef.current = true;
+          setIsLoaded(true);
+          if (typeof window !== 'undefined') {
+            (window as unknown as { __SCENE_LOADED__: boolean }).__SCENE_LOADED__ = true;
+          }
+
+          // ---------------------------------------------------------------------
+          // Stream remaining 3 models in the background asynchronously
+          // ---------------------------------------------------------------------
+          Promise.all([
+            gltfLoader.loadAsync('/models/flying_machine-compressed.glb'),
+            gltfLoader.loadAsync('/models/paddle_boat-compressed.glb'),
+            gltfLoader.loadAsync('/models/artificial_neural_network_ann-compressed.glb'),
+          ])
+            .then(([machineGltf, boatGltf, annGltf]) => {
+              if (isCancelled) return;
+
+              // 2. SETUP FLYING MACHINE MODEL (/models/flying_machine-compressed.glb)
+              const machineWrapper = setupEntityModel(
+                machineGltf.scene,
+                4.5,
+                flyingMachineMaterialsRef.current,
+                flyingMachineWireMeshesRef.current,
+                flyingMachineNodesRef.current
+              );
+              machineWrapper.position.set(0, 1.70, 0);
+              machineWrapper.rotation.y = -Math.PI / 2;
+              machineWrapper.rotation.x = 0.38;
+
+              const machineUnderGlow = new THREE.PointLight(0xffea60, 0.7, 4.0, 1.5);
+              machineUnderGlow.position.set(0, 0.95, 0);
+              flyingMachineContainer.add(machineUnderGlow);
+              flyingMachineGlowLightsRef.current.push(machineUnderGlow);
+
+              flyingMachineContainer.add(machineWrapper);
+              flyingMachineWrapperRef.current = machineWrapper;
+
+              // 3. SETUP WATERCRAFT MODEL (/models/paddle_boat-compressed.glb)
+              const boatWrapper = setupEntityModel(
+                boatGltf.scene,
+                2.2,
+                watercraftMaterialsRef.current,
+                watercraftWireMeshesRef.current,
+                watercraftNodesRef.current
+              );
+              boatWrapper.position.set(0, 1.95, 0);
+              boatWrapper.rotation.y = -0.35;
+
+              const boatUnderGlow = new THREE.PointLight(0xffea60, 0.6, 3.5, 1.5);
+              boatUnderGlow.position.set(0, 1.20, 0);
+              watercraftContainer.add(boatUnderGlow);
+              watercraftGlowLightsRef.current.push(boatUnderGlow);
+
+              watercraftContainer.add(boatWrapper);
+              watercraftWrapperRef.current = boatWrapper;
+
+              // 4. SETUP NEURAL NETWORK MODEL (/models/artificial_neural_network_ann-compressed.glb)
+              const annWrapper = setupEntityModel(
+                annGltf.scene,
+                2.0,
+                neuralNetworkMaterialsRef.current,
+                neuralNetworkWireMeshesRef.current,
+                neuralNetworkNodesRef.current
+              );
+              annWrapper.position.set(0, 2.00, 0);
+              annWrapper.rotation.x = 0.25;
+
+              const annUnderGlow = new THREE.PointLight(0xffea60, 0.7, 3.5, 1.5);
+              annUnderGlow.position.set(0, 1.25, 0);
+              neuralNetworkContainer.add(annUnderGlow);
+              neuralNetworkGlowLightsRef.current.push(annUnderGlow);
+
+              neuralNetworkContainer.add(annWrapper);
+              neuralNetworkWrapperRef.current = annWrapper;
+
+              secondaryModelsLoadedRef.current = true;
+              applyThemeRef.current(themeRef.current);
+            })
+            .catch((err) => {
+              console.warn('Background secondary models stream warning:', err);
+            });
+        },
+        (xhr) => {
+          if (xhr.total > 0) {
+            const pct = Math.round(25 + (xhr.loaded / xhr.total) * 65);
+            setLoadingProgress(Math.min(pct, 90));
+          }
+        },
+        (err) => {
+          if (isCancelled) return;
+          console.error(`Failed to load humanoid model from ${targetPath}:`, err);
+          if (!isFallback && targetPath !== '/models/superman_prime.glb') {
+            console.info('Attempting fallback to /models/superman_prime.glb');
+            loadHumanoidModel('/models/superman_prime.glb', true);
+          } else {
+            isLoadedRef.current = true;
+            setIsLoaded(true);
+          }
+        }
+      );
+    };
+
+    loadHumanoidModel(modelPath);
 
     // Resize handler
     const handleResize = () => {
-      if (!containerRef.current || !renderer || !camera || !composer) return;
-      const w = containerRef.current.clientWidth;
-      const h = containerRef.current.clientHeight;
+      if (!containerRef.current || !renderer || !camera) return;
+      const w = containerRef.current.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 390);
+      const h = containerRef.current.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 844);
+      const isMob = w <= 860;
       camera.aspect = w / h;
+      camera.fov = isMob ? 46 : 42;
       if (w > 860) {
         camera.setViewOffset(w, h, -w * 0.18, 0, w, h);
       } else {
@@ -1271,16 +1502,39 @@ export default function SupermanPrimeCanvas({
       }
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
-      composer.setSize(w, h);
+      if (composer) {
+        composer.setSize(w, h);
+      }
     };
     window.addEventListener('resize', handleResize);
 
-    // 17. Render Loop
-    const clock = new THREE.Clock();
+    const resizeObserver = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(() => {
+          handleResize();
+        })
+      : null;
+    if (container && resizeObserver) {
+      resizeObserver.observe(container);
+    }
+
+    // 17. Render Loop with Viewport Visibility Observer (Pauses when scrolled into #about)
+    let isVisible = true;
+    let isRunning = false;
+    let lastTime = performance.now();
+    let accumulatedTime = 0;
+
     const animate = () => {
+      if (!isVisible) {
+        isRunning = false;
+        return;
+      }
+      isRunning = true;
       animationFrameId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
-      const time = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      accumulatedTime += delta;
+      const time = accumulatedTime;
 
       // Update uniforms
       customUniformsRef.current.uTime.value = time;
@@ -1470,16 +1724,20 @@ export default function SupermanPrimeCanvas({
         } else if (autoTransformRef.current) {
           formStayTimerRef.current += delta;
           if (formStayTimerRef.current >= HOLD_SECS) {
-            formStayTimerRef.current = 0.0;
             const nextIdx = (currentFormIdxRef.current + 1) % 4;
-            currentFormIdxRef.current = targetFormIdxRef.current;
-            targetFormIdxRef.current = nextIdx;
-            isTransitioningRef.current = true;
-            transitionProgressRef.current = 0.0;
-            const nextForm = FORMS_SEQUENCE[nextIdx];
-            prevEntityFormRef.current = nextForm;
-            onEntityFormChangeRef.current?.(nextForm);
-            playChimeForForm(nextForm);
+            if (nextIdx !== 0 && !secondaryModelsLoadedRef.current) {
+              formStayTimerRef.current = HOLD_SECS - 1.0;
+            } else {
+              formStayTimerRef.current = 0.0;
+              currentFormIdxRef.current = targetFormIdxRef.current;
+              targetFormIdxRef.current = nextIdx;
+              isTransitioningRef.current = true;
+              transitionProgressRef.current = 0.0;
+              const nextForm = FORMS_SEQUENCE[nextIdx];
+              prevEntityFormRef.current = nextForm;
+              onEntityFormChangeRef.current?.(nextForm);
+              playChimeForForm(nextForm);
+            }
           }
         }
       }
@@ -1709,19 +1967,76 @@ export default function SupermanPrimeCanvas({
         controls.update(delta);
       }
 
-      composer.render();
+      let renderedOk = false;
+      if (composerRef.current) {
+        try {
+          composerRef.current.render();
+          renderedOk = true;
+        } catch (renderErr) {
+          console.warn('Composer render failed, permanently falling back to direct renderer:', renderErr);
+          composerRef.current = null;
+        }
+      }
+      if (!renderedOk) {
+        renderer.render(scene, camera);
+      }
     };
+
+    const viewportObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !isRunning && !document.hidden) {
+            lastTime = performance.now();
+            animate();
+          }
+        });
+      },
+      { threshold: 0.02 }
+    );
+
+    if (container) {
+      viewportObserver.observe(container);
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isVisible = false;
+        isRunning = false;
+      } else {
+        isVisible = true;
+        if (!isRunning) {
+          lastTime = performance.now();
+          animate();
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     animate();
 
     return () => {
       isCancelled = true;
+      isVisible = false;
+      clearTimeout(initialDismissTimeout);
+      clearTimeout(safetyTimeout);
+      viewportObserver.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      resizeObserver?.disconnect();
+      renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
+      renderer.domElement.removeEventListener('webglcontextrestored', handleContextRestored);
       if (cardsGroupRef.current?.userData?.dispose) {
         cardsGroupRef.current.userData.dispose();
       }
       controls.removeEventListener('start', handleControlsStart);
       controls.dispose();
+      if (composerRef.current) {
+        try {
+          composerRef.current.dispose();
+        } catch {}
+      }
       renderer.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -2200,6 +2515,84 @@ function createChestSunCore(): THREE.Group {
   coreGroup.add(glowMesh);
 
   return coreGroup;
+}
+
+/**
+ * Creates an instant stylized celestial proxy hero that renders immediately
+ * from frame 0 while high-detail GLB assets download asynchronously.
+ * Guarantees zero blank screen and 100% visibility across all devices.
+ */
+function createCelestialProxyHero(goldMaterial: THREE.MeshPhysicalMaterial): THREE.Group {
+  const proxy = new THREE.Group();
+  proxy.name = 'celestial_proxy_hero';
+
+  // Torso
+  const torsoGeom = new THREE.CylinderGeometry(0.24, 0.16, 0.65, 16);
+  const torsoMesh = new THREE.Mesh(torsoGeom, goldMaterial);
+  torsoMesh.position.set(0, 1.35, 0);
+  proxy.add(torsoMesh);
+
+  // Chest
+  const chestGeom = new THREE.SphereGeometry(0.22, 16, 16);
+  chestGeom.scale(1.15, 0.85, 0.85);
+  const chestMesh = new THREE.Mesh(chestGeom, goldMaterial);
+  chestMesh.position.set(0, 1.55, 0.02);
+  proxy.add(chestMesh);
+
+  // Head
+  const headGeom = new THREE.SphereGeometry(0.12, 16, 16);
+  const headMesh = new THREE.Mesh(headGeom, goldMaterial);
+  headMesh.position.set(0, 1.82, 0);
+  proxy.add(headMesh);
+
+  // Pelvis / Hips
+  const hipsGeom = new THREE.CylinderGeometry(0.17, 0.15, 0.22, 16);
+  const hipsMesh = new THREE.Mesh(hipsGeom, goldMaterial);
+  hipsMesh.position.set(0, 0.95, 0);
+  proxy.add(hipsMesh);
+
+  // Legs
+  const legGeom = new THREE.CylinderGeometry(0.075, 0.05, 0.85, 12);
+  const leftLeg = new THREE.Mesh(legGeom, goldMaterial);
+  leftLeg.position.set(-0.11, 0.45, 0);
+  const rightLeg = new THREE.Mesh(legGeom, goldMaterial);
+  rightLeg.position.set(0.11, 0.45, 0);
+  proxy.add(leftLeg, rightLeg);
+
+  // Arms
+  const armGeom = new THREE.CylinderGeometry(0.065, 0.045, 0.68, 12);
+  const leftArm = new THREE.Mesh(armGeom, goldMaterial);
+  leftArm.position.set(-0.32, 1.30, 0);
+  leftArm.rotation.z = 0.18;
+  const rightArm = new THREE.Mesh(armGeom, goldMaterial);
+  rightArm.position.set(0.32, 1.30, 0);
+  rightArm.rotation.z = -0.18;
+  proxy.add(leftArm, rightArm);
+
+  // Golden cybernetic wireframe overlay
+  [torsoMesh, chestMesh, headMesh].forEach((mesh) => {
+    const wireGeom = new THREE.WireframeGeometry(mesh.geometry);
+    const wireMat = new THREE.LineBasicMaterial({
+      color: 0xffea77,
+      transparent: true,
+      opacity: 0.55,
+      blending: THREE.AdditiveBlending,
+    });
+    const wire = new THREE.LineSegments(wireGeom, wireMat);
+    mesh.add(wire);
+  });
+
+  // Radiant Chest Sun Core
+  const chestCore = createChestSunCore();
+  chestCore.position.set(0, 1.55, 0.16);
+  proxy.add(chestCore);
+
+  // Divine Celestial Halo behind head
+  const halo = createDivineHalo();
+  halo.position.set(0, 1.82, -0.05);
+  proxy.add(halo);
+
+  return proxy;
 }
 
 /**
@@ -3111,13 +3504,13 @@ function createFloatingComicPanels(
       targetScale: t.scale,
       isHovered: false,
       flightCurve,
-      startDelay: 0.12 + idx * 0.14,
+      startDelay: 0.35 + idx * 0.15,
       duration: 2.25,
       hasLanded: false,
       hasChimed: false,
     };
 
-    // Initially hidden until launch time arrives
+    // Initially hidden until launch time arrives in entrance swoop animation
     cardMesh.visible = false;
     cardMesh.scale.set(0.001, 0.001, 0.001);
 
@@ -3157,45 +3550,53 @@ function createFloatingComicPanels(
   const mouse = new THREE.Vector2();
   let hoveredMesh: THREE.Mesh | null = null;
 
-  // Horizontal drag-to-spin interaction for the 3D carousel
+  // Pointer and Touch drag-to-spin & tap-to-open interaction for the 3D carousel
   let isPointerDown = false;
   let isDraggingCard = false;
   let previousClientX = 0;
+  let previousClientY = 0;
   let dragDelta = 0;
+  let pointerStartTime = 0;
+  let pointerStartPos = { x: 0, y: 0 };
 
-  const handlePointerDown = (e: MouseEvent) => {
+  const startPointer = (clientX: number, clientY: number) => {
     if (cardsGroup.userData.finishIntro) {
       cardsGroup.userData.finishIntro();
     }
     isPointerDown = true;
-    previousClientX = e.clientX;
+    previousClientX = clientX;
+    previousClientY = clientY;
     dragDelta = 0;
+    pointerStartTime = performance.now();
+    pointerStartPos = { x: clientX, y: clientY };
 
     const rect = domElement.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(cardMeshes);
     isDraggingCard = intersects.length > 0;
   };
 
-  const handlePointerMove = (e: MouseEvent) => {
+  const movePointer = (clientX: number, clientY: number) => {
     const rect = domElement.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
 
     if (isPointerDown) {
-      const dx = e.clientX - previousClientX;
-      previousClientX = e.clientX;
-      dragDelta += Math.abs(dx);
-      if (dragDelta > 5) {
+      const dx = clientX - previousClientX;
+      const dy = clientY - previousClientY;
+      previousClientX = clientX;
+      previousClientY = clientY;
+      dragDelta += Math.hypot(dx, dy);
+      if (dragDelta > 6) {
         cardsGroup.userData.isDragging = true;
         if (typeof window !== 'undefined') {
           window.dispatchEvent(new CustomEvent('user-3d-interacted'));
         }
       }
       if (isDraggingCard) {
-        carouselPivotGroup.rotation.y += dx * 0.005;
+        carouselPivotGroup.rotation.y += dx * 0.0055;
       }
     }
 
@@ -3229,22 +3630,20 @@ function createFloatingComicPanels(
     }
   };
 
-  const handlePointerUp = () => {
+  const endPointer = () => {
     isPointerDown = false;
     setTimeout(() => {
       cardsGroup.userData.isDragging = false;
-    }, 50);
+    }, 60);
   };
 
-  const handleClick = (e: MouseEvent) => {
+  const selectCardAt = (clientX: number, clientY: number) => {
     if (cardsGroup.userData.finishIntro) {
       cardsGroup.userData.finishIntro();
     }
-    if (dragDelta > 6) return; // Ignore drag operations
-
     const rect = domElement.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(cardMeshes);
@@ -3261,16 +3660,56 @@ function createFloatingComicPanels(
     }
   };
 
-  domElement.addEventListener('mousedown', handlePointerDown);
-  domElement.addEventListener('mousemove', handlePointerMove);
-  window.addEventListener('mouseup', handlePointerUp);
+  const handleMouseDown = (e: MouseEvent) => {
+    startPointer(e.clientX, e.clientY);
+  };
+  const handleMouseMove = (e: MouseEvent) => {
+    movePointer(e.clientX, e.clientY);
+  };
+  const handleMouseUp = () => {
+    endPointer();
+  };
+  const handleClick = (e: MouseEvent) => {
+    if (dragDelta > 8) return;
+    selectCardAt(e.clientX, e.clientY);
+  };
+
+  const handleTouchStart = (e: TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    startPointer(t.clientX, t.clientY);
+  };
+  const handleTouchMove = (e: TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    movePointer(t.clientX, t.clientY);
+  };
+  const handleTouchEnd = (e: TouchEvent) => {
+    endPointer();
+    const elapsed = performance.now() - pointerStartTime;
+    if (dragDelta < 14 && elapsed < 500) {
+      selectCardAt(pointerStartPos.x, pointerStartPos.y);
+    }
+  };
+
+  domElement.addEventListener('mousedown', handleMouseDown);
+  domElement.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('mouseup', handleMouseUp);
   domElement.addEventListener('click', handleClick);
 
+  domElement.addEventListener('touchstart', handleTouchStart, { passive: true });
+  domElement.addEventListener('touchmove', handleTouchMove, { passive: true });
+  domElement.addEventListener('touchend', handleTouchEnd, { passive: true });
+
   cardsGroup.userData.dispose = () => {
-    domElement.removeEventListener('mousedown', handlePointerDown);
-    domElement.removeEventListener('mousemove', handlePointerMove);
-    window.removeEventListener('mouseup', handlePointerUp);
+    domElement.removeEventListener('mousedown', handleMouseDown);
+    domElement.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseup', handleMouseUp);
     domElement.removeEventListener('click', handleClick);
+
+    domElement.removeEventListener('touchstart', handleTouchStart);
+    domElement.removeEventListener('touchmove', handleTouchMove);
+    domElement.removeEventListener('touchend', handleTouchEnd);
   };
 
   return cardsGroup;

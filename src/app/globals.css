@@ -71,3 +71,31 @@ body {
   box-shadow: 0 0 16px rgba(217, 173, 98, 0.25);
   transform: scale(1.04);
 }
+
+/* Responsive sidebars for mobile viewports */
+@media (max-width: 860px) {
+  .site-left-sidebar,
+  .site-right-sidebar {
+    display: none !important;
+  }
+}
+
+/* Responsive bottom nav: visible only on mobile viewports */
+@media (min-width: 861px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* 3D Controls hint & toggle: positioned above the mobile bottom nav on small viewports */
+.ui-3d-controls-container {
+  bottom: 26px;
+}
+
+@media (max-width: 860px) {
+  .ui-3d-controls-container {
+    bottom: calc(max(12px, env(safe-area-inset-bottom)) + 92px) !important;
+  }
+}
+
+

@@ -1,0 +1,331 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(5, 3, 10, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 24px;
+  animation: modalFadeIn 0.25s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalCard {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  background: linear-gradient(135deg, rgba(20, 16, 26, 0.97) 0%, rgba(10, 8, 14, 0.99) 100%);
+  border: 1px solid rgba(217, 173, 98, 0.45);
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.92), 0 0 40px rgba(217, 173, 98, 0.22);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 28px;
+  padding: 28px;
+  animation: cardScaleUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cardScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(217, 173, 98, 0.12);
+  border: 1px solid rgba(217, 173, 98, 0.35);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d9ad62;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(217, 173, 98, 0.28);
+  border-color: rgba(217, 173, 98, 0.7);
+  transform: scale(1.08);
+}
+
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageFrame {
+  padding: 10px 10px 16px 10px;
+  background-color: #0c0a14;
+  border-radius: 10px;
+  border: 1px solid rgba(217, 173, 98, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(217, 173, 98, 0.2);
+  transform: rotate(-1deg);
+  max-width: 300px;
+  width: 100%;
+}
+
+.imageCover {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid rgba(217, 173, 98, 0.25);
+}
+
+.imageCaption {
+  color: #d9ad62;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.detailsSection {
+  display: flex;
+  flex-direction: column;
+  justifyContent: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.eraBadge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #d9ad62;
+  background: rgba(217, 173, 98, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(217, 173, 98, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+}
+
+.cardTitle {
+  font-family: var(--font-barge), 'Barge', 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  text-shadow: 0 2px 10px rgba(217, 173, 98, 0.3);
+  letter-spacing: 0.02em;
+}
+
+.bridgeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(212, 154, 24, 0.15), rgba(0, 240, 234, 0.12));
+  border: 1px solid rgba(217, 173, 98, 0.32);
+}
+
+.bridgeBlock {
+  flex: 1;
+  min-width: 0;
+}
+
+.bridgeBlockRight {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+}
+
+.bridgeLabel {
+  font-size: 9px;
+  text-transform: uppercase;
+  color: #ffae19;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+}
+
+.bridgeLabelRight {
+  font-size: 9px;
+  text-transform: uppercase;
+  color: #00f0ea;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  font-weight: 700;
+}
+
+.bridgeText {
+  font-size: 11px;
+  font-weight: 600;
+  color: #f5ecd5;
+  display: block;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+.quoteCaption {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #d4ceeb;
+  font-style: italic;
+  border-left: 2px solid #d9ad62;
+  padding-left: 12px;
+}
+
+.loreBox {
+  background-color: rgba(217, 173, 98, 0.06);
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(217, 173, 98, 0.2);
+}
+
+.loreTitle {
+  font-family: var(--font-barge), 'Barge', 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: #d9ad62;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.loreText {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: #c9c3e2;
+}
+
+.ctaButton {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (<= 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .modalOverlay {
+    padding: 12px;
+    align-items: center;
+  }
+
+  .modalCard {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 20px 14px 18px 14px;
+    border-radius: 18px;
+    max-height: 86vh;
+  }
+
+  .closeButton {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .imageSection {
+    margin-top: 4px;
+  }
+
+  .imageFrame {
+    max-width: 170px;
+    padding: 6px 6px 10px 6px;
+    transform: rotate(0deg);
+  }
+
+  .imageCaption {
+    font-size: 9.5px;
+    margin-top: 5px;
+  }
+
+  .detailsSection {
+    gap: 12px;
+  }
+
+  .cardTitle {
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  .bridgeContainer {
+    flex-direction: row;
+    gap: 6px;
+    padding: 8px 10px;
+  }
+
+  .bridgeLabel,
+  .bridgeLabelRight {
+    font-size: 8px;
+  }
+
+  .bridgeText {
+    font-size: 10px;
+  }
+
+  .quoteCaption {
+    font-size: 11.5px;
+    line-height: 1.5;
+    padding-left: 10px;
+  }
+
+  .loreBox {
+    padding: 10px 12px;
+  }
+
+  .loreTitle {
+    font-size: 10px;
+  }
+
+  .loreText {
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+
+  .ctaButton {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 12.5px;
+  }
+}
+

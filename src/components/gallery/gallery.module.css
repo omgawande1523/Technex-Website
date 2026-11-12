@@ -8,10 +8,16 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #000 url("/permanent-bg.webp") center / cover no-repeat;
+  background: #000 url("/assets/bg/permanent-bg.webp") center / cover no-repeat;
   color: var(--ice);
   cursor: crosshair;
   font-family: var(--mono);
+}
+
+@media (max-width: 860px) {
+  .scene {
+    background-image: url("/assets/bg/permanent-bg-mobile.webp");
+  }
 }
 
 .webgl {

@@ -8,10 +8,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #08080b url("/assets/bg/registration-bg.webp")
+  background: #08080b url("/assets/bg/permanent-bg.webp")
     center center / cover no-repeat;
   color: #fff;
   padding: 20px;
+}
+
+@media (max-width: 860px) {
+  .page {
+    background-image: url("/assets/bg/permanent-bg-mobile.webp");
+  }
 }
 
 .overlay {

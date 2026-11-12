@@ -31,6 +31,11 @@ interface EventDetails {
   event_type?: string;
 }
 
+interface WorkshopDetails {
+  name?: string;
+  slug?: string;
+}
+
 interface Registration {
   registrationCode: string;
 
@@ -39,6 +44,13 @@ interface Registration {
   event_name?: string;
   eventType?: string;
   event_type?: string;
+
+  workshop?: WorkshopDetails | null;
+  workshopName?: string;
+  workshop_name?: string;
+
+  registrationType?: string;
+  registration_type?: string;
 
   status: string;
   totalAmountPaise: number;
@@ -71,7 +83,9 @@ export default function RegistrationConfirmation({
     async function fetchRegistration() {
       try {
         const response = await fetch(
-          `${API_URL}/api/public/registrations/${registrationCode}`,
+          `${API_URL}/api/public/registrations/${encodeURIComponent(
+            registrationCode
+          )}`,
           { cache: "no-store" }
         );
 
@@ -83,8 +97,13 @@ export default function RegistrationConfirmation({
 
         const result = await response.json();
 
-        const payload = result.data ?? result;
+        if (result.success === false) {
+          throw new Error(
+            result.message || "Unable to retrieve registration details."
+          );
+        }
 
+        const payload = result.data ?? result;
         const registrationData =
           payload.registration ?? payload;
 
@@ -157,23 +176,40 @@ export default function RegistrationConfirmation({
   // PAYMENT DETAILS
   const payment = registration.payments?.[0];
 
-  const amount =
-    (payment?.amountPaise ??
-      registration.totalAmountPaise ??
-      0) / 100;
-
-  const paymentStatus =
+  const isPaymentSuccessful =
     payment?.status?.toLowerCase() === "captured" ||
-    registration.status?.toLowerCase() === "confirmed"
-      ? "Successful"
-      : "Pending";
+    registration.status?.toLowerCase() === "confirmed";
 
-  const eventName =
-    registration.event?.name ??
-    registration.eventName ??
-    registration.event_name ??
-    "Registered Event";
+  const paymentStatus = isPaymentSuccessful
+    ? "Successful"
+    : "Pending";
 
+  // Use captured payment amount only after successful payment.
+  const amount =
+    (isPaymentSuccessful && payment?.amountPaise != null
+      ? payment.amountPaise
+      : registration.totalAmountPaise ?? 0) / 100;
+
+  // DETECT REGISTRATION TYPE
+  const isWorkshop =
+    Boolean(registration.workshop) ||
+    Boolean(registration.workshopName) ||
+    Boolean(registration.workshop_name) ||
+    registration.registrationType?.toLowerCase() === "workshop" ||
+    registration.registration_type?.toLowerCase() === "workshop";
+
+  // REGISTRATION NAME
+  const registrationName = isWorkshop
+    ? registration.workshop?.name ??
+      registration.workshopName ??
+      registration.workshop_name ??
+      "Registered Workshop"
+    : registration.event?.name ??
+      registration.eventName ??
+      registration.event_name ??
+      "Registered Event";
+
+  // EVENT TYPE
   const eventType = (
     registration.event?.eventType ??
     registration.event?.event_type ??
@@ -182,6 +218,7 @@ export default function RegistrationConfirmation({
     "individual"
   ).toLowerCase();
 
+  // PAYMENT METHOD
   const paymentMethod = payment?.method
     ? payment.method.charAt(0).toUpperCase() +
       payment.method.slice(1)
@@ -262,19 +299,23 @@ export default function RegistrationConfirmation({
           </button>
         </section>
 
-        {/* EVENT + PAYMENT DETAILS */}
+        {/* EVENT / WORKSHOP + PAYMENT DETAILS */}
         <section className={styles.detailsCard}>
           <div className={styles.eventSection}>
             <span className={styles.cardLabel}>
-              YOUR REGISTERED EVENT
+              {isWorkshop
+                ? "YOUR REGISTERED WORKSHOP"
+                : "YOUR REGISTERED EVENT"}
             </span>
 
-            <h2>{eventName}</h2>
+            <h2>{registrationName}</h2>
 
             <span className={styles.eventType}>
-              {eventType === "team"
-                ? "TEAM EVENT"
-                : "INDIVIDUAL EVENT"}
+              {isWorkshop
+                ? "INDIVIDUAL WORKSHOP"
+                : eventType === "team"
+                  ? "TEAM EVENT"
+                  : "INDIVIDUAL EVENT"}
             </span>
           </div>
 
@@ -298,7 +339,11 @@ export default function RegistrationConfirmation({
             </div>
 
             <div className={styles.paymentAmount}>
-              <span>TOTAL AMOUNT PAID</span>
+              <span>
+                {paymentStatus === "Successful"
+                  ? "TOTAL AMOUNT PAID"
+                  : "TOTAL REGISTRATION AMOUNT"}
+              </span>
 
               <strong>
                 {new Intl.NumberFormat("en-IN", {

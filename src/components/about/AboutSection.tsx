@@ -136,10 +136,7 @@ export default function AboutSection() {
         {/* 1. HERO HEADER */}
         {/* ========================================================= */}
         <div className="about-hero-header">
-          <div className="about-eyebrow-pill">
-            <Sparkles size={13} className="text-[#d9ad62]" />
-            <span>TECHNEX 2026 // ANNUAL TECHNICAL SYMPOSIUM</span>
-          </div>
+        
 
           <h2 className="about-main-title">
             ABOUT TECHNEX
@@ -384,53 +381,9 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* ========================================================= */}
-        {/* 7. FOOTER */}
-        {/* ========================================================= */}
-        <footer id="contact" className="about-footer">
-          <div className="footer-top-grid">
-            {/* Left Brand Col */}
-            <div>
-              <div className="footer-brand-title">TECHNEX 2026</div>
-              <p className="footer-brand-text">
-                Annual Technical Symposium of St. Vincent Pallotti College of Engineering & Technology, Nagpur.
-              </p>
-              <div className="footer-contact-item">
-                <MapPin size={15} className="text-[#d9ad62] shrink-0" />
-                <span>Gavsi Manapur, Wardha Road, Nagpur, Maharashtra - 441108</span>
-              </div>
-              <div className="footer-contact-item">
-                <Mail size={15} className="text-[#d9ad62] shrink-0" />
-                <span>technex@stvincentngp.edu.in</span>
-              </div>
-            </div>
+     
+     
 
-            {/* Quick Links */}
-            <div className="footer-links-col">
-              <div className="footer-col-header">EXPLORE</div>
-              <a href="#" onClick={(e) => { e.preventDefault(); scrollToTop(); }}>3D Multiverse Hero</a>
-              <a href="#about">About Technex</a>
-              <a href="#sponsors">Sponsors</a>
-              <a href="https://www.stvincentngp.edu.in/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1">
-                <span>College Portal</span>
-                <ExternalLink size={11} />
-              </a>
-            </div>
-
-            {/* Back to Top */}
-            <div className="footer-action-col">
-              <button onClick={scrollToTop} className="back-to-top-btn group">
-                <ArrowUp size={16} className="text-[#d9ad62] group-hover:-translate-y-1 transition-transform" />
-                <span>RETURN TO 3D HERO</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="footer-bottom-bar">
-            <span>© 2026 TECHNEX. St. Vincent Pallotti College of Engineering & Technology. All Rights Reserved.</span>
-            <span className="text-[#d9ad62]">DESIGNED & CRAFTED FOR INNOVATORS</span>
-          </div>
-        </footer>
       </div>
     </section>
   );
