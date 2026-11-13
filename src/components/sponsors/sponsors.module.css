@@ -6,7 +6,11 @@
   min-height: 100vh;
   overflow: clip;
   background: #000 url("/assets/bg/permanent-bg.webp") center / cover fixed no-repeat;
-  font-family: var(--font-outfit), sans-serif;
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+}
+
+.page :global(:not(svg)) {
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
 }
 
 @media (max-width: 860px) {
@@ -17,7 +21,16 @@
 }
 
 .page :global(.font-orbitron) {
-  font-family: var(--font-barge), 'Barge', var(--font-outfit), sans-serif;
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+}
+
+.page :global(h1:not(svg)),
+.page :global(h2:not(svg)),
+.page :global(h3:not(svg)),
+.page :global(h4:not(svg)),
+.page :global(h5:not(svg)),
+.page :global(h6:not(svg)) {
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
 }
 
 .page :global(h1) {

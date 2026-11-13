@@ -16,6 +16,29 @@
   box-sizing: border-box;
 }
 
+.technex-team-page :not(svg) {
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+}
+
+.technex-team-page h1:not(svg),
+.technex-team-page h2:not(svg),
+.technex-team-page h3:not(svg),
+.technex-team-page h4:not(svg),
+.technex-team-page h5:not(svg),
+.technex-team-page h6:not(svg) {
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+}
+
+.technex-team-page .section-heading-banner-title:not(svg) {
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+}
+
+.technex-team-page .cyber-front-name:not(svg),
+.technex-team-page .cyber-front-role:not(svg) {
+  font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+  text-transform: none !important;
+}
+
 /* Transparent backdrop layer */
 .technex-page-backdrop {
   display: none;

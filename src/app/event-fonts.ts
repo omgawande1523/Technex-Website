@@ -1,4 +1,11 @@
-import { Jura, Michroma, Outfit } from "next/font/google";
+import { Jura, Metal_Mania, Michroma, Outfit } from "next/font/google";
+
+export const metalManiaFont = Metal_Mania({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-metal-mania",
+  display: "swap",
+});
 
 export const eventDisplayFont = Michroma({
   weight: "400",

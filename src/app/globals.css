@@ -1,4 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Metal+Mania&family=Redaction+20&display=swap");
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Metal Mania";
+  src: url("/fonts/MetalMania-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Redaction 20";
+  src: url("/fonts/Redaction20-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: "Barge";
   src: url("/fonts/Barge-Black.otf") format("opentype");
@@ -20,6 +36,8 @@
   --background: #ffffff;
   --foreground: #171717;
   --font-barge: "Barge", "Outfit", sans-serif;
+  --font-metal-mania: "Metal Mania", cursive, sans-serif;
+  --font-redaction: "Redaction 20", system-ui, sans-serif;
 }
 
 @theme inline {
@@ -73,7 +91,17 @@ body {
 }
 
 .nav-link-btn {
-  font-size: 13.5px;
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-size: 14.5px;
+  letter-spacing: 0.1em;
+}
+
+.site-top-nav {
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif;
+}
+
+.site-top-nav .brand-text {
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
 }
 
 .site-main-navigation {

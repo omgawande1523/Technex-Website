@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Metal+Mania&family=Redaction+20&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 .workshop-page-wrapper {
   position: relative;
@@ -8,7 +8,7 @@
   margin: 0;
   background: #07070a url("/assets/bg/permanent-bg.webp") center top / cover fixed no-repeat;
   color: #f5f4f8;
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -39,14 +39,14 @@
 .page-header h1 {
   margin: 0;
   color: #fff;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(56px, 9vw, 92px);
-  font-weight: 600;
-  letter-spacing: -0.085em;
-  line-height: 0.98;
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-size: clamp(48px, 8vw, 84px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
   text-shadow:
-    0 0 18px rgba(170, 127, 255, 0.58),
-    0 0 50px rgba(135, 77, 255, 0.35);
+    0 0 18px rgba(217, 173, 98, 0.58),
+    0 0 50px rgba(217, 173, 98, 0.35);
 }
 
 .workshop-grid {
@@ -78,11 +78,12 @@
   min-width: 0;
   margin: 0;
   color: #fff;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(16px, 2.4vw, 20px);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.1;
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  text-transform: uppercase;
 }
 
 .workshop-action--register {
@@ -96,10 +97,10 @@
   background: linear-gradient(100deg, #fbe5b6 0%, #eabb6e 50%, #dd9441 100%);
   box-shadow: 0 0 22px rgba(194, 133, 52, 0.42);
   color: #241707;
-  font-family: "Manrope", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-family: var(--font-redaction), "Redaction 20", system-ui, sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   line-height: 1.45;
   text-align: center;
   text-decoration: none;
@@ -147,6 +148,25 @@
   cursor: pointer;
 }
 
+.workshop-csi-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.workshop-csi-badge .ev-out-csi {
+  width: clamp(52px, 5.5vw, 76px);
+  height: clamp(52px, 5.5vw, 76px);
+  border: 2px solid rgba(235, 186, 94, 0.85);
+  border-radius: 50%;
+  background: #fff;
+  object-fit: cover;
+  box-shadow: 0 0 24px rgba(242, 184, 75, 0.35);
+  display: block;
+}
+
 .card-art__wrapper {
   position: absolute;
   z-index: 0;
@@ -172,9 +192,11 @@
   object-fit: contain;
   opacity: 0;
   transform: translate3d(0, 3%, 0) scale(0.8);
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.92)) drop-shadow(0 0 20px rgba(217, 173, 98, 0.35));
   transition:
     opacity 450ms ease,
-    transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 450ms ease;
   pointer-events: none;
   display: block;
 }
@@ -182,6 +204,7 @@
 .workshop-card:hover .card-art__character {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(0.8);
+  filter: drop-shadow(0 20px 38px rgba(0, 0, 0, 0.96)) drop-shadow(0 0 30px rgba(217, 173, 98, 0.5));
 }
 
 .accent-violet {

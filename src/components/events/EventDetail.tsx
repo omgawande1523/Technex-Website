@@ -144,17 +144,32 @@ export default function EventDetail({
               <b>{"//"}{e.number}</b>
               <span>“{e.quote}”</span>
             </div>
-            {e.registerUrl ? (
-              e.registerUrl.startsWith("/") ? (
-                <Link className="btn gold register-refined" href={e.registerUrl}>
-                  Register now <span className="register-arrow" aria-hidden="true">↗</span>
-                </Link>
+            <div className="head-actions">
+              {e.registerUrl ? (
+                e.registerUrl.startsWith("/") ? (
+                  <Link className="btn gold register-refined" href={e.registerUrl}>
+                    Register now <span className="register-arrow" aria-hidden="true">↗</span>
+                  </Link>
+                ) : (
+                  <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">Register now <span className="register-arrow" aria-hidden="true">↗</span></a>
+                )
               ) : (
-                <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">Register now <span className="register-arrow" aria-hidden="true">↗</span></a>
-              )
-            ) : (
-              <span className="btn gold register-refined" aria-disabled="true">Registration TBA</span>
-            )}
+                <span className="btn gold register-refined" aria-disabled="true">Registration TBA</span>
+              )}
+              {e.slug === "hackathon" && (
+                <div className="collaboration">
+                  <span>In collaboration with</span>
+                  <Image
+                    src="/assets/events/csi-svpcet.png"
+                    alt="Computer Society of India, SVPCET"
+                    width={88}
+                    height={88}
+                    className="ev-out-csi collaboration-logo"
+                  />
+                  <strong>Computer Society of India</strong>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 
@@ -658,7 +673,7 @@ export default function EventDetail({
           background: linear-gradient(115deg, #fff2d0 0%, #f2cb82 38%, #dba04a 72%, #c68635 100%) !important;
           box-shadow: none !important;
           color: #1f1306 !important;
-          font-family: var(--f-ui, inherit);
+          font-family: "Redaction 20", sans-serif;
           font-size: clamp(0.8rem, 1vw, 0.98rem);
           font-weight: 700;
           letter-spacing: .16em;

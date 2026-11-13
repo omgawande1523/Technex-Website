@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Metal+Mania&family=Redaction+20&display=swap");
 
 
 
@@ -24,12 +24,16 @@
 .hack-detail-root{
   position: relative;
   touch-action: pan-y pinch-zoom;
-  color: var(--text); font-family: var(--font-body, system-ui), system-ui, sans-serif; line-height: 1.45;
+  color: var(--text); font-family: "Redaction 20", sans-serif; line-height: 1.45;
   background:
     radial-gradient(900px 420px at 12% -5%, rgba(227, 185, 92, 0.10), transparent 60%),
     radial-gradient(700px 500px at 100% 100%, rgba(139, 94, 42, 0.10), transparent 60%),
     linear-gradient(180deg, #070605 0%, #0b0907 50%, #050403 100%);
   background-attachment: fixed; background-color: var(--bg);
+}
+
+.hack-detail-root :is(h1, h2, h3, h4, h5, h6) {
+  font-family: "Metal Mania", sans-serif;
 }
 
 
@@ -71,7 +75,7 @@
 .hack-detail-root .head > *{ min-width: 0; }
 
 
-.hack-detail-root .brand{ display: inline-flex; align-items: center; gap: 8px; color: var(--gold-hi); text-decoration: none; font-family: "Orbitron", sans-serif; letter-spacing: 0.1em; font-size: 0.78rem; }
+.hack-detail-root .brand{ display: inline-flex; align-items: center; gap: 8px; color: var(--gold-hi); text-decoration: none; font-family: "Redaction 20", sans-serif; letter-spacing: 0.1em; font-size: 0.78rem; }
 
 
 .hack-detail-root .brand i{ width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--gold); border-radius: 50%; font-style: normal; font-size: 0.7rem; }
@@ -82,7 +86,7 @@
 
 
 .hack-detail-root .head h1{
-  font-family: "Orbitron", sans-serif; font-weight: 900; text-transform: uppercase; line-height: 1.05;
+  font-family: "Metal Mania", sans-serif; font-weight: 900; text-transform: uppercase; line-height: 1.05;
   letter-spacing: 0.04em; font-size: clamp(1.8rem, 9vw, 3.8rem); margin: 6px 0;
   background: linear-gradient(100deg, #fff6d6 0%, #ffe49a 28%, #ffffff 48%, #ffd45e 68%, #fff1c0 100%);
   background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -126,7 +130,7 @@
 .hack-detail-root .ghost{ text-align: right; }
 
 
-.hack-detail-root .ghost b{ display: block; font-family: "Orbitron", sans-serif; font-size: 2.2rem; font-weight: 800; font-style: italic; color: transparent; -webkit-text-stroke: 1.2px var(--gold-hi); line-height: 1; }
+.hack-detail-root .ghost b{ display: block; font-family: "Redaction 20", sans-serif; font-size: 2.2rem; font-weight: 800; font-style: italic; color: transparent; -webkit-text-stroke: 1.2px var(--gold-hi); line-height: 1; }
 
 
 .hack-detail-root .ghost span{ color: var(--muted); font-size: 0.8rem; font-style: italic; }
@@ -187,7 +191,7 @@
 .hack-detail-root .tabs{ display: flex; flex: none; padding: 4px; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; touch-action: pan-x pan-y; }
 
 
-.hack-detail-root .tabs button{ flex: 1; padding: 11px 8px; background: transparent; color: var(--muted); border: 0; border-radius: 8px; font: 600 0.88rem var(--font-body, system-ui), sans-serif; cursor: pointer; transition: background .25s, color .25s; }
+.hack-detail-root .tabs button{ flex: 1; padding: 11px 8px; background: transparent; color: var(--muted); border: 0; border-radius: 8px; font: 600 0.88rem "Metal Mania", sans-serif; cursor: pointer; transition: background .25s, color .25s; }
 
 
 .hack-detail-root .tabs button:hover{ color: var(--gold-hi); }
@@ -206,7 +210,7 @@
 @keyframes swap { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 
-.hack-detail-root .panel h2{ font-family: "Orbitron", sans-serif; font-weight: 600; letter-spacing: 0.04em; font-size: 1.05rem; color: var(--gold-hi); margin-bottom: 14px; }
+.hack-detail-root .panel h2{ font-family: "Metal Mania", sans-serif; font-weight: 600; letter-spacing: 0.04em; font-size: 1.05rem; color: var(--gold-hi); margin-bottom: 14px; }
 
 
 .hack-detail-root .panel h3{ font-size: 0.72rem; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 3px; }
@@ -332,7 +336,7 @@
 .hack-detail-root .card:hover{ transform: translateY(-4px); border-color: var(--gold); background: rgba(227,185,92,.1); }
 
 
-.hack-detail-root .card strong{ display: block; margin-bottom: 4px; }
+.hack-detail-root .card strong{ display: block; margin-bottom: 4px; font-family: "Metal Mania", sans-serif; }
 
 
 
@@ -367,7 +371,7 @@
 .hack-detail-root .rounds .card{ height: 100%; min-height: 130px; }
 
 
-.hack-detail-root .rounds .card b{ font-family: "Orbitron", sans-serif; font-size: 0.85rem; font-weight: 800; color: var(--gold); display: block; margin-bottom: 6px; }
+.hack-detail-root .rounds .card b{ font-family: "Redaction 20", sans-serif; font-size: 0.85rem; font-weight: 800; color: var(--gold); display: block; margin-bottom: 6px; }
 
 
 
@@ -399,7 +403,7 @@
 .hack-detail-root .faq.open{ border-color: var(--gold); }
 
 
-.hack-detail-root .faq button{ width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px; text-align: left; background: none; border: 0; color: var(--text); font: 600 0.88rem var(--font-body, system-ui), sans-serif; padding: 13px 16px; cursor: pointer; }
+.hack-detail-root .faq button{ width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px; text-align: left; background: none; border: 0; color: var(--text); font: 600 0.88rem "Metal Mania", sans-serif; padding: 13px 16px; cursor: pointer; }
 
 
 .hack-detail-root .faq em{ font-style: normal; color: var(--gold); font-size: 1.1rem; transition: transform .3s; }
@@ -506,14 +510,14 @@
 
 .hack-detail-root .highlights b{
   display: block;
-  font-family: "Orbitron", sans-serif;
+  font-family: "Redaction 20", sans-serif;
   font-size: 1.1rem;
   font-weight: 800;
   color: var(--gold-hi);
 }
 
 
-.hack-detail-root .highlights span{ font-size: 0.74rem; color: var(--muted); }
+.hack-detail-root .highlights span{ font-family: "Metal Mania", sans-serif; font-size: 0.74rem; color: var(--muted); }
 
 
 
@@ -542,7 +546,7 @@
 .hack-detail-root .perks .who{ font-size: 0.82rem; }
 
 
-.hack-detail-root .perks .who strong{ color: var(--gold-hi); }
+.hack-detail-root .perks .who strong{ color: var(--gold-hi); font-family: "Metal Mania", sans-serif; }
 
 .hack-detail-root .collaboration{
   display: flex;

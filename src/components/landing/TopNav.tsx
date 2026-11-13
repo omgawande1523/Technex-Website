@@ -3,6 +3,13 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Maximize2, Minimize2 } from 'lucide-react';
+import { Metal_Mania } from 'next/font/google';
+
+const metalMania = Metal_Mania({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function TopNav() {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -21,8 +28,9 @@ export default function TopNav() {
 
   return (
     <header
-      className="site-top-nav"
+      className={`site-top-nav ${metalMania.className}`}
       style={{
+        fontFamily: `${metalMania.style.fontFamily}, var(--font-metal-mania), 'Metal Mania', cursive, sans-serif`,
         position: 'fixed',
         top: 0,
         left: 0,
@@ -81,20 +89,20 @@ export default function TopNav() {
             />
           </div>
 
-          {/* TECHNEX 26-27 Text in Barge font - hidden on mobile, visible on desktop */}
+          {/* TECHNEX 26-27 Text in Metal Mania font - hidden on mobile, visible on desktop */}
           <span
             style={{
-              fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-              fontSize: '20px',
-              fontWeight: 900,
-              letterSpacing: '0.04em',
+              fontFamily: `${metalMania.style.fontFamily}, var(--font-metal-mania), 'Metal Mania', cursive, sans-serif`,
+              fontSize: '22px',
+              fontWeight: 400,
+              letterSpacing: '0.06em',
               color: '#ffffff',
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
               textShadow: '0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 173, 98, 0.25)',
               transition: 'color 0.3s ease, text-shadow 0.3s ease',
             }}
-            className="group-hover:text-[#d9ad62] hidden md:inline"
+            className="group-hover:text-[#d9ad62] hidden md:inline brand-text"
           >
             TECHNEX 26-27
           </span>
@@ -118,8 +126,8 @@ export default function TopNav() {
         <Link
           href="/workshops"
           style={{
-            fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-            fontWeight: 800,
+            fontFamily: `${metalMania.style.fontFamily}, var(--font-metal-mania), 'Metal Mania', cursive, sans-serif`,
+            fontWeight: 400,
             letterSpacing: '0.08em',
             color: '#f8fafc',
             textDecoration: 'none',
@@ -137,8 +145,8 @@ export default function TopNav() {
         <Link
           href="/events"
           style={{
-            fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-            fontWeight: 800,
+            fontFamily: `${metalMania.style.fontFamily}, var(--font-metal-mania), 'Metal Mania', cursive, sans-serif`,
+            fontWeight: 400,
             letterSpacing: '0.08em',
             color: '#f8fafc',
             textDecoration: 'none',

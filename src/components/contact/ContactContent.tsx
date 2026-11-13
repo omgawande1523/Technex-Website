@@ -159,11 +159,11 @@ export default function ContactContent() {
           <div className="text-center max-w-[260px] sm:max-w-[420px] md:max-w-[520px] mx-auto mb-7 sm:mb-10 md:mb-14">
             <HeaderStarOrnament />
 
-            <h1 className="font-renaissance italic font-black text-[23px] sm:text-4xl md:text-[52px] text-[#2a1305] tracking-tight drop-shadow-[0_1px_0_rgba(255,244,214,0.65)] leading-[1.08] mt-0.5 sm:mt-1">
+            <h1 className="font-black text-[23px] sm:text-4xl md:text-[52px] text-[#2a1305] tracking-tight drop-shadow-[0_1px_0_rgba(255,244,214,0.65)] leading-[1.08] mt-0.5 sm:mt-1" style={{ fontFamily: "var(--font-metal-mania), 'Metal Mania', cursive, sans-serif" }}>
               Contact Us
             </h1>
 
-            <p className="font-parchment-serif italic text-[#3b1e0a] text-[11px] sm:text-[15px] md:text-[17px] leading-snug mt-1.5 sm:mt-2 font-semibold">
+            <p className="font-parchment-serif text-[#3b1e0a] text-[11px] sm:text-[15px] md:text-[17px] leading-snug mt-1.5 sm:mt-2 font-semibold">
               Have a Query, Collaboration Idea, or General Question?
               <br className="hidden sm:inline" />{" "}
               We&apos;d love to hear from you!
@@ -174,7 +174,7 @@ export default function ContactContent() {
               <Mail className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#5e3819] flex-shrink-0" />
               <a
                 href="mailto:technex@stvincentngp.edu.in"
-                className="font-renaissance italic font-bold text-xs sm:text-[14.5px] text-[#261104] hover:text-[#5e3819] hover:underline transition-colors tracking-wide"
+                className="font-renaissance font-bold text-xs sm:text-[14.5px] text-[#261104] hover:text-[#5e3819] hover:underline transition-colors tracking-wide"
               >
                 technex@stvincentngp.edu.in
               </a>
@@ -205,7 +205,7 @@ export default function ContactContent() {
                   <span className="text-[11px] text-[#4a250a] leading-none" aria-hidden="true">
                     •
                   </span>
-                  <span className="font-renaissance italic font-bold text-[15px] sm:text-[17px] text-[#261104] tracking-tight">
+                  <span className="font-renaissance font-bold text-[15px] sm:text-[17px] text-[#261104] tracking-tight">
                     Send us a Message
                   </span>
                   <span className="text-[11px] text-[#4a250a] leading-none" aria-hidden="true">
@@ -219,7 +219,7 @@ export default function ContactContent() {
                   <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#7e2216] via-[#5e140b] to-[#3a0a04] border-2 border-[#d49e54] shadow-lg flex items-center justify-center text-[#f7e5c0]">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="font-renaissance italic font-bold text-2xl text-[#2a1305]">
+                  <h3 className="font-renaissance font-bold text-2xl text-[#2a1305]">
                     Scroll Sealed &amp; Dispatched!
                   </h3>
                   <p className="font-parchment-serif text-sm sm:text-base text-[#3b1e0a] leading-relaxed">
@@ -238,7 +238,7 @@ export default function ContactContent() {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="parchment-btn inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-renaissance italic font-bold text-sm cursor-pointer"
+                      className="parchment-btn inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-renaissance font-bold text-sm cursor-pointer"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>Send Another Message</span>
@@ -328,7 +328,7 @@ export default function ContactContent() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="parchment-btn relative border-0 px-8 py-2.5 inline-flex items-center gap-2.5 font-renaissance italic font-bold text-base sm:text-[17px] tracking-wide cursor-pointer disabled:opacity-60"
+                        className="parchment-btn relative border-0 px-8 py-2.5 inline-flex items-center gap-2.5 font-renaissance font-bold text-base sm:text-[17px] tracking-wide cursor-pointer disabled:opacity-60"
                         style={{
                           clipPath:
                             "polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%)",
@@ -358,7 +358,7 @@ export default function ContactContent() {
               topBadge={
                 <CartoucheBanner innerClassName="px-4 sm:px-5">
                   <MapPin className="w-[17px] h-[17px] text-[#f5dfb1] fill-[#2a1204]" />
-                  <span className="font-renaissance italic font-bold text-[15px] sm:text-[17px] text-[#261104] tracking-tight">
+                  <span className="font-renaissance font-bold text-[15px] sm:text-[17px] text-[#261104] tracking-tight">
                     Our Location
                   </span>
                 </CartoucheBanner>
@@ -428,7 +428,7 @@ export default function ContactContent() {
               <span className="text-[10px] text-[#4a250a] leading-none" aria-hidden="true">
                 •
               </span>
-              <h2 className="font-renaissance italic font-bold text-[12.5px] sm:text-[17px] text-[#261104] tracking-tight">
+              <h2 className="font-title font-bold text-[14px] sm:text-[19px] text-[#261104] tracking-tight" style={{ fontFamily: "var(--font-metal-mania), 'Metal Mania', cursive, sans-serif" }}>
                 Get in Touch With Our Team
               </h2>
               <span className="text-[10px] text-[#4a250a] leading-none" aria-hidden="true">
@@ -459,11 +459,11 @@ export default function ContactContent() {
                 }
               >
                 <div className="text-center flex flex-col items-center">
-                  <h3 className="font-renaissance font-bold text-[17px] text-[#261104] tracking-tight leading-snug">
+                  <h3 className="coordinator-name font-bold text-[17px] text-[#261104] tracking-tight leading-snug" style={{ fontFamily: "var(--font-redaction), 'Redaction 20', sans-serif" }}>
                     {member.name}
                   </h3>
 
-                  <span className="font-parchment-serif italic font-semibold text-[13px] text-[#5e3819] -mt-0.5 mb-1">
+                  <span className="font-parchment-serif font-semibold text-[13px] text-[#5e3819] -mt-0.5 mb-1">
                     {member.role}
                   </span>
 

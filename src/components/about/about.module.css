@@ -1,8 +1,23 @@
 .aboutPage {
   min-height: 100vh;
   background: transparent;
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
   color: #ffffff;
+}
+
+.aboutPage :global(:not(svg)) {
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+}
+
+.aboutPage :global(h1:not(svg)),
+.aboutPage :global(h2:not(svg)),
+.aboutPage :global(.stat-title) {
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+}
+
+.aboutPage :global(.dignitary-name) {
+  font-family: var(--font-redaction), "Redaction 20", system-ui, sans-serif !important;
+  font-weight: 700;
 }
 
 .standalone {

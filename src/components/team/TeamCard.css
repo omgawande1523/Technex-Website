@@ -345,10 +345,10 @@
   text-overflow: clip;
   font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 950;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.04em;
   color: #ffffff;
-  text-shadow: 0 0 12px rgba(251, 191, 36, 1), 0 0 20px rgba(217, 119, 6, 0.7), 0 2px 4px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 0 12px rgba(251, 191, 36, 1), 0 0 20px rgba(217, 173, 98, 0.7), 0 2px 4px rgba(0, 0, 0, 0.95);
   -webkit-text-stroke: 0.45px currentColor;
   font-size: clamp(15px, 6.8cqi, 20.5px);
 }
@@ -367,7 +367,7 @@
   text-overflow: clip;
   font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 900;
-  text-transform: uppercase;
+  text-transform: none;
   color: #fde047;
   text-shadow: 0 0 10px rgba(245, 158, 11, 1), 0 1px 3px rgba(0, 0, 0, 0.95);
   letter-spacing: 0.06em;

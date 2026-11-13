@@ -88,6 +88,31 @@
   color: #ffffff;
   overflow-x: hidden;
   box-sizing: border-box;
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+}
+
+.technex-contact-page,
+.technex-contact-page * {
+  font-style: normal !important;
+}
+
+.technex-contact-page :not(svg) {
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+}
+
+.technex-contact-page .font-renaissance,
+.technex-contact-page .font-parchment-serif {
+  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+}
+
+.technex-contact-page h1:not(svg),
+.technex-contact-page h2:not(svg) {
+  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+}
+
+.technex-contact-page .coordinator-name {
+  font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+  font-style: normal !important;
 }
 
 @media (max-width: 860px) {
@@ -96,4 +121,3 @@
     background-attachment: scroll;
   }
 }
-
