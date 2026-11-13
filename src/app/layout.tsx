@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TECHNEX 2026 - Official Annual Technical Symposium",
+  title: "TECHNEX 2026",
   description:
     "Explore the TECHNEX 2026 multiverse innovation experience at SVPCET Nagpur.",
 };

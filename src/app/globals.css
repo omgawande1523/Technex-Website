@@ -72,6 +72,24 @@ body {
   transform: scale(1.04);
 }
 
+.nav-link-btn {
+  font-size: 13.5px;
+}
+
+.site-main-navigation {
+  gap: 10px;
+}
+
+@media (min-width: 861px) {
+  .nav-link-btn {
+    font-size: 26px;
+  }
+
+  .site-main-navigation {
+    gap: 64px;
+  }
+}
+
 /* Responsive sidebars for mobile viewports */
 @media (max-width: 860px) {
   .site-left-sidebar,
@@ -97,5 +115,3 @@ body {
     bottom: calc(max(12px, env(safe-area-inset-bottom)) + 92px) !important;
   }
 }
-
-

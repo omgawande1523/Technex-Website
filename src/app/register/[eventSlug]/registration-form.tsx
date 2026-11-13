@@ -68,6 +68,8 @@ export default function RegistrationForm({ eventSlug }: Props) {
 
   const themeStyle = {
     "--event-accent": theme.accent,
+    "--event-accent-secondary": theme.accentSecondary,
+    "--event-accent-tertiary": theme.accentTertiary,
     "--event-accent-soft": theme.accentSoft,
     "--event-accent-border": theme.accentBorder,
   } as CSSProperties;

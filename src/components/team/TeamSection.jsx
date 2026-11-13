@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import TeamCard from './TeamCard.jsx';
 import SectionHeadingBanner from './SectionHeadingBanner.jsx';
@@ -13,7 +15,7 @@ export function TeamSection({ section }) {
 
   return (
     <section className="technex-section" id={id} aria-label={title}>
-      {/* Art-Deco Gold & Royal Blue Heading Banner */}
+      {/* Gold Mech Heading Banner */}
       <SectionHeadingBanner title={title} />
 
       {/* Team Member Cards Grid */}

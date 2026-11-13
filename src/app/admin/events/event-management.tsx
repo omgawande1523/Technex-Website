@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Minus, Plus } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import styles from "./event-management.module.css";
 
@@ -493,7 +494,11 @@ export default function EventManagement({
                       </span>
 
                       <span className={styles.assignmentPlus}>
-                        {expandedAssignments === event.id ? "−" : "+"}
+                        {expandedAssignments === event.id ? (
+                          <Minus size={16} strokeWidth={2} aria-hidden="true" />
+                        ) : (
+                          <Plus size={16} strokeWidth={2} aria-hidden="true" />
+                        )}
                       </span>
                     </button>
 

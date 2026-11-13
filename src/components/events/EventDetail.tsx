@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { KeyboardEvent, MouseEvent } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { EVENT_LIST_SCROLL_KEY } from "@/constants/events";
@@ -26,7 +27,8 @@ const PERKS = [
   "Goodies, swag and cash prizes for winners",
 ];
 
-const WHO_CAN_JOIN = "students from any branch, with no prior hackathon experience needed.";
+const WHO_CAN_JOIN =
+  "Undergraduate students across India (BTech, BE, BCA, and BSc).";
 
 const ICONS: Record<IconKind, string> = {
   calendar: "M7 2v3M17 2v3M3 9h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
@@ -311,10 +313,7 @@ export default function EventDetail({
               <div className="coordinator-grid">
                 {e.contacts.length === 0 && <p className="contact-empty">Event coordinator details will be announced.</p>}
                 {e.contacts.map((c, i) => {
-                  // Event data may optionally provide a separate email per coordinator.
-                  // Otherwise, the official email remains a working contact link.
-                  const coordinator = c as typeof c & { email?: string };
-                  const email = coordinator.email?.trim();
+                  const email = c.email?.trim();
                   const phone = c.phone?.trim();
                   const dialable = phone && /\d{7,}/.test(phone.replace(/\D/g, ""));
                   return (
@@ -631,34 +630,90 @@ export default function EventDetail({
           max-width: none;
           line-height: 1.65;
         }
-        /* Premium burgundy and champagne-gold registration CTA. */
+        /* Match the register CTA used beside Explore in the event experience. */
         body.event-detail-scroll-enabled .page .register-refined {
-          background: linear-gradient(115deg, #481a2a 0%, #772b43 55%, #9a4356 100%) !important;
-          color: #fff5e4 !important;
-          border: 1px solid rgba(239, 194, 124, .82) !important;
-          border-radius: 999px !important;
-          padding: 12px 16px 12px 24px !important;
-          font-weight: 750;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 8px 24px rgba(95, 27, 49, .28) !important;
+          --register-cut: 12px;
+          position: relative;
+          isolation: isolate;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+          overflow: hidden;
+          flex: 0 1 auto;
+          width: auto;
+          min-width: 220px;
+          min-height: 54px;
+          padding: 0 8px 0 clamp(12px, 1.3vw, 18px) !important;
+          border: 0 !important;
+          border-radius: 0 !important;
+          clip-path: polygon(
+            var(--register-cut) 0,
+            100% 0,
+            100% calc(100% - var(--register-cut)),
+            calc(100% - var(--register-cut)) 100%,
+            0 100%,
+            0 var(--register-cut)
+          ) !important;
+          background: linear-gradient(115deg, #fff2d0 0%, #f2cb82 38%, #dba04a 72%, #c68635 100%) !important;
+          box-shadow: none !important;
+          color: #1f1306 !important;
+          font-family: var(--f-ui, inherit);
+          font-size: clamp(0.8rem, 1vw, 0.98rem);
+          font-weight: 700;
+          letter-spacing: .16em;
+          line-height: 1;
+          text-transform: uppercase;
+          text-shadow: none;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: transform .26s cubic-bezier(.2, .8, .2, 1), color .26s ease, background .26s ease;
+        }
+        body.event-detail-scroll-enabled .page .register-refined::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, .5) 50%, transparent 65%);
+          transform: translateX(-130%) skewX(-18deg);
+          transition: transform .7s ease;
+        }
+        body.event-detail-scroll-enabled .page .register-cta-text {
+          position: relative;
+          -webkit-text-stroke: 0;
         }
         body.event-detail-scroll-enabled .page .register-arrow {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 30px;
-          height: 30px;
-          margin-left: 7px;
+          display: grid;
+          place-items: center;
+          flex: 0 0 34px;
+          width: 34px;
+          height: 34px;
           border-radius: 50%;
-          color: #502033;
-          background: #f2d59b;
-          font-size: 19px;
-          transition: transform .2s ease;
+          background: #1f1306;
+          color: #f6dfb4;
+        }
+        body.event-detail-scroll-enabled .page .register-arrow svg {
+          width: 14px;
+          height: 14px;
+          transition: transform .26s ease;
         }
         body.event-detail-scroll-enabled .page a.register-refined:hover {
-          background: linear-gradient(115deg, #612238, #a8435d) !important;
-          box-shadow: 0 10px 28px rgba(138, 43, 75, .38) !important;
+          transform: translateY(-3px);
+          background: linear-gradient(115deg, #fff9e8 0%, #f8d890 38%, #ebb259 72%, #d9953d 100%) !important;
+          color: #1f1306 !important;
         }
-        body.event-detail-scroll-enabled .page a.register-refined:hover .register-arrow { transform: translate(2px,-2px); }
+        body.event-detail-scroll-enabled .page a.register-refined:hover::before {
+          transform: translateX(130%) skewX(-18deg);
+        }
+        body.event-detail-scroll-enabled .page a.register-refined:hover .register-arrow svg {
+          transform: translateX(3px);
+        }
+        body.event-detail-scroll-enabled .page a.register-refined:active {
+          transform: translateY(-1px) scale(.985);
+        }
+        @media (max-width: 600px) {
+          body.event-detail-scroll-enabled .page .register-refined { min-width: 200px; }
+        }
         @media (max-width: 900px) {
           body.event-detail-scroll-enabled .page .about { grid-template-columns: minmax(0,1fr) !important; }
           body.event-detail-scroll-enabled .page .about > .perks { grid-column: 1; }
@@ -721,7 +776,7 @@ export default function EventDetail({
         /* Overview category label, shared by all event detail pages */
         body.event-detail-scroll-enabled .page .event-category-tag {
           display: inline-flex; align-items: center; width: fit-content;
-          max-width: 100%; padding: 5px 13px; margin-bottom: 12px;
+          max-width: 100%; padding: 5px 13px; margin-bottom: 5px;
           background: linear-gradient(110deg, #f7df9d, #dfb45b);
           color: #241808; border: 1px solid #f5d28a; border-radius: 3px;
           font-size: 12px; font-weight: 800; letter-spacing: .14em;

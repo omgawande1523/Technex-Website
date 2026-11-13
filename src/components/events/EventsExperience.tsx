@@ -1,5 +1,6 @@
 'use client';
-
+import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { EVENT_LIST_SCROLL_KEY, events, siteConfig } from '@/constants/events';
@@ -47,16 +48,30 @@ const Cross = () => (
 );
 
 /** Register + Explore pair (used on desktop and on phones) */
-function Actions({ href, on, onExplore }: { href: string; on: boolean; onExplore: () => void }) {
+function Actions({
+  href,
+  on,
+  onExplore,
+}: {
+  href: string;
+  on: boolean;
+  onExplore: () => void;
+}) {
   return (
     <>
-      <a className="ev-cta" href={href} tabIndex={on ? 0 : -1}>
+      <Link className="ev-cta" href={href} tabIndex={on ? 0 : -1}>
         <span className="ev-cta-txt">Register</span>
         <span className="ev-cta-ico">
           <Arrow />
         </span>
-      </a>
-      <button type="button" className="ev-cta ev-ghost" tabIndex={on ? 0 : -1} onClick={onExplore}>
+      </Link>
+
+      <button
+        type="button"
+        className="ev-cta ev-ghost"
+        tabIndex={on ? 0 : -1}
+        onClick={onExplore}
+      >
         <span className="ev-cta-txt">Explore</span>
         <span className="ev-cta-ico">
           <Diag />
@@ -494,7 +509,7 @@ export default function EventsExperience() {
 
         <div className="ev-scene">
           {events.map((ev, i) => {
-            const href = ev.registerUrl ?? siteConfig.registerUrl;
+           const href = `/register/${ev.slug}`;
             const on = i === active;
             const isFlipped = flipped === i;
             return (
@@ -601,6 +616,15 @@ export default function EventsExperience() {
                       <Turbine />
                     </div>
                   </div>
+                  {ev.slug === "hackathon" && (
+                    <Image
+                      src="/assets/events/csi-svpcet.png"
+                      alt="Computer Society of India, SVPCET"
+                      width={112}
+                      height={112}
+                      className="ev-out-csi"
+                    />
+                  )}
 
                   <span className="ev-tag">{ev.tag}</span>
 
@@ -675,12 +699,12 @@ export default function EventsExperience() {
               </div>
 
               <div className="ev-modal-actions">
-                <a className="ev-cta" href={opened.registerUrl ?? siteConfig.registerUrl}>
-                  <span className="ev-cta-txt">Register</span>
-                  <span className="ev-cta-ico">
-                    <Arrow />
-                  </span>
-                </a>
+              <Link className="ev-cta" href={`/register/${opened.slug}`}>
+  <span className="ev-cta-txt">Register</span>
+  <span className="ev-cta-ico">
+    <Arrow />
+  </span>
+</Link>
                 <button type="button" className="ev-cta ev-ghost" onClick={() => setOpenIdx(null)}>
                   <span className="ev-cta-txt">Close</span>
                   <span className="ev-cta-ico">

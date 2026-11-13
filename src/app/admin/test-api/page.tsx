@@ -271,7 +271,7 @@ async function testRemoveAssignment(adminId: string) {
     type="button"
     onClick={testUpdateWorkshop}
     disabled={workshopLoading}
-    className="rounded-lg bg-blue-500 px-5 py-3 font-semibold text-white disabled:opacity-50"
+    className="rounded-lg bg-amber-400 px-5 py-3 font-semibold text-black disabled:opacity-50"
   >
     Update Workshop
   </button>
@@ -333,4 +333,3 @@ async function testRemoveAssignment(adminId: string) {
     </main>
   );
 }
-

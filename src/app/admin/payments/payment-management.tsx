@@ -718,7 +718,11 @@ export default function PaymentManagement({
               <div className={styles.detailSection}>
                 <h3>Transaction information</h3>
                 <div className={styles.detailGrid}>
-                  <Detail label="Payment status" value={statusLabels[selectedPayment.status]} />
+                  <Detail
+                    label="Payment status"
+                    value={statusLabels[selectedPayment.status]}
+                    className={`${styles.status} ${styles[selectedPayment.status]}`}
+                  />
                   <Detail label="Payment method" value={selectedPayment.paymentMethod} />
                   <Detail label="Amount" value={formatCurrency(selectedPayment.amountPaise, selectedPayment.currency)} />
                   <Detail label="Payment created" value={formatDate(selectedPayment.createdAt)} />
@@ -793,14 +797,16 @@ export default function PaymentManagement({
 function Detail({
   label,
   value,
+  className,
 }: {
   label: string;
   value: string | number | null | undefined;
+  className?: string;
 }) {
   return (
     <div className={styles.detailItem}>
       <span>{label}</span>
-      <strong>
+      <strong className={className}>
         {value === null || value === undefined || value === "" ? "—" : value}
       </strong>
     </div>

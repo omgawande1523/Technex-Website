@@ -147,14 +147,19 @@ export const hackathon: EventItem = {
     {
       name: "Arpit Tiwari",
       phone: "+91 8390218889",
+      email: "tiwariarpit672@gmail.com",
     },
     {
       name: "Tanushri Kalaskar",
       phone: "+91 9764027188",
+      email: "tanushrikalaskar08@gmail.com",
     },
   ],
 
-  registerUrl: "#",
+  whoCanJoin:
+    "Undergraduate students across India (BTech, BE, BCA, and BSc).",
+
+  registerUrl: "/register/hackathon",
   rulebookUrl: "#",
 
   highlights: [

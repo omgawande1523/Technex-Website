@@ -1,10 +1,25 @@
-
+import { getCurrentSession } from "@/lib/supabase/auth";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 type ApiResponse<T> = {
   success: boolean;
   message: string;
   data: T;
+};
+
+export type PublicEventSummary = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  eventType: "individual" | "team";
+  feeType: "free" | "per_participant" | "per_team";
+  feeAmountPaise: number;
+  minParticipants: number;
+  maxParticipants: number;
+  registrationOpen: boolean;
+  registrationOpensAt: string | null;
+  registrationClosesAt: string | null;
 };
 
 export type EventFormField = {
@@ -148,6 +163,15 @@ async function apiRequest<T>(
   return result as ApiResponse<T>;
 }
 
+export async function getPublishedEvents(): Promise<PublicEventSummary[]> {
+  const result = await apiRequest<PublicEventSummary[]>(
+    "/api/public/events",
+    { method: "GET" },
+  );
+
+  return result.data;
+}
+
 // Fetch event configuration and dynamic form fields.
 export async function getEventRegistrationForm(
   slug: string,
@@ -289,4 +313,124 @@ export async function verifyPayment(
   );
 
   return result.data;
+}
+
+// --------------------------------------------------
+// Admin Analytics API
+// --------------------------------------------------
+
+export type AnalyticsDateRange = {
+  fromDate: string;
+  toDate: string;
+};
+
+export type AnalyticsOverview = {
+  registrations: number;
+  confirmedRegistrations: number;
+  pendingRegistrations: number;
+  cancelledRegistrations: number;
+  expiredRegistrations: number;
+  participants: number;
+  teams: number;
+  capturedRevenuePaise: number;
+  confirmedRevenuePaise: number;
+  requiresReviewRevenuePaise: number;
+  capturedPaymentRecords: number;
+  requiresReviewRecords: number;
+};
+
+export type AnalyticsPaymentStatus = {
+  status: string;
+  total: number;
+};
+
+export type AnalyticsTrend = {
+  date: string;
+  registrations?: number;
+  confirmed?: number;
+  revenuePaise?: number;
+};
+
+export type AnalyticsItem = {
+  id: string;
+  name: string;
+  category: string;
+  registrations: number;
+  confirmed: number;
+  teams: number;
+  participants: number;
+  revenuePaise: number;
+};
+
+export type AdminAnalytics = {
+  type: "event" | "workshop";
+  dateRange: {
+    from: string;
+    to: string;
+  };
+  overview: AnalyticsOverview;
+  paymentRecordsByStatus: AnalyticsPaymentStatus[];
+  registrationTrend: AnalyticsTrend[];
+  revenueTrend: AnalyticsTrend[];
+  itemBreakdown: AnalyticsItem[];
+};
+
+async function adminAnalyticsRequest(
+  path: string,
+): Promise<AdminAnalytics> {
+  if (!API_URL) {
+    throw new Error("NEXT_PUBLIC_API_URL is not configured.");
+  }
+
+  const {
+    data: { session },
+    error,
+  } = await getCurrentSession();
+
+  if (error || !session?.access_token) {
+    throw new Error("Your admin session has expired. Please sign in again.");
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+
+  const result = await response.json();
+
+  if (!response.ok || !result.success) {
+    throw new Error(result.message || "Unable to fetch analytics.");
+  }
+
+  return result.data as AdminAnalytics;
+}
+
+export async function getEventsAnalytics(
+  range: AnalyticsDateRange,
+): Promise<AdminAnalytics> {
+  const params = new URLSearchParams({
+    fromDate: range.fromDate,
+    toDate: range.toDate,
+  });
+
+  return adminAnalyticsRequest(
+    `/api/admin/analytics/events?${params.toString()}`,
+  );
+}
+
+export async function getWorkshopsAnalytics(
+  range: AnalyticsDateRange,
+): Promise<AdminAnalytics> {
+  const params = new URLSearchParams({
+    fromDate: range.fromDate,
+    toDate: range.toDate,
+  });
+
+  return adminAnalyticsRequest(
+    `/api/admin/analytics/workshops?${params.toString()}`,
+  );
 }

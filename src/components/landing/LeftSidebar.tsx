@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   Home09Icon,
   InformationCircleIcon,
@@ -27,12 +28,8 @@ const LEFT_NAV_ITEMS: SidebarItem[] = [
 ];
 
 export default function LeftSidebar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setMobileOpen(false); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  const pathname = usePathname();
+
   return (
     <> 
       <style>{`
@@ -105,6 +102,9 @@ export default function LeftSidebar() {
       <div className="sidebar-nav-items" data-open={mobileOpen}>
       {LEFT_NAV_ITEMS.map((item) => {
         const IconComponent = item.icon;
+        const isActive =
+          item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+
         return (
           <div key={item.name} style={{ position: 'relative' }} className="group">
             <Link
@@ -117,12 +117,15 @@ export default function LeftSidebar() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(217, 173, 98, 0.18)',
-                color: '#cbd5e1',
+                background: isActive ? 'rgba(217, 173, 98, 0.22)' : 'rgba(255, 255, 255, 0.05)',
+                border: isActive
+                  ? '1px solid rgba(217, 173, 98, 0.65)'
+                  : '1px solid rgba(217, 173, 98, 0.18)',
+                color: isActive ? '#d9ad62' : '#cbd5e1',
                 textDecoration: 'none',
                 transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
                 cursor: 'pointer',
+                boxShadow: isActive ? '0 0 16px rgba(217, 173, 98, 0.35)' : 'none',
               }}
               className="sidebar-icon-btn"
             >

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Minus, Plus } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import styles from "./workshop-management.module.css";
 
@@ -668,7 +669,11 @@ export default function WorkshopManagement({
                         Manage Workshop Assignments
                       </span>
                       <span className={styles.assignmentPlus}>
-                        {expandedAssignments[workshop.id] ? "−" : "+"}
+                        {expandedAssignments[workshop.id] ? (
+                          <Minus size={16} strokeWidth={2} aria-hidden="true" />
+                        ) : (
+                          <Plus size={16} strokeWidth={2} aria-hidden="true" />
+                        )}
                       </span>
                     </button>
 

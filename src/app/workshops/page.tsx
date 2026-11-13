@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import WorkshopCard from "@/components/workshops/WorkshopCard";
 import { workshops } from "@/constants/workshops";
-import styles from "@/components/workshops/workshops.module.css";
+import "./workshops.css";
 
 export const metadata: Metadata = {
   title: "Workshops | TECHNEX",

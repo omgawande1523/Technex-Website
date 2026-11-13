@@ -1,7 +1,7 @@
 
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import {
   CheckCircle2,
@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import styles from "./confirmation.module.css";
+import { getEventTheme } from "@/lib/event-themes";
 
 interface Participant {
   name: string;
@@ -38,6 +39,14 @@ interface WorkshopDetails {
 
 interface Registration {
   registrationCode: string;
+item?: {
+    id?: string;
+    name?: string;
+    slug?: string;
+    itemType?: "event" | "workshop";
+    feeType?: string;
+    feeAmountPaise?: number;
+  } | null;
 
   event?: EventDetails | null;
   eventName?: string;
@@ -192,22 +201,25 @@ export default function RegistrationConfirmation({
 
   // DETECT REGISTRATION TYPE
   const isWorkshop =
-    Boolean(registration.workshop) ||
-    Boolean(registration.workshopName) ||
-    Boolean(registration.workshop_name) ||
-    registration.registrationType?.toLowerCase() === "workshop" ||
-    registration.registration_type?.toLowerCase() === "workshop";
+    registration.item?.itemType === "workshop";
 
-  // REGISTRATION NAME
-  const registrationName = isWorkshop
-    ? registration.workshop?.name ??
-      registration.workshopName ??
-      registration.workshop_name ??
-      "Registered Workshop"
-    : registration.event?.name ??
-      registration.eventName ??
-      registration.event_name ??
-      "Registered Event";
+  const registeredItemName =
+    registration.item?.name ?? "Registered Item";
+
+  const theme = getEventTheme(
+    registration.item?.slug ??
+      registration.event?.slug ??
+      registration.workshop?.slug ??
+      "",
+  );
+  const themeStyle = {
+    "--event-accent": theme.accent,
+    "--event-accent-secondary": theme.accentSecondary,
+    "--event-accent-tertiary": theme.accentTertiary,
+    "--event-accent-soft": theme.accentSoft,
+    "--event-accent-border": theme.accentBorder,
+    "--event-accent-text": theme.accentText,
+  } as CSSProperties;
 
   // EVENT TYPE
   const eventType = (
@@ -225,7 +237,7 @@ export default function RegistrationConfirmation({
     : "—";
 
   return (
-    <main className={styles.page}>
+    <main className={styles.page} style={themeStyle}>
       <div className={styles.overlay} />
 
       <div className={styles.container}>
@@ -272,95 +284,110 @@ export default function RegistrationConfirmation({
           </p>
         </section>
 
-        {/* REGISTRATION CODE */}
-        <section className={styles.codeCard}>
-          <div>
-            <span className={styles.cardLabel}>
-              YOUR REGISTRATION CODE
-            </span>
+        <div className={styles.receiptCanvas}>
+          <Image
+            src="/assets/bg/receipt-background.png"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 650px) 100vw, 790px"
+            className={styles.receiptBackground}
+          />
 
-            <h2>{registration.registrationCode}</h2>
+          <h2 className={styles.receiptPrintHeading}>
+            TECHNEX 2026 <span>REGISTRATION RECEIPT</span>
+          </h2>
 
-            <p>Keep this code for future reference.</p>
-          </div>
-
-          <button
-            className={styles.copyButton}
-            onClick={copyCode}
-            type="button"
-          >
-            {copied ? (
-              <Check size={17} />
-            ) : (
-              <Copy size={17} />
-            )}
-
-            {copied ? "Copied" : "Copy"}
-          </button>
-        </section>
-
-        {/* EVENT / WORKSHOP + PAYMENT DETAILS */}
-        <section className={styles.detailsCard}>
-          <div className={styles.eventSection}>
-            <span className={styles.cardLabel}>
-              {isWorkshop
-                ? "YOUR REGISTERED WORKSHOP"
-                : "YOUR REGISTERED EVENT"}
-            </span>
-
-            <h2>{registrationName}</h2>
-
-            <span className={styles.eventType}>
-              {isWorkshop
-                ? "INDIVIDUAL WORKSHOP"
-                : eventType === "team"
-                  ? "TEAM EVENT"
-                  : "INDIVIDUAL EVENT"}
-            </span>
-          </div>
-
-          <div className={styles.divider} />
-
-          <div className={styles.paymentSection}>
-            <div className={styles.paymentHeading}>
+          {/* REGISTRATION CODE */}
+          <section className={styles.codeCard}>
+            <div>
               <span className={styles.cardLabel}>
-                PAYMENT DETAILS
+                YOUR REGISTRATION CODE
               </span>
 
-              <span
-                className={
-                  paymentStatus === "Successful"
-                    ? styles.successStatus
-                    : styles.pendingStatus
-                }
-              >
-                {paymentStatus}
+              <h2>{registration.registrationCode}</h2>
+
+              <p>Keep this code for future reference.</p>
+            </div>
+
+            <button
+              className={styles.copyButton}
+              onClick={copyCode}
+              type="button"
+            >
+              {copied ? (
+                <Check size={17} />
+              ) : (
+                <Copy size={17} />
+              )}
+
+              {copied ? "Copied" : "Copy"}
+            </button>
+          </section>
+
+          {/* EVENT / WORKSHOP + PAYMENT DETAILS */}
+          <section className={styles.detailsCard}>
+            <div className={styles.eventSection}>
+              <span className={styles.cardLabel}>
+                {isWorkshop
+                  ? "YOUR REGISTERED WORKSHOP"
+                  : "YOUR REGISTERED EVENT"}
+              </span>
+
+              <h2>{registeredItemName}</h2>
+
+              <span className={styles.eventType}>
+                {isWorkshop
+                  ? "INDIVIDUAL WORKSHOP"
+                  : eventType === "team"
+                    ? "TEAM EVENT"
+                    : "INDIVIDUAL EVENT"}
               </span>
             </div>
 
-            <div className={styles.paymentAmount}>
-              <span>
-                {paymentStatus === "Successful"
-                  ? "TOTAL AMOUNT PAID"
-                  : "TOTAL REGISTRATION AMOUNT"}
-              </span>
+            <div className={styles.divider} />
 
-              <strong>
-                {new Intl.NumberFormat("en-IN", {
-                  style: "currency",
-                  currency: payment?.currency || "INR",
-                  minimumFractionDigits: 2,
-                }).format(amount)}
-              </strong>
+            <div className={styles.paymentSection}>
+              <div className={styles.paymentHeading}>
+                <span className={styles.cardLabel}>
+                  PAYMENT DETAILS
+                </span>
+
+                <span
+                  className={
+                    paymentStatus === "Successful"
+                      ? styles.successStatus
+                      : styles.pendingStatus
+                  }
+                >
+                  {paymentStatus}
+                </span>
+              </div>
+
+              <div className={styles.paymentAmount}>
+                <span>
+                  {paymentStatus === "Successful"
+                    ? "TOTAL AMOUNT PAID"
+                    : "TOTAL REGISTRATION AMOUNT"}
+                </span>
+
+                <strong>
+                  {new Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: payment?.currency || "INR",
+                    minimumFractionDigits: 2,
+                  }).format(amount)}
+                </strong>
+              </div>
+
+              <div className={styles.paymentRow}>
+                <span>Payment Method</span>
+
+                <strong>{paymentMethod}</strong>
+              </div>
             </div>
-
-            <div className={styles.paymentRow}>
-              <span>Payment Method</span>
-
-              <strong>{paymentMethod}</strong>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         {/* DOWNLOAD RECEIPT */}
         <button

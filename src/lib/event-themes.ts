@@ -1,69 +1,67 @@
-
 export type EventTheme = {
   name: string;
   accent: string;
+  accentSecondary: string;
+  accentTertiary: string;
   accentSoft: string;
   accentBorder: string;
   accentText: string;
 };
 
-const defaultTheme: EventTheme = {
-  name: "Default",
-  accent: "#FFD34E",
-  accentSoft: "rgba(255, 211, 78, 0.12)",
-  accentBorder: "rgba(255, 211, 78, 0.45)",
-  accentText: "#FFD34E",
-};
+function createTheme(
+  name: string,
+  accent: string,
+  accentSecondary: string,
+  accentTertiary = accentSecondary,
+): EventTheme {
+  const toRgba = (color: string, alpha: number) => {
+    const hex = color.slice(1);
+    const red = Number.parseInt(hex.slice(0, 2), 16);
+    const green = Number.parseInt(hex.slice(2, 4), 16);
+    const blue = Number.parseInt(hex.slice(4, 6), 16);
 
-// Assign colours manually using actual event slugs.
+    return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+  };
+
+  return {
+    name,
+    accent,
+    accentSecondary,
+    accentTertiary,
+    accentSoft: toRgba(accent, 0.12),
+    accentBorder: toRgba(accentSecondary, 0.45),
+    accentText: accentSecondary,
+  };
+}
+
+const gold = "#D4AF37";
+const silver = "#C0C0C0";
+
+const defaultTheme = createTheme("Default", gold, "#F2D675");
+
+// Assign metallic palettes manually using actual event slugs.
 export const eventThemes: Record<string, EventTheme> = {
-  envision: {
-    name: "Envision",
-    accent: "#55D68B",
-    accentSoft: "rgba(85, 214, 139, 0.12)",
-    accentBorder: "rgba(85, 214, 139, 0.45)",
-    accentText: "#55D68B",
-  },
+  "hack-the-hardware": createTheme("Hack The Hardware", gold, "#F28C28"),
+  hackathon: createTheme("Hackathon", gold, "#9B59B6"),
+  envision: createTheme("Envision", gold, "#00A86B"),
+  vortex: createTheme("Vortex", gold, "#3B82F6"),
+  "gamer-conquest": createTheme("Gamer Conquest", gold, "#F28C28", "#9CA3AF"),
+  ctf: createTheme("Apex CTF", gold, "#DC2626", "#9CA3AF"),
+  "apex-ctf": createTheme("Apex CTF", gold, "#DC2626", "#9CA3AF"),
+  bizcon: createTheme("Bizcon", gold, "#EC4899"),
+  "build-the-brand": createTheme("Bizcon", gold, "#EC4899"),
+  "coastal-clash": createTheme("Coastal Clash", silver, gold, "#3B82F6"),
+  "robo-sumo": createTheme("Robo Sumo", gold, "#EC4899", "#22C55E"),
+  overdrive: createTheme("Overdrive", gold, "#8B5CF6", "#EC4899"),
+  techquest: createTheme("TechQuest", gold, "#808000"),
+  "ai-agent-arena": createTheme("Agentic Arena", gold, "#14B8A6"),
+  "agentic-arena": createTheme("Agentic Arena", gold, "#14B8A6"),
+  designx: createTheme("DesignX", silver, "#3B82F6", "#9CA3AF"),
 
-  hackathon: {
-    name: "Hackathon",
-    accent: "#A78BFA",
-    accentSoft: "rgba(167, 139, 250, 0.12)",
-    accentBorder: "rgba(167, 139, 250, 0.45)",
-    accentText: "#A78BFA",
-  },
-
-  coding: {
-    name: "Coding",
-    accent: "#FFD34E",
-    accentSoft: "rgba(255, 211, 78, 0.12)",
-    accentBorder: "rgba(255, 211, 78, 0.45)",
-    accentText: "#FFD34E",
-  },
-
-  ctf: {
-    name: "Cybersecurity",
-    accent: "#FF6464",
-    accentSoft: "rgba(255, 100, 100, 0.12)",
-    accentBorder: "rgba(255, 100, 100, 0.45)",
-    accentText: "#FF6464",
-  },
-
-  gaming: {
-    name: "Gaming",
-    accent: "#62A9FF",
-    accentSoft: "rgba(98, 169, 255, 0.12)",
-    accentBorder: "rgba(98, 169, 255, 0.45)",
-    accentText: "#62A9FF",
-  },
-
-  quiz: {
-    name: "Quiz",
-    accent: "#FF9C50",
-    accentSoft: "rgba(255, 156, 80, 0.12)",
-    accentBorder: "rgba(255, 156, 80, 0.45)",
-    accentText: "#FF9C50",
-  },
+  // Keep the existing generic categories available for older event links.
+  coding: createTheme("Coding", gold, "#F2D675"),
+  gaming: createTheme("Gaming", gold, "#3B82F6"),
+  quiz: createTheme("Quiz", gold, "#F28C28"),
 };
 
 export function getEventTheme(slug: string): EventTheme {

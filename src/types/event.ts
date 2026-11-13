@@ -15,7 +15,7 @@ export interface EventItem {
   rounds: { title: string; text: string }[];
   rules: { title: string; text: string }[];
   faqs: { q: string; a: string }[];
-  contacts: { name: string; phone: string }[];
+  contacts: { name: string; phone: string; email?: string }[];
   registerUrl: string;
   rulebookUrl: string;
   shape: ShapeKind;

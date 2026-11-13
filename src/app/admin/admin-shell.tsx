@@ -7,7 +7,20 @@ import {
   type ReactNode,
 } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import {
+  CalendarDays,
+  ChevronRight,
+  ClipboardList,
+  CreditCard,
+  LayoutDashboard,
+  LogOut,
+  Presentation,
+  ScrollText,
+  ChartNoAxesCombined,
+  UsersRound,
+} from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import styles from "./admin-shell.module.css";
 
@@ -22,13 +35,18 @@ type Admin = {
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const navigation = [
-  { label: "Overview", href: "/admin/dashboard", icon: "◫" },
-  { label: "Registrations", href: "/admin/registrations", icon: "▤" },
-  { label: "Events", href: "/admin/events", icon: "◇" },
-  { label: "Workshops", href: "/admin/workshops", icon: "▦" },
-  { label: "Participants", href: "/admin/participants", icon: "♙" },
-  { label: "Payments", href: "/admin/payments", icon: "₹" },
-  { label: "Audit Logs", href: "/admin/audit-logs", icon: "⚡" },
+  { label: "Overview", href: "/admin/dashboard", icon: LayoutDashboard },
+  { label: "Registrations", href: "/admin/registrations", icon: ClipboardList },
+  { label: "Events", href: "/admin/events", icon: CalendarDays },
+  { label: "Workshops", href: "/admin/workshops", icon: Presentation },
+  { label: "Participants", href: "/admin/participants", icon: UsersRound },
+  { label: "Payments", href: "/admin/payments", icon: CreditCard },
+  { label: "Audit Logs", href: "/admin/audit-logs", icon: ScrollText },
+  {
+  label: "Analytics",
+  href: "/admin/analytics",
+  icon: ChartNoAxesCombined,
+},
 ];
 
 function getRoleLabel(role: AdminRole) {
@@ -137,11 +155,16 @@ export default function AdminShell({
   if (item.href === "/admin/audit-logs") {
     return admin.role === "superadmin";
   }
+  // Analytics: Superadmin and Coordinator only
+if (item.href === "/admin/analytics") {
+  return admin.role === "superadmin" || admin.role === "coordinator";
+}
 
   // Payments: Superadmin and Coordinator only
   if (item.href === "/admin/payments") {
     return admin.role !== "event_head";
   }
+  
 
   return true;
 });
@@ -165,6 +188,14 @@ export default function AdminShell({
           className={styles.brand}
           onClick={() => setMenuOpen(false)}
         >
+          <Image
+            src="/logo_topnav.webp"
+            alt="TNX"
+            width={42}
+            height={42}
+            className={styles.brandLogo}
+            priority
+          />
           <span className={styles.brandName}>TECHNEX</span>
           <span className={styles.brandSubtitle}>
             2026 · ADMIN PORTAL
@@ -189,7 +220,9 @@ export default function AdminShell({
                   active ? styles.navActive : ""
                 }`}
               >
-                <span className={styles.navIcon}>{item.icon}</span>
+                <span className={styles.navIcon}>
+                  <item.icon size={18} strokeWidth={1.8} aria-hidden="true" />
+                </span>
                 <span>{item.label}</span>
                 {active && <span className={styles.activeIndicator} />}
               </Link>
@@ -210,7 +243,9 @@ export default function AdminShell({
               }`}
               onClick={() => setMenuOpen(false)}
             >
-              <span className={styles.navIcon}>♧</span>
+              <span className={styles.navIcon}>
+                <UsersRound size={18} strokeWidth={1.8} aria-hidden="true" />
+              </span>
               Team Management
             </Link>
           )}
@@ -235,9 +270,14 @@ export default function AdminShell({
             </button>
 
             <div className={styles.breadcrumb}>
-              <span>TECHNEX</span>
-              <span className={styles.breadcrumbDivider}>/</span>
-              <strong>
+              <span className={styles.breadcrumbBrand}>TECHNEX</span>
+              <ChevronRight
+                className={styles.breadcrumbDivider}
+                size={14}
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+              <strong className={styles.breadcrumbCurrent}>
                 {navigation.find((item) =>
                   pathname.startsWith(item.href)
                 )?.label || "Administration"}
@@ -261,8 +301,10 @@ export default function AdminShell({
               className={styles.logoutButton}
               onClick={handleLogout}
               title="Sign out"
+              aria-label="Sign out"
             >
-              ↗
+              <LogOut size={16} strokeWidth={1.8} aria-hidden="true" />
+              <span>Sign out</span>
             </button>
           </div>
         </header>

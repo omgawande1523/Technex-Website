@@ -765,6 +765,9 @@ export default function ParticipantManagement({
                   <Detail
                     label="Registration status"
                     value={statusLabels[selectedParticipant.registrationStatus]}
+                    className={`${styles.status} ${
+                      styles[selectedParticipant.registrationStatus]
+                    }`}
                   />
                   <Detail
                     label="Registration date"
@@ -806,14 +809,18 @@ export default function ParticipantManagement({
 function Detail({
   label,
   value,
+  className,
 }: {
   label: string;
   value: string | number | null | undefined;
+  className?: string;
 }) {
   return (
     <div className={styles.detailItem}>
       <span>{label}</span>
-      <strong>{value === null || value === undefined || value === "" ? "—" : value}</strong>
+      <strong className={className}>
+        {value === null || value === undefined || value === "" ? "—" : value}
+      </strong>
     </div>
   );
 }
