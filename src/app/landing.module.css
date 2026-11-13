@@ -214,18 +214,6 @@
   min-height: 100vh;
   overflow-x: clip;
   background-color: #000;
-  background-image: url("/assets/bg/permanent-bg.webp");
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-@media (max-width: 860px) {
-  .sitePage {
-    background-image: url("/assets/bg/permanent-bg-mobile.webp");
-    background-attachment: scroll;
-  }
 }
 
 .scrollCue {
