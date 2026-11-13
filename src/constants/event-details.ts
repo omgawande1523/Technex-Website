@@ -433,6 +433,7 @@ const otherEvents: EventItem[] = [
     "title": "Round 2 — Knockout Progression",
     "text": "Teams qualifying from Round 1 compete in the next knockout stage. Winners advance to the subsequent rounds."
   },
+  ],
 
   "stats": [
     {
