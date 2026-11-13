@@ -91,7 +91,7 @@ export const events: EventItem[] = [
   {
     id: '06',
     slug: 'ctf',
-    title: 'APEX CTF',
+    title: 'Apex CTF',
     tag: 'Cyber',
     source: 'The Imitation Game (2014)',
     concept: 'The story of Alan Turing and the effort to decipher Enigma-encrypted messages.',
@@ -100,8 +100,8 @@ export const events: EventItem[] = [
   },
   {
     id: '07',
-    slug: 'build-the-brand',
-    title: 'Bizcon 2026 ',
+    slug: 'bizcon',
+    title: 'BIZCON 2026',
     tag: 'Expo',
     source: 'Shark Tank',
     concept: 'Entrepreneurs present innovative business ideas to investors.',
@@ -150,7 +150,7 @@ export const events: EventItem[] = [
   },
   {
     id: '12',
-    slug: 'ai-agent-arena',
+    slug: 'agentic-arena ',
     title: 'Agentic Arena',
     tag: 'AI',
     source: 'J.A.R.V.I.S. — Marvel’s Iron Man',
@@ -161,7 +161,7 @@ export const events: EventItem[] = [
   {
     id: '13',
     slug: 'designx',
-    title: 'DesignX',
+    title: 'DesignX Studio',
     tag: 'Design',
     source: 'Leonardo da Vinci — Engineering sketches',
     concept: 'Drawings of futuristic machines and structures that explored ideas beyond the technology of his time.',

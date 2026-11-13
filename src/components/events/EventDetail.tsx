@@ -22,7 +22,6 @@ const HIGHLIGHTS = [
 
 const PERKS = [
   "Mentor guidance from industry experts and faculty",
-  "Food, refreshments and workspace for all 24 hours",
   "Certificates for every participant",
   "Goodies, swag and cash prizes for winners",
 ];
