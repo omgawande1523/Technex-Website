@@ -59,7 +59,7 @@ function getRoleSizeClass(role) {
  * Front: Perfectly proportioned portrait, bottom-stacked Name & Role, and below-frame flip prompt
  * Back: High-Tech Golden Reactor Social Medallions centered in honeycomb core
  */
-export function TeamCard({ member }) {
+export function TeamCard({ member, sectionId }) {
   const { id, name, designation, email, linkedin, instagram, image } = member;
   const safeId = String(id || 'member').replace(/[^a-zA-Z0-9_-]/g, '');
   const [isFlipped, setIsFlipped] = useState(false);
@@ -123,7 +123,7 @@ export function TeamCard({ member }) {
 
   return (
     <div
-      className={`cyber-card-wrapper theme-titan frame-titan ${isFlipped ? 'is-flipped' : ''}`}
+      className={`cyber-card-wrapper theme-titan frame-titan${sectionId === 'faculty-mentors' ? ' faculty-mentor-card' : ''} ${isFlipped ? 'is-flipped' : ''}`}
       id={`card-${safeId}`}
       onClick={handleCardToggle}
       onKeyDown={handleKeyDown}

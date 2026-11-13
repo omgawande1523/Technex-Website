@@ -81,12 +81,12 @@ export default function TopNav() {
             />
           </div>
 
-          {/* TECHNEX 26-27 Text in Barge font - hidden on mobile, visible on desktop */}
+          {/* TECHNEX 26-27 Text - hidden on mobile, visible on desktop */}
           <span
             style={{
-              fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
+              fontFamily: "var(--font-metal-mania), sans-serif",
               fontSize: '20px',
-              fontWeight: 900,
+              fontWeight: 400,
               letterSpacing: '0.04em',
               color: '#ffffff',
               textTransform: 'uppercase',
@@ -118,8 +118,8 @@ export default function TopNav() {
         <Link
           href="/workshops"
           style={{
-            fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-            fontWeight: 800,
+            fontFamily: "var(--font-metal-mania), sans-serif",
+            fontWeight: 400,
             letterSpacing: '0.08em',
             color: '#f8fafc',
             textDecoration: 'none',
@@ -137,8 +137,8 @@ export default function TopNav() {
         <Link
           href="/events"
           style={{
-            fontFamily: "var(--font-barge), 'Barge', 'Outfit', sans-serif",
-            fontWeight: 800,
+            fontFamily: "var(--font-metal-mania), sans-serif",
+            fontWeight: 400,
             letterSpacing: '0.08em',
             color: '#f8fafc',
             textDecoration: 'none',

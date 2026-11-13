@@ -62,7 +62,7 @@ const SponsorsPage: React.FC = () => {
           {/* Main Title - Refined Light Champagne Gold Chrome */}
           <motion.h1
             variants={heroItemVariants}
-            className="mt-4 font-orbitron text-4xl sm:text-6xl md:text-7xl font-black italic tracking-wider"
+            className="mt-4 font-orbitron text-4xl sm:text-6xl md:text-7xl font-black tracking-wider"
           >
             <span className="text-[#ffffff] drop-shadow-[0_2px_12px_rgba(255,255,255,0.4)]">OUR </span>
             <span className="bg-gradient-to-r from-white via-yellow-100 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(254,240,138,0.4)]">

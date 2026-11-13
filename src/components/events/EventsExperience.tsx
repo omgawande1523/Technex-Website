@@ -429,7 +429,7 @@ export default function EventsExperience() {
           .ev-stage .ev-out-top { justify-content: center !important; gap: 9px !important; }
           .ev-stage .ev-num { font-size: clamp(27px, 8vw, 40px) !important; line-height: 1 !important; }
           .ev-stage .ev-title {
-            font-size: clamp(15px, 4.6vw, 21px) !important;
+            font-size: clamp(19px, 5.5vw, 27px) !important;
             line-height: 1.08 !important;
             margin: 5px 0 0 !important;
             overflow-wrap: anywhere;
@@ -491,7 +491,7 @@ export default function EventsExperience() {
           .ev-stage .ev-panel { gap: 6px !important; top: calc(50% - 18px) !important; }
           .ev-stage .ev-flip { height: clamp(110px, 24dvh, 180px) !important; }
           .ev-stage .ev-num { font-size: 26px !important; }
-          .ev-stage .ev-title { font-size: 15px !important; }
+          .ev-stage .ev-title { font-size: 19px !important; }
           .ev-stage .ev-btns-m .ev-cta { height: 34px !important; }
         }
         @media (prefers-reduced-motion: reduce) {

@@ -1,8 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Redaction+20&display=swap");
 
 
 
 .hack-detail-root{
+  --font-body: "Redaction 20";
   --bg: #060504; --panel: rgba(18, 13, 8, 0.8);
   --gold: #e3b95c; --gold-hi: #f6dc94; --bronze: #8b5e2a;
   --line: rgba(227, 185, 92, 0.28); --text: #f3ead7; --muted: #b3a58a;
@@ -24,13 +25,15 @@
 .hack-detail-root{
   position: relative;
   touch-action: pan-y pinch-zoom;
-  color: var(--text); font-family: var(--font-body, system-ui), system-ui, sans-serif; line-height: 1.45;
+  color: var(--text); font-family: var(--font-body), system-ui, sans-serif; line-height: 1.45;
   background:
     radial-gradient(900px 420px at 12% -5%, rgba(227, 185, 92, 0.10), transparent 60%),
     radial-gradient(700px 500px at 100% 100%, rgba(139, 94, 42, 0.10), transparent 60%),
     linear-gradient(180deg, #070605 0%, #0b0907 50%, #050403 100%);
   background-attachment: fixed; background-color: var(--bg);
 }
+
+.hack-detail-root button{ font-family: var(--font-body), system-ui, sans-serif; }
 
 
 .hack-detail-root .terrain{ position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -53,6 +56,8 @@
 
 .hack-detail-root .back-events{ align-self: flex-start; flex: none; }
 
+.hack-detail-root .page.hackathon-detail .back-events{ margin-bottom: -48px; }
+
 
 /* header */
 
@@ -63,7 +68,7 @@
 .hack-detail-root .head > *{ min-width: 0; }
 
 
-.hack-detail-root .brand{ display: inline-flex; align-items: center; gap: 8px; color: var(--gold-hi); text-decoration: none; font-family: "Orbitron", sans-serif; letter-spacing: 0.1em; font-size: 0.78rem; }
+.hack-detail-root .brand{ display: inline-flex; align-items: center; gap: 8px; color: var(--gold-hi); text-decoration: none; font-family: var(--font-body), system-ui, sans-serif; letter-spacing: 0.1em; font-size: 0.78rem; }
 
 
 .hack-detail-root .brand i{ width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--gold); border-radius: 50%; font-style: normal; font-size: 0.7rem; }
@@ -74,7 +79,7 @@
 
 
 .hack-detail-root .head h1{
-  font-family: "Orbitron", sans-serif; font-weight: 900; text-transform: uppercase; line-height: 1.05;
+  font-family: var(--font-metal-mania), sans-serif; font-weight: 400; text-transform: uppercase; line-height: 1.05;
   letter-spacing: 0.04em; font-size: clamp(1.8rem, 9vw, 3.8rem); margin: 6px 0;
   background: linear-gradient(100deg, #fff6d6 0%, #ffe49a 28%, #ffffff 48%, #ffd45e 68%, #fff1c0 100%);
   background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -92,10 +97,65 @@
 .hack-detail-root .headright{ display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 
 
+.hack-detail-root.hackathon-workshop .headright{
+  align-items: stretch;
+  flex-direction: column;
+  gap: 12px;
+  width: 260px;
+  flex: none;
+}
+
+.hack-detail-root.hackathon-workshop .head-actions{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.hack-detail-root.hackathon-workshop .head-actions .register-refined,
+.hack-detail-root.hackathon-workshop .collaboration{ width: 100%; }
+
+.hack-detail-root.hackathon-workshop .collaboration{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: none;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(120deg, rgba(227,185,92,.1), rgba(227,185,92,.035));
+  text-align: center;
+}
+
+.hack-detail-root.hackathon-workshop .collaboration > span{
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hack-detail-root.hackathon-workshop .collaboration-logo{
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.hack-detail-root.hackathon-workshop .collaboration strong{
+  color: var(--gold-hi);
+  font-size: 0.9rem;
+  line-height: 1.15;
+}
+
+
 .hack-detail-root .ghost{ text-align: right; }
 
 
-.hack-detail-root .ghost b{ display: block; font-family: "Orbitron", sans-serif; font-size: 2.2rem; font-weight: 800; font-style: italic; color: transparent; -webkit-text-stroke: 1.2px var(--gold-hi); line-height: 1; }
+.hack-detail-root .ghost b{ display: block; font-family: var(--font-metal-mania), sans-serif; font-size: 2.2rem; font-weight: 400; font-style: italic; color: transparent; -webkit-text-stroke: 1.2px var(--gold-hi); line-height: 1; }
 
 
 .hack-detail-root .ghost span{ color: var(--muted); font-size: 0.8rem; font-style: italic; }
@@ -175,7 +235,7 @@
 @keyframes swap { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 
-.hack-detail-root .panel h2{ font-family: "Orbitron", sans-serif; font-weight: 600; letter-spacing: 0.04em; font-size: 1.05rem; color: var(--gold-hi); margin-bottom: 14px; }
+.hack-detail-root .panel h2{ font-family: var(--font-metal-mania), sans-serif; font-weight: 400; letter-spacing: 0.04em; font-size: 1.05rem; color: var(--gold-hi); margin-bottom: 14px; }
 
 
 .hack-detail-root .panel h3{ font-size: 0.72rem; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 3px; }
@@ -336,7 +396,7 @@
 .hack-detail-root .rounds .card{ height: 100%; min-height: 130px; }
 
 
-.hack-detail-root .rounds .card b{ font-family: "Orbitron", sans-serif; font-size: 0.85rem; font-weight: 800; color: var(--gold); display: block; margin-bottom: 6px; }
+.hack-detail-root .rounds .card b{ font-family: var(--font-body), system-ui, sans-serif; font-size: 0.85rem; font-weight: 800; color: var(--gold); display: block; margin-bottom: 6px; }
 
 
 
@@ -396,7 +456,13 @@
 @media  (max-width: 980px) {.hack-detail-root .page{ height: auto; min-height: 100dvh; }
 .hack-detail-root .head{ flex-direction: column; align-items: flex-start; gap: 12px; }
 .hack-detail-root .headright{ width: 100%; justify-content: space-between; }
+.hack-detail-root.hackathon-workshop .headright{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 10px; width: 100%; }
+.hack-detail-root.hackathon-workshop .head-actions{ grid-column: 2; width: 100%; }
 .hack-detail-root .ghost{ text-align: left; }
+.hack-detail-root.hackathon-workshop .collaboration{ width: 100%; min-width: 0; padding: 10px 8px; gap: 5px; }
+.hack-detail-root.hackathon-workshop .collaboration > span{ font-size: 0.52rem; }
+.hack-detail-root.hackathon-workshop .collaboration-logo{ width: 56px; height: 56px; }
+.hack-detail-root.hackathon-workshop .collaboration strong{ font-size: 0.68rem; }
 .hack-detail-root .stats{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .hack-detail-root .tabs{ overflow-x: auto; scrollbar-width: none; }
 .hack-detail-root .tabs::-webkit-scrollbar{ display: none; }
@@ -468,7 +534,7 @@
 
 .hack-detail-root .highlights b{
   display: block;
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   font-size: 1.1rem;
   font-weight: 800;
   color: var(--gold-hi);
@@ -546,3 +612,29 @@
 @media  (max-width: 560px) {.hack-detail-root .highlights{ grid-template-columns: minmax(0, 1fr); }
 .hack-detail-root .headright .btn.gold{ padding: 13px 22px; }}
 .hack-detail-root { min-height: 100dvh; isolation: isolate; }
+
+.hack-detail-root .head h1,
+.hack-detail-root .ghost b,
+.hack-detail-root .panel h2,
+.hack-detail-root .panel h3,
+.hack-detail-root .stat h3,
+.hack-detail-root .tabs button,
+.hack-detail-root .rounds .card strong,
+.hack-detail-root .rules .card strong,
+.hack-detail-root .faq button,
+.hack-detail-root .coordinator-name,
+.hack-detail-root .coordinator-role,
+.hack-detail-root .contact-eyebrow,
+.hack-detail-root .highlights span,
+.hack-detail-root .perks .who strong{
+  font-family: var(--font-metal-mania), sans-serif;
+}
+
+.hack-detail-root .brand,
+.hack-detail-root .rounds .card b,
+.hack-detail-root .highlights b,
+.hack-detail-root .chips span,
+.hack-detail-root .collaboration > span,
+.hack-detail-root .collaboration strong{
+  font-family: var(--font-body), system-ui, sans-serif;
+}

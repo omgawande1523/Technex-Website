@@ -3,7 +3,7 @@ import * as path from "node:path";
 
 import type { MediaItem } from "@/lib/types";
 
-const GALLERY_DIR = path.join(process.cwd(), "public", "gallery");
+const GALLERY_DIR = path.join(process.cwd(), "public", "assets", "gallery");
 const IMAGE_RE = /\.(webp|jpe?g|png|gif|avif)$/i;
 
 export async function listMedia(): Promise<MediaItem[]> {
@@ -12,7 +12,7 @@ export async function listMedia(): Promise<MediaItem[]> {
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   return files.map((file, index) => ({
-    src: `/gallery/${file}`,
+    src: `/assets/gallery/${file}`,
     title: `FRAME ${String(index + 1).padStart(2, "0")}`,
   }));
 }

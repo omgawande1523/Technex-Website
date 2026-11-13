@@ -128,7 +128,7 @@ export default function EventDetail({
   return (
     <>
       <TerrainBackground />
-      <main className="page">
+      <main className={`page${e.slug === "hackathon" ? " hackathon-detail" : ""}`}>
         <button className="btn line back-events" type="button" onClick={backToEvents}>
           {backLabel}
         </button>
@@ -779,7 +779,8 @@ export default function EventDetail({
           max-width: 100%; padding: 5px 13px; margin-bottom: 5px;
           background: linear-gradient(110deg, #f7df9d, #dfb45b);
           color: #241808; border: 1px solid #f5d28a; border-radius: 3px;
-          font-size: 12px; font-weight: 800; letter-spacing: .14em;
+          font-family: var(--font-metal-mania), sans-serif;
+          font-size: 12px; font-weight: 400; letter-spacing: .14em;
           text-transform: uppercase; line-height: 1.3;
         }
         body.event-detail-scroll-enabled .page .coordinator-email-pending {

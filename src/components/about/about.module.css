@@ -1,8 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Redaction+20&display=swap");
+
 .aboutPage {
   min-height: 100vh;
   background: transparent;
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  font-family: "Redaction 20", system-ui, sans-serif;
   color: #ffffff;
+}
+
+.aboutPage :global(*) {
+  font-family: "Redaction 20", system-ui, sans-serif !important;
+}
+
+.aboutPage :global(h1),
+.aboutPage :global(h2),
+.aboutPage :global(h3),
+.aboutPage :global(h4),
+.aboutPage :global(h5),
+.aboutPage :global(h6) {
+  font-family: var(--font-metal-mania), sans-serif !important;
+}
+
+.aboutPage :global(.dignitary-name) {
+  font-family: "Redaction 20", system-ui, sans-serif !important;
 }
 
 .standalone {
@@ -18,24 +37,4 @@
     padding-top: 80px;
     padding-bottom: 60px;
   }
-}
-
-/* Continuous Marquee Animation */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animateMarquee {
-  width: max-content;
-  display: flex;
-  animation: marquee 28s linear infinite;
-}
-
-.animateMarquee:hover {
-  animation-play-state: paused;
 }

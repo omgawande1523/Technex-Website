@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=IM+Fell+English:ital@0;1&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Redaction+20&display=swap");
 
 /* Da Vinci Parchment Scroll Theme (Contact Page Only) */
 .font-renaissance {
-  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  font-family: "Redaction 20", system-ui, sans-serif;
 }
 
 .font-parchment-serif {
-  font-family: 'Cormorant Garamond', 'IM Fell English', Georgia, serif;
+  font-family: "Redaction 20", system-ui, sans-serif;
 }
 
 .parchment-input {
@@ -88,6 +88,25 @@
   color: #ffffff;
   overflow-x: hidden;
   box-sizing: border-box;
+  font-family: "Redaction 20", system-ui, sans-serif;
+}
+
+.technex-contact-page * {
+  font-family: "Redaction 20", system-ui, sans-serif !important;
+  font-style: normal !important;
+}
+
+.technex-contact-page h1,
+.technex-contact-page h2,
+.technex-contact-page h3,
+.technex-contact-page h4,
+.technex-contact-page h5,
+.technex-contact-page h6 {
+  font-family: var(--font-metal-mania), sans-serif !important;
+}
+
+.technex-contact-page .contact-coordinator-name {
+  font-family: "Redaction 20", system-ui, sans-serif !important;
 }
 
 @media (max-width: 860px) {
@@ -96,4 +115,3 @@
     background-attachment: scroll;
   }
 }
-

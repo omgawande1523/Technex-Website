@@ -1,4 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Redaction+20&display=swap");
+
 .ev-root {
+  --font-body: "Redaction 20";
+  --font-text: var(--font-body);
+  --font-display: var(--font-body);
   --bg: #040404;
   --ink: #f3efe6;
   --dim: rgba(243, 239, 230, 0.7);
@@ -37,7 +42,7 @@ html:has(.ev-root)::-webkit-scrollbar {
 body:has(.ev-root) {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-text), 'Jura', system-ui, sans-serif;
+  font-family: "Redaction 20", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -537,7 +542,7 @@ body:has(.ev-root) {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   font-size: max(10px, calc(var(--w) * 0.03));
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1604,7 +1609,7 @@ body:has(.ev-root) {
    ═══════════════════════════════════════════════════════════════ */
 
 .ev-panel {
-  --f-title: var(--font-orb, var(--font-display)), 'Orbitron', 'Eurostile', Arial, sans-serif;
+  --f-title: var(--font-metal-mania), sans-serif;
   --f-ui: var(--font-raj, var(--font-text)), 'Rajdhani', system-ui, sans-serif;
 }
 
@@ -1723,7 +1728,7 @@ body:has(.ev-root) {
   padding: 0 0 clamp(10px, 1vw, 16px);
   font-family: var(--f-title);
   font-weight: 700;
-  font-size: clamp(1rem, 9.4cqi, 2.6rem); /* ≈ widest word (9 letters) uses 86% of the column */
+  font-size: clamp(1.2rem, 12cqi, 3.4rem);
   line-height: 1.08;
   letter-spacing: 0.02em;
   text-wrap: balance;
@@ -2280,4 +2285,20 @@ body:has(.ev-root) {
   .ev-back {
     transition: none;
   }
+}
+
+.ev-root .ev-num,
+.ev-root .ev-title,
+.ev-root .ev-modal-num,
+.ev-root .ev-modal-title,
+.ev-root .ev-back-num,
+.ev-root .ev-back-title,
+.ev-root .ev-idx,
+.ev-root .ev-jump-num,
+.ev-root .ev-tl-item,
+.ev-root .ev-tl-circle,
+.ev-root .lc-ph span,
+.ev-root .lc-ph em {
+  font-family: var(--font-metal-mania), sans-serif;
+  font-weight: 400;
 }

@@ -13,7 +13,9 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
   if (!workshop) notFound();
 
   return (
-    <div className="hack-detail-root">
+    <div
+      className={`hack-detail-root${workshop.slug === "hackathon" ? " hackathon-workshop" : ""}`}
+    >
       <WorkshopDetail event={workshop} />
     </div>
   );
