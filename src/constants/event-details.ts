@@ -128,22 +128,22 @@ const otherEvents: EventItem[] = [
       "name": "Arpit Kharwade",
      
       "phone": "9156867498",
-      "email": "arpitkh2005@gmail.com",
+      "email": "",
      
     },
     {
       "name": "Shravani Bobde",
       
       "phone": "8530080205",
-      "email": "shravanib722@gmail.com"},
+      "email": ""},
     {
       "name": "Vedant Bhaganagare",
       
       "phone": "8999078014",
-      "email": "vedantbhaganagare3@gmail.com"}
+      "email": ""}
   ],
 
-  registerUrl: "/register/hack-the-hardware",
+  "registerUrl": "",
   "rulebookUrl": "",
 
   "shape": "ship",
@@ -433,170 +433,10 @@ const otherEvents: EventItem[] = [
     "title": "Round 2 — Knockout Progression",
     "text": "Teams qualifying from Round 1 compete in the next knockout stage. Winners advance to the subsequent rounds."
   },
-  ],
-
-  "stats": [
-    {
-      "icon": "calendar",
-      "label": "Event Dates",
-      "value": "19–20 Dec 2026",
-      "sub": "Day 1: Qualifiers | Day 2: Grand Finals"
-    },
-    {
-      "icon": "pin",
-      "label": "Venue",
-      "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering and Technology"
-    },
-    {
-      "icon": "team",
-      "label": "Team Size",
-      "value": "4 Members",
-      "sub": "BGMI Squad Format"
-    },
-    {
-      "icon": "trophy",
-      "label": "Prize Pool",
-      "value": "₹70,000"
-    }
-  ],
-
-  "rounds": [
-    {
-      "title": "Day 1 — Qualifiers (19 December 2026)",
-      "text": "Online and offline qualifiers where all registered BGMI squads compete. Squads are evaluated based on placement points and kill points. The top 16 squads with the highest total scores qualify for the Grand Finals."
-    },
-    {
-      "title": "Day 2 — Grand Finals (20 December 2026)",
-      "text": "The top 16 qualified squads compete physically at SVPCET, Nagpur, in 6 matches across Erangel, Rondo, and Miramar. The squad with the highest cumulative points across all matches is declared the winner."
-    }
-  ],
-
-  "rules": [
-    {
-      "title": "Grand Finals Attendance",
-      "text": "All players from qualified BGMI squads must be physically present at the event venue for the Grand Finals."
-    },
-    {
-      "title": "Devices and Identification",
-      "text": "Participants must bring their own fully charged mobile devices and valid identification."
-    },
-    {
-      "title": "Online Qualifier Requirements",
-      "text": "Participants competing in online qualifiers are responsible for arranging their own devices and stable internet connections."
-    },
-    {
-      "title": "Fair Play and Anti-Cheating",
-      "text": "Hacks, cheats, third-party tools, emulator misuse, teaming with opponents, and unauthorized software are strictly prohibited and will result in immediate disqualification."
-    },
-    {
-      "title": "Final Decision",
-      "text": "The decisions of the event organizers and referees regarding rules, disputes, and results are final."
-    }
-  ],
-
-  "faqs": [
-    {
-      "q": "What is the team size?",
-      "a": "Each BGMI squad must consist of 4 members."
-    },
-    {
-      "q": "Are there registration fees?",
-      "a": "Registration fees are yet to be confirmed by the organizers."
-    },
-    {
-      "q": "What are the submission rules?",
-      "a": "Participants must register their squad online through the official Google Form, providing all player names and in-game IDs."
-    },
-    {
-      "q": "What tools are allowed?",
-      "a": "Participants must use their own mobile devices and charging accessories. Emulators and unauthorized third-party tools are strictly prohibited."
-    },
-    {
-      "q": "What are the selection criteria?",
-      "a": "The top 16 squads with the highest total scores, calculated using placement points and kill points from Day 1 qualifiers, advance to the Grand Finals."
-    },
-    {
-      "q": "What is the final round format?",
-      "a": "The offline Grand Finals take place on 20 December 2026 at SVPCET, Nagpur. The top 16 squads compete in 6 matches across Erangel, Rondo, and Miramar."
-    },
-    {
-      "q": "When will the qualifiers take place?",
-      "a": "The online and offline qualifiers are scheduled for 19 December 2026."
-    },
-    {
-      "q": "When are the Grand Finals?",
-      "a": "The Grand Finals are scheduled for 20 December 2026."
-    },
-    {
-      "q": "How many squads qualify for the finals?",
-      "a": "The top 16 squads from Day 1 qualifiers advance to the Grand Finals."
-    },
-    {
-      "q": "Which maps will be played in the finals?",
-      "a": "The Grand Finals consist of 6 matches played across Erangel, Rondo, and Miramar."
-    }
-  ],
-
-  "contacts": [
-    {
-      "name": "Yug Meshram",
-      "phone": "+91 9921143282",
-      "email": ""},
-    {
-      "name": "Shreyash Tiwari",
-      "phone": "+91 9623719736",
-      "email": ""}
-  ],
-
-  registerUrl: "/register/gamer-conquest",
-  "rulebookUrl": "",
-
-  "shape": "ship",
-  "image": "/events/Gamer Conquest.jpeg",
-
-  "highlights": [
-    {
-      "value": "₹70,000",
-      "label": "Prize Pool"
-    },
-    {
-      "value": "4",
-      "label": "Members per Squad"
-    },
-    {
-      "value": "16",
-      "label": "Finalist Squads"
-    }
-  ],
-
-  "perks": [
-    "Compete for a ₹70,000 prize pool",
-    "Experience competitive BGMI battle royale gaming",
-    "Online and offline qualifiers",
-    "Grand Finals featuring the top 16 squads",
-    "Six final matches across Erangel, Rondo, and Miramar",
-    "Live esports atmosphere with big-screen broadcast",
-    "Planned interactive gaming experience zone"
-  ],
-
-  "whoCanJoin": "BGMI players and college gaming enthusiasts interested in competitive squad-based battle royale tournaments. Participants must register in squads of 4 members and provide accurate player details and in-game IDs."
-},
-
   {
     "title": "Semi-Finals",
     "text": "The remaining qualifying teams compete for a place in the grand finale. The winning teams advance to the championship match."
   },
-  "number": "06",
-  "source": {
-    "title": "The Imitation Game (2014)",
-    "text": "The story of Alan Turing and the effort to decipher Enigma-encrypted messages."
-  },
-  "image": "/events/CTF.jpeg",
-  "shape": "ship",
-  registerUrl: "/register/ctf",
-  "rulebookUrl": ""
-},
   {
     "title": "Grand Finale",
     "text": "The final two teams compete in the championship match. The winning team is declared the tournament champion."
@@ -740,7 +580,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology"
+      "sub": "St. Vincent Pallotti College of Engineering and Technology"
     },
     {
       "icon": "team",
@@ -1657,7 +1497,7 @@ const otherEvents: EventItem[] = [
       "email": ""}
   ],
 
- registerUrl: "/register/overdrive",
+  "registerUrl": "",
   "rulebookUrl": "",
 
   "shape": "ship",
@@ -2111,7 +1951,7 @@ const otherEvents: EventItem[] = [
       "email": ""}
   ],
 
-"registerUrl": "/register/designx",
+  "registerUrl": "",
   "rulebookUrl": "",
 
   "shape": "ship",
