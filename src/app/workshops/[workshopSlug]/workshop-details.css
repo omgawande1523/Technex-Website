@@ -533,8 +533,6 @@
 
 .hack-detail-root .headright .btn.gold::after{ content: "  →"; position: static; background: none; transform: none; animation: none; }
 
-.hack-detail-root .headright .btn.gold.register-refined::after{ content: none; }
-
 
 @keyframes ctapulse {
   50% { box-shadow: 0 0 0 4px rgba(255,236,170,.55), 0 0 42px rgba(255,200,60,.9); }

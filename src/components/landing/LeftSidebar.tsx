@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -31,6 +31,41 @@ export default function LeftSidebar() {
   const pathname = usePathname();
 
   return (
+    <> 
+      <style>{`
+        @media (max-width: 767px) {
+          .site-left-sidebar {
+            left: 8px !important;
+            top: 96px !important;
+            transform: none !important;
+            padding: 5px !important;
+            border-radius: 15px !important;
+            gap: 5px !important;
+            background: rgba(12, 10, 16, .88) !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,.38) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            max-height: calc(100dvh - 190px);
+            overflow-y: auto;
+            scrollbar-width: none;
+          }
+          .site-left-sidebar::-webkit-scrollbar { display: none; }
+          .site-left-sidebar .sidebar-icon-btn {
+            width: 35px !important;
+            height: 35px !important;
+            border-radius: 10px !important;
+          }
+          .site-left-sidebar .sidebar-tooltip,
+          .site-left-sidebar .sidebar-tooltip-left { display: none !important; }
+          .site-left-sidebar .sidebar-nav-items[data-open='false'] { display: none !important; }
+          .site-left-sidebar .sidebar-nav-items { display: flex; flex-direction: column; gap: 6px; }
+          .site-left-sidebar .mobile-sidebar-toggle { display: flex !important; }
+        }
+        @media (min-width: 768px) {
+          .site-left-sidebar .mobile-sidebar-toggle { display: none !important; }
+          .site-left-sidebar .sidebar-nav-items { display: contents !important; }
+        }
+      `}</style>
     <aside
       className="site-left-sidebar"
       style={{
@@ -54,6 +89,17 @@ export default function LeftSidebar() {
         pointerEvents: 'auto',
       }}
     >
+      <button
+        type="button"
+        className="mobile-sidebar-toggle"
+        aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={mobileOpen}
+        onClick={() => setMobileOpen((v) => !v)}
+        style={{ display: 'none', width: 35, height: 35, alignItems: 'center', justifyContent: 'center', borderRadius: 10, background: 'rgba(217,173,98,.14)', border: '1px solid rgba(217,173,98,.38)', color: '#f1cf89', cursor: 'pointer', fontSize: 20, lineHeight: 1 }}
+      >
+        {mobileOpen ? '×' : '☰'}
+      </button>
+      <div className="sidebar-nav-items" data-open={mobileOpen}>
       {LEFT_NAV_ITEMS.map((item) => {
         const IconComponent = item.icon;
         const isActive =
@@ -118,6 +164,8 @@ export default function LeftSidebar() {
           </div>
         );
       })}
+      </div>
     </aside>
+    </>
   );
 }

@@ -23,7 +23,6 @@ const HIGHLIGHTS = [
 
 const PERKS = [
   "Mentor guidance from industry experts and faculty",
-  "Food, refreshments and workspace for all 24 hours",
   "Certificates for every participant",
   "Goodies, swag and cash prizes for winners",
 ];
@@ -145,51 +144,17 @@ export default function EventDetail({
               <b>{"//"}{e.number}</b>
               <span>“{e.quote}”</span>
             </div>
-            <div className="head-actions">
-              {e.registerUrl ? (
-                e.registerUrl.startsWith("/") ? (
-                  <Link className="btn gold register-refined" href={e.registerUrl}>
-                    <span className="register-cta-text">REGISTER</span>
-                    <span className="register-arrow" aria-hidden="true">
-                      <svg viewBox="0 0 16 10">
-                        <path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                      </svg>
-                    </span>
-                  </Link>
-                ) : (
-                  <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">
-                    <span className="register-cta-text">REGISTRATION TBA</span>
-                    <span className="register-arrow" aria-hidden="true">
-                      <svg viewBox="0 0 16 10">
-                        <path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                      </svg>
-                    </span>
-                  </a>
-                )
+            {e.registerUrl ? (
+              e.registerUrl.startsWith("/") ? (
+                <Link className="btn gold register-refined" href={e.registerUrl}>
+                  Register now <span className="register-arrow" aria-hidden="true">↗</span>
+                </Link>
               ) : (
-                <span className="btn gold register-refined" aria-disabled="true">
-                  <span className="register-cta-text">REGISTRATION TBA</span>
-                  <span className="register-arrow" aria-hidden="true">
-                    <svg viewBox="0 0 16 10">
-                      <path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                    </svg>
-                  </span>
-                </span>
-              )}
-              {e.slug === "hackathon" && (
-                <div className="collaboration">
-                  <span>In collaboration with</span>
-                  <Image
-                    src="/assets/events/csi-svpcet.png"
-                    alt="Computer Society of India, Department of IT, SVPCET"
-                    width={144}
-                    height={144}
-                    className="collaboration-logo"
-                  />
-                  <strong>Computer Society of India</strong>
-                </div>
-              )}
-            </div>
+                <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">Register now <span className="register-arrow" aria-hidden="true">↗</span></a>
+              )
+            ) : (
+              <span className="btn gold register-refined" aria-disabled="true">Registration TBA</span>
+            )}
           </div>
         </header>
 

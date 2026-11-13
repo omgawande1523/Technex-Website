@@ -335,7 +335,7 @@ const otherEvents: EventItem[] = [
       "email": ""}
   ],
 
- registerUrl: "/register/envision",
+  "registerUrl": "",
   "rulebookUrl": "",
 
   "shape": "ship",
@@ -432,137 +432,6 @@ const otherEvents: EventItem[] = [
   {
     "title": "Round 2 — Knockout Progression",
     "text": "Teams qualifying from Round 1 compete in the next knockout stage. Winners advance to the subsequent rounds."
-  },
-  {
-    "title": "Semi-Finals",
-    "text": "The remaining qualifying teams compete for a place in the grand finale. The winning teams advance to the championship match."
-  },
-  {
-    "title": "Grand Finale",
-    "text": "The final two teams compete in the championship match. The winning team is declared the tournament champion."
-  }
-],
-
-
-  "rules": [
-    {
-      "title": "Registration and Player Details",
-      "text": "Teams must submit accurate team names, captain details, player lists and contact information during registration. Incorrect or false player information may lead to disqualification."
-    },
-    {
-      "title": "Check-In and Roster Verification",
-      "text": "All teams must complete check-in and roster verification before their scheduled matches."
-    },
-    {
-      "title": "Match Schedule and Communication",
-      "text": "Participants must follow the official match schedule and tournament rules. Match schedules, lobby details, announcements and results will be communicated through Discord."
-    },
-    {
-      "title": "Player Changes",
-      "text": "Any changes to player details must be communicated to the organizers beforehand. Last-minute changes will not be permitted."
-    },
-    {
-      "title": "Disqualification",
-      "text": "Teams may be disqualified for failing to report for scheduled matches, violating tournament rules, or submitting incorrect or false player details. Disputes will be handled by event administrators."
-    }
-  ],
-
-  "faqs": [
-    {
-      "q": "What is the team size?",
-      "a": "Each team must have 5 players and compete in a 5v5 Valorant format."
-    },
-    {
-      "q": "Are there registration fees?",
-      "a": "Registration is proposed to remain open until 15 December 2026. The registration fee amount is yet to be announced."
-    },
-    {
-      "q": "What are the submission rules?",
-      "a": "Participants must submit their team name, captain details, player list and contact information. All teams must complete check-in and roster verification before matches."
-    },
-    {
-      "q": "What tools are allowed?",
-      "a": "Participants will compete using the Valorant gaming platform. Internet connectivity and required gaming equipment will be provided as per the event setup."
-    },
-    {
-      "q": "What are the selection criteria?",
-      "a": "A total of 56 teams are expected. Eight teams will qualify directly for Round 2 through seeding or draw, while the remaining teams compete in Round 1."
-    },
-    {
-      "q": "What is the final round format?",
-      "a": "The grand finale will be a 5v5 Valorant match between the two teams qualifying from the semi-finals. The winning team will be declared tournament champion. The final is scheduled for 20 December 2026, followed by prize distribution and awards."
-    }
-  ],
-
-  "contacts": [
-    {
-      "name": "Alan Biju",
-      
-      "phone": "+919643728841",
-      "email": ""},
-    {
-      "name": "Sneha Agrawal",
-      "phone": "+918080550340",
-      "email": ""}
-  ],
-
- registerUrl: "/register/vortex",
-  "rulebookUrl": "",
-
-  "shape": "ship",
-  "image": "/events/vortex.jpeg",
-
-  "highlights": [
-    {
-      "value": "₹70,000",
-      "label": "Prize Pool"
-    },
-    {
-      "value": "5v5",
-      "label": "Team Format"
-    },
-    {
-      "value": "56",
-      "label": "Expected Teams"
-    }
-  ],
-
-  "perks": [
-    "Competitive Valorant esports experience",
-    "Live streaming",
-    "Team-based tactical competition",
-    "Grand finale and award distribution"
-  ],
-
-  "whoCanJoin": "Gaming enthusiasts and students participating in teams of 5 players."
-},
-  
-{
-  "slug": "gamer-conquest",
-  "number": "05",
-  "name": "Gamers Conquest 3.0",
-  "category": "Esports Fiesta",
-  "tagline": "BGMI Battle Royale Tournament · TECHNEX'26",
-  "quote": "Drop. Survive. Conquer.",
-
-  "about": "Gamers Conquest 3.0 is the esports flagship of TECHNEX'26. The tournament features BGMI, a squad-based battle royale with qualifiers on Day 1 and Grand Finals on Day 2, where the top 16 squads compete across multiple maps for the Chicken Dinner. The event brings a live esports atmosphere to campus, complete with a big-screen broadcast, thematic decoration, and a planned interactive experience zone.",
-
-  "domains": [
-    "Esports/Gaming Tournament",
-    "BGMI",
-    "Battle Royale",
-    "Live Broadcast",
-    "College Gaming Community"
-  ],
-
-  "source": {
-    "title": "Ready Player One — Ernest Cline (2011)",
-    "text": "The OASIS, an immersive shared virtual universe."
-  },
-
-  "innovation": {
-    "title": "Competitive Esports & Gaming",
-    "text": "BGMI battle royale competition, squad-based strategy, competitive multiplayer gaming, live esports broadcasting, and campus gaming experiences."
   },
 
   "stats": [
@@ -714,12 +583,317 @@ const otherEvents: EventItem[] = [
 },
 
   {
+    "title": "Semi-Finals",
+    "text": "The remaining qualifying teams compete for a place in the grand finale. The winning teams advance to the championship match."
+  },
+  "number": "06",
+  "source": {
+    "title": "The Imitation Game (2014)",
+    "text": "The story of Alan Turing and the effort to decipher Enigma-encrypted messages."
+  },
+  "image": "/events/CTF.jpeg",
+  "shape": "ship",
+  registerUrl: "/register/ctf",
+  "rulebookUrl": ""
+},
+  {
+    "title": "Grand Finale",
+    "text": "The final two teams compete in the championship match. The winning team is declared the tournament champion."
+  }
+],
+
+
+  "rules": [
+    {
+      "title": "Registration and Player Details",
+      "text": "Teams must submit accurate team names, captain details, player lists and contact information during registration. Incorrect or false player information may lead to disqualification."
+    },
+    {
+      "title": "Check-In and Roster Verification",
+      "text": "All teams must complete check-in and roster verification before their scheduled matches."
+    },
+    {
+      "title": "Match Schedule and Communication",
+      "text": "Participants must follow the official match schedule and tournament rules. Match schedules, lobby details, announcements and results will be communicated through Discord."
+    },
+    {
+      "title": "Player Changes",
+      "text": "Any changes to player details must be communicated to the organizers beforehand. Last-minute changes will not be permitted."
+    },
+    {
+      "title": "Disqualification",
+      "text": "Teams may be disqualified for failing to report for scheduled matches, violating tournament rules, or submitting incorrect or false player details. Disputes will be handled by event administrators."
+    }
+  ],
+
+  "faqs": [
+    {
+      "q": "What is the team size?",
+      "a": "Each team must have 5 players and compete in a 5v5 Valorant format."
+    },
+    {
+      "q": "Are there registration fees?",
+      "a": "Registration is proposed to remain open until 15 December 2026. The registration fee amount is yet to be announced."
+    },
+    {
+      "q": "What are the submission rules?",
+      "a": "Participants must submit their team name, captain details, player list and contact information. All teams must complete check-in and roster verification before matches."
+    },
+    {
+      "q": "What tools are allowed?",
+      "a": "Participants will compete using the Valorant gaming platform. Internet connectivity and required gaming equipment will be provided as per the event setup."
+    },
+    {
+      "q": "What are the selection criteria?",
+      "a": "A total of 56 teams are expected. Eight teams will qualify directly for Round 2 through seeding or draw, while the remaining teams compete in Round 1."
+    },
+    {
+      "q": "What is the final round format?",
+      "a": "The grand finale will be a 5v5 Valorant match between the two teams qualifying from the semi-finals. The winning team will be declared tournament champion. The final is scheduled for 20 December 2026, followed by prize distribution and awards."
+    }
+  ],
+
+  "contacts": [
+    {
+      "name": "Alan Biju",
+      
+      "phone": "+919643728841",
+      "email": "alankbiju150@gmail.com"},
+    {
+      "name": "Sneha Agrawal",
+      "phone": "+918080550340",
+      "email": "snehakagrawal8080@gmail.com"}
+  ],
+
+ registerUrl: "/register/vortex",
+  "rulebookUrl": "/rulebooks/VORTEX_2026_Official_Rulebook.pdf",
+
+  "shape": "ship",
+  "image": "/events/vortex.jpeg",
+
+  "highlights": [
+    {
+      "value": "₹70,000",
+      "label": "Prize Pool"
+    },
+    {
+      "value": "5v5",
+      "label": "Team Format"
+    },
+    {
+      "value": "56",
+      "label": "Expected Teams"
+    }
+  ],
+
+  "perks": [
+    "Competitive Valorant esports experience",
+    "Live streaming",
+    "Team-based tactical competition",
+    "Grand finale and award distribution"
+  ],
+
+  "whoCanJoin": "Gaming enthusiasts and students participating in teams of 5 players."
+},
+  
+
+{
+  "slug": "gamer-conquest",
+  "number": "05",
+  "name": "Gamers Conquest 3.0",
+  "category": "Esports Fiesta",
+  "tagline": "BGMI & Real Cricket 24 Esports Tournament · TECHNEX'26",
+  "quote": "Drop. Survive. Conquer.",
+
+  "about": "Gamers Conquest 3.0 is the multi-title mobile esports flagship of TECHNEX'26, featuring BGMI (4-player squad battle royale) and Real Cricket 24 (RC24) in a 1v1 single-elimination knockout format. BGMI features qualifiers on Day 1 and Grand Finals on Day 2, where the top 16 squads compete across multiple maps for the Chicken Dinner. RC24 features early knockout rounds on Day 1, followed by Semi-Finals and Final on Day 2, subject to registration count. RC24 participants can register online through Google Forms or at the on-ground registration and verification counter. The event brings a live esports atmosphere to campus, complete with a big-screen broadcast, thematic decoration, and a planned interactive experience zone.",
+
+  "domains": [
+    "Esports/Gaming Tournament",
+    "BGMI",
+    "Battle Royale",
+    "Real Cricket 24",
+    "RC24",
+    "1v1 Knockout",
+    "Live Broadcast",
+    "College Gaming Community"
+  ],
+
+  "source": {
+    "title": "Ready Player One — Ernest Cline (2011)",
+    "text": "The OASIS, an immersive shared virtual universe."
+  },
+
+  "innovation": {
+    "title": "Competitive Esports & Gaming",
+    "text": "BGMI squad-based battle royale competition, Real Cricket 24 (RC24) 1v1 knockout matches, competitive multiplayer gaming, live esports broadcasting, and campus gaming experiences."
+  },
+
+  "stats": [
+    {
+      "icon": "calendar",
+      "label": "Event Dates",
+      "value": "19–20 Dec 2026",
+      "sub": "Day 1: Qualifiers & RC24 Knockouts | Day 2: Finals"
+    },
+    {
+      "icon": "pin",
+      "label": "Venue",
+      "value": "SVPCET, Nagpur",
+      "sub": "St. Vincent Pallotti College of Engineering & Technology"
+    },
+    {
+      "icon": "team",
+      "label": "Team Size",
+      "value": "Squad (4) & Solo (1v1)",
+      "sub": "BGMI & RC24 Formats"
+    },
+    {
+      "icon": "trophy",
+      "label": "Prize Pool",
+      "value": "₹70,000",
+      "sub": "RC24 prize distribution being finalized"
+    }
+  ],
+
+  "rounds": [
+    {
+      "title": "Day 1 — Qualifiers (19 December 2026)",
+      "text": "BGMI: Online and offline qualifiers where all registered squads compete. Squads are evaluated based on placement points and kill points. The top 16 squads with the highest total scores qualify for the Grand Finals. RC24: Day 1 early knockout rounds featuring 1v1 single-elimination matches. Each match consists of 2 overs, with a Super Over used as a tie-breaker. RC24 players may complete registration and verification at the on-ground venue counter."
+    },
+    {
+      "title": "Day 2 — Grand Finals (20 December 2026)",
+      "text": "BGMI: The top 16 qualified squads compete physically at SVPCET, Nagpur, in 6 matches across Erangel, Rondo, and Miramar. The squad with the highest cumulative points across all matches is declared the winner. RC24: Semi-Finals and Final take place in a 1v1 single-elimination format, subject to registration count."
+    }
+  ],
+
+  "rules": [
+    {
+      "title": "Grand Finals Attendance",
+      "text": "All 16 qualified BGMI squads, including all squad members, must be physically present at SVPCET, Nagpur, on Day 2 (20 December 2026) for the Grand Finals. Players must use their own registered game accounts."
+    },
+    {
+      "title": "Devices and Identification",
+      "text": "Participants must bring their own fully charged mobile devices and valid identification. BGMI and RC24 players must use their own registered game accounts."
+    },
+    {
+      "title": "Online Qualifier Requirements",
+      "text": "Participants competing in BGMI online qualifiers are responsible for arranging their own devices and stable internet connections."
+    },
+    {
+      "title": "Fair Play and Anti-Cheating",
+      "text": "Hacks, cheats, third-party tools, emulator misuse, teaming with opponents, and unauthorized software are strictly prohibited and will result in immediate disqualification."
+    },
+    {
+      "title": "Final Decision",
+      "text": "The decisions of the event organizers and referees regarding rules, disputes, and results are final."
+    },
+    {
+      "title": "Real Cricket 24 (RC24) Rules",
+      "text": "RC24 follows a 1v1 single-elimination knockout bracket. Each match consists of 2 overs. If a match ends in a tie, a Super Over will be used to determine the winner. Players must complete on-ground registration or verification at the venue counter and use their own personal mobile devices and registered game accounts. Day 1 features early knockout rounds, while Day 2 features Semi-Finals and Final, subject to registration count."
+    }
+  ],
+
+  "faqs": [
+    {
+      "q": "What is the team size?",
+      "a": "BGMI requires a squad of 4 members. Real Cricket 24 (RC24) is an individual 1v1 tournament."
+    },
+    {
+      "q": "Are there registration fees?",
+      "a": "Registration fees are yet to be confirmed by the organizers."
+    },
+    {
+      "q": "What are the submission rules?",
+      "a": "BGMI participants must register their squad online through the official Google Form, providing all player names and in-game IDs. RC24 participants can register through the online Google Form or at the on-ground registration counter, with venue verification required."
+    },
+    {
+      "q": "What tools are allowed?",
+      "a": "Participants must use their own mobile devices and registered game accounts. Charging accessories are permitted. Emulators and unauthorized third-party tools are strictly prohibited."
+    },
+    {
+      "q": "What are the selection criteria?",
+      "a": "BGMI: The top 16 squads with the highest total scores, calculated using placement points and kill points from Day 1 qualifiers, advance to the Grand Finals. RC24: Players advance by winning their 1v1 single-elimination knockout matches."
+    },
+    {
+      "q": "What is the final round format?",
+      "a": "BGMI: The offline Grand Finals take place on 20 December 2026 at SVPCET, Nagpur. The top 16 squads compete in 6 matches across Erangel, Rondo, and Miramar. RC24: Semi-Finals and Final are scheduled for Day 2, subject to registration count."
+    },
+    {
+      "q": "When will the qualifiers take place?",
+      "a": "BGMI online and offline qualifiers and RC24 early knockout rounds are scheduled for 19 December 2026."
+    },
+    {
+      "q": "When are the Grand Finals?",
+      "a": "BGMI Grand Finals and RC24 Semi-Finals and Final are scheduled for 20 December 2026, with the RC24 schedule subject to registration count."
+    },
+    {
+      "q": "How many squads qualify for the finals?",
+      "a": "The top 16 BGMI squads from Day 1 qualifiers advance to the Grand Finals. RC24 follows a 1v1 knockout bracket."
+    },
+    {
+      "q": "Which maps will be played in the finals?",
+      "a": "The BGMI Grand Finals consist of 6 matches played across Erangel, Rondo, and Miramar."
+    }
+  ],
+
+  "contacts": [
+    {
+      "name": "Yug Meshram",
+      "phone": "+91 9921143282",
+      "email": "yugmeshram.24@stvincentngp.edu.in"
+    },
+    {
+      "name": "Shreyash Tiwari",
+      "phone": "+91 9623719736",
+      "email": "shreyashtiwari.24@stvincentngp.edu.in"
+    }
+  ],
+
+  registerUrl: "/register/gamer-conquest",
+  "rulebookUrl": "/rulebooks/Rule book(Gamer Conquest).pdf",
+
+  "shape": "ship",
+  "image": "/events/Gamer Conquest.jpeg",
+
+  "highlights": [
+    {
+      "value": "₹70,000",
+      "label": "Prize Pool"
+    },
+    {
+      "value": "4 / 1v1",
+      "label": "BGMI Squad / RC24 Solo"
+    },
+    {
+      "value": "16",
+      "label": "BGMI Finalist Squads"
+    }
+  ],
+
+  "perks": [
+    "Compete for a ₹70,000 prize pool",
+    "Experience competitive BGMI battle royale gaming",
+    "Online and offline qualifiers",
+    "Grand Finals featuring the top 16 squads",
+    "Six final matches across Erangel, Rondo, and Miramar",
+    "Real Cricket 24 (RC24) 1v1 single-elimination knockout matches",
+    "RC24 on-ground registration and verification counter",
+    "Live esports atmosphere with big-screen broadcast",
+    "Planned interactive gaming experience zone"
+  ],
+
+  "whoCanJoin": "BGMI players and college gaming enthusiasts interested in competitive squad-based battle royale tournaments, as well as individual players interested in Real Cricket 24 (RC24). BGMI participants must register in squads of 4 members and provide accurate player details and in-game IDs. RC24 is an individual 1v1 tournament with online Google Form registration and on-ground registration counters. RC24 players must complete on-ground verification and use their own mobile devices and registered game accounts."
+},
+
+
+  
+{
   "slug": "ctf",
   "name": "APEX CTF",
   "category": "Cyber",
-  "tagline": "Capture the Flag · TECHNEX'26",
+  "tagline": "Think. Exploit. Solve",
   "quote": "Explore. Create. Innovate.",
-  "about": "APEX CTF is a multi-domain Capture the Flag competition hosted by the ACM Student Chapter at SVPCET, Nagpur, under TECHNEX'26. Teams decode clues, trace evidence and solve technical challenges to capture flags. The event includes an 8-hour online qualifier and a 24-hour offline Final Arena.",
+  "about": "APEX CTF is a multi-domain Capture the Flag competition hosted by the ACM Student Chapter at SVPCET, Nagpur, as part of TECHNEX'26. The competition runs in two rounds in a hybrid mode — Round 1 online and Round 2 offline. Teams of 2–4 members solve multi-domain challenges. Registration for Round 1 is free. The event includes an 8-hour online qualifier and a 24-hour offline Final Arena.",
   "domains": [
     "Capture the Flag (CTF)",
     "Cybersecurity",
@@ -753,17 +927,17 @@ const otherEvents: EventItem[] = [
     {
       "icon": "trophy",
       "label": "Prize Pool",
-      "value": "₹2,00,000"
+      "value": "₹5,00,000"
     }
   ],
   "rounds": [
     {
       "title": "Round 1 — Online Qualifier (8 Hours)",
-      "text": "Teams solve multi-domain challenges and submit flags through the official CTF platform. The top teams advance based on scores and an organizer-announced cutoff."
+      "text": "Format: Online. Date & Time: 9 December 2026, 6:00 PM IST to 10 December 2026, 2:00 AM IST. Duration: 8 hours. Teams solve multi-domain challenges on the official CTF platform. Flags must be submitted through the CTF platform. Participants should retain notes and evidence for any write-ups requested by organizers. Evaluation is based on valid flag submissions and published platform scoring rules. Top qualifying teams advance to Round 2. Qualifying cutoff and tie-break rules are to be confirmed."
     },
     {
       "title": "Round 2 — Final Arena (24 Hours)",
-      "text": "Qualified teams compete in a 24-hour offline CTF final at SVPCET, Nagpur. Flags are submitted on the official platform; challenge write-ups may be requested to verify solutions before winners are confirmed."
+      "text": "Format: Offline at SVPCET, Nagpur. Date & Time: 19 December 2026, 11:00 AM IST to 20 December 2026, 11:00 AM IST. Duration: 24 hours. Qualified teams compete in a 24-hour offline CTF final during TECHNEX'26. Flags must be submitted through the official CTF platform, and write-ups for solved challenges may be requested for verification. Evaluation is based on platform points and organizer verification of write-ups before winners are declared. Final results will be confirmed after write-up verification, with the result announcement on 20 December."
     }
   ],
   "rules": [
@@ -785,7 +959,7 @@ const otherEvents: EventItem[] = [
     },
     {
       "title": "Verification & Ties",
-      "text": "Final-round write-ups may be required. In a tie, the team reaching the tied score first ranks higher."
+      "text": "Final-round write-ups may be required. In a tie, the team that reached the tied score first (earlier leaderboard timestamp) ranks higher."
     }
   ],
   "faqs": [
@@ -799,7 +973,7 @@ const otherEvents: EventItem[] = [
     },
     {
       "q": "What are the submission rules?",
-      "a": "Submit flags through the official CTF platform. Final-round write-ups may be required; PPT and demo videos are not required."
+      "a": "Submit flags in the format APX{...} through the official CTF platform. Retain notes and evidence for any write-ups requested by organizers. Final-round write-ups may be required for verification; PPT and demo videos are not required."
     },
     {
       "q": "What tools are allowed?",
@@ -807,27 +981,28 @@ const otherEvents: EventItem[] = [
     },
     {
       "q": "What are the selection criteria?",
-      "a": "Round 1 platform scores determine advancement, according to a cutoff announced by organizers."
+      "a": "Round 1 platform scores determine advancement, according to a cutoff announced by organizers. Final results are confirmed after any required write-up verification."
     },
     {
       "q": "What is the final round format?",
-      "a": "A 24-hour offline CTF final at SVPCET, Nagpur, with winners confirmed after any required write-up verification."
+      "a": "A 24-hour offline CTF final at SVPCET, Nagpur, from 19 December 2026 at 11:00 AM IST to 20 December 2026 at 11:00 AM IST. Winners are confirmed after any required write-up verification, and results will be announced on 20 December."
     }
   ],
   "contacts": [
     {
       "name": "Rishi Walokar",
       "phone": "9373334727",
-      "email": "",
+      "email": "rishiwalokar7@gmail.com "
     },
     {
       "name": "Zubiya Khushgil Khan",
       "phone": "8668260665",
-      "email": ""}
+      "email": "zubiyakhushgil@gmail.com"
+    }
   ],
   "highlights": [
     {
-      "value": "₹2,00,000",
+      "value": "₹5,00,000",
       "label": "Prize Pool"
     },
     {
@@ -857,10 +1032,11 @@ const otherEvents: EventItem[] = [
   "image": "/events/CTF.jpeg",
   "shape": "ship",
   registerUrl: "/register/ctf",
-  "rulebookUrl": ""
+  "rulebookUrl": "/rulebooks/APEX_CTF_Rulebook.pdf"
 },
+
   {
-  "slug": "bizcon",
+  "slug": "build-the-brand",
   "name": "BIZCON 2026",
   "category": "Expo",
   "tagline": "Startup Conclave & Entrepreneurship · TECHNEX-26",
@@ -988,7 +1164,7 @@ const otherEvents: EventItem[] = [
   },
   "image": "",
   "shape": "ship",
- registerUrl: "/register/bizcon",
+  "registerUrl": "",
   "rulebookUrl": ""
 },
   
@@ -1115,7 +1291,7 @@ const otherEvents: EventItem[] = [
 
   "contacts": [],
 
- registerUrl: "/register/coastal-clash",
+  "registerUrl": "",
   "rulebookUrl": "",
 
   "shape": "ship",
@@ -1147,26 +1323,28 @@ const otherEvents: EventItem[] = [
 
   "whoCanJoin": "Engineering and junior college students interested in marine engineering, remote-controlled boats, electronics, and competitive racing. Participants can register individually or in teams of up to 4 members."
 },
-
-  {
+{
   "slug": "robo-sumo",
   "name": "Robo Sumo",
   "category": "Robotics",
-  "tagline": "Robot Sumo Competition · TECHNEX 2026",
+  "tagline": "PUSH. CONTROL. CONQUER.",
   "quote": "Explore. Create. Innovate.",
-  "about": "Robo Sumo is a competitive robotics event under TECHNEX 2026 where two robots enter a circular arena and attempt to push each other outside the ring. Participants build robots focused on strength, stability, traction and control. The robot remaining in the ring wins the round. The competition applies mechanical design, motor control, sensors and teamwork.",
+
+  "about": "Robo Sumo is an exciting robotics competition under TECHNEX-26 in which two remotely controlled robots compete inside a designated arena. The objective is to push the opponent's robot beyond the marked red boundary while maintaining control of your own robot. Participants demonstrate their robot's strength, stability, traction, and control through competitive battles. Enter the arena, challenge your opponent, and prove your robot's strength and control in an exciting battle of engineering and strategy.",
+
   "domains": [
     "Robotics",
     "Mechanical Design",
     "Motor Control",
     "Competition"
   ],
+
   "stats": [
     {
       "icon": "calendar",
-      "label": "Event Format",
-      "value": "2 Days",
-      "sub": "Day 1 qualifiers · Day 2 finals"
+      "label": "Event Dates",
+      "value": "19–20 Dec 2026",
+      "sub": "Day 1: Qualifiers | Day 2: Knockout Finals"
     },
     {
       "icon": "pin",
@@ -1185,20 +1363,22 @@ const otherEvents: EventItem[] = [
       "value": "₹50,000"
     }
   ],
+
   "rounds": [
     {
-      "title": "Day 1 — Inspection & Qualifiers",
-      "text": "Robots are inspected for weight and dimensions, then all teams participate in qualifier matches. Top-performing teams are shortlisted."
+      "title": "Day 1 — Qualifier Rounds (19 December 2026)",
+      "text": "All registered and verified teams participate in the qualifier rounds. Random match cards determine match allocation. Each match consists of two rounds of 1 minute 30 seconds each, making a total playing time of 3 minutes per match. Winners qualify for Day 2, while losing teams are eliminated."
     },
     {
-      "title": "Day 2 — Elimination Finals",
-      "text": "Shortlisted teams compete in elimination rounds, including semifinals, final and third-place matches, followed by prize distribution."
+      "title": "Day 2 — Knockout Rounds & Championship (20 December 2026)",
+      "text": "Qualified teams from Day 1 compete in further knockout rounds. Match duration and round timings will be announced by the organizing team on the day of the event. Winning teams advance until the final two teams remain. The final two teams compete for the Robo Sumo championship, followed by prize distribution."
     },
     {
       "title": "Match Execution",
-      "text": "Two robots enter the circular arena and compete after a countdown. A match ends when a robot is forced out or the time limit expires. Knockout matches are decided by the applicable point scoring."
+      "text": "Two remotely controlled robots start from their designated positions inside the Robo Sumo arena and compete to push the opponent beyond the red boundary. A robot pushed completely beyond the red boundary awards 2 points to the opposing team. If both robots completely cross the red boundary simultaneously, each team receives 1 point. The same scoring applies to two-wheel and four-wheel robots. A robot falling completely outside the arena does not award additional points; the maximum award remains 2 points."
     }
   ],
+
   "rules": [
     {
       "title": "Timely Reporting",
@@ -1219,8 +1399,37 @@ const otherEvents: EventItem[] = [
     {
       "title": "Repairs",
       "text": "Only minor repairs are permitted between matches; major redesigns are not allowed."
+    },
+    {
+      "title": "Robot Dimensions",
+      "text": "Maximum length: 350 mm. Maximum width: 350 mm. Maximum height: 300 mm. No tolerance is allowed for the specified robot dimensions."
+    },
+    {
+      "title": "Robot Weight Limit",
+      "text": "Maximum permitted robot weight is 5 kg with a 1% tolerance, allowing a maximum of 5.05 kg. Battery weight is excluded only when the battery is not mounted on the robot."
+    },
+    {
+      "title": "Battery Specifications",
+      "text": "Only one 3S LiPo battery is permitted, with a maximum voltage of 12.5V. For wireless-controlled robots, the battery must be securely mounted on the robot. Battery replacement or swapping is prohibited once a match has started."
+    },
+    {
+      "title": "Control Method",
+      "text": "Both wired and wireless control methods are permitted. Wired-controlled robots must have a control cable of at least 2 metres. The designated robot operator cannot be changed throughout the tournament."
+    },
+    {
+      "title": "Prohibited Mechanisms",
+      "text": "Magnets, magnetic devices, suction cups, vacuum mechanisms, and similar mechanisms designed to provide additional adhesion or traction against the arena surface are prohibited."
+    },
+    {
+      "title": "Mandatory Robot Verification",
+      "text": "All robots must pass mandatory verification before participating. Any robot that fails to satisfy the mandatory verification criteria will be disqualified and will not be permitted to participate."
+    },
+    {
+      "title": "Arena Scoring System",
+      "text": "2 Points: When a robot is pushed completely beyond the red boundary, the opposing team receives 2 points. 1 Point Each: If both robots completely cross beyond the red boundary simultaneously, each team receives 1 point. The same scoring criteria apply to both two-wheel and four-wheel robots. A robot falling completely outside the arena does not receive any additional points. The maximum award remains 2 points."
     }
   ],
+
   "faqs": [
     {
       "q": "What is the team size?",
@@ -1232,33 +1441,35 @@ const otherEvents: EventItem[] = [
     },
     {
       "q": "What are the submission rules?",
-      "a": "Submit robot specifications (size and weight), component list and power details (battery type and voltage); present the robot for inspection at the scheduled reporting time."
+      "a": "Submit robot specifications (size and weight), component list and power details (battery type and voltage); present the robot for mandatory verification at the scheduled reporting time."
     },
     {
       "q": "What tools are allowed?",
-      "a": "Only minor repairs between matches are allowed; major redesigns are not permitted."
+      "a": "Both wired and wireless robot control methods are permitted. Only minor repairs between matches are allowed; major redesigns are not permitted. Magnets, suction cups, vacuum mechanisms, and similar additional adhesion mechanisms are prohibited."
     },
     {
       "q": "What are the selection criteria?",
-      "a": "Robot performance in the arena, ability to push or immobilize the opponent, stability and control."
+      "a": "Robot performance in the arena, ability to push the opponent beyond the red boundary, stability, traction, control, and applicable match scoring. Winners of Day 1 qualifiers advance to Day 2."
     },
     {
       "q": "What is the final round format?",
-      "a": "Typically knockout or best-of-three; the robot that pushes the opponent out or immobilizes it within the time limit wins."
+      "a": "Day 2 features knockout rounds where qualified teams compete until the final two teams remain. The final two teams compete for the Robo Sumo championship. Match duration and round timings will be announced by the organizing team on the event day."
     }
   ],
+
   "contacts": [
     {
       "name": "Kartikeya Shivankar",
-      
       "phone": "9356635146",
-      "email": ""},
+      "email": "kartikshivankar12@gmail.com "
+    },
     {
       "name": "R. Bhavya Naidu",
-      
       "phone": "8459884596",
-      "email": ""}
+      "email": "bhavyanaidu2309@gmail.com"
+    }
   ],
+
   "highlights": [
     {
       "value": "₹50,000",
@@ -1273,26 +1484,36 @@ const otherEvents: EventItem[] = [
       "label": "Competition"
     }
   ],
+
   "perks": [
-    "Competitive robot sumo matches",
-    "Robot inspection and qualifying rounds",
-    "Semifinal, final and third-place matches"
+    "Competitive robot-versus-robot battles",
+    "Knockout-based robotics competition",
+    "Two days of intense robotics action",
+    "Opportunity to demonstrate engineering and robot-control skills",
+    "Exciting final battles for the championship",
+    "Compete for a ₹50,000 prize pool"
   ],
-  "whoCanJoin": "Teams of 1–4 interested in mechanical design, motor control and competitive robotics.",
+
+  "whoCanJoin": "Teams of 1–4 interested in mechanical design, motor control and competitive robotics. All participating robots must satisfy the specified dimensions, weight, battery, control and mandatory verification requirements.",
+
   "innovation": {
     "title": "Practical Robotics Engineering",
     "text": "Mechanical design, traction, stability, motor control and sensors for robot-sumo competition."
   },
+
   "number": "09",
+
   "source": {
     "title": "Real Steel (2011)",
     "text": "Fictional boxing robots designed to fight in an arena under human control or with automated routines."
   },
+
   "image": "/events/robo-sumo.webp",
   "shape": "ship",
- registerUrl: "/register/robo-sumo",
-  "rulebookUrl": ""
+  registerUrl: "/register/robo-sumo",
+  "rulebookUrl": "/rulebooks/Robo Sumo RuleBook.pdf"
 },
+
   
 {
   "slug": "overdrive",
@@ -1516,7 +1737,7 @@ const otherEvents: EventItem[] = [
     },
     {
       "title": "Round 2 — Technical Quiz",
-      "text": "Qualified teams take an online computer-based, fast-paced quiz covering C++, Python, DSA, AI and logical reasoning, using hints unlocked in Round 1."
+      "text": "Qualified teams take an online computer-based, fast-paced quiz covering C++, Python, DSA, AI and logical reasoning."
     },
     {
       "title": "Round 3 — Grand Mix Tech Quiz (Final Breakout)",
@@ -1576,12 +1797,12 @@ const otherEvents: EventItem[] = [
       "name": "Raj Kubde",
       
       "phone": "+919284221610",
-      "email": ""},
+      "email": "rajkubde12@gmail.com "},
     {
       "name": "Devansh Yadav",
       
       "phone": "+917057555407",
-      "email": ""}
+      "email": "devanshy494@gmail.com"}
   ],
   "highlights": [
     {
@@ -1599,7 +1820,9 @@ const otherEvents: EventItem[] = [
   ],
   "perks": [
     "QR-based campus treasure hunt",
-    "Technical quiz in C++, Python, DSA and AI",
+    "Technical quiz in C++, Python, DSA, AI and Mathematical Reasoning",
+    "Technical Puzzles and Problem-Solving, debugging and cryptography",
+    "Teamwork, Leadership,Creativity & Quick Decision-Making",
     "Live coding, debugging and cryptography finale"
   ],
   "whoCanJoin": "Teams of 2–5 participants interested in programming, logical reasoning, cybersecurity and technical problem-solving.",
@@ -1615,10 +1838,10 @@ const otherEvents: EventItem[] = [
   "image": "/events/TechQuest.jpeg",
   "shape": "ship",
  registerUrl: "/register/techquest",
-  "rulebookUrl": ""
+  "rulebookUrl": "/rulebooks/TECHQUEST 2k26 (Rule book).pdf"
 },
   {
-  "slug": "agentic-arena",
+  "slug": "ai-agent-arena",
   "name": "Agentic Arena",
   "category": "AI",
   "tagline": "24-Hour Agentic AI Hackathon · TECHNEX'26",
@@ -1727,13 +1950,13 @@ const otherEvents: EventItem[] = [
       "name": "Kaushik Khodke",
       
       "phone": "8806275531",
-      "email": "",
+      "email": "kaushikkhodke29@gmail.com",
     },
     {
       "name": "Anushree Khobe",
       
       "phone": "9503334551",
-      "email": ""}
+      "email": "anushreekhobe.24@stvincentngp.edu.in"}
   ],
   "highlights": [
     {
@@ -1752,6 +1975,7 @@ const otherEvents: EventItem[] = [
   "perks": [
     "Build practical goal-driven AI agents",
     "Controlled robustness evaluation",
+    "Real-world problem-solving experience",
     "Live final pitch and demonstration"
   ],
   "whoCanJoin": "Student teams of 2–4 interested in building practical agentic AI systems across the listed domains.",
@@ -1767,7 +1991,7 @@ const otherEvents: EventItem[] = [
   "image": "",
   "shape": "ship",
 "registerUrl": "/register/ai-agent-arena",
-  "rulebookUrl": ""
+  "rulebookUrl": "/rulebooks/Agentic_Arena_Rulebook.pdf"
 },
   
 {
