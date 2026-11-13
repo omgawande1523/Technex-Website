@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Redaction+20&display=swap");
-
 .route {
   min-height: 100vh;
 }
@@ -8,21 +6,7 @@
   min-height: 100vh;
   overflow: clip;
   background: #000 url("/assets/bg/permanent-bg.webp") center / cover fixed no-repeat;
-  font-family: "Redaction 20", system-ui, sans-serif;
-}
-
-.page :global(*) {
-  font-family: "Redaction 20", system-ui, sans-serif !important;
-}
-
-.page :global(h1),
-.page :global(h2),
-.page :global(h3),
-.page :global(h4),
-.page :global(h5),
-.page :global(h6),
-.page :global(.font-orbitron) {
-  font-family: var(--font-metal-mania), sans-serif !important;
+  font-family: var(--font-outfit), sans-serif;
 }
 
 @media (max-width: 860px) {
@@ -33,7 +17,7 @@
 }
 
 .page :global(.font-orbitron) {
-  font-family: var(--font-metal-mania), sans-serif;
+  font-family: var(--font-barge), 'Barge', var(--font-outfit), sans-serif;
 }
 
 .page :global(h1) {

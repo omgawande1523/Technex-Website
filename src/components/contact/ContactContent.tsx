@@ -459,7 +459,7 @@ export default function ContactContent() {
                 }
               >
                 <div className="text-center flex flex-col items-center">
-                  <h3 className="contact-coordinator-name font-renaissance font-bold text-[17px] text-[#261104] tracking-tight leading-snug">
+                  <h3 className="font-renaissance font-bold text-[17px] text-[#261104] tracking-tight leading-snug">
                     {member.name}
                   </h3>
 

@@ -11,28 +11,18 @@ export const metadata: Metadata = {
 
 export default function WorkshopsPage() {
   return (
-    <main className={styles.page}>
-      <div
-        className={styles.backgroundGlow}
-        aria-hidden="true"
-      />
+    <div className="workshop-page-wrapper">
+      <main className="page-shell">
+        <header className="page-header">
+          <h1>Workshops</h1>
+        </header>
 
-      <header className={styles.header}>
-        <h1>WORKSHOPS</h1>
-        <div className={styles.titleRule} />
-      </header>
-
-      <section
-        className={styles.grid}
-        aria-label="Available workshops"
-      >
-        {workshops.map((workshop) => (
-          <WorkshopCard
-            key={workshop.id}
-            workshop={workshop}
-          />
-        ))}
-      </section>
-    </main>
+        <section className="workshop-grid" aria-label="Featured workshops">
+          {workshops.map((workshop) => (
+            <WorkshopCard key={workshop.id || workshop.cover} workshop={workshop} />
+          ))}
+        </section>
+      </main>
+    </div>
   );
 }

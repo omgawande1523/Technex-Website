@@ -344,8 +344,8 @@
   overflow: hidden;
   text-overflow: clip;
   font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 600;
-  text-transform: none;
+  font-weight: 950;
+  text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #ffffff;
   text-shadow: 0 0 12px rgba(251, 191, 36, 1), 0 0 20px rgba(217, 119, 6, 0.7), 0 2px 4px rgba(0, 0, 0, 0.95);
@@ -366,8 +366,8 @@
   overflow: hidden;
   text-overflow: clip;
   font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 500;
-  text-transform: none;
+  font-weight: 900;
+  text-transform: uppercase;
   color: #fde047;
   text-shadow: 0 0 10px rgba(245, 158, 11, 1), 0 1px 3px rgba(0, 0, 0, 0.95);
   letter-spacing: 0.06em;

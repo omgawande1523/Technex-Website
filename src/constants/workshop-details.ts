@@ -38,17 +38,20 @@ const detailsBySlug: Record<string, Partial<WorkshopDetails>> = {
 export const workshopDetails: WorkshopDetails[] = workshops.map((workshop, index) => {
   const slug = workshop.slug || workshop.id;
   const overrides = detailsBySlug[slug] ?? {};
+  const category = workshop.category ?? "Workshop";
+  const description =
+    workshop.description ?? "Workshop details will be announced by the organizers.";
   return {
     slug,
     number: String(index + 1).padStart(2, "0"),
     name: workshop.title,
-    category: workshop.category,
+    category,
     tagline: "TECHNEX 2026 · Hands-on Workshop",
     quote: "Learn. Build. Innovate.",
-    about: workshop.description,
-    domains: [workshop.category],
-    source: { title: "Workshop overview", text: workshop.description },
-    innovation: { title: "Practical learning", text: workshop.description },
+    about: description,
+    domains: [category],
+    source: { title: "Workshop overview", text: description },
+    innovation: { title: "Practical learning", text: description },
     stats: [
       { icon: "calendar", label: "Date", value: "To be announced" },
       { icon: "pin", label: "Venue", value: "To be announced" },

@@ -4,7 +4,6 @@ import {
   eventDisplayFont,
   eventTextFont,
   landingBodyFont,
-  metalManiaFont,
 } from "@/app/event-fonts";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -29,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${metalManiaFont.variable} ${eventDisplayFont.variable} ${eventTextFont.variable} ${landingBodyFont.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${eventDisplayFont.variable} ${eventTextFont.variable} ${landingBodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <SiteChrome />

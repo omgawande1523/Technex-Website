@@ -4,7 +4,6 @@
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Rajdhani:wght@600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Redaction+20&display=swap");
 
 .technex-team-page {
   position: relative;
@@ -46,28 +45,3 @@
     padding: 4.5rem 0 3.5rem;
   }
 }
-
-.technex-team-page,
-.technex-team-page * {
-  font-family: "Redaction 20", system-ui, sans-serif !important;
-}
-
-.technex-team-page h1,
-.technex-team-page h2,
-.technex-team-page h3,
-.technex-team-page h4,
-.technex-team-page h5,
-.technex-team-page h6,
-.technex-team-page .section-heading-banner-title {
-  font-family: var(--font-metal-mania), sans-serif !important;
-}
-
-.technex-team-page .faculty-mentor-card .cyber-front-name.name-size-sm { font-size: clamp(18px, 8cqi, 24px); }
-.technex-team-page .faculty-mentor-card .cyber-front-name.name-size-md { font-size: clamp(16px, 7.2cqi, 22px); }
-.technex-team-page .faculty-mentor-card .cyber-front-name.name-size-lg { font-size: clamp(14px, 6.2cqi, 19.5px); }
-.technex-team-page .faculty-mentor-card .cyber-front-name.name-size-xl { font-size: clamp(12.5px, 5.4cqi, 17px); }
-
-.technex-team-page .faculty-mentor-card .cyber-front-role.role-size-sm { font-size: clamp(13.5px, 5.6cqi, 17px); }
-.technex-team-page .faculty-mentor-card .cyber-front-role.role-size-md { font-size: clamp(12px, 5cqi, 15.5px); }
-.technex-team-page .faculty-mentor-card .cyber-front-role.role-size-lg { font-size: clamp(10.5px, 4.3cqi, 14px); }
-.technex-team-page .faculty-mentor-card .cyber-front-role.role-size-xl { font-size: clamp(9.5px, 3.8cqi, 12px); }

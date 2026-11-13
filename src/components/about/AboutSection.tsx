@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import MaterializedFrame from "./MaterializedFrame";
 import AftermoviePlayer from "./AftermoviePlayer";
+import styles from "./about.module.css";
 
 interface StatItem {
   title: string;
@@ -112,6 +113,22 @@ const PREVIOUS_GUESTS: DignitaryItem[] = [
     image: "/Dr-Ravinder-Singhal.webp",
     quote: "Technology driven by youth is the backbone of modern progress and security.",
   },
+];
+
+const SPONSORS = [
+  { name: "Federal Bank", logo: "/sponsors/federal-bank.webp" },
+  { name: "Skoda", logo: "/sponsors/skoda.png" },
+  { name: "Hyundai", logo: "/sponsors/hyundai.webp" },
+  { name: "Toyota", logo: "/sponsors/toyota.webp" },
+  { name: "NEXA", logo: "/sponsors/nexa.webp" },
+  { name: "MG", logo: "/sponsors/mg.png" },
+  { name: "Mahindra", logo: "/sponsors/mahindra.webp" },
+  { name: "Krafton", logo: "/sponsors/krafton.webp" },
+  { name: "CAD Desk", logo: "/sponsors/cad-desk.webp" },
+  { name: "Shah Overseas", logo: "/sponsors/shah-overseas.webp" },
+  { name: "IDP", logo: "/sponsors/idp.webp" },
+  { name: "Waflate", logo: "/sponsors/waflatte.webp" },
+  { name: "Physics Wallah", logo: "/Physics_wallah_logo.webp" },
 ];
 
 export default function AboutSection() {
@@ -379,7 +396,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          <h3 className="dignitary-name text-2xl sm:text-3xl font-extrabold text-white">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
             {CHIEF_GUEST.name}
           </h3>
           <p className="text-[#d9ad62] font-mono text-xs sm:text-sm mt-1.5 font-semibold">
@@ -439,7 +456,7 @@ export default function AboutSection() {
                   {guest.role}
                 </div>
 
-                <h3 className="dignitary-name text-2xl sm:text-3xl font-extrabold text-white">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
                   {guest.name}
                 </h3>
                 <p className="text-gray-300 text-xs sm:text-sm font-mono mt-1 max-w-lg">
@@ -492,6 +509,38 @@ export default function AboutSection() {
         </div>
       </section>
 
+      {/* ========================================================= */}
+      {/* 7. SPONSORED & SUPPORTED BY (INFINITE MARQUEE) */}
+      {/* ========================================================= */}
+      <MaterializedFrame tag="ALLIANCE // PATRON_NETWORK" glowColor="gold">
+        <h2 className="text-2xl sm:text-4xl font-extrabold text-center mb-8 tracking-tight bg-gradient-to-r from-white via-[#f5e5c9] to-[#d9ad62] bg-clip-text text-transparent">
+          Sponsored & Supported By
+        </h2>
+        <p className="text-center text-xs sm:text-sm text-gray-400 -mt-5 mb-8 max-w-xl mx-auto">
+          Empowered by industry-leading organizations and visionary education partners
+        </p>
+
+        <div className="relative overflow-hidden w-full py-2">
+          {/* Edge gradient mask for smooth conveyor feeling */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-[#05040a] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-[#05040a] to-transparent z-10 pointer-events-none" />
+
+          <div className={styles.animateMarquee}>
+            {[...SPONSORS, ...SPONSORS].map((s, idx) => (
+              <div
+                key={`sponsor-${idx}`}
+                className="flex-shrink-0 h-16 w-32 sm:h-20 sm:w-40 md:h-22 md:w-44 mx-2.5 sm:mx-3.5 flex items-center justify-center bg-[rgba(14,11,22,0.85)] border border-[rgba(217,173,98,0.22)] rounded-2xl p-3 sm:p-4 hover:border-[#d9ad62] hover:bg-[rgba(22,17,32,0.95)] hover:scale-105 transition-all duration-300 shadow-md group/sp"
+              >
+                <img
+                  src={s.logo}
+                  alt={s.name}
+                  className="object-contain max-h-full max-w-full filter brightness-95 group-hover/sp:brightness-110 transition-all"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </MaterializedFrame>
     </div>
   );
 }
