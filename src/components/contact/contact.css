@@ -1,134 +1,179 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=IM+Fell+English:ital@0;1&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-/* Da Vinci Parchment Scroll Theme (Contact Page Only) */
-.font-renaissance {
-  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+/* Custom Antique & Parchment Utilities */
+.font-cinzel {
+  font-family: var(--font-cinzel, 'Cinzel', serif);
 }
 
-.font-parchment-serif {
-  font-family: 'Cormorant Garamond', 'IM Fell English', Georgia, serif;
+.font-cinzel-dec {
+  font-family: var(--font-cinzel-dec, 'Cinzel Decorative', serif);
 }
 
-.parchment-input {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: 1px solid rgba(77, 42, 16, 0.72);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 245, 222, 0.2),
-    inset 0 2px 5px rgba(72, 38, 12, 0.1),
-    0 1px 0 rgba(255, 246, 225, 0.3);
-  color: #261104;
-  transition:
-    border-color 0.22s ease,
-    box-shadow 0.22s ease;
+.font-serif-accent {
+  font-family: var(--font-serif-accent, 'Cormorant Garamond', Georgia, serif);
 }
 
-.parchment-input:hover {
-  border-color: rgba(66, 33, 10, 0.85);
-  background: transparent !important;
-  background-color: transparent !important;
+.font-brand {
+  font-family: var(--font-brand, 'Metal Mania', cursive, sans-serif);
 }
 
-.parchment-input:focus,
-.parchment-input:active {
-  outline: none;
-  border-color: #3a1906;
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(92, 52, 22, 0.25),
-    inset 0 1px 4px rgba(72, 38, 12, 0.16),
-    0 0 0 2px rgba(132, 82, 36, 0.22);
-}
-
-/* Chrome / Safari / WebKit autofill & browser filled field reset to stay transparent */
-.parchment-input:-webkit-autofill,
-.parchment-input:-webkit-autofill:hover,
-.parchment-input:-webkit-autofill:focus,
-.parchment-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
-  box-shadow: 0 0 0 1000px transparent inset !important;
-  -webkit-text-fill-color: #261104 !important;
-  caret-color: #261104 !important;
-  background-color: transparent !important;
-  background: transparent !important;
-  transition: background-color 5000000s ease-in-out 0s, color 5000000s ease-in-out 0s !important;
-}
-
-.parchment-input:-moz-autofill,
-.parchment-input:-moz-autofill-preview {
-  background-color: transparent !important;
-  color: #261104 !important;
-}
-
-.parchment-input::placeholder {
-  color: #543317;
-  opacity: 0.88;
-}
-
-.parchment-btn {
-  background: linear-gradient(180deg, #653112 0%, #411b06 55%, #260d01 100%);
-  color: #f9ead0;
-  border: 1px solid #d4a664;
-  box-shadow:
-    0 4px 14px rgba(34, 14, 3, 0.5),
-    inset 0 1px 1px rgba(255, 228, 176, 0.38),
-    inset 0 -1px 2px rgba(20, 7, 0, 0.65);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.parchment-btn:hover:not(:disabled) {
-  background: linear-gradient(180deg, #793d18 0%, #502208 55%, #311203 100%);
-  transform: translateY(-1px);
-  box-shadow:
-    0 7px 18px rgba(34, 14, 3, 0.65),
-    inset 0 1px 2px rgba(255, 236, 194, 0.52),
-    inset 0 -1px 2px rgba(20, 7, 0, 0.65);
-}
-
-.parchment-btn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-/* Page container & background matching Technex 2026 cosmic theme */
-.technex-contact-page {
+/* Dark Antique Parchment Panel */
+.antique-panel {
+  background: linear-gradient(170deg, rgba(26, 19, 13, 0.88) 0%, rgba(16, 12, 8, 0.94) 55%, rgba(10, 8, 6, 0.97) 100%);
+  border: 1px solid rgba(217, 173, 98, 0.22);
+  box-shadow: 
+    0 18px 45px -10px rgba(0, 0, 0, 0.85),
+    0 0 30px -5px rgba(217, 173, 98, 0.08),
+    inset 0 0 0 1px rgba(184, 131, 66, 0.12);
   position: relative;
-  min-height: 100vh;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.antique-panel::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(217, 173, 98, 0.1);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Subtle corner decorations */
+.corner-ornament {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(217, 173, 98, 0.55);
+  pointer-events: none;
+}
+.corner-ornament.top-left {
+  top: 4px;
+  left: 4px;
+  border-top: 1.5px solid;
+  border-left: 1.5px solid;
+}
+.corner-ornament.top-right {
+  top: 4px;
+  right: 4px;
+  border-top: 1.5px solid;
+  border-right: 1.5px solid;
+}
+.corner-ornament.bottom-left {
+  bottom: 4px;
+  left: 4px;
+  border-bottom: 1.5px solid;
+  border-left: 1.5px solid;
+}
+.corner-ornament.bottom-right {
+  bottom: 4px;
+  right: 4px;
+  border-bottom: 1.5px solid;
+  border-right: 1.5px solid;
+}
+
+/* Antique Inputs */
+.antique-input {
+  background: rgba(22, 16, 11, 0.65);
+  border: 1px solid rgba(217, 173, 98, 0.2);
+  color: #f7eedb;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.antique-input:hover:not(:focus) {
+  border-color: rgba(217, 173, 98, 0.35);
+  background: rgba(28, 20, 14, 0.75);
+}
+
+.antique-input:focus {
+  outline: none;
+  background: rgba(33, 24, 16, 0.9);
+  border-color: #d9ad62;
+  box-shadow: 
+    0 0 0 2px rgba(217, 173, 98, 0.2),
+    0 0 16px rgba(217, 173, 98, 0.15),
+    inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.antique-input::placeholder {
+  color: #8c7862;
+}
+
+/* Premium Antique Gold Button */
+.gold-btn {
+  background: linear-gradient(135deg, #c5984b 0%, #a47634 50%, #7e5320 100%);
+  border: 1px solid rgba(247, 230, 196, 0.35);
+  color: #170d04;
+  font-family: var(--font-cinzel, 'Cinzel', serif);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 4px 14px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(217, 173, 98, 0.2),
+    inset 0 1px 1px rgba(255, 245, 220, 0.5),
+    inset 0 -1px 2px rgba(40, 20, 5, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
   width: 100%;
-  background: #000000 url("/assets/bg/permanent-bg.webp") center top / cover fixed no-repeat;
-  color: #ffffff;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: 0.6s ease;
 }
 
-.technex-contact-page,
-.technex-contact-page * {
-  font-style: normal !important;
+.gold-btn:hover:not(:disabled)::after {
+  left: 100%;
 }
 
-.technex-contact-page :not(svg) {
-  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+.gold-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dfb361 0%, #b8863f 50%, #8e6027 100%);
+  transform: translateY(-1.5px);
+  box-shadow: 
+    0 8px 22px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(217, 173, 98, 0.35),
+    inset 0 1px 2px rgba(255, 255, 240, 0.6);
 }
 
-.technex-contact-page .font-renaissance,
-.technex-contact-page .font-parchment-serif {
-  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+.gold-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 
+    0 3px 10px rgba(0, 0, 0, 0.6),
+    0 0 12px rgba(217, 173, 98, 0.2);
 }
 
-.technex-contact-page h1:not(svg),
-.technex-contact-page h2:not(svg) {
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+/* Subtle Gold Text Gradient */
+.gold-text-gradient {
+  background: linear-gradient(180deg, #fff2d6 0%, #e2be79 50%, #b8863f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.technex-contact-page .coordinator-name {
-  font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
-  font-style: normal !important;
+.bronze-text-gradient {
+  background: linear-gradient(180deg, #edd5b4 0%, #c49a62 50%, #94693a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-@media (max-width: 860px) {
-  .technex-contact-page {
-    background-image: url("/assets/bg/permanent-bg-mobile.webp");
-    background-attachment: scroll;
+/* Animated success state transition */
+@keyframes fadeInZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-in {
+  animation: fadeInZoom 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

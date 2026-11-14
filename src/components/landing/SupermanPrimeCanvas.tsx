@@ -729,23 +729,93 @@ export default function SupermanPrimeCanvas({
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // 4. Orbit Controls
+    // 4. Orbit Controls with calibrated Mobile Pinch-to-Zoom
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
+    controls.enableZoom = true;
+    controls.enablePan = false; // Disable panning so two-finger pinch strictly moves forward/backward without drifting
+    controls.zoomSpeed = 1.35;
+    renderer.domElement.style.touchAction = 'none';
+
     if (isMobile) {
       controls.target.set(0, 1.25, 0);
-      controls.minDistance = 3.0;
-      controls.maxDistance = 22;
-      renderer.domElement.style.touchAction = 'none';
-      controls.enableZoom = true;
+      controls.minDistance = 2.0;
+      controls.maxDistance = 35.0;
+      controls.zoomSpeed = 1.5;
     } else {
       controls.target.set(0.15, 1.25, 0);
       controls.minDistance = 1.2;
-      controls.maxDistance = 18;
+      controls.maxDistance = 28;
     }
+    controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_PAN,
+    };
     controls.maxPolarAngle = Math.PI / 2 + 0.18;
     controlsRef.current = controls;
+
+    // Direct two-finger pinch-to-zoom handler for mobile (smooth forward/backward camera dolly)
+    let lastPinchDist = 0;
+    const handlePinchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+        lastPinchDist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+        if (cameraTransitionRef.current) {
+          cameraTransitionRef.current.active = false;
+        }
+        if (cardsGroupRef.current?.userData?.finishIntro) {
+          cardsGroupRef.current.userData.finishIntro();
+        }
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('user-3d-interacted'));
+        }
+        onUserInteractionRef.current?.();
+      }
+    };
+
+    const handlePinchMove = (e: TouchEvent) => {
+      if (e.touches.length === 2 && lastPinchDist > 0) {
+        e.preventDefault(); // Prevent native browser viewport zoom
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+        const currentDist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+        if (currentDist > 5 && lastPinchDist > 5) {
+          const factor = currentDist / lastPinchDist;
+          lastPinchDist = currentDist;
+
+          const target = controls.target;
+          const offset = camera.position.clone().sub(target);
+          const currentLength = offset.length();
+          const newLength = THREE.MathUtils.clamp(
+            currentLength / Math.pow(factor, 1.3),
+            controls.minDistance,
+            controls.maxDistance
+          );
+          offset.setLength(newLength);
+          camera.position.copy(target).add(offset);
+          camera.updateMatrixWorld(true);
+          controls.update();
+
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('user-3d-interacted'));
+          }
+          onUserInteractionRef.current?.();
+        }
+      }
+    };
+
+    const handlePinchEnd = (e: TouchEvent) => {
+      if (e.touches.length < 2) {
+        lastPinchDist = 0;
+      }
+    };
+
+    renderer.domElement.addEventListener('touchstart', handlePinchStart, { passive: false });
+    renderer.domElement.addEventListener('touchmove', handlePinchMove, { passive: false });
+    renderer.domElement.addEventListener('touchend', handlePinchEnd, { passive: true });
 
     controls.autoRotate = false;
     controls.autoRotateSpeed = 1.8;
@@ -2231,6 +2301,9 @@ export default function SupermanPrimeCanvas({
       resizeObserver?.disconnect();
       renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
       renderer.domElement.removeEventListener('webglcontextrestored', handleContextRestored);
+      renderer.domElement.removeEventListener('touchstart', handlePinchStart);
+      renderer.domElement.removeEventListener('touchmove', handlePinchMove);
+      renderer.domElement.removeEventListener('touchend', handlePinchEnd);
       if (cardsGroupRef.current?.userData?.dispose) {
         cardsGroupRef.current.userData.dispose();
       }
@@ -3528,7 +3601,7 @@ function getCardTransforms(
   totalCount: number,
   layout: 'circular' | 'horizontal_ring' | 'helical' | 'orbit'
 ): { position: THREE.Vector3; rotation: THREE.Euler; scale: number } {
-  const R = 2.45; // Cylinder orbit radius encircling Superman Prime
+  const R = 2.10; // Cylinder orbit radius encircling Superman Prime (tighter amphitheater framing)
 
   if (layout === 'horizontal_ring') {
     // Exact continuous 360-degree cylinder ring at uniform horizon height (Image 2 raw)
@@ -3563,23 +3636,21 @@ function getCardTransforms(
     };
   }
 
-  // DEFAULT: 'circular' (3D Circular Amphitheater with dispersed heights, matching Image 2 & artwork)
-  // Cards sit on a true 3D circle of radius R=2.45, angled tangent to the circle (rotation.y = phi),
-  // with heights dispersed from 0.65 to 2.45 so Superman Prime and ribbons remain radiant in the center!
+  // DEFAULT: 'circular' (3D Circular Amphitheater with closer, cohesive spacing encircling Superman Prime)
   const circularConfigs: Record<string, { phiDeg: number; y: number; scale: number }> = {
-    // Lower Foreground Flanks (framing central entity, leaving 0° unobstructed)
-    flight:      { phiDeg: -30,  y: 0.65, scale: 0.98 },
-    neural:      { phiDeg: +30,  y: 0.65, scale: 0.98 },
+    // Lower Foreground Flanks (framing central entity, leaving front unobstructed)
+    flight:      { phiDeg: -25,  y: 0.72, scale: 0.98 },
+    neural:      { phiDeg: +25,  y: 0.72, scale: 0.98 },
     // Mid Flanks
-    maritime:    { phiDeg: -65,  y: 1.25, scale: 0.92 },
-    computing:   { phiDeg: +65,  y: 1.25, scale: 0.92 },
+    maritime:    { phiDeg: -58,  y: 1.15, scale: 0.94 },
+    computing:   { phiDeg: +58,  y: 1.15, scale: 0.94 },
     // Upper Flanks / Rear
-    astronomy:   { phiDeg: -105, y: 1.95, scale: 0.88 },
-    energy:      { phiDeg: +105, y: 1.95, scale: 0.88 },
+    astronomy:   { phiDeg: -95,  y: 1.58, scale: 0.90 },
+    energy:      { phiDeg: +95,  y: 1.58, scale: 0.90 },
     // Rear Depth
-    telecom:     { phiDeg: -140, y: 2.25, scale: 0.82 },
-    biomed:      { phiDeg: +140, y: 2.25, scale: 0.82 },
-    transport:   { phiDeg: 180,  y: 2.45, scale: 0.78 },
+    telecom:     { phiDeg: -135, y: 1.88, scale: 0.85 },
+    biomed:      { phiDeg: +135, y: 1.88, scale: 0.85 },
+    transport:   { phiDeg: 180,  y: 2.08, scale: 0.82 },
   };
 
   const cfg = circularConfigs[cardId] || {
@@ -3631,22 +3702,22 @@ function createCardTrailCurve(
   // 4. Waypoint 3: For right flank or rear cards, sweep through front airspace (z > 0)
   // to maintain clearance and prevent clipping through central entity
   const phiDeg = (targetPhiRad * 180) / Math.PI;
-  const R = 2.45;
+  const R = 2.10;
   if (phiDeg > 0 || phiDeg <= -140) {
     const frontPhi = Math.min(targetPhiRad * 0.5, 0.5);
     waypoints.push(new THREE.Vector3(
-      3.2 * Math.sin(frontPhi),
+      2.8 * Math.sin(frontPhi),
       Math.max(targetY + 0.4, 1.8),
-      3.2 * Math.cos(frontPhi)
+      2.8 * Math.cos(frontPhi)
     ));
   }
 
   // 5. Waypoint 4: Pre-dock tangent waypoint aligning with cylindrical orbit
   const preDockPhi = targetPhiRad - (phiDeg >= 0 ? 0.25 : -0.25);
   waypoints.push(new THREE.Vector3(
-    (R + 0.35) * Math.sin(preDockPhi),
+    (R + 0.3) * Math.sin(preDockPhi),
     targetY + 0.2,
-    (R + 0.35) * Math.cos(preDockPhi)
+    (R + 0.3) * Math.cos(preDockPhi)
   ));
 
   // 6. Final destination slot
@@ -3677,7 +3748,7 @@ function createFloatingComicPanels(
   const CHIME_PITCHES = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50, 1174.66];
 
   // Subtle celestial orbit guide ring at base (y = 0.55) so it never occludes Superman Prime
-  const R = 2.45;
+  const R = 2.10;
   const orbitRingGeom = new THREE.TorusGeometry(R, 0.003, 12, 96);
   orbitRingGeom.rotateX(Math.PI / 2);
   const orbitRingMat = new THREE.MeshBasicMaterial({
@@ -3910,20 +3981,32 @@ function createFloatingComicPanels(
   };
 
   const handleTouchStart = (e: TouchEvent) => {
-    if (e.touches.length !== 1) return;
+    if (e.touches.length !== 1) {
+      isPointerDown = false;
+      isDraggingCard = false;
+      dragDelta = 999;
+      return;
+    }
     const t = e.touches[0];
     startPointer(t.clientX, t.clientY);
   };
   const handleTouchMove = (e: TouchEvent) => {
-    if (e.touches.length !== 1) return;
+    if (e.touches.length !== 1) {
+      isPointerDown = false;
+      isDraggingCard = false;
+      dragDelta = 999;
+      return;
+    }
     const t = e.touches[0];
     movePointer(t.clientX, t.clientY);
   };
   const handleTouchEnd = (e: TouchEvent) => {
-    endPointer();
-    const elapsed = performance.now() - pointerStartTime;
-    if (dragDelta < 14 && elapsed < 500) {
-      selectCardAt(pointerStartPos.x, pointerStartPos.y);
+    if (isPointerDown) {
+      endPointer();
+      const elapsed = performance.now() - pointerStartTime;
+      if (dragDelta < 14 && elapsed < 500) {
+        selectCardAt(pointerStartPos.x, pointerStartPos.y);
+      }
     }
   };
 

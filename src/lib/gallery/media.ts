@@ -1,11 +1,16 @@
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
+import { GALLERY_IMAGES } from "@/data/gallery";
 import type { MediaItem } from "@/lib/types";
 
 const IMAGE_RE = /\.(webp|jpe?g|png|gif|avif)$/i;
 
 export async function listMedia(): Promise<MediaItem[]> {
+  if (GALLERY_IMAGES && GALLERY_IMAGES.length > 0) {
+    return GALLERY_IMAGES;
+  }
+
   const possibleDirs = [
     { dir: path.join(process.cwd(), "public", "assets", "gallery"), prefix: "/assets/gallery" },
   ];

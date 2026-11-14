@@ -336,7 +336,7 @@
   line-height: 1.15;
 }
 
-/* Member Name (Reduced Font Weight, Clean & Legible) */
+/* Member Name (Increased Font Weight, Bold & Legible) */
 .cyber-front-name {
   display: block;
   max-width: 100%;
@@ -344,12 +344,12 @@
   overflow: hidden;
   text-overflow: clip;
   font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 550;
+  font-weight: 800;
   text-transform: none;
   letter-spacing: 0.03em;
   color: #ffffff;
-  text-shadow: 0 0 10px rgba(251, 191, 36, 0.8), 0 0 16px rgba(217, 173, 98, 0.5), 0 2px 4px rgba(0, 0, 0, 0.95);
-  -webkit-text-stroke: none;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.9), 0 0 18px rgba(217, 173, 98, 0.6), 0 2px 4px rgba(0, 0, 0, 0.95);
+  -webkit-text-stroke: 0.35px currentColor;
   font-size: clamp(15px, 6.8cqi, 20.5px);
 }
 
@@ -358,7 +358,7 @@
 .cyber-front-name.name-size-lg { font-size: clamp(13px, 5.6cqi, 17.5px); }
 .cyber-front-name.name-size-xl { font-size: clamp(11.5px, 4.8cqi, 15.5px); letter-spacing: 0.02em; }
 
-/* Member Role (Reduced Font Weight, Clean & Refined) */
+/* Member Role (Increased Font Weight, Crisp & Refined) */
 .cyber-front-role {
   display: block;
   max-width: 100%;
@@ -366,14 +366,14 @@
   overflow: hidden;
   text-overflow: clip;
   font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 500;
+  font-weight: 700;
   text-transform: none;
   color: #fde047;
-  text-shadow: 0 0 8px rgba(245, 158, 11, 0.85), 0 1px 3px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.9), 0 1px 3px rgba(0, 0, 0, 0.95);
   letter-spacing: 0.05em;
   margin-top: 2px;
   font-size: clamp(11.5px, 4.8cqi, 15px);
-  -webkit-text-stroke: none;
+  -webkit-text-stroke: 0.25px currentColor;
 }
 
 .cyber-front-role.role-size-sm { font-size: clamp(12px, 5.0cqi, 15.5px); }
@@ -387,8 +387,9 @@
 .is-faculty .cyber-front-name,
 .cyber-front-name.faculty-name {
   font-size: clamp(17.5px, 8.0cqi, 24px) !important;
-  font-weight: 600 !important;
+  font-weight: 800 !important;
   letter-spacing: 0.03em;
+  -webkit-text-stroke: 0.35px currentColor;
   text-shadow: 0 0 14px rgba(251, 191, 36, 0.9), 0 0 22px rgba(217, 173, 98, 0.6), 0 2px 5px rgba(0, 0, 0, 0.95);
 }
 .is-faculty .cyber-front-name.name-size-sm,
@@ -403,9 +404,10 @@
 .is-faculty .cyber-front-role,
 .cyber-front-role.faculty-role {
   font-size: clamp(13.5px, 5.8cqi, 17.5px) !important;
-  font-weight: 600 !important;
+  font-weight: 750 !important;
   letter-spacing: 0.06em;
   margin-top: 3px;
+  -webkit-text-stroke: 0.25px currentColor;
   text-shadow: 0 0 12px rgba(245, 158, 11, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 .is-faculty .cyber-front-role.role-size-sm,

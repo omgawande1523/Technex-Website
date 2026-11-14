@@ -143,7 +143,7 @@ const otherEvents: EventItem[] = [
       "email": ""}
   ],
 
-  "registerUrl": "",
+  "registerUrl": "https://forms.gle/WJTE7gHBfxQa9wSy7",
   "rulebookUrl": "",
 
   "shape": "ship",

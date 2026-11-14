@@ -31,12 +31,61 @@
 
 .technex-team-page .section-heading-banner-title:not(svg) {
   font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-weight: 900 !important;
+  -webkit-text-stroke: 0.55px currentColor !important;
 }
 
-.technex-team-page .cyber-front-name:not(svg),
+.technex-team-page .cyber-front-name:not(svg) {
+  font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+  font-weight: 800 !important;
+  -webkit-text-stroke: 0.35px currentColor !important;
+  text-transform: none !important;
+}
+
 .technex-team-page .cyber-front-role:not(svg) {
   font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+  font-weight: 700 !important;
+  -webkit-text-stroke: 0.25px currentColor !important;
   text-transform: none !important;
+}
+
+/* Explicit font-weight boost for Mentors, Lead Team, and Website sections */
+.technex-team-page #mentors .section-heading-banner-title:not(svg),
+.technex-team-page #lead-team .section-heading-banner-title:not(svg),
+.technex-team-page #website-developers .section-heading-banner-title:not(svg) {
+  font-weight: 900 !important;
+  -webkit-text-stroke: 0.6px currentColor !important;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 1),
+               0 0 22px rgba(217, 119, 6, 0.75),
+               0 2px 4px rgba(0, 0, 0, 0.95);
+}
+
+.technex-team-page #mentors .cyber-front-name:not(svg),
+.technex-team-page #lead-team .cyber-front-name:not(svg),
+.technex-team-page #website-developers .cyber-front-name:not(svg) {
+  font-weight: 800 !important;
+  -webkit-text-stroke: 0.35px currentColor !important;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.95), 0 0 18px rgba(217, 173, 98, 0.65), 0 2px 4px rgba(0, 0, 0, 0.95);
+}
+
+.technex-team-page #mentors .cyber-front-role:not(svg),
+.technex-team-page #lead-team .cyber-front-role:not(svg),
+.technex-team-page #website-developers .cyber-front-role:not(svg) {
+  font-weight: 700 !important;
+  -webkit-text-stroke: 0.25px currentColor !important;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.technex-team-page .is-faculty .cyber-front-name:not(svg),
+.technex-team-page .cyber-front-name.faculty-name:not(svg) {
+  font-weight: 800 !important;
+  -webkit-text-stroke: 0.35px currentColor !important;
+}
+
+.technex-team-page .is-faculty .cyber-front-role:not(svg),
+.technex-team-page .cyber-front-role.faculty-role:not(svg) {
+  font-weight: 750 !important;
+  -webkit-text-stroke: 0.25px currentColor !important;
 }
 
 /* Transparent backdrop layer */
