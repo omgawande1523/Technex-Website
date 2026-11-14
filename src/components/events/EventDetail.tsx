@@ -133,12 +133,76 @@ export default function EventDetail({
           {backLabel}
         </button>
 
-        <header className="head">
+                <header className="head">
           <div className="titleblock">
             <span className="event-category-tag">{e.category}</span>
             <h1>{e.name}</h1>
             <p className="tag">{e.tagline}</p>
+
+            {/* Mobile-only Stage: shown below tagline on mobile (<= 860px), hidden on desktop */}
+            <div
+              className={`stage stage-mobile${e.slug === "hack-the-hardware" ? " hack-the-hardware" : ""}`}
+              style={{ ["--i" as string]: 1 }}
+              onMouseMove={onMove}
+              onMouseLeave={onLeave}
+            >
+              <div className="imgwrap">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  ref={(img) => {
+                    // handles images already cached before hydration
+                    if (img?.complete && img.naturalWidth > 0) setImgLoaded(true);
+                  }}
+                  className={`heroimg${imgLoaded ? " loaded" : ""}`}
+                  src={imgSrc}
+                  alt={`${e.name} – Technex 2k26`}
+                  draggable={false}
+                  onLoad={() => setImgLoaded(true)}
+                  onError={() => {
+                    if (!imgFailed) {
+                      setImgFailed(true);
+                      setImgLoaded(false);
+                    }
+                  }}
+                />
+              </div>
+              <div className="shade" />
+              <div className="glow" />
+              <div className="sweep" />
+              <i className="c tl" /><i className="c tr" /><i className="c bl" /><i className="c br" />
+            </div>
+
+            {/* Mobile-only Head-actions: shown below stage on mobile (<= 860px), hidden on desktop */}
+            <div className="head-actions head-actions-mobile">
+              {e.registerUrl ? (
+                e.registerUrl.startsWith("/") ? (
+                  <Link className="btn gold register-refined" href={e.registerUrl}>
+                    Register now <span className="register-arrow" aria-hidden="true">↗</span>
+                  </Link>
+                ) : (
+                  <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">Register now <span className="register-arrow" aria-hidden="true">↗</span></a>
+                )
+              ) : (
+                <span className="btn gold register-refined" aria-disabled="true">Registration TBA</span>
+              )}
+              {e.slug === "hackathon" && (
+                <div className="collaboration">
+                  <span>In collaboration with</span>
+                  <div className="collaboration-logo-wrap">
+                    <Image
+                      src="/assets/events/csi-svpcet.png"
+                      alt="Computer Society of India, SVPCET"
+                      width={88}
+                      height={88}
+                      className="ev-out-csi collaboration-logo"
+                    />
+                  </div>
+                  <strong>Computer Society of India</strong>
+                </div>
+              )}
+            </div>
           </div>
+
           <div className="headright">
             <div className="ghost">
               <b>{"//"}{e.number}</b>
@@ -159,13 +223,15 @@ export default function EventDetail({
               {e.slug === "hackathon" && (
                 <div className="collaboration">
                   <span>In collaboration with</span>
-                  <Image
-                    src="/assets/events/csi-svpcet.png"
-                    alt="Computer Society of India, SVPCET"
-                    width={88}
-                    height={88}
-                    className="ev-out-csi collaboration-logo"
-                  />
+                  <div className="collaboration-logo-wrap">
+                    <Image
+                      src="/assets/events/csi-svpcet.png"
+                      alt="Computer Society of India, SVPCET"
+                      width={88}
+                      height={88}
+                      className="ev-out-csi collaboration-logo"
+                    />
+                  </div>
                   <strong>Computer Society of India</strong>
                 </div>
               )}
@@ -223,7 +289,7 @@ export default function EventDetail({
                 </div>
 
                 {highlights.length > 0 && (
-                  <div className="highlights">
+                  <div className="highlights highlights-desktop">
                     {highlights.map((h) => (
                       <div key={h.label}><b>{h.value}</b><span>{h.label}</span></div>
                     ))}
@@ -232,8 +298,9 @@ export default function EventDetail({
 
               </div>
 
+                            {/* Desktop-only Stage in About: visible on desktop (> 860px), hidden on mobile */}
               <div
-                className={`stage${e.slug === "hack-the-hardware" ? " hack-the-hardware" : ""}`}
+                className={`stage stage-desktop${e.slug === "hack-the-hardware" ? " hack-the-hardware" : ""}`}
                 style={{ ["--i" as string]: 1 }}
                 onMouseMove={onMove}
                 onMouseLeave={onLeave}
@@ -263,7 +330,7 @@ export default function EventDetail({
                 <div className="sweep" />
                 <i className="c tl" /><i className="c tr" /><i className="c bl" /><i className="c br" />
               </div>
-                <div className="perks">
+<div className="perks">
                   {perks.length > 0 && (
                     <>
                       <h3>What you get</h3>
@@ -957,6 +1024,298 @@ export default function EventDetail({
           }
           body.event-detail-scroll-enabled .page .rounds-compact ol > li .card {
             grid-column: 2; grid-row: 1; padding: 14px !important;
+          }
+        }
+      
+        /* Desktop specific visibility rules */
+        @media (min-width: 861px) {
+          body.event-detail-scroll-enabled .page .stage.stage-mobile,
+          body.event-detail-scroll-enabled .page .head-actions-mobile {
+            display: none !important;
+          }
+          body.event-detail-scroll-enabled .page .headright {
+            display: flex !important;
+          }
+          body.event-detail-scroll-enabled .page .stage.stage-desktop {
+            display: block !important;
+          }
+          body.event-detail-scroll-enabled .page .highlights.highlights-desktop {
+            display: grid !important;
+          }
+        }
+
+        /* Mobile specific overrides (<= 860px) */
+        @media (max-width: 860px) {
+          body.event-detail-scroll-enabled .page .stage-desktop,
+          body.event-detail-scroll-enabled .page .highlights-desktop,
+          body.event-detail-scroll-enabled .page .headright {
+            display: none !important;
+          }
+
+          body.event-detail-scroll-enabled .page .event-category-tag {
+            order: -3 !important;
+          }
+
+          body.event-detail-scroll-enabled .page .titleblock h1 {
+            order: -2 !important;
+          }
+
+          body.event-detail-scroll-enabled .page .titleblock p.tag {
+            order: -1 !important;
+          }
+
+          body.event-detail-scroll-enabled .page .stage.stage-mobile {
+            order: 0 !important;
+            display: block !important;
+            width: min(100%, 480px) !important;
+            min-height: 240px !important;
+            max-height: 380px !important;
+            aspect-ratio: 621 / 515 !important;
+            margin: 14px 0 16px !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+          }
+
+          body.event-detail-scroll-enabled .page .head-actions-mobile {
+            order: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 10px !important;
+            width: min(100%, 480px) !important;
+            margin-bottom: 12px !important;
+          }
+
+          body.event-detail-scroll-enabled .page .head-actions-mobile .register-refined,
+          body.event-detail-scroll-enabled .page .btn.gold.register-refined {
+            width: 100% !important;
+            min-width: 0 !important;
+            text-align: center !important;
+            justify-content: center !important;
+            padding: 14px 28px !important;
+          }
+
+          body.event-detail-scroll-enabled .page .head-actions-mobile .collaboration,
+          body.event-detail-scroll-enabled .page .collaboration {
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            margin-inline: auto !important;
+          }
+
+          body.event-detail-scroll-enabled .page .collaboration-logo-wrap {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin: 4px auto !important;
+            text-align: center !important;
+          }
+
+          body.event-detail-scroll-enabled .page .collaboration-logo,
+          body.event-detail-scroll-enabled .page .collaboration img {
+            display: block !important;
+            margin: 0 auto !important;
+            align-self: center !important;
+            text-align: center !important;
+          }
+
+          body.event-detail-scroll-enabled .page .collaboration > span,
+          body.event-detail-scroll-enabled .page .collaboration strong {
+            display: block !important;
+            text-align: center !important;
+            width: 100% !important;
+            margin-inline: auto !important;
+          }
+
+          /* Small Back Button on Mobile */
+          body.event-detail-scroll-enabled .page button.back-events,
+          body.event-detail-scroll-enabled .page .back-events.btn,
+          body.event-detail-scroll-enabled .page .back-events {
+            align-self: flex-start !important;
+            flex: none !important;
+            padding: 6px 14px !important;
+            font-size: 0.72rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.08em !important;
+            border-radius: 6px !important;
+            clip-path: none !important;
+            line-height: 1.3 !important;
+          }
+
+          /* Small Category Tag on Mobile */
+          body.event-detail-scroll-enabled .page .event-category-tag {
+            display: inline-flex !important;
+            align-items: center !important;
+            width: fit-content !important;
+            max-width: 100% !important;
+            padding: 3px 9px !important;
+            margin-bottom: 6px !important;
+            font-size: 10px !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.1em !important;
+            line-height: 1.25 !important;
+            border-radius: 4px !important;
+          }
+
+          /* Single-column Header & Titleblock on Mobile */
+          body.event-detail-scroll-enabled .page .head {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+            width: 100% !important;
+          }
+
+          body.event-detail-scroll-enabled .page .titleblock {
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+
+          /* Single-column Stats Cards on Mobile */
+          body.event-detail-scroll-enabled .page .stats {
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 10px !important;
+          }
+          body.event-detail-scroll-enabled .page .stat {
+            padding: 12px 14px !important;
+            gap: 14px !important;
+            display: flex !important;
+            align-items: flex-start !important;
+          }
+          body.event-detail-scroll-enabled .page .stat .ico {
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            margin-top: 2px !important;
+          }
+          body.event-detail-scroll-enabled .page .stat .ico svg {
+            width: 20px !important;
+            height: 20px !important;
+          }
+          body.event-detail-scroll-enabled .page .stat h3 {
+            font-size: 0.68rem !important;
+            letter-spacing: 0.08em !important;
+            margin-bottom: 2px !important;
+          }
+          body.event-detail-scroll-enabled .page .stat strong {
+            font-size: 0.95rem !important;
+            line-height: 1.3 !important;
+          }
+          body.event-detail-scroll-enabled .page .stat p {
+            font-size: 0.78rem !important;
+            line-height: 1.4 !important;
+            margin-top: 3px !important;
+          }
+
+          /* Mobile Tabs Horizontal Scrollbar */
+          body.event-detail-scroll-enabled .page .tabs {
+            overflow-x: auto !important;
+            scrollbar-width: thin !important;
+            scrollbar-color: rgba(227, 185, 92, 0.7) rgba(20, 15, 10, 0.8) !important;
+            padding-bottom: 7px !important;
+          }
+          body.event-detail-scroll-enabled .page .tabs::-webkit-scrollbar {
+            height: 4px !important;
+            display: block !important;
+          }
+          body.event-detail-scroll-enabled .page .tabs::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #c9983e, #f7d889) !important;
+            border-radius: 999px !important;
+          }
+
+          /* Reduced Domain Pills in About on Mobile */
+          body.event-detail-scroll-enabled .page .chips span {
+            padding: 3px 9px !important;
+            font-size: 0.7rem !important;
+            letter-spacing: 0.04em !important;
+            border-radius: 99px !important;
+          }
+
+          /* Single-column About on Mobile */
+          body.event-detail-scroll-enabled .page .about {
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 20px !important;
+          }
+
+          /* Compact Contact Block on Mobile */
+          body.event-detail-scroll-enabled .page .official-email {
+            padding: 12px 18px !important;
+            margin: 12px 0 16px !important;
+          }
+          body.event-detail-scroll-enabled .page .contact-symbol {
+            flex: 0 0 40px !important;
+            height: 40px !important;
+          }
+          body.event-detail-scroll-enabled .page .coordinator-card {
+            padding: 14px 16px !important;
+          }
+
+          /* Metal Mania Font on Mobile */
+          body.event-detail-scroll-enabled .page .tabs button,
+          body.event-detail-scroll-enabled .page .panel h2,
+          body.event-detail-scroll-enabled .page .panel h3,
+          body.event-detail-scroll-enabled .page .perks h3,
+          body.event-detail-scroll-enabled .page .perks .who strong {
+            font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+          }
+
+          body.event-detail-scroll-enabled .page .tabs button {
+            font-size: 0.95rem !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+          }
+
+          body.event-detail-scroll-enabled .page .panel h2 {
+            font-size: 1.35rem !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.06em !important;
+            text-transform: uppercase !important;
+            color: var(--gold-hi) !important;
+          }
+
+          body.event-detail-scroll-enabled .page .panel h3,
+          body.event-detail-scroll-enabled .page .perks h3 {
+            font-size: 1.05rem !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            color: var(--gold) !important;
+          }
+
+          body.event-detail-scroll-enabled .page .perks .who strong {
+            font-size: 0.96rem !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.05em !important;
+            color: var(--gold-hi) !important;
+          }
+
+          /* Redaction 20 on Mobile for Questions and Rules */
+          body.event-detail-scroll-enabled .page .faq button,
+          body.event-detail-scroll-enabled .page .faq .ans,
+          body.event-detail-scroll-enabled .page .card strong,
+          body.event-detail-scroll-enabled .page .rounds ol > li .card strong,
+          body.event-detail-scroll-enabled .page .rules .card strong,
+          body.event-detail-scroll-enabled .page .rules .card p,
+          body.event-detail-scroll-enabled .page .btn.line {
+            font-family: var(--font-redaction), "Redaction 20", system-ui, sans-serif !important;
+          }
+
+          body.event-detail-scroll-enabled .page .faq button {
+            font-weight: 700 !important;
+            font-size: 0.94rem !important;
+            letter-spacing: 0.02em !important;
+          }
+
+          body.event-detail-scroll-enabled .page .card strong {
+            font-weight: 700 !important;
+            letter-spacing: 0.03em !important;
           }
         }
       `}</style>

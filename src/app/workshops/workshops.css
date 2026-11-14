@@ -98,9 +98,11 @@
   box-shadow: 0 0 22px rgba(194, 133, 52, 0.42);
   color: #241707;
   font-family: var(--font-redaction), "Redaction 20", system-ui, sans-serif !important;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 0.98rem;
+  font-weight: 900 !important;
+  -webkit-text-stroke: 0.8px #241707;
+  text-shadow: 0 0 1px #241707;
+  letter-spacing: 0.12em;
   line-height: 1.45;
   text-align: center;
   text-decoration: none;
@@ -258,8 +260,19 @@
 
 @media (max-width: 860px) {
   .workshop-page-wrapper {
-    background-image: url("/assets/bg/permanent-bg-mobile.webp");
-    background-attachment: scroll;
+    background: #07070a url("/assets/bg/permanent-bg-mobile.webp") center top / cover no-repeat !important;
+    background-attachment: scroll !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .workshop-action--register {
+    font-size: 0.96rem;
+    font-weight: 900 !important;
+    -webkit-text-stroke: 1.1px #241707 !important;
+    text-shadow: 0 0 1.5px #241707;
+    letter-spacing: 0.12em !important;
+    padding: 12px 20px;
   }
 }
 

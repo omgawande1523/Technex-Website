@@ -7,6 +7,17 @@ export default function UIOverlay() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 860);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Synchronize hint appearance after cards trail entrance animation settles (~3.6s)
   useEffect(() => {
@@ -68,17 +79,21 @@ export default function UIOverlay() {
       <div
         className="ui-3d-controls-container"
         style={{
-          position: 'absolute',
+          position: 'fixed',
           left: '50%',
           transform: 'translateX(-50%)',
+          bottom: isMobile
+            ? 'calc(max(14px, env(safe-area-inset-bottom)) + 104px)'
+            : '24px',
           pointerEvents: 'none',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          width: '100%',
-          maxWidth: '680px',
-          padding: '0 16px',
-          zIndex: 30,
+          width: isMobile ? 'calc(100vw - 20px)' : '100%',
+          maxWidth: isMobile ? '420px' : '680px',
+          padding: '0 6px',
+          zIndex: 60,
+          transition: 'bottom 0.3s ease',
         }}
       >
         {/* Expanded Interactive Guide Popup */}
@@ -86,30 +101,31 @@ export default function UIOverlay() {
           style={{
             pointerEvents: showHint && !isDismissed ? 'auto' : 'none',
             opacity: showHint && !isDismissed ? 1 : 0,
-            transform: showHint && !isDismissed ? 'translateY(0) scale(1)' : 'translateY(24px) scale(0.96)',
-            transition: 'all 0.55s cubic-bezier(0.16, 1, 0.3, 1)',
-            background: 'rgba(14, 11, 7, 0.88)',
+            transform: showHint && !isDismissed ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.96)',
+            transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+            background: 'rgba(14, 11, 7, 0.92)',
             backdropFilter: 'blur(20px) saturate(180%)',
             WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-            border: '1px solid rgba(217, 173, 98, 0.38)',
+            border: '1px solid rgba(217, 173, 98, 0.42)',
             boxShadow:
               '0 16px 48px rgba(0, 0, 0, 0.88), 0 0 28px rgba(217, 173, 98, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
-            borderRadius: '16px',
-            padding: '12px 18px',
+            borderRadius: isMobile ? '14px' : '16px',
+            padding: isMobile ? '9px 12px' : '12px 18px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '14px',
+            gap: isMobile ? '8px' : '14px',
             width: '100%',
-            maxWidth: '540px',
+            maxWidth: isMobile ? '430px' : '540px',
+            fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif !important',
           }}
         >
           {/* Left Icon Badge with Pulse Glow */}
           <div
             style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '10px',
+              width: isMobile ? '32px' : '38px',
+              height: isMobile ? '32px' : '38px',
+              borderRadius: isMobile ? '8px' : '10px',
               background: 'linear-gradient(135deg, rgba(217, 173, 98, 0.22), rgba(184, 141, 68, 0.08))',
               border: '1px solid rgba(217, 173, 98, 0.45)',
               display: 'flex',
@@ -119,72 +135,90 @@ export default function UIOverlay() {
               boxShadow: '0 0 14px rgba(217, 173, 98, 0.28)',
             }}
           >
-            <Move3d size={20} color="#d9ad62" />
+            <Move3d size={isMobile ? 17 : 20} color="#d9ad62" />
           </div>
 
-          {/* Central Instruction Text */}
-          <div style={{ flex: 1, minWidth: 0 }}>
+          {/* Central Instruction Text in Redaction 20 */}
+          <div style={{ flex: 1, minWidth: 0, fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif !important' }}>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '5px',
                 color: '#d9ad62',
-                fontSize: '11px',
-                letterSpacing: '0.12em',
+                fontSize: isMobile ? '10px' : '11px',
+                letterSpacing: '0.1em',
                 fontWeight: 700,
                 textTransform: 'uppercase',
-                fontFamily: 'var(--font-sans)',
+                fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif !important',
               }}
             >
-              <Sparkles size={12} color="#d9ad62" />
+              <Sparkles size={isMobile ? 11 : 12} color="#d9ad62" />
               <span>Interactive 3D Multiverse</span>
             </div>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
+                gap: isMobile ? '6px' : '8px',
                 marginTop: '3px',
                 color: '#f1f5f9',
-                fontSize: '12.5px',
+                fontSize: isMobile ? '11px' : '12.5px',
                 fontWeight: 500,
                 flexWrap: 'wrap',
-                fontFamily: 'var(--font-sans)',
+                fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif !important',
               }}
             >
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
-                <b style={{ color: '#d9ad62', fontWeight: 600 }}>Drag</b> to rotate 360°
-              </span>
-              <span style={{ opacity: 0.35 }}>•</span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
-                <b style={{ color: '#d9ad62', fontWeight: 600 }}>Scroll</b> to zoom
-              </span>
-              <span style={{ opacity: 0.35 }}>•</span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
-                <b style={{ color: '#d9ad62', fontWeight: 600 }}>Click</b> cards for lore
-              </span>
+              {isMobile ? (
+                <>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
+                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Drag</b> to rotate 360°
+                  </span>
+                  <span style={{ opacity: 0.35 }}>•</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
+                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Pinch</b> to zoom
+                  </span>
+                  <span style={{ opacity: 0.35 }}>•</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
+                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Tap</b> cards for lore
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
+                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Drag</b> to rotate 360°
+                  </span>
+                  <span style={{ opacity: 0.35 }}>•</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
+                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Scroll</b> to zoom
+                  </span>
+                  <span style={{ opacity: 0.35 }}>•</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
+                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Click</b> cards for lore
+                  </span>
+                </>
+              )}
             </div>
           </div>
 
-          {/* Dismiss Button */}
+          {/* Dismiss Button in Redaction 20 */}
           <button
             onClick={() => setIsDismissed(true)}
             style={{
               background: 'rgba(217, 173, 98, 0.12)',
               border: '1px solid rgba(217, 173, 98, 0.35)',
               borderRadius: '8px',
-              padding: '6px 12px',
+              padding: isMobile ? '5px 9px' : '6px 12px',
               color: '#d9ad62',
-              fontSize: '12px',
+              fontSize: isMobile ? '11px' : '12px',
               fontWeight: 600,
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
+              gap: '4px',
               cursor: 'pointer',
               flexShrink: 0,
               transition: 'all 0.2s ease',
-              fontFamily: 'var(--font-sans)',
+              fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif !important',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'rgba(217, 173, 98, 0.25)';
@@ -197,25 +231,25 @@ export default function UIOverlay() {
             title="Dismiss instruction"
           >
             <span>Got it</span>
-            <X size={13} />
+            <X size={isMobile ? 12 : 13} />
           </button>
         </div>
 
-        {/* Minimized Pill to Re-open Guide */}
+        {/* Minimized Pill to Re-open Guide in Redaction 20 */}
         {showHint && isDismissed && (
           <button
             onClick={() => setIsDismissed(false)}
             style={{
               pointerEvents: 'auto',
               position: 'absolute',
-              background: 'rgba(14, 11, 7, 0.82)',
+              background: 'rgba(14, 11, 7, 0.88)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
-              border: '1px solid rgba(217, 173, 98, 0.3)',
+              border: '1px solid rgba(217, 173, 98, 0.38)',
               borderRadius: '9999px',
-              padding: '6px 14px',
+              padding: isMobile ? '6px 14px' : '6px 15px',
               color: '#d9ad62',
-              fontSize: '11px',
+              fontSize: isMobile ? '11px' : '11.5px',
               fontWeight: 600,
               letterSpacing: '0.06em',
               display: 'flex',
@@ -223,8 +257,8 @@ export default function UIOverlay() {
               gap: '6px',
               cursor: 'pointer',
               transition: 'all 0.25s ease',
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(217, 173, 98, 0.1)',
-              fontFamily: 'var(--font-sans)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(217, 173, 98, 0.15)',
+              fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif !important',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'rgba(217, 173, 98, 0.2)';
@@ -232,9 +266,9 @@ export default function UIOverlay() {
               e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.8), 0 0 16px rgba(217, 173, 98, 0.3)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(14, 11, 7, 0.82)';
-              e.currentTarget.style.borderColor = 'rgba(217, 173, 98, 0.3)';
-              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(217, 173, 98, 0.1)';
+              e.currentTarget.style.background = 'rgba(14, 11, 7, 0.88)';
+              e.currentTarget.style.borderColor = 'rgba(217, 173, 98, 0.38)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(217, 173, 98, 0.15)';
             }}
             title="Show 3D interaction tips"
           >

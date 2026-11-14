@@ -626,3 +626,282 @@
 @media  (max-width: 560px) {.hack-detail-root .highlights{ grid-template-columns: minmax(0, 1fr); }
 .hack-detail-root .headright .btn.gold{ padding: 13px 22px; }}
 .hack-detail-root { min-height: 100dvh; isolation: isolate; }
+
+
+/* ==========================================================================
+   MOBILE-ONLY OVERRIDES (Applies strictly to <= 860px)
+   Desktop (> 860px) retains 100% of its original layout and formatting.
+   ========================================================================== */
+@media (max-width: 860px) {
+  .hack-detail-root {
+    background: #060504 url("/assets/bg/permanent-bg-mobile.webp") center top / cover no-repeat !important;
+    background-attachment: scroll !important;
+  }
+
+  /* Visibility toggles between mobile & desktop */
+  .hack-detail-root .stage-desktop,
+  .hack-detail-root .highlights-desktop,
+  .hack-detail-root .headright {
+    display: none !important;
+  }
+
+  .hack-detail-root .event-category-tag { order: -3 !important; }
+  .hack-detail-root .titleblock h1 { order: -2 !important; }
+  .hack-detail-root .titleblock p.tag { order: -1 !important; }
+  .hack-detail-root .stage.stage-mobile {
+    order: 0 !important;
+    display: block !important;
+    width: min(100%, 480px) !important;
+    min-height: 240px !important;
+    max-height: 380px !important;
+    aspect-ratio: 621 / 515 !important;
+    margin: 14px 0 16px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+
+  .hack-detail-root .head-actions-mobile {
+    order: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: min(100%, 480px) !important;
+    margin-bottom: 12px !important;
+  }
+
+  .hack-detail-root .head-actions-mobile .register-refined,
+  .hack-detail-root .btn.gold.register-refined {
+    width: 100% !important;
+    min-width: 0 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 14px 28px !important;
+  }
+
+  .hack-detail-root .head-actions-mobile .collaboration,
+  .hack-detail-root .collaboration {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin-inline: auto !important;
+  }
+
+  .hack-detail-root .collaboration-logo-wrap {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 4px auto !important;
+    text-align: center !important;
+  }
+
+  .hack-detail-root .collaboration-logo,
+  .hack-detail-root .collaboration img {
+    display: block !important;
+    margin: 0 auto !important;
+    align-self: center !important;
+    text-align: center !important;
+  }
+
+  .hack-detail-root .collaboration > span,
+  .hack-detail-root .collaboration strong {
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-inline: auto !important;
+  }
+
+  /* Small Back Button on Mobile */
+  .hack-detail-root button.back-events,
+  .hack-detail-root .back-events.btn,
+  .hack-detail-root .back-events {
+    align-self: flex-start !important;
+    flex: none !important;
+    padding: 6px 14px !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    border-radius: 6px !important;
+    clip-path: none !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Small Category Tag on Mobile */
+  .hack-detail-root .event-category-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    padding: 3px 9px !important;
+    margin-bottom: 6px !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.1em !important;
+    line-height: 1.25 !important;
+    border-radius: 4px !important;
+  }
+
+  /* Single-column Header & Titleblock on Mobile */
+  .hack-detail-root .head {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .hack-detail-root .titleblock {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* Single-column Stats Cards on Mobile */
+  .hack-detail-root .stats {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+  .hack-detail-root .stat {
+    padding: 12px 14px !important;
+    gap: 14px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+  }
+  .hack-detail-root .ico {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    margin-top: 2px !important;
+  }
+  .hack-detail-root .ico svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .hack-detail-root .stat h3 {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 2px !important;
+  }
+  .hack-detail-root .stat strong {
+    font-size: 0.95rem !important;
+    line-height: 1.3 !important;
+  }
+  .hack-detail-root .stat p {
+    font-size: 0.78rem !important;
+    line-height: 1.4 !important;
+    margin-top: 3px !important;
+  }
+
+  /* Mobile Tabs Horizontal Scrollbar */
+  .hack-detail-root .tabs {
+    overflow-x: auto !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(227, 185, 92, 0.7) rgba(20, 15, 10, 0.8) !important;
+    padding-bottom: 7px !important;
+  }
+  .hack-detail-root .tabs::-webkit-scrollbar {
+    height: 4px !important;
+    display: block !important;
+  }
+  .hack-detail-root .tabs::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #c9983e, #f7d889) !important;
+    border-radius: 999px !important;
+  }
+
+  /* Reduced Domain Pills in About on Mobile */
+  .hack-detail-root .chips span {
+    padding: 3px 9px !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.04em !important;
+    border-radius: 99px !important;
+  }
+
+  /* Single-column About on Mobile */
+  .hack-detail-root .about {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  /* Metal Mania Font on Mobile */
+  .hack-detail-root .tabs button,
+  .hack-detail-root .panel h2,
+  .hack-detail-root .panel h3,
+  .hack-detail-root .perks h3,
+  .hack-detail-root .perks .who strong {
+    font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  }
+
+  .hack-detail-root .tabs button {
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+
+  .hack-detail-root .panel h2 {
+    font-size: 1.35rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: var(--gold-hi) !important;
+  }
+
+  .hack-detail-root .panel h3,
+  .hack-detail-root .perks h3 {
+    font-size: 1.05rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: var(--gold) !important;
+  }
+
+  .hack-detail-root .perks .who strong {
+    font-size: 0.96rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.05em !important;
+    color: var(--gold-hi) !important;
+  }
+
+  /* Redaction 20 on Mobile for Questions and Rules */
+  .hack-detail-root .faq button,
+  .hack-detail-root .faq .ans,
+  .hack-detail-root .card strong,
+  .hack-detail-root .rounds ol > li .card strong,
+  .hack-detail-root .rules .card strong,
+  .hack-detail-root .rules .card p,
+  .hack-detail-root .btn.line {
+    font-family: var(--font-redaction), "Redaction 20", system-ui, sans-serif !important;
+  }
+
+  .hack-detail-root .faq button {
+    font-weight: 700 !important;
+    font-size: 0.94rem !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .hack-detail-root .card strong {
+    font-weight: 700 !important;
+    letter-spacing: 0.03em !important;
+  }
+}
+
+@media (min-width: 861px) {
+  .hack-detail-root .stage.stage-mobile,
+  .hack-detail-root .head-actions-mobile {
+    display: none !important;
+  }
+  .hack-detail-root .headright {
+    display: flex !important;
+  }
+  .hack-detail-root .stage.stage-desktop {
+    display: block !important;
+  }
+  .hack-detail-root .highlights.highlights-desktop {
+    display: grid !important;
+  }
+}

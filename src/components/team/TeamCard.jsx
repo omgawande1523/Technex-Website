@@ -59,9 +59,10 @@ function getRoleSizeClass(role) {
  * Front: Perfectly proportioned portrait, bottom-stacked Name & Role, and below-frame flip prompt
  * Back: High-Tech Golden Reactor Social Medallions centered in honeycomb core
  */
-export function TeamCard({ member }) {
+export function TeamCard({ member, sectionId }) {
   const { id, name, designation, email, linkedin, instagram, image } = member;
   const safeId = String(id || 'member').replace(/[^a-zA-Z0-9_-]/g, '');
+  const isFaculty = sectionId === 'faculty-mentors' || String(id || '').startsWith('fm-');
   const [isFlipped, setIsFlipped] = useState(false);
 
   const hasLinkedin = Boolean(
@@ -123,7 +124,7 @@ export function TeamCard({ member }) {
 
   return (
     <div
-      className={`cyber-card-wrapper theme-titan frame-titan ${isFlipped ? 'is-flipped' : ''}`}
+      className={`cyber-card-wrapper theme-titan frame-titan ${isFlipped ? 'is-flipped' : ''} ${isFaculty ? 'is-faculty' : ''}`}
       id={`card-${safeId}`}
       onClick={handleCardToggle}
       onKeyDown={handleKeyDown}
@@ -179,10 +180,10 @@ export function TeamCard({ member }) {
 
             {/* Bottom Combined Identity Plate: Name & Role Pushed Down into Bottom Arch */}
             <div className="cyber-front-bottom-plate">
-              <div className={`cyber-front-name ${getNameSizeClass(name)}`} title={name}>
+              <div className={`cyber-front-name ${getNameSizeClass(name)} ${isFaculty ? 'faculty-name' : ''}`} title={name}>
                 {name}
               </div>
-              <div className={`cyber-front-role ${getRoleSizeClass(designation)}`} title={designation}>
+              <div className={`cyber-front-role ${getRoleSizeClass(designation)} ${isFaculty ? 'faculty-role' : ''}`} title={designation}>
                 {designation}
               </div>
             </div>

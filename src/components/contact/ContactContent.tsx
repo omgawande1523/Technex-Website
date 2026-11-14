@@ -261,6 +261,7 @@ export default function ContactContent() {
                         onChange={handleChange}
                         placeholder="Your Name"
                         aria-label="Your Name"
+                        style={{ backgroundColor: 'transparent' }}
                         className="parchment-input w-full pl-10 pr-3.5 py-2.5 rounded-[2px] font-parchment-serif text-[15.5px] font-semibold"
                       />
                     </div>
@@ -278,6 +279,7 @@ export default function ContactContent() {
                         onChange={handleChange}
                         placeholder="Your Email"
                         aria-label="Your Email"
+                        style={{ backgroundColor: 'transparent' }}
                         className="parchment-input w-full pl-10 pr-3.5 py-2.5 rounded-[2px] font-parchment-serif text-[15.5px] font-semibold"
                       />
                     </div>
@@ -294,6 +296,7 @@ export default function ContactContent() {
                         onChange={handleChange}
                         placeholder="Your Phone Number"
                         aria-label="Your Phone Number"
+                        style={{ backgroundColor: 'transparent' }}
                         className="parchment-input w-full pl-10 pr-3.5 py-2.5 rounded-[2px] font-parchment-serif text-[15.5px] font-semibold"
                       />
                     </div>
@@ -311,6 +314,7 @@ export default function ContactContent() {
                         onChange={handleChange}
                         placeholder="Your Message"
                         aria-label="Your Message"
+                        style={{ backgroundColor: 'transparent' }}
                         className="parchment-input w-full pl-10 pr-3.5 py-2.5 min-h-[112px] rounded-[2px] font-parchment-serif text-[15.5px] font-semibold resize-none"
                       />
                     </div>

@@ -91,6 +91,36 @@ export default function RightSidebar() {
           .site-right-sidebar .mobile-sidebar-toggle { display: none !important; }
           .site-right-sidebar .sidebar-nav-items { display: contents !important; }
         }
+        @keyframes chatbotPulsePop {
+          0% {
+            transform: scale(0.96);
+            box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6), 0 0 14px rgba(56, 189, 248, 0.45), 0 0 20px rgba(239, 68, 68, 0.25);
+          }
+          50% {
+            transform: scale(1.06);
+            box-shadow: 0 0 0 8px rgba(56, 189, 248, 0), 0 0 22px rgba(56, 189, 248, 0.7), 0 0 28px rgba(239, 68, 68, 0.45);
+          }
+          100% {
+            transform: scale(0.96);
+            box-shadow: 0 0 0 0 rgba(56, 189, 248, 0), 0 0 14px rgba(56, 189, 248, 0.45), 0 0 20px rgba(239, 68, 68, 0.25);
+          }
+        }
+        @keyframes liveDotPing {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.45; transform: scale(1.3); }
+        }
+        .chatbot-pop-btn {
+          animation: chatbotPulsePop 2.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
+        }
+        .chatbot-pop-btn:hover {
+          animation: none !important;
+          transform: scale(1.18) translateY(-2px) !important;
+          box-shadow: 0 0 26px rgba(56, 189, 248, 0.9), 0 0 36px rgba(239, 68, 68, 0.6) !important;
+        }
+        .chatbot-pop-btn:active {
+          transform: scale(0.92) !important;
+        }
       `}</style>
     <aside
       className="site-right-sidebar"
@@ -126,7 +156,97 @@ export default function RightSidebar() {
         {mobileOpen ? '×' : '☰'}
       </button>
       <div className="sidebar-nav-items" data-open={mobileOpen}>
-      {RIGHT_SOCIAL_ITEMS.map((item) => {
+        {/* Chatbot Action Button - Exact copy of the mobile chatbot logo styling */}
+        <div style={{ position: 'relative' }} className="group">
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('open-chatbot'));
+              }
+            }}
+            aria-label="AI Chatbot"
+            className="chatbot-pop-btn"
+            style={{
+              position: 'relative',
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#000000',
+              border: 'none',
+              boxShadow:
+                '0 6px 20px rgba(0, 0, 0, 0.88), 0 0 16px rgba(56, 189, 248, 0.55), 0 0 24px rgba(239, 68, 68, 0.35)',
+              padding: 0,
+              cursor: 'pointer',
+              outline: 'none',
+              overflow: 'hidden',
+              transition:
+                'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease',
+            }}
+          >
+            <img
+              src="/assets/chatbot-icon.webp"
+              alt="AI Chatbot"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '50%',
+                display: 'block',
+              }}
+            />
+          </button>
+
+          {/* Floating Tooltip to the left */}
+          <div
+            style={{
+              position: 'absolute',
+              right: 'calc(100% + 14px)',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'rgba(14, 11, 8, 0.94)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(217, 173, 98, 0.45)',
+              boxShadow: '0 6px 20px rgba(0, 0, 0, 0.85), 0 0 14px rgba(217, 173, 98, 0.25)',
+              borderRadius: '8px',
+              padding: '6px 12px',
+              color: '#d9ad62',
+              fontSize: '12px',
+              fontWeight: 600,
+              letterSpacing: '0.04em',
+              whiteSpace: 'nowrap',
+              pointerEvents: 'none',
+              opacity: 0,
+              visibility: 'hidden',
+              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+              zIndex: 60,
+              fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+            className="sidebar-tooltip-left"
+          >
+            <span>AI Chatbot</span>
+            <span style={{ fontSize: '10px', color: '#22c55e', fontWeight: 700 }}>●</span>
+          </div>
+        </div>
+
+        {/* Separator line between Chatbot and Social Links */}
+        <div
+          style={{
+            width: '26px',
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(217, 173, 98, 0.4), transparent)',
+            margin: '2px 0',
+          }}
+        />
+
+        {RIGHT_SOCIAL_ITEMS.map((item) => {
         const IconComponent = item.icon;
         return (
           <div key={item.name} style={{ position: 'relative' }} className="group">

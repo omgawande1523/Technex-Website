@@ -25,6 +25,7 @@
 }
 
 .page :global(h1:not(svg)),
+.page :global(h1 span:not(svg)),
 .page :global(h2:not(svg)),
 .page :global(h3:not(svg)),
 .page :global(h4:not(svg)),

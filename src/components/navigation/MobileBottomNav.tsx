@@ -49,9 +49,9 @@ export default function MobileBottomNav() {
 
   // Exact geometry parameters for the continuous sculpted dock
   const w = dockWidth;
-  const h = 64; // height of flat dock bar
-  const rise = 18; // height of center arch hump above flat bar
-  const r = 32; // corner radius of the dock
+  const h = 50; // height of flat dock bar (reduced from 64)
+  const rise = 14; // height of center arch hump above flat bar (reduced from 18)
+  const r = 25; // corner radius of the dock
   const m = w / 2;
   const topY = rise;
   const bottomY = rise + h;
@@ -60,10 +60,10 @@ export default function MobileBottomNav() {
   // Smooth organic bell curve matching the reference image
   const dockBodyPath = [
     `M ${r} ${topY}`,
-    `L ${m - 46} ${topY}`,
-    `C ${m - 32} ${topY}, ${m - 26} 7, ${m - 14} 3`,
-    `C ${m - 7} 1, ${m + 7} 1, ${m + 14} 3`,
-    `C ${m + 26} 7, ${m + 32} ${topY}, ${m + 46} ${topY}`,
+    `L ${m - 38} ${topY}`,
+    `C ${m - 24} ${topY}, ${m - 18} 5, ${m - 10} 2`,
+    `C ${m - 5} 0.5, ${m + 5} 0.5, ${m + 10} 2`,
+    `C ${m + 18} 5, ${m + 24} ${topY}, ${m + 38} ${topY}`,
     `L ${w - r} ${topY}`,
     `A ${r} ${r} 0 0 1 ${w} ${topY + r}`,
     `L ${w} ${bottomY - r}`,
@@ -79,10 +79,10 @@ export default function MobileBottomNav() {
   const dockRimPath = [
     `M 0 ${topY + r}`,
     `A ${r} ${r} 0 0 1 ${r} ${topY}`,
-    `L ${m - 46} ${topY}`,
-    `C ${m - 32} ${topY}, ${m - 26} 7, ${m - 14} 3`,
-    `C ${m - 7} 1, ${m + 7} 1, ${m + 14} 3`,
-    `C ${m + 26} 7, ${m + 32} ${topY}, ${m + 46} ${topY}`,
+    `L ${m - 38} ${topY}`,
+    `C ${m - 24} ${topY}, ${m - 18} 5, ${m - 10} 2`,
+    `C ${m - 5} 0.5, ${m + 5} 0.5, ${m + 10} 2`,
+    `C ${m + 18} 5, ${m + 24} ${topY}, ${m + 38} ${topY}`,
     `L ${w - r} ${topY}`,
     `A ${r} ${r} 0 0 1 ${w} ${topY + r}`,
   ].join(' ');
@@ -112,6 +112,23 @@ export default function MobileBottomNav() {
         pointerEvents: 'none',
       }}
     >
+      {/* Frosted Glassmorphism Backdrop Blur Silhouette */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: `${w}px`,
+          height: `${bottomY}px`,
+          clipPath: `path('${dockBodyPath}')`,
+          WebkitClipPath: `path('${dockBodyPath}')`,
+          backdropFilter: 'blur(28px) saturate(210%) brightness(108%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(210%) brightness(108%)',
+          pointerEvents: 'none',
+        }}
+      />
+
       {/* 1:1 EXACT PIXEL-MATCHED SEAMLESS SCULPTED DOCK SVG */}
       <svg
         width={w}
@@ -127,39 +144,45 @@ export default function MobileBottomNav() {
           height: `${bottomY}px`,
           pointerEvents: 'none',
           filter:
-            'drop-shadow(0 20px 42px rgba(0, 0, 0, 0.90)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.50))',
+            'drop-shadow(0 16px 36px rgba(0, 0, 0, 0.82)) drop-shadow(0 0 22px rgba(217, 173, 98, 0.16)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.50))',
         }}
       >
         <defs>
+          {/* Translucent Cosmic Obsidian Glass Fill */}
           <linearGradient id="dockBodyGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#18181d" stopOpacity="0.96" />
-            <stop offset="100%" stopColor="#0e0e12" stopOpacity="0.98" />
+            <stop offset="0%" stopColor="#1a1426" stopOpacity="0.65" />
+            <stop offset="42%" stopColor="#100c1c" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="#08060f" stopOpacity="0.86" />
           </linearGradient>
+
+          {/* Luminous Luxury Champagne Gold Specular Rim Highlight */}
           <linearGradient id="dockRimGradient" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="rgba(255, 255, 255, 0.08)" />
-            <stop offset="35%" stopColor="rgba(255, 255, 255, 0.12)" />
-            <stop offset="50%" stopColor="rgba(229, 184, 105, 0.40)" />
-            <stop offset="65%" stopColor="rgba(255, 255, 255, 0.12)" />
-            <stop offset="100%" stopColor="rgba(255, 255, 255, 0.08)" />
+            <stop offset="0%" stopColor="rgba(217, 173, 98, 0.20)" />
+            <stop offset="28%" stopColor="rgba(245, 229, 201, 0.45)" />
+            <stop offset="44%" stopColor="rgba(217, 173, 98, 0.85)" />
+            <stop offset="50%" stopColor="rgba(255, 245, 225, 0.98)" />
+            <stop offset="56%" stopColor="rgba(217, 173, 98, 0.85)" />
+            <stop offset="72%" stopColor="rgba(245, 229, 201, 0.45)" />
+            <stop offset="100%" stopColor="rgba(217, 173, 98, 0.20)" />
           </linearGradient>
         </defs>
 
-        {/* Unified Matte Dark Charcoal Body */}
+        {/* Translucent Frosted Glass Tint Body */}
         <path d={dockBodyPath} fill="url(#dockBodyGradient)" />
 
-        {/* Subtle, refined continuous top rim highlight */}
+        {/* Continuous Champagne Gold Rim Highlight */}
         <path
           d={dockRimPath}
           stroke="url(#dockRimGradient)"
-          strokeWidth="1.1"
+          strokeWidth="1.2"
           strokeLinecap="round"
           fill="none"
         />
 
-        {/* Subtle bottom/side rim outline */}
+        {/* Champagne Glass Under-Rim Contour */}
         <path
           d={dockBottomPath}
-          stroke="rgba(255, 255, 255, 0.04)"
+          stroke="rgba(217, 173, 98, 0.16)"
           strokeWidth="1"
           strokeLinecap="round"
           fill="none"
@@ -171,7 +194,7 @@ export default function MobileBottomNav() {
         style={{
           position: 'absolute',
           left: '8px',
-          width: 'calc(50% - 38px)',
+          width: 'calc(50% - 34px)',
           top: `${rise}px`,
           height: `${h}px`,
           display: 'grid',
@@ -194,8 +217,8 @@ export default function MobileBottomNav() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 textDecoration: 'none',
-                gap: '3px',
-                padding: '6px 0 8px',
+                gap: '2px',
+                padding: '3px 0 5px',
                 position: 'relative',
                 width: '100%',
                 height: '100%',
@@ -205,12 +228,12 @@ export default function MobileBottomNav() {
               }}
             >
               <Icon
-                size={19}
-                strokeWidth={isActive ? 2.0 : 1.65}
+                size={18}
+                strokeWidth={isActive ? 2.1 : 1.7}
                 style={{
-                  color: isActive ? '#ffffff' : '#7e808c',
+                  color: isActive ? '#ffffff' : 'rgba(243, 239, 230, 0.60)',
                   filter: isActive
-                    ? 'drop-shadow(0 0 6px rgba(255, 235, 175, 0.6))'
+                    ? 'drop-shadow(0 0 8px rgba(217, 173, 98, 0.85)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.9))'
                     : 'none',
                   transition: 'all 0.2s ease',
                   flexShrink: 0,
@@ -218,21 +241,25 @@ export default function MobileBottomNav() {
               />
               <span
                 style={{
+                  fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif',
                   fontSize: '9.5px',
                   fontWeight: isActive ? 600 : 500,
-                  letterSpacing: '0.01em',
-                  color: isActive ? '#ffffff' : '#7e808c',
+                  letterSpacing: '0.02em',
+                  color: isActive ? '#f5e5c9' : 'rgba(243, 239, 230, 0.60)',
                   transition: 'all 0.2s ease',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   maxWidth: '100%',
+                  textShadow: isActive
+                    ? '0 0 10px rgba(217, 173, 98, 0.55)'
+                    : 'none',
                 }}
               >
                 {item.name}
               </span>
 
-              {/* ACTIVE PILL INDICATOR & UPWARD GLOW (MATCHING REFERENCE EXACTLY) */}
+              {/* ACTIVE PILL INDICATOR & UPWARD GLOW */}
               {isActive && (
                 <>
                   <span
@@ -241,25 +268,25 @@ export default function MobileBottomNav() {
                       bottom: '0px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      width: '32px',
-                      height: '18px',
+                      width: '28px',
+                      height: '14px',
                       background:
-                        'radial-gradient(ellipse at bottom, rgba(217, 173, 98, 0.40) 0%, transparent 70%)',
+                        'radial-gradient(ellipse at bottom, rgba(217, 173, 98, 0.42) 0%, transparent 72%)',
                       pointerEvents: 'none',
                     }}
                   />
                   <span
                     style={{
                       position: 'absolute',
-                      bottom: '3px',
+                      bottom: '2px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      width: '22px',
-                      height: '3.5px',
+                      width: '18px',
+                      height: '2.5px',
                       borderRadius: '9999px',
                       backgroundColor: '#d9ad62',
                       boxShadow:
-                        '0 0 8px #d9ad62, 0 0 16px rgba(217, 173, 98, 0.75), 0 -1px 3px rgba(255, 230, 160, 0.8)',
+                        '0 0 8px #d9ad62, 0 0 16px rgba(217, 173, 98, 0.85), 0 -1px 3px rgba(255, 235, 175, 0.9)',
                     }}
                   />
                 </>
@@ -282,63 +309,73 @@ export default function MobileBottomNav() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'flex-end',
-          paddingBottom: '8px',
+          paddingBottom: '3px',
           pointerEvents: 'none',
         }}
       >
-        {/* Sleek Elevated Action Button matching the blue circle in reference */}
-        <Link
-          href="/"
-          aria-label="TECHNEX 2026 Home"
-          className="active:scale-95 hover:scale-105"
+        {/* Slightly reduced Floating Chatbot Avatar - No golden border, glowing cosmic presence */}
+        <button
+          type="button"
+          onClick={() => {
+            if (typeof window !== 'undefined') {
+              window.dispatchEvent(new CustomEvent('open-chatbot'));
+            }
+          }}
+          aria-label="Open AI Chatbot"
+          className="active:scale-90 hover:scale-105"
           style={{
             position: 'absolute',
-            top: '-5px',
+            top: '-13px',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '52px',
-            height: '52px',
+            width: '54px',
+            height: '54px',
             borderRadius: '50%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background:
-              'radial-gradient(circle at 35% 30%, #262432 0%, #131218 70%, #09080c 100%)',
-            border: '1.5px solid rgba(229, 184, 105, 0.75)',
+            background: '#000000',
+            border: 'none',
             boxShadow:
-              '0 8px 22px rgba(0, 0, 0, 0.8), 0 0 16px rgba(217, 173, 98, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.25)',
+              '0 6px 20px rgba(0, 0, 0, 0.88), 0 0 16px rgba(56, 189, 248, 0.55), 0 0 24px rgba(239, 68, 68, 0.35)',
             textDecoration: 'none',
             zIndex: 10,
             pointerEvents: 'auto',
             transition:
-              'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease',
+              'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease',
             WebkitTapHighlightColor: 'transparent',
+            padding: 0,
+            cursor: 'pointer',
+            overflow: 'hidden',
           }}
         >
           <img
-            src="/logo_topnav.webp"
-            alt="TNX Logo"
+            src="/assets/chatbot-icon.webp"
+            alt="Chatbot AI"
             style={{
-              width: '68%',
-              height: '68%',
-              objectFit: 'contain',
-              filter: 'drop-shadow(0 0 8px rgba(217, 173, 98, 0.75))',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '50%',
+              display: 'block',
             }}
           />
-        </Link>
+        </button>
 
         {/* Micro-label below circle, aligned with other nav labels */}
         <span
           style={{
-            fontSize: '9.5px',
-            fontWeight: pathname === '/' ? 600 : 500,
-            letterSpacing: '0.02em',
-            color: pathname === '/' ? '#d9ad62' : '#7e808c',
+            fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif',
+            fontSize: '9px',
+            fontWeight: 600,
+            letterSpacing: '0.04em',
+            color: '#d9ad62',
             pointerEvents: 'auto',
             transition: 'color 0.2s ease',
+            textShadow: '0 0 10px rgba(217, 173, 98, 0.45)',
           }}
         >
-          TNX
+          Chat
         </span>
       </div>
 
@@ -347,7 +384,7 @@ export default function MobileBottomNav() {
         style={{
           position: 'absolute',
           right: '8px',
-          width: 'calc(50% - 38px)',
+          width: 'calc(50% - 34px)',
           top: `${rise}px`,
           height: `${h}px`,
           display: 'grid',
@@ -370,8 +407,8 @@ export default function MobileBottomNav() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 textDecoration: 'none',
-                gap: '3px',
-                padding: '6px 0 8px',
+                gap: '2px',
+                padding: '3px 0 5px',
                 position: 'relative',
                 width: '100%',
                 height: '100%',
@@ -381,12 +418,12 @@ export default function MobileBottomNav() {
               }}
             >
               <Icon
-                size={19}
-                strokeWidth={isActive ? 2.0 : 1.65}
+                size={18}
+                strokeWidth={isActive ? 2.1 : 1.7}
                 style={{
-                  color: isActive ? '#ffffff' : '#7e808c',
+                  color: isActive ? '#ffffff' : 'rgba(243, 239, 230, 0.60)',
                   filter: isActive
-                    ? 'drop-shadow(0 0 6px rgba(255, 235, 175, 0.6))'
+                    ? 'drop-shadow(0 0 8px rgba(217, 173, 98, 0.85)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.9))'
                     : 'none',
                   transition: 'all 0.2s ease',
                   flexShrink: 0,
@@ -394,21 +431,25 @@ export default function MobileBottomNav() {
               />
               <span
                 style={{
+                  fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif',
                   fontSize: '9.5px',
                   fontWeight: isActive ? 600 : 500,
-                  letterSpacing: '0.01em',
-                  color: isActive ? '#ffffff' : '#7e808c',
+                  letterSpacing: '0.02em',
+                  color: isActive ? '#f5e5c9' : 'rgba(243, 239, 230, 0.60)',
                   transition: 'all 0.2s ease',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   maxWidth: '100%',
+                  textShadow: isActive
+                    ? '0 0 10px rgba(217, 173, 98, 0.55)'
+                    : 'none',
                 }}
               >
                 {item.name}
               </span>
 
-              {/* ACTIVE PILL INDICATOR & UPWARD GLOW (MATCHING REFERENCE EXACTLY) */}
+              {/* ACTIVE PILL INDICATOR & UPWARD GLOW */}
               {isActive && (
                 <>
                   <span
@@ -417,25 +458,25 @@ export default function MobileBottomNav() {
                       bottom: '0px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      width: '32px',
-                      height: '18px',
+                      width: '28px',
+                      height: '14px',
                       background:
-                        'radial-gradient(ellipse at bottom, rgba(217, 173, 98, 0.40) 0%, transparent 70%)',
+                        'radial-gradient(ellipse at bottom, rgba(217, 173, 98, 0.42) 0%, transparent 72%)',
                       pointerEvents: 'none',
                     }}
                   />
                   <span
                     style={{
                       position: 'absolute',
-                      bottom: '3px',
+                      bottom: '2px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      width: '22px',
-                      height: '3.5px',
+                      width: '18px',
+                      height: '2.5px',
                       borderRadius: '9999px',
                       backgroundColor: '#d9ad62',
                       boxShadow:
-                        '0 0 8px #d9ad62, 0 0 16px rgba(217, 173, 98, 0.75), 0 -1px 3px rgba(255, 230, 160, 0.8)',
+                        '0 0 8px #d9ad62, 0 0 16px rgba(217, 173, 98, 0.85), 0 -1px 3px rgba(255, 235, 175, 0.9)',
                     }}
                   />
                 </>

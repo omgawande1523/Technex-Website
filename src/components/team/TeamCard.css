@@ -336,7 +336,7 @@
   line-height: 1.15;
 }
 
-/* Member Name (Enlarged Primary Title) */
+/* Member Name (Reduced Font Weight, Clean & Legible) */
 .cyber-front-name {
   display: block;
   max-width: 100%;
@@ -344,12 +344,12 @@
   overflow: hidden;
   text-overflow: clip;
   font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 950;
+  font-weight: 550;
   text-transform: none;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: #ffffff;
-  text-shadow: 0 0 12px rgba(251, 191, 36, 1), 0 0 20px rgba(217, 173, 98, 0.7), 0 2px 4px rgba(0, 0, 0, 0.95);
-  -webkit-text-stroke: 0.45px currentColor;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.8), 0 0 16px rgba(217, 173, 98, 0.5), 0 2px 4px rgba(0, 0, 0, 0.95);
+  -webkit-text-stroke: none;
   font-size: clamp(15px, 6.8cqi, 20.5px);
 }
 
@@ -358,7 +358,7 @@
 .cyber-front-name.name-size-lg { font-size: clamp(13px, 5.6cqi, 17.5px); }
 .cyber-front-name.name-size-xl { font-size: clamp(11.5px, 4.8cqi, 15.5px); letter-spacing: 0.02em; }
 
-/* Member Role (Enlarged Secondary Subtitle) */
+/* Member Role (Reduced Font Weight, Clean & Refined) */
 .cyber-front-role {
   display: block;
   max-width: 100%;
@@ -366,20 +366,56 @@
   overflow: hidden;
   text-overflow: clip;
   font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 900;
+  font-weight: 500;
   text-transform: none;
   color: #fde047;
-  text-shadow: 0 0 10px rgba(245, 158, 11, 1), 0 1px 3px rgba(0, 0, 0, 0.95);
-  letter-spacing: 0.06em;
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.85), 0 1px 3px rgba(0, 0, 0, 0.95);
+  letter-spacing: 0.05em;
   margin-top: 2px;
   font-size: clamp(11.5px, 4.8cqi, 15px);
-  -webkit-text-stroke: 0.3px currentColor;
+  -webkit-text-stroke: none;
 }
 
 .cyber-front-role.role-size-sm { font-size: clamp(12px, 5.0cqi, 15.5px); }
 .cyber-front-role.role-size-md { font-size: clamp(10.8px, 4.4cqi, 14px); letter-spacing: 0.04em; }
 .cyber-front-role.role-size-lg { font-size: clamp(9.6px, 3.8cqi, 12.5px); letter-spacing: 0.03em; }
 .cyber-front-role.role-size-xl { font-size: clamp(8.6px, 3.4cqi, 11px); letter-spacing: 0.02em; }
+
+/* ==========================================================================
+   FACULTY NAME & ROLE ENLARGEMENT (PROMINENT TITLES)
+   ========================================================================== */
+.is-faculty .cyber-front-name,
+.cyber-front-name.faculty-name {
+  font-size: clamp(17.5px, 8.0cqi, 24px) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 14px rgba(251, 191, 36, 0.9), 0 0 22px rgba(217, 173, 98, 0.6), 0 2px 5px rgba(0, 0, 0, 0.95);
+}
+.is-faculty .cyber-front-name.name-size-sm,
+.cyber-front-name.faculty-name.name-size-sm { font-size: clamp(19px, 8.6cqi, 25.5px) !important; }
+.is-faculty .cyber-front-name.name-size-md,
+.cyber-front-name.faculty-name.name-size-md { font-size: clamp(17.5px, 7.8cqi, 23.5px) !important; }
+.is-faculty .cyber-front-name.name-size-lg,
+.cyber-front-name.faculty-name.name-size-lg { font-size: clamp(16px, 7.0cqi, 21.5px) !important; }
+.is-faculty .cyber-front-name.name-size-xl,
+.cyber-front-name.faculty-name.name-size-xl { font-size: clamp(14.5px, 6.2cqi, 19.5px) !important; }
+
+.is-faculty .cyber-front-role,
+.cyber-front-role.faculty-role {
+  font-size: clamp(13.5px, 5.8cqi, 17.5px) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+.is-faculty .cyber-front-role.role-size-sm,
+.cyber-front-role.faculty-role.role-size-sm { font-size: clamp(14px, 6.0cqi, 18px) !important; }
+.is-faculty .cyber-front-role.role-size-md,
+.cyber-front-role.faculty-role.role-size-md { font-size: clamp(13px, 5.4cqi, 16.5px) !important; }
+.is-faculty .cyber-front-role.role-size-lg,
+.cyber-front-role.faculty-role.role-size-lg { font-size: clamp(12px, 4.8cqi, 15px) !important; }
+.is-faculty .cyber-front-role.role-size-xl,
+.cyber-front-role.faculty-role.role-size-xl { font-size: clamp(11px, 4.4cqi, 14px) !important; }
 
 /* ==========================================================================
    FLIP PROMPT: POSITIONED OUTSIDE BELOW THE FRAME
