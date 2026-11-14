@@ -51,6 +51,22 @@ interface SupermanPrimeCanvasProps {
   onUserInteraction?: () => void;
 }
 
+// Mobile camera sits farther back than desktop so the entity renders smaller.
+const MOBILE_CAMERA_POS = new THREE.Vector3(-6.9, 4.85, 13.8);
+
+/**
+ * Frames the entity away from the hero content:
+ * desktop shifts it to the right, mobile shifts it down.
+ */
+function applyHeroFraming(camera: THREE.PerspectiveCamera, w: number, h: number) {
+  if (w > 860) {
+    camera.setViewOffset(w, h, -w * 0.2, 0, w, h);
+  } else {
+    camera.setViewOffset(w, h, 0, -h * 0.12, w, h);
+  }
+  camera.updateProjectionMatrix();
+}
+
 export const COMIC_CARDS_DATA: ComicCardData[] = [
   {
     id: 'flight',
@@ -179,6 +195,7 @@ export default function SupermanPrimeCanvas({
   }, [onUserInteraction]);
   const [loadingProgress, setLoadingProgress] = useState<number>(10);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [webglUnavailable, setWebglUnavailable] = useState<boolean>(false);
   const isLoadedRef = useRef<boolean>(false);
   const poseModeRef = useRef(poseMode);
 
@@ -544,7 +561,7 @@ export default function SupermanPrimeCanvas({
       switch (preset) {
         case 'prime': // Finalized panoramic amphitheater view
           if (isMobile) {
-            targetPos.set(-5.6, 4.2, 11.2);
+            targetPos.copy(MOBILE_CAMERA_POS);
             targetLook.set(0, 1.25, 0);
           } else {
             targetPos.set(-4.95, 3.55, 7.55);
@@ -637,73 +654,61 @@ export default function SupermanPrimeCanvas({
     const initialFov = isMobile ? 46 : 42;
     const camera = new THREE.PerspectiveCamera(initialFov, width / height, 0.1, 150);
     if (isMobile) {
-      camera.position.set(-5.6, 4.2, 11.2);
+      camera.position.copy(MOBILE_CAMERA_POS);
     } else {
       camera.position.set(-4.95, 3.55, 7.55);
     }
     cameraRef.current = camera;
 
-    // Shift view offset so the 3D entity & amphitheater is framed on the right side of the page on desktop
-    if (width > 860) {
-      camera.setViewOffset(width, height, -width * 0.18, 0, width, height);
-    }
+    // Desktop: frame the entity on the right (left side is reserved for hero content).
+    // Mobile: push the entity down (top area is reserved for hero content).
+    applyHeroFraming(camera, width, height);
 
     // 3. Robust WebGLRenderer creation with cross-device fallbacks
-    const canvas = document.createElement('canvas');
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.display = 'block';
-
-    const contextAttributes: WebGLContextAttributes = {
-      alpha: true,
-      antialias: true,
-      depth: true,
-      stencil: false,
-      powerPreference: 'default',
-      preserveDrawingBuffer: false,
-      failIfMajorPerformanceCaveat: false,
+    // NOTE: three.js r163+ only supports WebGL2. We must NOT pre-create a context with a
+    // WebGL1 fallback on the canvas: on laptops where WebGL2 is unavailable that hands three
+    // a WebGL1 context (which it rejects) and also "poisons" the canvas so every retry fails.
+    // Each attempt therefore gets its own fresh canvas and lets three create the context.
+    const makeCanvas = () => {
+      const c = document.createElement('canvas');
+      c.style.width = '100%';
+      c.style.height = '100%';
+      c.style.display = 'block';
+      return c;
     };
 
-    let gl: WebGLRenderingContext | WebGL2RenderingContext | null = null;
-    try {
-      gl = (canvas.getContext('webgl2', contextAttributes) ||
-            canvas.getContext('webgl', contextAttributes) ||
-            canvas.getContext('experimental-webgl', contextAttributes)) as any;
-    } catch (e) {
-      console.warn('WebGL context creation warning:', e);
-    }
+    const rendererAttempts: THREE.WebGLRendererParameters[] = [
+      // Hybrid-GPU laptops: ask for the discrete GPU first
+      { antialias: true, powerPreference: 'high-performance' },
+      { antialias: true, powerPreference: 'default' },
+      { antialias: false, powerPreference: 'low-power', precision: 'mediump' },
+    ];
 
-    let renderer: THREE.WebGLRenderer;
-    try {
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        context: gl || undefined,
-        antialias: true,
-        alpha: true,
-        powerPreference: 'default',
-        preserveDrawingBuffer: false,
-        failIfMajorPerformanceCaveat: false,
-      });
-    } catch (e1) {
-      console.warn('Initial WebGLRenderer creation failed, attempting fallback options:', e1);
+    let createdRenderer: THREE.WebGLRenderer | null = null;
+    for (const attempt of rendererAttempts) {
       try {
-        renderer = new THREE.WebGLRenderer({
-          canvas,
-          antialias: false,
+        createdRenderer = new THREE.WebGLRenderer({
+          canvas: makeCanvas(),
           alpha: true,
-          powerPreference: 'default',
-          precision: 'mediump',
           preserveDrawingBuffer: false,
           failIfMajorPerformanceCaveat: false,
+          ...attempt,
         });
-      } catch (e2) {
-        console.error('All WebGLRenderer attempts failed:', e2);
-        setLoadingProgress(100);
-        isLoadedRef.current = true;
-        setIsLoaded(true);
-        return;
+        break;
+      } catch (err) {
+        console.warn('WebGLRenderer attempt failed:', attempt, err);
       }
     }
+
+    if (!createdRenderer) {
+      console.error('WebGL2 is unavailable on this device/browser; 3D scene cannot render.');
+      setWebglUnavailable(true);
+      setLoadingProgress(100);
+      isLoadedRef.current = true;
+      setIsLoaded(true);
+      return;
+    }
+    const renderer: THREE.WebGLRenderer = createdRenderer;
 
     const handleContextLost = (event: Event) => {
       event.preventDefault();
@@ -760,6 +765,33 @@ export default function SupermanPrimeCanvas({
     };
 
     controls.addEventListener('start', handleControlsStart);
+
+    // Desktop hover reaction: the entity turns toward the cursor while it is over
+    // the entity's side of the screen, and eases back to an idle sway otherwise.
+    const hoverState = { x: 0, active: false, dragging: false, rotY: 0, lift: 0, glow: 0, bobPhase: 0 };
+    const handleHoverMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      // While the user drags to orbit the camera, freeze the cursor-follow so the
+      // two motions don't fight each other.
+      hoverState.dragging = e.buttons !== 0;
+      if (hoverState.dragging) return;
+      const rect = container.getBoundingClientRect();
+      if (rect.width <= 860) {
+        hoverState.active = false;
+        return;
+      }
+      const nx = (e.clientX - rect.left) / rect.width;
+      const ny = (e.clientY - rect.top) / rect.height;
+      // Entity is framed at ~70% of the width (see applyHeroFraming)
+      const centerX = 0.7;
+      hoverState.active = nx >= 0.42 && nx <= 1 && ny >= 0 && ny <= 1;
+      hoverState.x = THREE.MathUtils.clamp((nx - centerX) / (1 - centerX), -1, 1);
+    };
+    const handleHoverLeave = () => {
+      hoverState.active = false;
+    };
+    window.addEventListener('pointermove', handleHoverMove);
+    document.documentElement.addEventListener('pointerleave', handleHoverLeave);
 
     // 5. Post-Processing: UnrealBloomPass tuned for high-contrast celestial gold with foolproof universal fallback
     let composer: EffectComposer | null = null;
@@ -937,10 +969,21 @@ export default function SupermanPrimeCanvas({
 
     // Custom shader injection via onBeforeCompile
     const injectGoldShader = (mat: THREE.MeshPhysicalMaterial) => {
+      // Per-material dissolve uniforms used for the smooth form-to-form transition.
+      // uReveal: 1 = fully visible, 0 = fully dissolved. uMinY/uMaxY: world-space height range of the form.
+      const dissolve = {
+        uReveal: { value: 1.0 },
+        uMinY: { value: 0.0 },
+        uMaxY: { value: 3.0 },
+      };
+      mat.userData.dissolve = dissolve;
       mat.onBeforeCompile = (shader) => {
         shader.uniforms.uTime = customUniformsRef.current.uTime;
         shader.uniforms.uGlowIntensity = customUniformsRef.current.uGlowIntensity;
         shader.uniforms.uThemeColor = customUniformsRef.current.uThemeColor;
+        shader.uniforms.uReveal = dissolve.uReveal;
+        shader.uniforms.uMinY = dissolve.uMinY;
+        shader.uniforms.uMaxY = dissolve.uMaxY;
 
         shader.vertexShader = shader.vertexShader.replace(
           '#include <common>',
@@ -964,7 +1007,43 @@ export default function SupermanPrimeCanvas({
           uniform float uTime;
           uniform float uGlowIntensity;
           uniform vec3 uThemeColor;
+          uniform float uReveal;
+          uniform float uMinY;
+          uniform float uMaxY;
           varying vec3 vWorldPositionCustom;
+
+          float dsHash(vec3 p) {
+            return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+          }
+          float dsNoise(vec3 p) {
+            vec3 i = floor(p);
+            vec3 f = fract(p);
+            f = f * f * (3.0 - 2.0 * f);
+            return mix(
+              mix(mix(dsHash(i), dsHash(i + vec3(1.0, 0.0, 0.0)), f.x),
+                  mix(dsHash(i + vec3(0.0, 1.0, 0.0)), dsHash(i + vec3(1.0, 1.0, 0.0)), f.x), f.y),
+              mix(mix(dsHash(i + vec3(0.0, 0.0, 1.0)), dsHash(i + vec3(1.0, 0.0, 1.0)), f.x),
+                  mix(dsHash(i + vec3(0.0, 1.0, 1.0)), dsHash(i + vec3(1.0, 1.0, 1.0)), f.x), f.y),
+              f.z);
+          }
+          `
+        );
+
+        // Dissolve: discard as early as possible so hidden fragments skip lighting
+        shader.fragmentShader = shader.fragmentShader.replace(
+          '#include <clipping_planes_fragment>',
+          `
+          #include <clipping_planes_fragment>
+          float dsEdge = 0.0;
+          if (uReveal < 0.999) {
+            float dsH = clamp((vWorldPositionCustom.y - uMinY) / max(0.001, uMaxY - uMinY), 0.0, 1.0);
+            float dsN = dsNoise(vWorldPositionCustom * 7.0) * 0.6 + dsNoise(vWorldPositionCustom * 19.0) * 0.4;
+            float dsField = mix(dsH, dsN, 0.35);
+            const float dsWidth = 0.07;
+            float dsThreshold = uReveal * (1.0 + dsWidth);
+            if (dsField > dsThreshold) discard;
+            dsEdge = smoothstep(dsThreshold - dsWidth, dsThreshold, dsField);
+          }
           `
         );
 
@@ -977,6 +1056,8 @@ export default function SupermanPrimeCanvas({
           vec3 rimGlow = uThemeColor * fresnel * uGlowIntensity * 0.14;
 
           gl_FragColor.rgb += rimGlow;
+          // Glowing molten-gold rim along the dissolve front
+          gl_FragColor.rgb = mix(gl_FragColor.rgb, uThemeColor * 2.2 + vec3(0.35, 0.28, 0.12), dsEdge);
           gl_FragColor.a = 1.0;
           `
         );
@@ -1025,8 +1106,7 @@ export default function SupermanPrimeCanvas({
       debugWindow.__watercraft = watercraftContainer;
       debugWindow.__neuralNetwork = neuralNetworkContainer;
       debugWindow.__humanoid = humanoidContainer;
-      debugWindow.__entityGroup = entityGroup;
-    }
+      debugWindow.__entityGroup = entityGroup;    }
 
     // Holographic Quantum Metamorphosis Shockwave Mesh
     const shockGeom = new THREE.TorusGeometry(1.0, 0.045, 16, 64);
@@ -1314,12 +1394,6 @@ export default function SupermanPrimeCanvas({
               }
             }
 
-            // Divine Celestial Halo behind Superman Prime / Technex Hero
-            const divineHalo = createDivineHalo();
-            divineHalo.position.set(0, 1.82, -0.06);
-            humanoidContainer.add(divineHalo);
-            haloGroupRef.current = divineHalo;
-
             capeGroupRef.current = null;
             capeMeshRef.current = null;
           } else {
@@ -1495,12 +1569,7 @@ export default function SupermanPrimeCanvas({
       const isMob = w <= 860;
       camera.aspect = w / h;
       camera.fov = isMob ? 46 : 42;
-      if (w > 860) {
-        camera.setViewOffset(w, h, -w * 0.18, 0, w, h);
-      } else {
-        camera.clearViewOffset();
-      }
-      camera.updateProjectionMatrix();
+      applyHeroFraming(camera, w, h);
       renderer.setSize(w, h);
       if (composer) {
         composer.setSize(w, h);
@@ -1522,6 +1591,59 @@ export default function SupermanPrimeCanvas({
     let isRunning = false;
     let lastTime = performance.now();
     let accumulatedTime = 0;
+
+    // Post-processing self-check.
+    // On some GPUs (notably Intel integrated graphics via ANGLE/D3D11, very common on laptops)
+    // the bloom EffectComposer silently outputs a fully transparent frame without raising any
+    // GL error, so the whole scene is invisible. After the scene has loaded we read back real
+    // pixels: if the composer frame is empty but a direct render is not, bloom is dropped
+    // permanently for this session so the model is always visible.
+    let composerVerified = false;
+    let composerCheckFrames = 0;
+    let composerCheckAttempts = 0;
+    const countVisiblePixels = (): number => {
+      const glc = renderer.getContext();
+      const w = glc.drawingBufferWidth;
+      const h = glc.drawingBufferHeight;
+      if (!w || !h) return 0;
+      const buf = new Uint8Array(w * h * 4);
+      renderer.setRenderTarget(null);
+      glc.readPixels(0, 0, w, h, glc.RGBA, glc.UNSIGNED_BYTE, buf);
+      let visible = 0;
+      // Sample every 7th pixel - plenty to detect a non-empty frame
+      for (let i = 0; i < buf.length; i += 4 * 7) {
+        if (buf[i + 3] > 8 && (buf[i] > 8 || buf[i + 1] > 8 || buf[i + 2] > 8)) visible++;
+      }
+      return visible;
+    };
+    const verifyComposerOutput = () => {
+      if (composerVerified || !composerRef.current || !isLoadedRef.current) return;
+      composerCheckFrames++;
+      // Let a few frames settle after load, then check periodically
+      if (composerCheckFrames < 20 || composerCheckFrames % 20 !== 0) return;
+      composerCheckAttempts++;
+      try {
+        const composerPixels = countVisiblePixels();
+        if (composerPixels > 0) {
+          composerVerified = true;
+          return;
+        }
+        renderer.render(scene, camera);
+        const directPixels = countVisiblePixels();
+        if (directPixels > 0) {
+          console.warn('Bloom post-processing produced an empty frame on this GPU; using direct rendering.');
+          try { composerRef.current.dispose(); } catch {}
+          composerRef.current = null;
+          composerVerified = true;
+        }
+      } catch (err) {
+        console.warn('Post-processing self-check failed; using direct rendering.', err);
+        composerRef.current = null;
+        composerVerified = true;
+      }
+      // Give up checking after ~10 attempts (scene may legitimately be empty for a moment)
+      if (composerCheckAttempts >= 10) composerVerified = true;
+    };
 
     const animate = () => {
       if (!isVisible) {
@@ -1710,7 +1832,9 @@ export default function SupermanPrimeCanvas({
 
       // 18. Autonomous 4-Stage Metamorphosis Cycle (4s Humanoid ➔ 4s Flying Machine ➔ 4s Watercraft ➔ 4s Neural Network ➔ Repeat)
       const HOLD_SECS = 4.0;
-      const CROSSFADE_SECS = 1.0;
+      const CROSSFADE_SECS = 2.0;
+      const prevTransitioning = isTransitioningRef.current;
+      const prevTargetIdx = targetFormIdxRef.current;
 
       if (isLoadedRef.current) {
         if (isTransitioningRef.current) {
@@ -1742,32 +1866,93 @@ export default function SupermanPrimeCanvas({
         }
       }
 
-      // Compute smooth alphas across all 4 forms
+      // Smooth form-to-form transition: overlapping golden dissolve.
+      // The outgoing form melts away top-to-bottom while the incoming form materializes
+      // bottom-to-top; both meet in the middle of the transition.
+      const formContainers = [
+        humanoidContainerRef.current,
+        flyingMachineContainerRef.current,
+        watercraftContainerRef.current,
+        neuralNetworkContainerRef.current,
+      ];
+      const formMaterials: THREE.Material[][] = [
+        [goldBodyMaterial, goldJointsMaterial],
+        flyingMachineMaterialsRef.current,
+        watercraftMaterialsRef.current,
+        neuralNetworkMaterialsRef.current,
+      ];
+      const FORM_BASE_SCALE = [1.15, 1, 1, 1];
+
+      // Measure the world-space height of both forms whenever a new transition starts
+      const transitionStarted =
+        isTransitioningRef.current &&
+        (!prevTransitioning || prevTargetIdx !== targetFormIdxRef.current);
+      if (transitionStarted) {
+        [currentFormIdxRef.current, targetFormIdxRef.current].forEach((idx) => {
+          const c = formContainers[idx];
+          if (!c) return;
+          c.scale.setScalar(FORM_BASE_SCALE[idx]);
+          c.updateMatrixWorld(true);
+          const box = new THREE.Box3().setFromObject(c);
+          if (box.isEmpty()) return;
+          formMaterials[idx].forEach((m) => {
+            const d = m.userData.dissolve;
+            if (d) {
+              d.uMinY.value = box.min.y;
+              d.uMaxY.value = box.max.y;
+            }
+          });
+        });
+      }
+
+      const smooth = (e0: number, e1: number, x: number) => {
+        const t = Math.min(1, Math.max(0, (x - e0) / (e1 - e0)));
+        return t * t * (3 - 2 * t);
+      };
+
       const alphas = [0, 0, 0, 0];
       let transitionWireAlpha = 0;
 
       if (isTransitioningRef.current) {
         const rawP = Math.min(1.0, Math.max(0.0, transitionProgressRef.current));
-        const ease = rawP * rawP * (3 - 2 * rawP); // Smooth cubic ease-in-out
-        alphas[currentFormIdxRef.current] = 1.0 - ease;
-        alphas[targetFormIdxRef.current] = ease;
+        alphas[currentFormIdxRef.current] = 1.0 - smooth(0.0, 0.62, rawP);
+        alphas[targetFormIdxRef.current] = smooth(0.38, 1.0, rawP);
         transitionWireAlpha = Math.sin(rawP * Math.PI) * 0.42;
       } else {
         alphas[currentFormIdxRef.current] = 1.0;
       }
 
+      // Drive dissolve uniforms + gentle scale breathing (incoming grows in, outgoing shrinks slightly)
+      formContainers.forEach((c, idx) => {
+        const a = alphas[idx];
+        formMaterials[idx].forEach((m) => {
+          const d = m.userData.dissolve;
+          if (d) d.uReveal.value = a;
+        });
+        if (c) {
+          const easeOut = 1 - Math.pow(1 - a, 3);
+          c.scale.setScalar(FORM_BASE_SCALE[idx] * (0.94 + 0.06 * easeOut));
+        }
+      });
+
       const [alphaHolo, alphaFly, alphaBoat, alphaAnn] = alphas;
 
-      // 1. Update Humanoid: pure smooth fade away at full original scale (no shrinking)
+      // 1. Update Humanoid
       if (humanoidContainerRef.current) {
         humanoidContainerRef.current.visible = alphaHolo > 0.001;
-        humanoidContainerRef.current.scale.set(1.15, 1.15, 1.15);
 
+        // Gold skin visibility is handled by the dissolve shader, so keep it fully opaque in depth
         const skinAlpha = hologramSkinOpacityRef.current * alphaHolo;
-        goldBodyMaterial.opacity = skinAlpha;
-        goldJointsMaterial.opacity = skinAlpha;
-        goldBodyMaterial.depthWrite = skinAlpha > 0.35;
-        goldJointsMaterial.depthWrite = skinAlpha > 0.35;
+        goldBodyMaterial.opacity = hologramSkinOpacityRef.current;
+        goldJointsMaterial.opacity = hologramSkinOpacityRef.current;
+        goldBodyMaterial.depthWrite = true;
+        goldJointsMaterial.depthWrite = true;
+
+        // Halo sits at the head, which dissolves first / materializes last: shrink it in step
+        if (haloGroupRef.current) {
+          const haloScale = smooth(0.55, 1.0, alphaHolo);
+          haloGroupRef.current.scale.setScalar(Math.max(0.0001, haloScale));
+        }
 
         if (holographicLayersRef.current) {
           holographicLayersRef.current.setSkinOpacity(skinAlpha);
@@ -1795,15 +1980,11 @@ export default function SupermanPrimeCanvas({
         container.visible = isVis;
         if (!isVis) return;
 
-        // 1. Effective skin opacity is driven directly by Translucent Skin Opacity slider
-        const effectiveSkinOpacity = hologramSkinOpacityRef.current * alpha;
-        const isSolid = effectiveSkinOpacity > 0.35;
-
+        // 1. Gold skin visibility is driven by the dissolve shader (uReveal), so the
+        // material stays depth-writing and never needs a per-frame recompile.
         materialsList.forEach((m) => {
-          m.opacity = effectiveSkinOpacity;
-          (m as THREE.MeshPhysicalMaterial).depthWrite = isSolid;
-          m.transparent = true;
-          m.needsUpdate = true;
+          m.opacity = hologramSkinOpacityRef.current;
+          m.depthWrite = true;
         });
 
         // 2. Update holographic wireframe intensity and traveling pulse speed
@@ -1903,8 +2084,24 @@ export default function SupermanPrimeCanvas({
       // Subtle entity levitation float when hovering or walking
       if (characterGroupRef.current) {
         if (poseModeRef.current === 'hover') {
-          characterGroupRef.current.position.y = 0.08 + Math.sin(time * 1.5) * 0.06;
-          characterGroupRef.current.rotation.y = 0;
+          // Slow, critically-damped easing so the turn never overshoots or jitters
+          const k = 1 - Math.exp(-delta * 2.2);
+          const follow = hoverState.active && !hoverState.dragging;
+          const targetRotY = follow ? hoverState.x * 0.5 : 0;
+          hoverState.rotY += (targetRotY - hoverState.rotY) * k;
+          hoverState.lift += ((follow ? 0.1 : 0) - hoverState.lift) * k;
+          hoverState.glow += ((follow ? 1 : 0) - hoverState.glow) * k;
+          // Accumulate the bob phase so a changing bob speed can't make it jump
+          hoverState.bobPhase += delta * 1.5;
+          characterGroupRef.current.position.y =
+            0.08 + hoverState.lift + Math.sin(hoverState.bobPhase) * 0.05;
+          characterGroupRef.current.rotation.y = hoverState.rotY;
+          characterGroupRef.current.rotation.x = 0;
+          if (holographicLayersRef.current) {
+            holographicLayersRef.current.setChestCoreRadiance(
+              hologramChestCoreRadianceRef.current * (1 + hoverState.glow * 0.6),
+            );
+          }
         } else if (poseModeRef.current === 'walk' && isMaleBody) {
           characterGroupRef.current.position.y = 0.04 + Math.sin(time * 2.8) * 0.03;
           characterGroupRef.current.rotation.y = Math.sin(time * 1.4) * 0.05;
@@ -1979,6 +2176,8 @@ export default function SupermanPrimeCanvas({
       }
       if (!renderedOk) {
         renderer.render(scene, camera);
+      } else {
+        verifyComposerOutput();
       }
     };
 
@@ -2024,6 +2223,8 @@ export default function SupermanPrimeCanvas({
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('pointermove', handleHoverMove);
+      document.documentElement.removeEventListener('pointerleave', handleHoverLeave);
       resizeObserver?.disconnect();
       renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
       renderer.domElement.removeEventListener('webglcontextrestored', handleContextRestored);
@@ -2056,6 +2257,14 @@ export default function SupermanPrimeCanvas({
         cursor: 'grab',
       }}
     >
+      {/* Static fallback when the device/browser has no WebGL 2 (e.g. hardware acceleration off) */}
+      {webglUnavailable && (
+        <div className="hero-webgl-fallback">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/models/hero-fallback.png" alt="Technex golden hero" draggable={false} />
+        </div>
+      )}
+
       {/* Loading Overlay */}
       {!isLoaded && (
         <div
@@ -2227,6 +2436,35 @@ export default function SupermanPrimeCanvas({
       )}
 
       <style jsx global>{`
+        .hero-webgl-fallback {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding-right: 12%;
+          pointer-events: none;
+          z-index: 1;
+        }
+        .hero-webgl-fallback img {
+          width: min(560px, 46vw);
+          height: auto;
+          mix-blend-mode: screen;
+          animation: heroFloat 6s ease-in-out infinite;
+        }
+        @media (max-width: 860px) {
+          .hero-webgl-fallback {
+            justify-content: center;
+            padding-right: 0;
+          }
+          .hero-webgl-fallback img {
+            width: min(520px, 92vw);
+          }
+        }
+        @keyframes heroFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
         @keyframes spin {
           to {
             transform: rotate(360deg);
@@ -2586,11 +2824,6 @@ function createCelestialProxyHero(goldMaterial: THREE.MeshPhysicalMaterial): THR
   const chestCore = createChestSunCore();
   chestCore.position.set(0, 1.55, 0.16);
   proxy.add(chestCore);
-
-  // Divine Celestial Halo behind head
-  const halo = createDivineHalo();
-  halo.position.set(0, 1.82, -0.05);
-  proxy.add(halo);
 
   return proxy;
 }

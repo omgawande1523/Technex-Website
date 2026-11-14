@@ -8,7 +8,6 @@ const IMAGE_RE = /\.(webp|jpe?g|png|gif|avif)$/i;
 export async function listMedia(): Promise<MediaItem[]> {
   const possibleDirs = [
     { dir: path.join(process.cwd(), "public", "assets", "gallery"), prefix: "/assets/gallery" },
-    { dir: path.join(process.cwd(), "public", "gallery"), prefix: "/gallery" },
   ];
 
   for (const { dir, prefix } of possibleDirs) {
