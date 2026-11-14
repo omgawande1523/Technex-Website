@@ -51,6 +51,22 @@ interface SupermanPrimeCanvasProps {
   onUserInteraction?: () => void;
 }
 
+// Mobile camera sits farther back than desktop so the entity renders smaller.
+const MOBILE_CAMERA_POS = new THREE.Vector3(-6.9, 4.85, 13.8);
+
+/**
+ * Frames the entity away from the hero content:
+ * desktop shifts it to the right, mobile shifts it down.
+ */
+function applyHeroFraming(camera: THREE.PerspectiveCamera, w: number, h: number) {
+  if (w > 860) {
+    camera.setViewOffset(w, h, -w * 0.2, 0, w, h);
+  } else {
+    camera.setViewOffset(w, h, 0, -h * 0.12, w, h);
+  }
+  camera.updateProjectionMatrix();
+}
+
 export const COMIC_CARDS_DATA: ComicCardData[] = [
   {
     id: 'flight',
@@ -545,7 +561,7 @@ export default function SupermanPrimeCanvas({
       switch (preset) {
         case 'prime': // Finalized panoramic amphitheater view
           if (isMobile) {
-            targetPos.set(-5.6, 4.2, 11.2);
+            targetPos.copy(MOBILE_CAMERA_POS);
             targetLook.set(0, 1.25, 0);
           } else {
             targetPos.set(-4.95, 3.55, 7.55);
@@ -638,16 +654,15 @@ export default function SupermanPrimeCanvas({
     const initialFov = isMobile ? 46 : 42;
     const camera = new THREE.PerspectiveCamera(initialFov, width / height, 0.1, 150);
     if (isMobile) {
-      camera.position.set(-5.6, 4.2, 11.2);
+      camera.position.copy(MOBILE_CAMERA_POS);
     } else {
       camera.position.set(-4.95, 3.55, 7.55);
     }
     cameraRef.current = camera;
 
-    // Shift view offset so the 3D entity & amphitheater is framed on the right side of the page on desktop
-    if (width > 860) {
-      camera.setViewOffset(width, height, -width * 0.18, 0, width, height);
-    }
+    // Desktop: frame the entity on the right (left side is reserved for hero content).
+    // Mobile: push the entity down (top area is reserved for hero content).
+    applyHeroFraming(camera, width, height);
 
     // 3. Robust WebGLRenderer creation with cross-device fallbacks
     // NOTE: three.js r163+ only supports WebGL2. We must NOT pre-create a context with a
@@ -750,6 +765,33 @@ export default function SupermanPrimeCanvas({
     };
 
     controls.addEventListener('start', handleControlsStart);
+
+    // Desktop hover reaction: the entity turns toward the cursor while it is over
+    // the entity's side of the screen, and eases back to an idle sway otherwise.
+    const hoverState = { x: 0, active: false, dragging: false, rotY: 0, lift: 0, glow: 0, bobPhase: 0 };
+    const handleHoverMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      // While the user drags to orbit the camera, freeze the cursor-follow so the
+      // two motions don't fight each other.
+      hoverState.dragging = e.buttons !== 0;
+      if (hoverState.dragging) return;
+      const rect = container.getBoundingClientRect();
+      if (rect.width <= 860) {
+        hoverState.active = false;
+        return;
+      }
+      const nx = (e.clientX - rect.left) / rect.width;
+      const ny = (e.clientY - rect.top) / rect.height;
+      // Entity is framed at ~70% of the width (see applyHeroFraming)
+      const centerX = 0.7;
+      hoverState.active = nx >= 0.42 && nx <= 1 && ny >= 0 && ny <= 1;
+      hoverState.x = THREE.MathUtils.clamp((nx - centerX) / (1 - centerX), -1, 1);
+    };
+    const handleHoverLeave = () => {
+      hoverState.active = false;
+    };
+    window.addEventListener('pointermove', handleHoverMove);
+    document.documentElement.addEventListener('pointerleave', handleHoverLeave);
 
     // 5. Post-Processing: UnrealBloomPass tuned for high-contrast celestial gold with foolproof universal fallback
     let composer: EffectComposer | null = null;
@@ -1527,12 +1569,7 @@ export default function SupermanPrimeCanvas({
       const isMob = w <= 860;
       camera.aspect = w / h;
       camera.fov = isMob ? 46 : 42;
-      if (w > 860) {
-        camera.setViewOffset(w, h, -w * 0.18, 0, w, h);
-      } else {
-        camera.clearViewOffset();
-      }
-      camera.updateProjectionMatrix();
+      applyHeroFraming(camera, w, h);
       renderer.setSize(w, h);
       if (composer) {
         composer.setSize(w, h);
@@ -2047,8 +2084,24 @@ export default function SupermanPrimeCanvas({
       // Subtle entity levitation float when hovering or walking
       if (characterGroupRef.current) {
         if (poseModeRef.current === 'hover') {
-          characterGroupRef.current.position.y = 0.08 + Math.sin(time * 1.5) * 0.06;
-          characterGroupRef.current.rotation.y = 0;
+          // Slow, critically-damped easing so the turn never overshoots or jitters
+          const k = 1 - Math.exp(-delta * 2.2);
+          const follow = hoverState.active && !hoverState.dragging;
+          const targetRotY = follow ? hoverState.x * 0.5 : 0;
+          hoverState.rotY += (targetRotY - hoverState.rotY) * k;
+          hoverState.lift += ((follow ? 0.1 : 0) - hoverState.lift) * k;
+          hoverState.glow += ((follow ? 1 : 0) - hoverState.glow) * k;
+          // Accumulate the bob phase so a changing bob speed can't make it jump
+          hoverState.bobPhase += delta * 1.5;
+          characterGroupRef.current.position.y =
+            0.08 + hoverState.lift + Math.sin(hoverState.bobPhase) * 0.05;
+          characterGroupRef.current.rotation.y = hoverState.rotY;
+          characterGroupRef.current.rotation.x = 0;
+          if (holographicLayersRef.current) {
+            holographicLayersRef.current.setChestCoreRadiance(
+              hologramChestCoreRadianceRef.current * (1 + hoverState.glow * 0.6),
+            );
+          }
         } else if (poseModeRef.current === 'walk' && isMaleBody) {
           characterGroupRef.current.position.y = 0.04 + Math.sin(time * 2.8) * 0.03;
           characterGroupRef.current.rotation.y = Math.sin(time * 1.4) * 0.05;
@@ -2170,6 +2223,8 @@ export default function SupermanPrimeCanvas({
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('pointermove', handleHoverMove);
+      document.documentElement.removeEventListener('pointerleave', handleHoverLeave);
       resizeObserver?.disconnect();
       renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
       renderer.domElement.removeEventListener('webglcontextrestored', handleContextRestored);

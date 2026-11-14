@@ -23,6 +23,8 @@ export default function Home() {
           overflow: "hidden",
         }}
       >
+        <div className={styles.heroBackground} aria-hidden="true" />
+
         <div
           style={{
             position: "absolute",
@@ -59,6 +61,12 @@ export default function Home() {
             autoTransform
           />
         </div>
+
+        <div className={styles.heroScrim} aria-hidden="true" />
+
+        {/* Hero content slot: left side on desktop, top on mobile.
+            Add the logo, countdown timer and Register Now button here. */}
+        <div className={styles.heroContent}></div>
 
         <UIOverlay />
         <ComicModal
