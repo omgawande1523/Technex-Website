@@ -921,6 +921,9 @@ export default function SupermanPrimeCanvas({
     ribbonsGroupRef.current = null;
 
     // 11. Floating Multiverse Comic Panels
+    camera.lookAt(controls.target);
+    camera.updateMatrixWorld(true);
+    camera.updateProjectionMatrix();
     const cardsGroup = createFloatingComicPanels(scene, onSelectComic, camera, renderer.domElement);
     scene.add(cardsGroup);
     cardsGroupRef.current = cardsGroup;
@@ -3596,57 +3599,57 @@ function getCardTransforms(
 /**
  * Creates a smooth 3D flight trajectory for a card in the entrance trail.
  * All cards share the exact same top-left origin and entry swoop across the sky,
- * loop around the 3D entity clockwise, and settle gracefully into their circular amphitheater slot.
+ * arc gracefully into the 3D entity space, and settle into their circular amphitheater slot.
  */
 function createCardTrailCurve(
-  startPoint: THREE.Vector3,
+  camera: THREE.PerspectiveCamera,
   targetPos: THREE.Vector3,
   targetPhiRad: number,
   targetY: number
 ): THREE.CatmullRomCurve3 {
   const waypoints: THREE.Vector3[] = [];
 
-  // 1. High in the top-left cosmic sky (unprojected from screen top-left)
-  waypoints.push(startPoint.clone());
+  const target = new THREE.Vector3(0, 1.25, 0);
+  const camDist = camera.position.distanceTo(target);
 
-  // 2. High-speed diagonal swoop across upper cosmic space
-  waypoints.push(new THREE.Vector3(-4.6, 3.8, 4.4));
+  // Helper to project screen NDC coordinates at a given distance along the ray from camera
+  const getScreenPoint = (ndcX: number, ndcY: number, dist: number): THREE.Vector3 => {
+    const pNear = new THREE.Vector3(ndcX, ndcY, 0).unproject(camera);
+    const dir = pNear.sub(camera.position).normalize();
+    return camera.position.clone().add(dir.multiplyScalar(dist));
+  };
 
-  // 3. Approaching front-left airspace of the 3D entity
-  waypoints.push(new THREE.Vector3(-1.6, 2.4, 3.8));
+  // 1. Waypoint 0: Off-screen beyond the top-left corner
+  waypoints.push(getScreenPoint(-1.35, 1.35, camDist * 0.75));
 
-  // 4. Sweeping across the front toward the right flank
-  waypoints.push(new THREE.Vector3(1.6, 1.9, 3.0));
+  // 2. Waypoint 1: High in the top-left cosmic sky (coming into view)
+  waypoints.push(getScreenPoint(-0.90, 0.90, camDist * 0.85));
 
-  // 5. Clockwise loop around the 3D entity:
-  let normTargetPhi = targetPhiRad;
-  while (normTargetPhi < 0) normTargetPhi += Math.PI * 2;
-  while (normTargetPhi >= Math.PI * 2) normTargetPhi -= Math.PI * 2;
+  // 3. Waypoint 2: Swooping down-right across upper-left airspace toward the center
+  waypoints.push(getScreenPoint(-0.45, 0.50, camDist * 0.95));
 
-  const startAlpha = 0.25 * Math.PI;
-  let endAlpha = normTargetPhi;
-  if (endAlpha <= startAlpha + 0.35) {
-    endAlpha += Math.PI * 2;
+  // 4. Waypoint 3: For right flank or rear cards, sweep through front airspace (z > 0)
+  // to maintain clearance and prevent clipping through central entity
+  const phiDeg = (targetPhiRad * 180) / Math.PI;
+  const R = 2.45;
+  if (phiDeg > 0 || phiDeg <= -140) {
+    const frontPhi = Math.min(targetPhiRad * 0.5, 0.5);
+    waypoints.push(new THREE.Vector3(
+      3.2 * Math.sin(frontPhi),
+      Math.max(targetY + 0.4, 1.8),
+      3.2 * Math.cos(frontPhi)
+    ));
   }
 
-  const arcSteps = 7;
-  for (let s = 1; s <= arcSteps; s++) {
-    const frac = s / (arcSteps + 1);
-    const alpha = THREE.MathUtils.lerp(startAlpha, endAlpha, frac);
-    const r = THREE.MathUtils.lerp(2.8, 2.45, frac);
-    const y = THREE.MathUtils.lerp(1.9, targetY, frac);
-    waypoints.push(new THREE.Vector3(r * Math.sin(alpha), y, r * Math.cos(alpha)));
-  }
-
-  // 6. Pre-dock tangent waypoint (aligns card with cylindrical orbit before docking)
-  const preDockAlpha = targetPhiRad - 0.12;
+  // 5. Waypoint 4: Pre-dock tangent waypoint aligning with cylindrical orbit
+  const preDockPhi = targetPhiRad - (phiDeg >= 0 ? 0.25 : -0.25);
   waypoints.push(new THREE.Vector3(
-    2.45 * Math.sin(preDockAlpha),
-    targetY,
-    2.45 * Math.cos(preDockAlpha)
+    (R + 0.35) * Math.sin(preDockPhi),
+    targetY + 0.2,
+    (R + 0.35) * Math.cos(preDockPhi)
   ));
 
-  // 7. Destination slot
+  // 6. Final destination slot
   waypoints.push(targetPos.clone());
 
   return new THREE.CatmullRomCurve3(waypoints, false, 'centripetal');
@@ -3671,7 +3674,6 @@ function createFloatingComicPanels(
   const cardMeshes: THREE.Mesh[] = [];
 
   const defaultLayout = 'circular';
-  const startPoint = new THREE.Vector3(-1.12, 0.98, 0.42).unproject(camera);
   const CHIME_PITCHES = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50, 1174.66];
 
   // Subtle celestial orbit guide ring at base (y = 0.55) so it never occludes Superman Prime
@@ -3726,7 +3728,7 @@ function createFloatingComicPanels(
     cardMesh.rotation.copy(t.rotation);
     cardMesh.scale.set(t.scale, t.scale, t.scale);
 
-    const flightCurve = createCardTrailCurve(startPoint, t.position, t.rotation.y, t.position.y);
+    const flightCurve = createCardTrailCurve(camera, t.position, t.rotation.y, t.position.y);
 
     cardMesh.userData = {
       cardData,

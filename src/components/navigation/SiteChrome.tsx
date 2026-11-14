@@ -5,6 +5,7 @@ import Navbar from "@/components/navigation/Navbar";
 import LeftSidebar from "@/components/landing/LeftSidebar";
 import RightSidebar from "@/components/landing/RightSidebar";
 import MobileBottomNav from "@/components/navigation/MobileBottomNav";
+import TechnexChatbot from "@/components/technex-ai/TechnexChatbot";
 
 export default function SiteChrome() {
   const pathname = usePathname();
@@ -19,6 +20,7 @@ export default function SiteChrome() {
       <LeftSidebar />
       <RightSidebar />
       <MobileBottomNav />
+      <TechnexChatbot />
     </>
   );
 }

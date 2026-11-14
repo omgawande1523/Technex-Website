@@ -8,6 +8,7 @@ import {
 } from "@/app/event-fonts";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@/components/technex-ai/technex-chatbot.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

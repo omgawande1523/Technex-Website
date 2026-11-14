@@ -1,0 +1,671 @@
+/* ==========================================================================
+   TECHNEX AI — Clean, Restrained Liquid-Glass Design
+   Compact proportions, reduced radii, and mobile expandable space
+   ========================================================================== */
+
+:root {
+  --tx-bg-glass: rgba(11, 14, 22, 0.90);
+  --tx-accent-blue: #2563eb;
+  --tx-accent-blue-hover: #1d4ed8;
+  --tx-accent-cyan: #38bdf8;
+  --tx-border-subtle: rgba(255, 255, 255, 0.08);
+  --tx-border-hover: rgba(255, 255, 255, 0.18);
+  --tx-bot-bubble: rgba(255, 255, 255, 0.04);
+  --tx-user-bubble: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  --tx-text-main: #f8fafc;
+  --tx-text-secondary: #94a3b8;
+  --tx-text-tertiary: #64748b;
+}
+
+.txai-root,
+.txai-root * {
+  box-sizing: border-box;
+}
+
+.txai-root {
+  position: relative;
+  z-index: 99999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+  color: var(--tx-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Backdrop (Tap outside to dismiss)
+   -------------------------------------------------------------------------- */
+.txai-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 99998;
+  animation: txai-fade-in 0.2s ease-out;
+}
+
+@media (min-width: 769px) {
+  .txai-backdrop {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Chat Window Sheet / Compact Floating Card with Reduced Radius
+   -------------------------------------------------------------------------- */
+.txai-panel {
+  position: fixed;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--tx-bg-glass);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid var(--tx-border-subtle);
+  border-radius: 14px; /* Reduced box radius */
+  box-shadow: 
+    0 20px 50px -10px rgba(0, 0, 0, 0.85),
+    0 0 30px -10px rgba(37, 99, 235, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  animation: txai-sheet-up 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Desktop sizing & positioning — reduced compact size */
+@media (min-width: 769px) {
+  .txai-panel {
+    right: 86px;
+    bottom: 26px;
+    width: 300px; /* Reduced desktop width */
+    height: min(470px, calc(100vh - 120px));
+    max-height: 490px;
+  }
+}
+
+/* Mobile sizing & positioning — compact by default, expandable */
+@media (max-width: 768px) {
+  .txai-panel {
+    left: 14px;
+    right: 14px;
+    margin: 0 auto;
+    width: calc(100% - 28px);
+    max-width: 375px;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    height: min(390px, 48vh); /* Reduced mobile height: leaves > 50% open */
+    max-height: 400px;
+    transition: height 0.28s cubic-bezier(0.16, 1, 0.3, 1), max-height 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Extended space state on mobile */
+  .txai-panel.txai-expanded {
+    height: min(580px, 76vh);
+    max-height: 600px;
+  }
+}
+
+/* Mobile Top Handle Pill (Interactive Tap to Expand/Collapse) */
+.txai-mobile-handle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .txai-mobile-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0 3px;
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    flex-shrink: 0;
+  }
+
+  .txai-mobile-handle-bar {
+    width: 36px;
+    height: 4px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.22);
+    transition: background 0.18s ease;
+  }
+
+  .txai-mobile-handle:hover .txai-mobile-handle-bar {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.txai-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--tx-border-subtle);
+  flex-shrink: 0;
+}
+
+.txai-header-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.txai-header-avatar {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.8), rgba(244, 63, 94, 0.6));
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+  flex-shrink: 0;
+}
+
+.txai-header-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.txai-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.txai-header-title {
+  font-size: 13.5px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.txai-header-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  color: var(--tx-text-secondary);
+}
+
+.txai-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 5px rgba(34, 197, 94, 0.6);
+}
+
+.txai-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.txai-btn-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px; /* Reduced button radius */
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  color: var(--tx-text-secondary);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.18s ease;
+}
+
+.txai-btn-icon:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Expand button visible only on mobile */
+.txai-btn-expand {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .txai-btn-expand {
+    display: grid;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Message Area
+   -------------------------------------------------------------------------- */
+.txai-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.txai-messages-mask {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 14px, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14px, black 100%);
+}
+
+.txai-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.txai-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Welcome Screen (Clean, Compact & Structured)
+   -------------------------------------------------------------------------- */
+.txai-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px 4px 6px;
+  gap: 5px;
+  animation: txai-fade-in 0.25s ease-out;
+}
+
+.txai-welcome-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.7), rgba(244, 63, 94, 0.6));
+  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.25);
+  margin-bottom: 2px;
+}
+
+.txai-welcome-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.txai-welcome-title {
+  font-size: 14.5px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.txai-welcome-desc {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--tx-text-secondary);
+  max-width: 270px;
+  margin: 0 0 3px;
+}
+
+/* Prompt Pills in clean 2x2 grid with reduced radius */
+.txai-pills-wrap {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 3px;
+}
+
+.txai-pill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 9px;
+  border-radius: 9px; /* Reduced radius */
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--tx-border-subtle);
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.txai-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.txai-pill-arrow {
+  color: var(--tx-text-tertiary);
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Messages Stream Layout
+   -------------------------------------------------------------------------- */
+.txai-msg {
+  display: flex;
+  gap: 7px;
+  align-items: flex-start;
+  animation: txai-msg-slide 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.txai-msg-user {
+  justify-content: flex-end;
+}
+
+.txai-msg-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.txai-msg-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.txai-msg-bubble {
+  max-width: 86%;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  border-radius: 10px; /* Reduced bubble radius */
+  overflow-wrap: anywhere;
+}
+
+/* Assistant Bubble: Soft Clean Glass */
+.txai-msg-assistant .txai-msg-bubble {
+  background: var(--tx-bot-bubble);
+  border: 1px solid var(--tx-border-subtle);
+  border-top-left-radius: 2px;
+  color: #e2e8f0;
+}
+
+/* User Bubble: Deep Royal Blue */
+.txai-msg-user .txai-msg-bubble {
+  background: var(--tx-user-bubble);
+  border-bottom-right-radius: 2px;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+/* Rich Structured Formatting Inside Assistant Responses */
+.txai-msg-bubble h1,
+.txai-msg-bubble h2,
+.txai-msg-bubble h3,
+.txai-msg-bubble h4 {
+  color: #ffffff;
+  font-weight: 700;
+  margin: 10px 0 5px 0;
+  line-height: 1.3;
+}
+
+.txai-msg-bubble h3 {
+  font-size: 13.5px;
+  color: #38bdf8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 3px;
+}
+
+.txai-msg-bubble h4 {
+  font-size: 12.5px;
+  color: #f1f5f9;
+}
+
+.txai-msg-bubble p {
+  margin: 0 0 6px;
+}
+
+.txai-msg-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.txai-msg-bubble strong {
+  color: #ffffff;
+  font-weight: 650;
+}
+
+.txai-msg-bubble a {
+  color: var(--tx-accent-cyan);
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+  font-weight: 500;
+}
+
+.txai-msg-bubble a:hover {
+  color: #ffffff;
+}
+
+.txai-msg-bubble ul,
+.txai-msg-bubble ol {
+  margin: 5px 0 8px;
+  padding-left: 17px;
+}
+
+.txai-msg-bubble li {
+  margin: 3px 0;
+}
+
+.txai-msg-bubble li strong {
+  color: #38bdf8;
+}
+
+.txai-msg-bubble code {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 0.9em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #7dd3fc;
+}
+
+.txai-msg-bubble pre {
+  margin: 6px 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.45);
+  overflow-x: auto;
+}
+
+.txai-msg-bubble pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.txai-msg-bubble table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0;
+  font-size: 10.5px;
+}
+
+.txai-msg-bubble th,
+.txai-msg-bubble td {
+  padding: 4px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+}
+
+.txai-msg-bubble th {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Thinking Indicator Dots */
+.txai-thinking-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 16px;
+}
+
+.txai-thinking-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #94a3b8;
+  animation: txai-bounce 1.3s infinite ease-in-out;
+}
+
+.txai-thinking-dots span:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.txai-thinking-dots span:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+/* --------------------------------------------------------------------------
+   Composer / Pill Input Bar with Reduced Radius
+   -------------------------------------------------------------------------- */
+.txai-composer {
+  padding: 8px 12px 10px;
+  background: rgba(11, 14, 22, 0.6);
+  border-top: 1px solid var(--tx-border-subtle);
+  flex-shrink: 0;
+}
+
+.txai-input-pill {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 4px 4px 4px 12px;
+  border-radius: 12px; /* Reduced composer radius */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--tx-border-subtle);
+  transition: all 0.2s ease;
+}
+
+.txai-input-pill:focus-within {
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.1);
+}
+
+.txai-input-textarea {
+  flex: 1;
+  min-width: 0;
+  max-height: 72px;
+  resize: none;
+  padding: 5px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.txai-input-textarea::placeholder {
+  color: #64748b;
+}
+
+/* Send Button with Reduced Radius */
+.txai-send-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px; /* Reduced button radius */
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+
+.txai-send-btn.txai-send-active {
+  background: var(--tx-accent-blue);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+}
+
+.txai-send-btn.txai-send-active:hover {
+  background: var(--tx-accent-blue-hover);
+  transform: scale(1.05);
+}
+
+.txai-send-btn.txai-send-active:active {
+  transform: scale(0.95);
+}
+
+/* --------------------------------------------------------------------------
+   Keyframe Animations
+   -------------------------------------------------------------------------- */
+@keyframes txai-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes txai-sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes txai-msg-slide {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes txai-bounce {
+  0%, 80%, 100% {
+    transform: scale(0.7);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .txai-panel,
+  .txai-msg,
+  .txai-backdrop,
+  .txai-thinking-dots span {
+    animation: none !important;
+  }
+  .txai-btn-icon,
+  .txai-send-btn,
+  .txai-pill-btn {
+    transition: none !important;
+  }
+}
