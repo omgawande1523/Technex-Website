@@ -33,6 +33,19 @@ const detailsBySlug: Record<string, Partial<WorkshopDetails>> = {
     domains: ["Competitive Coding", "Problem Solving"],
     rounds: [{ title: "Workshop session", text: "Session agenda will be announced by the organizers." }],
   },
+  "apex-ctf": {
+    domains: ["Cybersecurity", "Network Security", "Penetration Testing", "CTF Strategies"],
+    rounds: [
+      {
+        title: "Session 1 — Fundamentals of Web Security & Exploitation",
+        text: "• Format: Hands-on Workshop Session\n• Venue: Lab Complex, SVPCET Nagpur\n\n• Introduction to security mindsets, reconnaissance techniques, and OWASP Top 10 vulnerabilities.\n• Hands-on exploitation labs and mitigation strategies.",
+      },
+      {
+        title: "Session 2 — Cryptography, Reverse Engineering & CTF Sprint",
+        text: "• Format: Practical Lab & Mini CTF Sprint\n• Duration: 3 Hours\n\n• Deep dive into classical/modern cryptographic ciphers and binary reverse engineering fundamentals.\n• Live Capture The Flag sprint to apply learned concepts under timed challenges.",
+      },
+    ],
+  },
 };
 
 export const workshopDetails: WorkshopDetails[] = workshops.map((workshop, index) => {

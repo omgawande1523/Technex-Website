@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ComicModal, { type ComicCardData } from "@/components/landing/ComicModal";
-import SupermanPrimeCanvas from "@/components/landing/SupermanPrimeCanvas";
+import SupermanPrimeCanvas, { COMIC_CARDS_DATA } from "@/components/landing/SupermanPrimeCanvas";
 import UIOverlay from "@/components/landing/UIOverlay";
 import styles from "./landing.module.css";
 
@@ -11,6 +11,19 @@ type EntityForm = "humanoid" | "flying_machine" | "watercraft" | "neural_network
 export default function Home() {
   const [selectedComic, setSelectedComic] = useState<ComicCardData | null>(null);
   const [entityForm, setEntityForm] = useState<EntityForm>("humanoid");
+
+  useEffect(() => {
+    const onOpen = (ev: Event) => {
+      const customEv = ev as CustomEvent<ComicCardData>;
+      if (customEv.detail) {
+        setSelectedComic(customEv.detail);
+      } else if (COMIC_CARDS_DATA && COMIC_CARDS_DATA.length > 0) {
+        setSelectedComic(COMIC_CARDS_DATA[0]);
+      }
+    };
+    window.addEventListener("open-comic-modal", onOpen);
+    return () => window.removeEventListener("open-comic-modal", onOpen);
+  }, []);
 
   return (
     <div className={styles.sitePage}>

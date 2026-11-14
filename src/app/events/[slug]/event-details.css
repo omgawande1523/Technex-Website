@@ -55,21 +55,72 @@
 
 .hack-detail-root .page > *{ min-width: 0; }
 
-.hack-detail-root .back-events{ align-self: flex-start; flex: none; }
+.hack-detail-root .top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex: none;
+  min-height: 40px;
+}
+
+.hack-detail-root .top-bar .back-events {
+  margin: 0;
+  align-self: center;
+}
+
+.hack-detail-root .top-bar .ghost {
+  text-align: right;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hack-detail-root .back-events{ align-self: flex-start; flex: none; margin-bottom: 0; }
 
 
 /* header */
 
 
 .hack-detail-root .head{
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: end;
-  gap: 10px;
+  gap: 16px;
   flex: none;
+  margin-top: 4px;
 }
 
-.hack-detail-root .titleblock{ grid-column: 1 / 4; }
+.hack-detail-root .head > *{ min-width: 0; }
+
+.hack-detail-root .head.has-collab .titleblock{
+  grid-column: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+.hack-detail-root .head.no-collab .titleblock{
+  grid-column: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+.hack-detail-root .titleblock{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
 
 
 .hack-detail-root .head > *{ min-width: 0; }
@@ -101,30 +152,120 @@
 .hack-detail-root .tag{ color: var(--gold-hi); font-size: clamp(0.58rem, 2.4vw, 0.92rem); letter-spacing: 0.28em; text-transform: uppercase; }
 
 
-.hack-detail-root .headright{
-  grid-column: 4;
+/* Column 3: Register button directly on top of Team Size block */
+.hack-detail-root .head.has-collab .head-col-reg{
+  grid-column: 3;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
-  min-width: 0;
-}
-
-.hack-detail-root .head-actions{
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
+  align-items: flex-end;
   width: 100%;
 }
 
-.hack-detail-root .head-actions .register-refined{
-  width: 100% !important;
-  min-width: 0 !important;
-  flex: none !important;
+/* For events without collaboration: Register button sits in Column 4 directly on top of Prize Pool */
+.hack-detail-root .head.no-collab .head-col-reg{
+  grid-column: 4;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
 }
 
-.hack-detail-root .head-actions .collaboration{ width: 100%; }
+.hack-detail-root .head-col-reg .register-refined{
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 14px 20px !important;
+  font-size: 0.92rem !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+/* Column 4: Collaboration card directly on top of Prize Pool block */
+.hack-detail-root .head-col-collab{
+  grid-column: 4;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.hack-detail-root .head-col-collab .collaboration{
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(135deg, rgba(28, 21, 12, 0.94) 0%, rgba(13, 10, 6, 0.98) 100%) !important;
+  border: 1.5px solid rgba(227, 185, 92, 0.5) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), inset 0 0 16px rgba(227, 185, 92, 0.08) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.hack-detail-root .head-col-collab .collaboration .collaboration-logo-wrap{
+  width: 54px !important;
+  height: 54px !important;
+  min-width: 54px !important;
+  min-height: 54px !important;
+  flex: 0 0 54px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 2px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+.hack-detail-root .head-col-collab .collaboration .collaboration-logo-wrap .collaboration-logo,
+.hack-detail-root .head-col-collab .collaboration .collaboration-logo-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  transform: scale(1.08) !important;
+}
+
+.hack-detail-root .head-col-collab .collaboration .collaboration-text{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+  text-align: left !important;
+}
+
+.hack-detail-root .head-col-collab .collaboration .collaboration-text span,
+.hack-detail-root .head-col-collab .collaboration > span{
+  font-family: var(--font-redaction), "Redaction 20", Georgia, serif !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #c4b595 !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  line-height: 1.15 !important;
+  text-align: left !important;
+  display: block !important;
+  white-space: nowrap !important;
+}
+
+.hack-detail-root .head-col-collab .collaboration .collaboration-text strong,
+.hack-detail-root .head-col-collab .collaboration strong{
+  font-family: var(--font-redaction), "Redaction 20", Georgia, serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 700 !important;
+  color: var(--gold-hi) !important;
+  letter-spacing: 0.015em !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  text-align: left !important;
+  display: block !important;
+  text-shadow: 0 0 12px rgba(246, 220, 148, 0.3) !important;
+}
 
 
 .hack-detail-root .ghost{ text-align: right; }
@@ -449,7 +590,18 @@
 .hack-detail-root .head-actions .register-refined{ padding-inline: 12px !important; }
 .hack-detail-root .collaboration{ width: 100%; min-width: 0; flex: none; padding: 10px 8px; gap: 5px; }
 .hack-detail-root .collaboration > span{ font-size: 0.52rem; }
-.hack-detail-root .collaboration-logo{ width: 56px; height: 56px; }
+.hack-detail-root .collaboration-logo-wrap{ width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background: #ffffff; flex: 0 0 56px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+.hack-detail-root .collaboration-logo-wrap .collaboration-logo{ width: 100%; height: 100%; object-fit: contain; }
+
+.hack-detail-root .rounds ol > li .card .round-text p {
+  line-height: 1.65;
+  margin-bottom: 0.65rem;
+}
+
+.hack-detail-root .rounds ol > li .card .round-text p:last-child {
+  margin-bottom: 0;
+}
+
 .hack-detail-root .collaboration strong{ font-size: 0.68rem; }
 .hack-detail-root .ghost b{ font-size: 1.7rem; }
 .hack-detail-root .btn{ padding: 11px 18px; }
@@ -571,11 +723,35 @@
   text-transform: uppercase;
 }
 
-.hack-detail-root .collaboration-logo{
+.hack-detail-root .collaboration-logo-wrap {
   width: 88px;
   height: 88px;
-  object-fit: contain;
   border-radius: 50%;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 88px;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.hack-detail-root .collaboration-logo-wrap .collaboration-logo,
+.hack-detail-root .collaboration-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.hack-detail-root .rounds ol > li .card .round-text p {
+  line-height: 1.65;
+  margin-bottom: 0.65rem;
+}
+
+.hack-detail-root .rounds ol > li .card .round-text p:last-child {
+  margin-bottom: 0;
 }
 
 .hack-detail-root .collaboration strong{
@@ -633,6 +809,13 @@
    Desktop (> 860px) retains 100% of its original layout and formatting.
    ========================================================================== */
 @media (max-width: 860px) {
+  .hack-detail-root .top-bar .ghost {
+    display: none !important;
+  }
+  .hack-detail-root .head-col-reg,
+  .hack-detail-root .head-col-collab {
+    display: none !important;
+  }
   .hack-detail-root {
     background: #060504 url("/assets/bg/permanent-bg-mobile.webp") center top / cover no-repeat !important;
     background-attachment: scroll !important;
@@ -679,40 +862,107 @@
     padding: 14px 28px !important;
   }
 
-  .hack-detail-root .head-actions-mobile .collaboration,
-  .hack-detail-root .collaboration {
+  .hack-detail-root .head-actions-mobile .collaboration.collaboration-mobile-row {
     width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 14px !important;
+    padding: 10px 16px !important;
+    box-sizing: border-box !important;
+    background: linear-gradient(120deg, rgba(227,185,92,.12), rgba(227,185,92,.04)) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 12px !important;
+    text-align: left !important;
+    margin: 0 !important;
+  }
+
+  .hack-detail-root .head-actions-mobile .collaboration-mobile-row .collaboration-logo-wrap {
+    width: 48px !important;
+    height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    flex: 0 0 48px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  .hack-detail-root .head-actions-mobile .collaboration-mobile-row .collaboration-text {
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
+    align-items: flex-start !important;
     justify-content: center !important;
-    text-align: center !important;
-    margin-inline: auto !important;
+    gap: 2px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    text-align: left !important;
   }
 
-  .hack-detail-root .collaboration-logo-wrap {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    margin: 4px auto !important;
-    text-align: center !important;
-  }
-
-  .hack-detail-root .collaboration-logo,
-  .hack-detail-root .collaboration img {
+  .hack-detail-root .head-actions-mobile .collaboration-mobile-row .collaboration-text span {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: var(--muted) !important;
+    margin: 0 !important;
+    text-align: left !important;
     display: block !important;
+    line-height: 1.2 !important;
+  }
+
+  .hack-detail-root .head-actions-mobile .collaboration-mobile-row .collaboration-text strong {
+    font-size: 0.88rem !important;
+    color: var(--gold-hi) !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    display: block !important;
+    font-weight: 700 !important;
+  }
+
+  .hack-detail-root .head-actions-mobile .mobile-sponsors-quickjump-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 10px 16px !important;
+    background: linear-gradient(135deg, rgba(30, 24, 16, 0.8), rgba(20, 16, 10, 0.95)) !important;
+    border: 1px solid rgba(227, 185, 92, 0.4) !important;
+    border-radius: 10px !important;
+    color: var(--gold-hi) !important;
+    font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 12px rgba(227, 185, 92, 0.12) !important;
+    box-sizing: border-box !important;
+  }
+
+  .hack-detail-root .sparkle-gold {
+    color: #ffd885 !important;
+    font-size: 0.95rem !important;
+  }
+
+  .hack-detail-root .collaboration-logo-wrap .collaboration-logo,
+  .hack-detail-root .collaboration-logo-wrap img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+    object-fit: contain !important;
     margin: 0 auto !important;
     align-self: center !important;
     text-align: center !important;
-  }
-
-  .hack-detail-root .collaboration > span,
-  .hack-detail-root .collaboration strong {
-    display: block !important;
-    text-align: center !important;
-    width: 100% !important;
-    margin-inline: auto !important;
   }
 
   /* Small Back Button on Mobile */
@@ -895,6 +1145,10 @@
   .hack-detail-root .head-actions-mobile {
     display: none !important;
   }
+  .hack-detail-root .head-col-reg,
+  .hack-detail-root .head-col-collab {
+    display: flex !important;
+  }
   .hack-detail-root .headright {
     display: flex !important;
   }
@@ -903,5 +1157,611 @@
   }
   .hack-detail-root .highlights.highlights-desktop {
     display: grid !important;
+  }
+}
+
+/* ==========================================================================
+   APEX CTF Sponsors & Partners Section + Highlighted Tab
+   ========================================================================== */
+
+/* Highlighted Sponsors Tab Button */
+.hack-detail-root .tabs button.tab-sponsors-highlight {
+  position: relative;
+  background: linear-gradient(135deg, rgba(242, 212, 154, 0.16) 0%, rgba(213, 169, 95, 0.06) 100%);
+  border: 1px solid rgba(242, 212, 154, 0.5);
+  color: #ffe099;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(227, 185, 92, 0.2);
+  animation: tabSponsorPulse 2.8s infinite ease-in-out;
+}
+
+@keyframes tabSponsorPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(227, 185, 92, 0.18), inset 0 0 8px rgba(227, 185, 92, 0.05);
+    border-color: rgba(242, 212, 154, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(227, 185, 92, 0.45), inset 0 0 12px rgba(227, 185, 92, 0.2);
+    border-color: rgba(242, 212, 154, 0.95);
+  }
+}
+
+.hack-detail-root .tabs button.tab-sponsors-highlight:hover {
+  color: #ffffff;
+  border-color: rgba(242, 212, 154, 0.85);
+  background: linear-gradient(135deg, rgba(242, 212, 154, 0.3) 0%, rgba(213, 169, 95, 0.15) 100%);
+}
+
+.hack-detail-root .tabs button.tab-sponsors-highlight.on {
+  color: #1a1208;
+  background: linear-gradient(100deg, #fff0cb, var(--gold-hi), var(--gold));
+  border-color: #fff0cb;
+  box-shadow: 0 0 26px rgba(227, 185, 92, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  animation: none;
+}
+
+.hack-detail-root .sponsors-tab-btn-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.hack-detail-root .sponsors-sparkle {
+  color: #ffdf9e;
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+.hack-detail-root .tabs button.tab-sponsors-highlight.on .sponsors-sparkle {
+  color: #24180c;
+}
+
+/* Sponsors View Container */
+.hack-detail-root .sponsors-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 28px;
+  width: 100%;
+}
+
+/* Header */
+.hack-detail-root .sponsors-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  width: 100%;
+}
+
+.hack-detail-root .sponsors-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold-hi);
+  background: rgba(227, 185, 92, 0.12);
+  border: 1px solid rgba(227, 185, 92, 0.3);
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hack-detail-root .sponsors-header h2 {
+  font-family: "Metal Mania", sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  color: var(--gold-hi);
+  margin: 0;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.hack-detail-root .sponsors-header p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 720px;
+  text-align: center;
+}
+
+.hack-detail-root .sponsors-header p strong {
+  color: var(--gold-hi);
+}
+
+/* Platform Partner Featured Banner */
+.hack-detail-root .platform-partner-banner {
+  position: relative;
+  border: 1px solid rgba(242, 212, 154, 0.4);
+  background: linear-gradient(135deg, rgba(20, 26, 20, 0.9) 0%, rgba(10, 14, 10, 0.96) 100%);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.45), 0 0 24px rgba(34, 197, 94, 0.1);
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hack-detail-root .platform-partner-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #22c55e, #f2d49a, transparent);
+}
+
+.hack-detail-root .partner-badge-glow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  padding: 3px 14px;
+  border-radius: 12px;
+  margin: 0 auto 16px;
+  text-align: center;
+}
+
+.hack-detail-root .partner-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.hack-detail-root .partner-logo-box {
+  flex-shrink: 0;
+  width: 140px;
+  height: 100px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.6);
+  margin: 0 auto;
+}
+
+.hack-detail-root .partner-logo-box.dark-logo {
+  background: #000000;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.hack-detail-root .partner-logo-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.hack-detail-root .partner-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.hack-detail-root .partner-role-badge {
+  color: var(--gold-hi);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hack-detail-root .partner-info h3 {
+  font-family: "Metal Mania", sans-serif;
+  font-size: 1.35rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.hack-detail-root .partner-info p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 720px;
+  text-align: center;
+}
+
+/* Sponsors Grid Section */
+.hack-detail-root .sponsors-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.hack-detail-root .section-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.hack-detail-root .section-title-wrap h3 {
+  font-family: "Metal Mania", sans-serif;
+  font-size: 1.25rem;
+  color: var(--gold-hi);
+  margin: 0 0 4px;
+  text-align: center;
+}
+
+.hack-detail-root .section-title-wrap span {
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.hack-detail-root .sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+  width: 100%;
+  justify-content: center;
+}
+
+.hack-detail-root .sponsor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(18, 14, 10, 0.65);
+  border: 1px solid rgba(227, 185, 92, 0.16);
+  border-radius: 12px;
+  padding: 16px 14px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hack-detail-root .sponsor-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(242, 212, 154, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(227, 185, 92, 0.12);
+}
+
+.hack-detail-root .sponsor-logo-frame {
+  width: 100%;
+  height: 90px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 0 auto 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hack-detail-root .sponsor-logo-frame.light-theme {
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hack-detail-root .sponsor-logo-frame.dark-theme {
+  background: #09090b;
+  border: 1px solid rgba(227, 185, 92, 0.25);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.hack-detail-root .sponsor-logo-frame.placeholder-frame {
+  background: linear-gradient(135deg, rgba(30, 24, 16, 0.7), rgba(15, 12, 8, 0.9));
+  border: 1px dashed rgba(227, 185, 92, 0.35);
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hack-detail-root .sponsor-initial {
+  font-family: "Metal Mania", sans-serif;
+  font-size: 1.6rem;
+  color: var(--gold-hi);
+  line-height: 1;
+}
+
+.hack-detail-root .sponsor-pending-label {
+  font-size: 0.66rem;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+
+.hack-detail-root .sponsor-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.hack-detail-root .sponsor-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.hack-detail-root .sponsor-meta h4 {
+  font-family: "Metal Mania", sans-serif;
+  font-size: 0.98rem;
+  color: var(--gold-hi);
+  margin: 0;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.hack-detail-root .sponsor-role {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.hack-detail-root .sponsor-status-tag {
+  display: inline-block;
+  align-self: center;
+  font-size: 0.66rem;
+  color: var(--gold);
+  background: rgba(227, 185, 92, 0.1);
+  border: 1px solid rgba(227, 185, 92, 0.25);
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin: 4px auto 0;
+  text-align: center;
+}
+
+/* Dedicated Discord Server Section */
+.hack-detail-root .discord-server-section {
+  position: relative;
+  background: linear-gradient(135deg, rgba(24, 26, 44, 0.88) 0%, rgba(13, 14, 26, 0.95) 100%);
+  border: 1px solid rgba(88, 101, 242, 0.4);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5), 0 0 24px rgba(88, 101, 242, 0.15);
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hack-detail-root .discord-server-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #5865F2, #7983f5, transparent);
+}
+
+.hack-detail-root .discord-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hack-detail-root .discord-brand-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(88, 101, 242, 0.45);
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+.hack-detail-root .discord-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.hack-detail-root .discord-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.hack-detail-root .discord-community-pill {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8da0f9;
+  background: rgba(88, 101, 242, 0.16);
+  border: 1px solid rgba(88, 101, 242, 0.35);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.hack-detail-root .discord-status-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffd885;
+  background: rgba(227, 185, 92, 0.12);
+  border: 1px solid rgba(227, 185, 92, 0.3);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.hack-detail-root .discord-content-col h3 {
+  font-family: "Metal Mania", sans-serif;
+  font-size: 1.35rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.hack-detail-root .discord-content-col p {
+  color: rgba(235, 238, 255, 0.75);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0 auto;
+  max-width: 620px;
+  text-align: center;
+}
+
+.hack-detail-root .discord-perks-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px 24px;
+  margin: 4px auto 0;
+  width: 100%;
+}
+
+.hack-detail-root .discord-perk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: rgba(240, 242, 255, 0.85);
+}
+
+.hack-detail-root .discord-perk .perk-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #5865F2;
+  box-shadow: 0 0 6px #5865F2;
+  flex-shrink: 0;
+}
+
+.hack-detail-root .discord-action-box {
+  margin: 6px auto 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.hack-detail-root .discord-link-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(88, 101, 242, 0.15);
+  border: 1px dashed rgba(88, 101, 242, 0.5);
+  color: #b0beff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0 auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 860px) {
+  .hack-detail-root .partner-card-body {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+  .hack-detail-root .partner-logo-box {
+    margin: 0 auto;
+  }
+  .hack-detail-root .sponsors-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .hack-detail-root .sponsor-card {
+    padding: 12px 8px;
+  }
+  .hack-detail-root .sponsor-logo-frame {
+    height: 75px;
+    padding: 6px;
+  }
+  .hack-detail-root .discord-card-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+  .hack-detail-root .discord-header-row {
+    justify-content: center;
+  }
+  .hack-detail-root .discord-perks-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .hack-detail-root .discord-link-badge {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hack-detail-root .sponsors-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .hack-detail-root .sponsor-card {
+    padding: 10px 6px;
+  }
+  .hack-detail-root .sponsor-logo-frame {
+    height: 65px;
+  }
+  .hack-detail-root .sponsor-meta h4 {
+    font-size: 0.88rem;
+  }
+  .hack-detail-root .sponsor-role {
+    font-size: 0.7rem;
   }
 }

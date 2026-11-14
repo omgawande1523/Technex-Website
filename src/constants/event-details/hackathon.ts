@@ -5,7 +5,7 @@ export const hackathon: EventItem = {
   slug: "hackathon",
   image: "/hackathon.webp",
   number: "02",
-  name: "Hackathon-2026",
+  name: "Hackathon",
   category: "Software",
   tagline: "Build · Innovate · Solve · Create",
   quote: "Ideas build realities",
@@ -43,7 +43,7 @@ export const hackathon: EventItem = {
       icon: "pin",
       label: "Venue",
       value: "SVPCET, Nagpur",
-      sub: "St. Vincent Pallotti College of Engineering and Technology",
+  
     },
     {
       icon: "team",

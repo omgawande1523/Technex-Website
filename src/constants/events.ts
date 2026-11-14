@@ -131,7 +131,7 @@ export const events: EventItem[] = [
   {
     id: '10',
     slug: 'overdrive',
-    title: 'Overdrive 8.0',
+    title: 'Overdrive 9.0',
     tag: 'Racing',
     source: 'Speed Racer (Mach GoGoGo) — Tatsuo Yoshida (1966)',
     concept: 'The Mach 5, a high-performance racing car with specialised features.',

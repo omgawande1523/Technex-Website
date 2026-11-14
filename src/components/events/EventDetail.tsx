@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import type { KeyboardEvent, MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,8 +8,77 @@ import { EVENT_LIST_SCROLL_KEY } from "@/constants/events";
 import type { EventItem, IconKind } from "@/types/event";
 import TerrainBackground from "./TerrainBackground";
 
-const TABS = ["About", "Rounds", "Rule book", "Contact", "FAQs"] as const;
-type Tab = (typeof TABS)[number];
+const BASE_TABS = ["About", "Rounds", "Rule book", "Contact", "FAQs"] as const;
+type BaseTab = (typeof BASE_TABS)[number];
+type Tab = BaseTab | "Sponsors";
+
+interface SponsorItem {
+  name: string;
+  role: string;
+  logo?: string;
+  status?: string;
+  theme?: "dark" | "light";
+}
+
+const APEX_PLATFORM_PARTNER = {
+  name: "CTF7",
+  title: "CTF7 — Platform Partner",
+  role: "Official Platform Partner",
+  badge: "Special Mention",
+  logo: "/assets/events/sponsors/ctf7-partner-v2.webp?v=2",
+  description:
+    "CTF7 is an advanced, enterprise-grade cybersecurity competition platform designed for hosting scalable Capture The Flag events. Featuring dynamic real-time scoring, containerized challenge deployment, anti-cheat monitoring, and automated flag verification, CTF7 powers APEX CTF to provide participants with an authentic, high-octane competitive hacking experience.",
+};
+
+const APEX_SPONSORS: SponsorItem[] = [
+  {
+    name: "TryHackMe",
+    role: "Cybersecurity Training Partner",
+    logo: "/assets/events/sponsors/tryhackme-v2.webp?v=2",
+    theme: "light",
+  },
+  {
+    name: ".xyz",
+    role: "Official Domains Partner",
+    logo: "/assets/events/sponsors/xyz-v2.webp?v=2",
+    theme: "light",
+  },
+  {
+    name: "ThunderCipher",
+    role: "Cybersecurity Sponsor",
+    logo: "/assets/events/sponsors/thundercipher-v2.webp?v=2",
+    theme: "dark",
+  },
+  {
+    name: "Campfire Security",
+    role: "Security Partner & Sponsor",
+    logo: "/assets/events/sponsors/campfire-security-v2.webp?v=2",
+    theme: "light",
+  },
+  {
+    name: "Abakus",
+    role: "Technology Sponsor",
+    logo: "/assets/events/sponsors/abakus-technologies-v2.webp?v=2",
+    theme: "light",
+  },
+  {
+    name: "Semi Electronic",
+    role: "Official Sponsor",
+    status: "[Logo to be attached]",
+  },
+  {
+    name: "Unilogy",
+    role: "Official Sponsor",
+    status: "[Logo to be attached]",
+  },
+];
+
+const APEX_DISCORD_SERVER = {
+  name: "APEX CTF Discord Server",
+  statusNotice: "Coming soon",
+  description:
+    "The official communication hub for APEX CTF. Connect with participants, get real-time hint releases, live challenge updates, and direct coordinator support.",
+};
 
 const FALLBACK_IMAGE = "/hackathon.webp";
 const OFFICIAL_EMAIL = "technex@stvincentngp.edu.in";
@@ -67,14 +136,25 @@ export default function EventDetail({
 }) {
   const router = useRouter();
 
+  const isApexCtf = e.slug === "ctf" || e.slug === "apex-ctf";
+  const hasCollab = e.slug === "hackathon" || isApexCtf;
+  const tabs: Tab[] = isApexCtf ? [...BASE_TABS, "Sponsors"] : [...BASE_TABS];
+
   useEffect(() => {
     document.documentElement.classList.add("event-detail-scroll-enabled");
     document.body.classList.add("event-detail-scroll-enabled");
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const qTab = params.get("tab");
+      if (qTab && tabs.includes(qTab as Tab)) {
+        setTab(qTab as Tab);
+      }
+    }
     return () => {
       document.documentElement.classList.remove("event-detail-scroll-enabled");
       document.body.classList.remove("event-detail-scroll-enabled");
     };
-  }, []);
+  }, [tabs]);
   const [tab, setTab] = useState<Tab>("About");
   const [open, setOpen] = useState<number | null>(0);
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -96,9 +176,10 @@ export default function EventDetail({
 
   // arrow keys move between tabs (accessibility + feels good)
   const onTabKey = (ev: KeyboardEvent<HTMLElement>) => {
-    const i = TABS.indexOf(tab);
-    if (ev.key === "ArrowRight") setTab(TABS[(i + 1) % TABS.length]);
-    else if (ev.key === "ArrowLeft") setTab(TABS[(i - 1 + TABS.length) % TABS.length]);
+    const i = tabs.indexOf(tab);
+    if (i === -1) return;
+    if (ev.key === "ArrowRight") setTab(tabs[(i + 1) % tabs.length]);
+    else if (ev.key === "ArrowLeft") setTab(tabs[(i - 1 + tabs.length) % tabs.length]);
     else return;
     ev.preventDefault();
   };
@@ -129,11 +210,17 @@ export default function EventDetail({
     <>
       <TerrainBackground />
       <main className="page">
-        <button className="btn line back-events" type="button" onClick={backToEvents}>
-          {backLabel}
-        </button>
+        <div className="top-bar">
+          <button className="btn line back-events" type="button" onClick={backToEvents}>
+            {backLabel}
+          </button>
+          <div className="ghost" aria-hidden="true">
+            <b>{"//"}{e.number}</b>
+            <span>“{e.quote}”</span>
+          </div>
+        </div>
 
-                <header className="head">
+        <header className={`head ${hasCollab ? "has-collab" : "no-collab"}`}>
           <div className="titleblock">
             <span className="event-category-tag">{e.category}</span>
             <h1>{e.name}</h1>
@@ -186,57 +273,110 @@ export default function EventDetail({
                 <span className="btn gold register-refined" aria-disabled="true">Registration TBA</span>
               )}
               {e.slug === "hackathon" && (
-                <div className="collaboration">
-                  <span>In collaboration with</span>
+                <div className="collaboration collaboration-mobile-row">
                   <div className="collaboration-logo-wrap">
                     <Image
                       src="/assets/events/csi-svpcet.png"
                       alt="Computer Society of India, SVPCET"
-                      width={88}
-                      height={88}
-                      className="ev-out-csi collaboration-logo"
+                      width={52}
+                      height={52}
+                      className="collaboration-logo"
                     />
                   </div>
-                  <strong>Computer Society of India</strong>
+                  <div className="collaboration-text">
+                    <span>In collaboration with</span>
+                    <strong>Computer Society of India</strong>
+                  </div>
                 </div>
+              )}
+              {(e.slug === "ctf" || e.slug === "apex-ctf") && (
+                <div className="collaboration collaboration-mobile-row">
+                  <div className="collaboration-logo-wrap">
+                    <Image
+                      src="/assets/events/acm-svpcet.webp"
+                      alt="ACM SVPCET Student Chapter"
+                      width={52}
+                      height={52}
+                      className="collaboration-logo acm-logo"
+                    />
+                  </div>
+                  <div className="collaboration-text">
+                    <span>In collaboration with</span>
+                    <strong>ACM SVPCET Student Chapter</strong>
+                  </div>
+                </div>
+              )}
+              {isApexCtf && (
+                <button
+                  type="button"
+                  className="mobile-sponsors-quickjump-btn"
+                  onClick={() => setTab("Sponsors")}
+                  aria-label="View official sponsors and platform partner"
+                >
+                  <span className="sparkle-gold" aria-hidden="true">★</span> View APEX CTF Sponsors &amp; Partners
+                </button>
               )}
             </div>
           </div>
 
-          <div className="headright">
-            <div className="ghost">
-              <b>{"//"}{e.number}</b>
-              <span>“{e.quote}”</span>
-            </div>
-            <div className="head-actions">
-              {e.registerUrl ? (
-                e.registerUrl.startsWith("/") ? (
-                  <Link className="btn gold register-refined" href={e.registerUrl}>
-                    Register now <span className="register-arrow" aria-hidden="true">↗</span>
-                  </Link>
-                ) : (
-                  <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">Register now <span className="register-arrow" aria-hidden="true">↗</span></a>
-                )
+          {/* Desktop Column 3: Register button directly on top of Team Size block */}
+          <div className="head-col-reg">
+            {e.registerUrl ? (
+              e.registerUrl.startsWith("/") ? (
+                <Link className="btn gold register-refined" href={e.registerUrl}>
+                  Register now <span className="register-arrow" aria-hidden="true">↗</span>
+                </Link>
               ) : (
-                <span className="btn gold register-refined" aria-disabled="true">Registration TBA</span>
-              )}
+                <a className="btn gold register-refined" href={e.registerUrl} target="_blank" rel="noreferrer">
+                  Register now <span className="register-arrow" aria-hidden="true">↗</span>
+                </a>
+              )
+            ) : (
+              <span className="btn gold register-refined" aria-disabled="true">
+                Registration TBA
+              </span>
+            )}
+          </div>
+
+          {/* Desktop Column 4: Collaboration block directly on top of Prize Pool block */}
+          {hasCollab && (
+            <div className="head-col-collab">
               {e.slug === "hackathon" && (
                 <div className="collaboration">
-                  <span>In collaboration with</span>
                   <div className="collaboration-logo-wrap">
                     <Image
                       src="/assets/events/csi-svpcet.png"
                       alt="Computer Society of India, SVPCET"
-                      width={88}
-                      height={88}
-                      className="ev-out-csi collaboration-logo"
+                      width={68}
+                      height={68}
+                      className="collaboration-logo"
                     />
                   </div>
-                  <strong>Computer Society of India</strong>
+                  <div className="collaboration-text">
+                    <span>In collaboration with</span>
+                    <strong>Computer Society of India</strong>
+                  </div>
+                </div>
+              )}
+              {(e.slug === "ctf" || e.slug === "apex-ctf") && (
+                <div className="collaboration">
+                  <div className="collaboration-logo-wrap">
+                    <Image
+                      src="/assets/events/acm-svpcet.webp"
+                      alt="ACM SVPCET Student Chapter"
+                      width={68}
+                      height={68}
+                      className="collaboration-logo acm-logo"
+                    />
+                  </div>
+                  <div className="collaboration-text">
+                    <span>In collaboration with</span>
+                    <strong>ACM SVPCET Student Chapter</strong>
+                  </div>
                 </div>
               )}
             </div>
-          </div>
+          )}
         </header>
 
         <section className="stats">
@@ -256,20 +396,26 @@ export default function EventDetail({
           className="tabs"
           role="tablist"
           aria-label="Event sections"
-          style={{ ["--idx" as string]: TABS.indexOf(tab) }}
+          style={{ ["--idx" as string]: tabs.indexOf(tab) }}
           onKeyDown={onTabKey}
         >
-          {TABS.map((t) => (
+          {tabs.map((t) => (
             <button
               key={t}
               type="button"
               role="tab"
               aria-selected={tab === t}
               tabIndex={tab === t ? 0 : -1}
-              className={tab === t ? "on" : ""}
+              className={`${tab === t ? "on" : ""} ${t === "Sponsors" ? "tab-sponsors-highlight" : ""}`}
               onClick={() => setTab(t)}
             >
-              {t}
+              {t === "Sponsors" ? (
+                <span className="sponsors-tab-btn-content">
+                  <span className="sponsors-sparkle" aria-hidden="true">★</span> Sponsors
+                </span>
+              ) : (
+                t
+              )}
             </button>
           ))}
         </nav>
@@ -287,14 +433,6 @@ export default function EventDetail({
                 <div className="chips">
                   {e.domains.map((d) => <span key={d}>{d}</span>)}
                 </div>
-
-                {highlights.length > 0 && (
-                  <div className="highlights highlights-desktop">
-                    {highlights.map((h) => (
-                      <div key={h.label}><b>{h.value}</b><span>{h.label}</span></div>
-                    ))}
-                  </div>
-                )}
 
               </div>
 
@@ -355,7 +493,18 @@ export default function EventDetail({
                     <div className="card">
                       <b>{String(i + 1).padStart(2, "0")}</b>
                       <strong>{r.title}</strong>
-                      <p>{r.text}</p>
+                      <div className="round-text">
+                        {r.text.split("\n\n").map((para, pIdx) => (
+                          <p key={pIdx}>
+                            {para.split("\n").map((line, lIdx, arr) => (
+                              <Fragment key={lIdx}>
+                                {line}
+                                {lIdx < arr.length - 1 && <br />}
+                              </Fragment>
+                            ))}
+                          </p>
+                        ))}
+                      </div>
                     </div>
                   </li>
                 ))}
@@ -430,6 +579,105 @@ export default function EventDetail({
                   <div className="ans"><p>{f.a}</p></div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {tab === "Sponsors" && isApexCtf && (
+            <div className="sponsors-view">
+              <div className="sponsors-header">
+                <div className="sponsors-tag">Official Partners &amp; Sponsors</div>
+                <h2>Our Sponsors &amp; Platform Partner</h2>
+                <p>
+                  APEX CTF in association with <strong>ACM Student Chapter, SVPCET</strong> is proudly supported by leading cybersecurity organizations, platforms, and industry innovators.
+                </p>
+              </div>
+
+              {/* Platform Partner (Special Mention) */}
+              <div className="platform-partner-banner">
+                <div className="partner-badge-glow">Special Mention</div>
+                <div className="partner-card-body">
+                  <div className="partner-logo-box dark-logo">
+                    <Image
+                      src={APEX_PLATFORM_PARTNER.logo}
+                      alt={APEX_PLATFORM_PARTNER.name}
+                      width={120}
+                      height={90}
+                      className="partner-logo-img"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="partner-info">
+                    <div className="partner-role-badge">Official Platform Partner</div>
+                    <h3>{APEX_PLATFORM_PARTNER.title}</h3>
+                    <p>{APEX_PLATFORM_PARTNER.description}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sponsors Section */}
+              <div className="sponsors-section">
+                <div className="section-title-wrap">
+                  <h3>Event Sponsors</h3>
+                  <span>Empowering the next generation of cybersecurity talent &amp; competitive hackers</span>
+                </div>
+                <div className="sponsors-grid">
+                  {APEX_SPONSORS.map((s) => (
+                    <div key={s.name} className="sponsor-card">
+                      {s.logo ? (
+                        <div className={`sponsor-logo-frame ${s.theme === "dark" ? "dark-theme" : "light-theme"}`}>
+                          <Image
+                            src={s.logo}
+                            alt={s.name}
+                            width={140}
+                            height={80}
+                            className="sponsor-img"
+                            unoptimized
+                          />
+                        </div>
+                      ) : (
+                        <div className="sponsor-logo-frame placeholder-frame">
+                          <span className="sponsor-initial">{s.name.charAt(0)}</span>
+                          <span className="sponsor-pending-label">[Logo to be attached]</span>
+                        </div>
+                      )}
+                      <div className="sponsor-meta">
+                        <h4>{s.name}</h4>
+                        <span className="sponsor-role">{s.role}</span>
+                        {s.status && <span className="sponsor-status-tag">{s.status}</span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Dedicated Discord Server Section */}
+              <div className="discord-server-section">
+                <div className="discord-card-inner">
+                  <div className="discord-brand-icon">
+                    <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor" aria-hidden="true">
+                      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                    </svg>
+                  </div>
+                  <div className="discord-content-col">
+                    <div className="discord-header-row">
+                      <span className="discord-community-pill">Community Hub</span>
+                      <span className="discord-status-pill">Coming Soon</span>
+                    </div>
+                    <h3>{APEX_DISCORD_SERVER.name}</h3>
+                    <p>{APEX_DISCORD_SERVER.description}</p>
+                   
+                    <div className="discord-action-box">
+                      <div className="discord-link-badge">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                        </svg>
+                        <span>{APEX_DISCORD_SERVER.statusNotice}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </section>
@@ -1033,6 +1281,10 @@ export default function EventDetail({
           body.event-detail-scroll-enabled .page .head-actions-mobile {
             display: none !important;
           }
+          body.event-detail-scroll-enabled .page .head-col-reg,
+          body.event-detail-scroll-enabled .page .head-col-collab {
+            display: flex !important;
+          }
           body.event-detail-scroll-enabled .page .headright {
             display: flex !important;
           }
@@ -1046,6 +1298,10 @@ export default function EventDetail({
 
         /* Mobile specific overrides (<= 860px) */
         @media (max-width: 860px) {
+          body.event-detail-scroll-enabled .page .head-col-reg,
+          body.event-detail-scroll-enabled .page .head-col-collab {
+            display: none !important;
+          }
           body.event-detail-scroll-enabled .page .stage-desktop,
           body.event-detail-scroll-enabled .page .highlights-desktop,
           body.event-detail-scroll-enabled .page .headright {
@@ -1095,29 +1351,112 @@ export default function EventDetail({
             padding: 14px 28px !important;
           }
 
-          body.event-detail-scroll-enabled .page .head-actions-mobile .collaboration,
-          body.event-detail-scroll-enabled .page .collaboration {
+          body.event-detail-scroll-enabled .page .head-actions-mobile .collaboration.collaboration-mobile-row {
             width: 100% !important;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            gap: 14px !important;
+            padding: 10px 16px !important;
+            box-sizing: border-box !important;
+            background: linear-gradient(120deg, rgba(227,185,92,.12), rgba(227,185,92,.04)) !important;
+            border: 1px solid var(--line) !important;
+            border-radius: 12px !important;
+            text-align: left !important;
+            margin: 0 !important;
+          }
+
+          body.event-detail-scroll-enabled .page .head-actions-mobile .collaboration-mobile-row .collaboration-logo-wrap {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 48px !important;
+            height: 48px !important;
+            max-width: 48px !important;
+            max-height: 48px !important;
+            border-radius: 50% !important;
+            overflow: hidden !important;
+            background: #ffffff !important;
+            margin: 0 !important;
+            flex: 0 0 48px !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+          }
+
+          body.event-detail-scroll-enabled .page .head-actions-mobile .collaboration-mobile-row .collaboration-text {
             display: flex !important;
             flex-direction: column !important;
-            align-items: center !important;
+            align-items: flex-start !important;
             justify-content: center !important;
-            text-align: center !important;
-            margin-inline: auto !important;
+            gap: 2px !important;
+            flex: 1 !important;
+            min-width: 0 !important;
+            text-align: left !important;
           }
 
-          body.event-detail-scroll-enabled .page .collaboration-logo-wrap {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            width: 100% !important;
-            margin: 4px auto !important;
-            text-align: center !important;
-          }
-
-          body.event-detail-scroll-enabled .page .collaboration-logo,
-          body.event-detail-scroll-enabled .page .collaboration img {
+          body.event-detail-scroll-enabled .page .head-actions-mobile .collaboration-mobile-row .collaboration-text span {
+            font-size: 0.62rem !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            color: var(--muted) !important;
+            margin: 0 !important;
+            text-align: left !important;
             display: block !important;
+            line-height: 1.2 !important;
+          }
+
+          body.event-detail-scroll-enabled .page .head-actions-mobile .collaboration-mobile-row .collaboration-text strong {
+            font-size: 0.88rem !important;
+            color: var(--gold-hi) !important;
+            line-height: 1.25 !important;
+            margin: 0 !important;
+            text-align: left !important;
+            display: block !important;
+            font-weight: 700 !important;
+          }
+
+          body.event-detail-scroll-enabled .page .head-actions-mobile .mobile-sponsors-quickjump-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            width: 100% !important;
+            padding: 10px 16px !important;
+            background: linear-gradient(135deg, rgba(30, 24, 16, 0.8), rgba(20, 16, 10, 0.95)) !important;
+            border: 1px solid rgba(227, 185, 92, 0.4) !important;
+            border-radius: 10px !important;
+            color: var(--gold-hi) !important;
+            font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+            font-size: 0.82rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.04em !important;
+            cursor: pointer !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 12px rgba(227, 185, 92, 0.12) !important;
+            box-sizing: border-box !important;
+          }
+
+          body.event-detail-scroll-enabled .page .sparkle-gold {
+            color: #ffd885 !important;
+            font-size: 0.95rem !important;
+          }
+
+          body.event-detail-scroll-enabled .page .rounds ol > li .card .round-text p {
+            line-height: 1.65 !important;
+            margin-bottom: 0.65rem !important;
+          }
+          body.event-detail-scroll-enabled .page .rounds ol > li .card .round-text p:last-child {
+            margin-bottom: 0 !important;
+          }
+
+          body.event-detail-scroll-enabled .page .collaboration-logo-wrap .collaboration-logo,
+          body.event-detail-scroll-enabled .page .collaboration-logo-wrap img {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            border-radius: 0 !important;
+            object-fit: contain !important;
             margin: 0 auto !important;
             align-self: center !important;
             text-align: center !important;

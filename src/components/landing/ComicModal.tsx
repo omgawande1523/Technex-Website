@@ -21,15 +21,20 @@ interface ComicModalProps {
 }
 
 export default function ComicModal({ card, onClose }: ComicModalProps) {
-  // Lock body scroll while modal is open on mobile
+  // Lock body scroll while modal is open & add ESC key listener
   useEffect(() => {
     if (card) {
       document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleKeyDown);
       return () => {
         document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [card]);
+  }, [card, onClose]);
 
   if (!card) return null;
 
@@ -45,62 +50,69 @@ export default function ComicModal({ card, onClose }: ComicModalProps) {
           <X size={18} />
         </button>
 
-        {/* Image Display with Luxury Framing */}
+        {/* Left: Luxury Artwork Frame */}
         <div className={styles.imageSection}>
           <div className={styles.imageFrame}>
-            <img
-              src={card.image}
-              alt={card.title}
-              className={styles.imageCover}
-              loading="eager"
-            />
-            <p className={styles.imageCaption}>{card.caption}</p>
+            <div className={styles.imageContainer}>
+              <img
+                src={card.image}
+                alt={card.title}
+                className={styles.imageCover}
+                loading="eager"
+              />
+            </div>
+            <div className={styles.imageTagWrap}>
+              <span className={styles.imageCategoryPill}>{card.caption}</span>
+            </div>
           </div>
         </div>
 
-        {/* Details & Lore Section */}
+        {/* Right: Editorial Narrative & Lore */}
         <div className={styles.detailsSection}>
-          <div>
+          <div className={styles.metaRow}>
             <span className={styles.eraBadge}>
-              <Sparkles size={12} />
+              <Sparkles size={12} className={styles.sparkleIcon} />
               {card.era}
             </span>
           </div>
 
           <h2 className={styles.cardTitle}>{card.title}</h2>
 
-          {/* Evolution Bridge: Idea ➔ Innovation */}
+          {/* Dual Evolution Timeline Cards */}
           {card.idea && card.innovation && (
             <div className={styles.bridgeContainer}>
               <div className={styles.bridgeBlock}>
                 <span className={styles.bridgeLabel}>
-                  <Lightbulb size={11} /> Visionary Idea
+                  <Lightbulb size={12} /> HISTORICAL ORIGIN
                 </span>
                 <span className={styles.bridgeText}>{card.idea}</span>
               </div>
-              <ArrowRight size={16} color="#00F0EA" style={{ flexShrink: 0 }} />
+              <div className={styles.bridgeArrow}>
+                <ArrowRight size={16} />
+              </div>
               <div className={styles.bridgeBlockRight}>
                 <span className={styles.bridgeLabelRight}>
-                  <Rocket size={11} /> Modern Innovation
+                  <Rocket size={12} /> MODERN BREAKTHROUGH
                 </span>
                 <span className={styles.bridgeText}>{card.innovation}</span>
               </div>
             </div>
           )}
 
-          <p className={styles.quoteCaption}>&quot;{card.caption}&quot;</p>
-
+          {/* Lore Narrative Box */}
           <div className={styles.loreBox}>
             <h4 className={styles.loreTitle}>
               <BookOpen size={13} />
-              INNOVATION GENESIS &amp; EVOLUTION
+              CHRONICLE OF HUMAN INGENUITY
             </h4>
             <p className={styles.loreText}>{card.lore}</p>
           </div>
 
-          <button onClick={onClose} className={`gold-btn ${styles.ctaButton}`}>
-            Return to 3D Orbit
-          </button>
+          <div className={styles.actionRow}>
+            <button onClick={onClose} className={styles.ctaButton}>
+              ← Return to 3D Orbit
+            </button>
+          </div>
         </div>
       </div>
     </div>

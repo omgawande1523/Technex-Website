@@ -47,7 +47,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology"
+     
     },
     {
       "icon": "team",
@@ -147,7 +147,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "",
 
   "shape": "ship",
-  "image": "/events/Hack the hardware.jpeg",
+  "image": "/assets/events/Hack the hardware.jpeg",
 
   "highlights": [
     {
@@ -218,7 +218,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering and Technology"
+     
     },
     {
       "icon": "team",
@@ -339,7 +339,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "",
 
   "shape": "ship",
-  "image": "/events/envision.webp",
+  "image": "/assets/events/envision.webp",
 
   "highlights": [
     {
@@ -408,7 +408,7 @@ const otherEvents: EventItem[] = [
     {
       "icon": "pin",
       "label": "Venue",
-      "value": "St. Vincent Pallotti College of Engineering & Technology"
+      "value": "SVPCET,Nagpur"
     },
     {
       "icon": "team",
@@ -510,7 +510,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "/rulebooks/VORTEX_2026_Official_Rulebook.pdf",
 
   "shape": "ship",
-  "image": "/events/vortex.jpeg",
+  "image": "/assets/events/vortex.jpeg",
 
   "highlights": [
     {
@@ -580,7 +580,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering and Technology"
+     
     },
     {
       "icon": "team",
@@ -694,7 +694,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "/rulebooks/Rule book(Gamer Conquest).pdf",
 
   "shape": "ship",
-  "image": "/events/Gamer Conquest.jpeg",
+  "image": "/assets/events/Gamer Conquest.jpeg",
 
   "highlights": [
     {
@@ -758,7 +758,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Final Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology, Nagpur"
+     
     },
     {
       "icon": "team",
@@ -774,11 +774,11 @@ const otherEvents: EventItem[] = [
   "rounds": [
     {
       "title": "Round 1 — Online Qualifier (8 Hours)",
-      "text": "Format: Online. Date & Time: 9 December 2026, 6:00 PM IST to 10 December 2026, 2:00 AM IST. Duration: 8 hours. Teams solve multi-domain challenges on the official CTF platform. Flags must be submitted through the CTF platform. Participants should retain notes and evidence for any write-ups requested by organizers. Evaluation is based on valid flag submissions and published platform scoring rules. Top qualifying teams advance to Round 2. Qualifying cutoff and tie-break rules are to be confirmed."
+      "text": " • Format : Online (8 Hours)\n • Date & Time : 9 December 2026, 6:00 PM IST to 10 December 2026, 2:00 AM IST\n\n • Challenge Arena : Teams solve multi-domain challenges on the official CTF platform. Flags must be submitted through the CTF platform.\n • Submission Notes : Participants should retain notes and evidence for any write-ups requested by organizers.\n\n • Scoring & Evaluation  : Based on valid flag submissions and published platform scoring rules.\n • Advancement : Top qualifying teams advance to Round 2. Qualifying cutoff and tie-break rules are to be confirmed."
     },
     {
       "title": "Round 2 — Final Arena (24 Hours)",
-      "text": "Format: Offline at SVPCET, Nagpur. Date & Time: 19 December 2026, 11:00 AM IST to 20 December 2026, 11:00 AM IST. Duration: 24 hours. Qualified teams compete in a 24-hour offline CTF final during TECHNEX'26. Flags must be submitted through the official CTF platform, and write-ups for solved challenges may be requested for verification. Evaluation is based on platform points and organizer verification of write-ups before winners are declared. Final results will be confirmed after write-up verification, with the result announcement on 20 December."
+      "text": "• Format : Offline at SVPCET, Nagpur (24 Hours)\n • Date & Time : 19 December 2026, 11:00 AM IST to 20 December 2026, 11:00 AM IST\n\n • Final Arena : Qualified teams compete in an intensive 24-hour offline CTF final during TECHNEX'26.\n • Verification : Flags must be submitted through the official CTF platform, and write-ups for solved challenges may be requested for verification.\n\n • Scoring & Evaluation : Based on platform points and organizer verification of write-ups before winners are declared.\n • Announcement : Final results will be confirmed after write-up verification, followed by the result announcement on 20 December."
     }
   ],
   "rules": [
@@ -870,7 +870,7 @@ const otherEvents: EventItem[] = [
     "title": "The Imitation Game (2014)",
     "text": "The story of Alan Turing and the effort to decipher Enigma-encrypted messages."
   },
-  "image": "/events/CTF.jpeg",
+  "image": "/assets/events/CTF.webp",
   "shape": "ship",
   registerUrl: "/register/ctf",
   "rulebookUrl": "/rulebooks/APEX_CTF_Rulebook.pdf"
@@ -902,7 +902,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology, Nagpur"
+     
     },
     {
       "icon": "team",
@@ -1046,7 +1046,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology"
+    
     },
     {
       "icon": "team",
@@ -1136,7 +1136,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "",
 
   "shape": "ship",
-  "image": "/events/coastal-clash.webp",
+  "image": "/assets/events/coastal-clash.webp",
 
   "highlights": [
     {
@@ -1191,7 +1191,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology, Nagpur"
+     
     },
     {
       "icon": "team",
@@ -1349,7 +1349,7 @@ const otherEvents: EventItem[] = [
     "text": "Fictional boxing robots designed to fight in an arena under human control or with automated routines."
   },
 
-  "image": "/events/robo-sumo.webp",
+  "image": "/assets/events/robo-sumo.webp",
   "shape": "ship",
   registerUrl: "/register/robo-sumo",
   "rulebookUrl": "/rulebooks/Robo Sumo RuleBook.pdf"
@@ -1395,7 +1395,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology"
+    
     },
     {
       "icon": "team",
@@ -1501,7 +1501,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "",
 
   "shape": "ship",
-  "image": "/events/overdrive.webp",
+  "image": "/assets/events/overdrive.webp",
 
   "highlights": [
     {
@@ -1557,7 +1557,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology, Nagpur"
+     
     },
     {
       "icon": "team",
@@ -1676,7 +1676,7 @@ const otherEvents: EventItem[] = [
     "title": "Sherlock Holmes — Arthur Conan Doyle",
     "text": "A fictional detective who solves mysteries through observation, deduction and clues."
   },
-  "image": "/events/TechQuest.jpeg",
+  "image": "/assets/events/TechQuest.jpeg",
   "shape": "ship",
  registerUrl: "/register/techquest",
   "rulebookUrl": "/rulebooks/TECHQUEST 2k26 (Rule book).pdf"
@@ -1711,7 +1711,7 @@ const otherEvents: EventItem[] = [
       "icon": "pin",
       "label": "Venue",
       "value": "SVPCET, Nagpur",
-      "sub": "St. Vincent Pallotti College of Engineering & Technology, Nagpur"
+  
     },
     {
       "icon": "team",
@@ -1874,7 +1874,7 @@ const otherEvents: EventItem[] = [
     {
       "icon": "pin",
       "label": "Venue",
-      "value": "St. Vincent Pallotti College of Engineering & Technology"
+      "value": "SVPCET ,Nagpur"
     },
     {
       "icon": "team",
