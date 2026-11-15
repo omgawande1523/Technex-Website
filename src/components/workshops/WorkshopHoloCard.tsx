@@ -157,10 +157,18 @@ export function WorkshopHoloCard({ workshop, className = "" }: WorkshopHoloCardP
             </div>
           </div>
 
-          {/* Minimalist Animated Art Window */}
+          {/* 3D Diorama Art Window */}
           <div className={styles.artFrame}>
-            {/* Deep space cosmic backdrop with breathing theme glow */}
-            <div className={styles.artBackdrop} />
+            {/* Background 3D Glass Diorama Scene */}
+            <div className={styles.artBackground}>
+              <img
+                src={workshop.cover}
+                alt={workshop.title}
+                className={styles.coverImage}
+                loading="eager"
+              />
+              <div className={styles.coverOverlay} />
+            </div>
 
             {/* Concentric rotating tech reticle */}
             <div className={styles.rotatingReticle} aria-hidden="true">
@@ -175,12 +183,12 @@ export function WorkshopHoloCard({ workshop, className = "" }: WorkshopHoloCardP
             {/* Smooth glowing horizontal laser scanline */}
             <div className={styles.laserScanline} aria-hidden="true" />
 
-            {/* Clean, minimalist hero emblem with smooth floating animation */}
+            {/* Clean, 3D Hero Diorama Cutout with smooth parallax floating animation */}
             <div className={styles.heroWrapper}>
               <img
-                src={workshop.cover}
+                src={workshop.character || workshop.cover}
                 alt={workshop.title}
-                className={styles.minimalHeroImage}
+                className={styles.characterCutout}
                 loading="eager"
               />
             </div>
