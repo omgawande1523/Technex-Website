@@ -172,29 +172,13 @@ export default function UIOverlay() {
               {isMobile ? (
                 <>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
-                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Drag</b> to rotate 360°
-                  </span>
-                  <span style={{ opacity: 0.35 }}>•</span>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
-                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Pinch</b> to zoom
-                  </span>
-                  <span style={{ opacity: 0.35 }}>•</span>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
-                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Tap</b> cards for lore
+                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Watch</b> the figure transform
                   </span>
                 </>
               ) : (
                 <>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
-                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Drag</b> to rotate 360°
-                  </span>
-                  <span style={{ opacity: 0.35 }}>•</span>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
-                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Scroll</b> to zoom
-                  </span>
-                  <span style={{ opacity: 0.35 }}>•</span>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontFamily: 'inherit' }}>
-                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Click</b> cards for lore
+                    <b style={{ color: '#d9ad62', fontWeight: 600 }}>Move</b> your cursor, the figure follows
                   </span>
                 </>
               )}

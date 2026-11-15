@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import ComicModal, { type ComicCardData } from "@/components/landing/ComicModal";
 import SupermanPrimeCanvas, { COMIC_CARDS_DATA } from "@/components/landing/SupermanPrimeCanvas";
 import UIOverlay from "@/components/landing/UIOverlay";
+import StardustLayer from "@/components/landing/StardustLayer";
 import styles from "./landing.module.css";
 
 type EntityForm = "humanoid" | "flying_machine" | "watercraft" | "neural_network";
@@ -37,6 +39,7 @@ export default function Home() {
         }}
       >
         <div className={styles.heroBackground} aria-hidden="true" />
+        <StardustLayer />
 
         <div
           style={{
@@ -51,24 +54,24 @@ export default function Home() {
           <SupermanPrimeCanvas
             onSelectComic={setSelectedComic}
             bloomStrength={0.34}
-            glowIntensity={0.9}
+            glowIntensity={0.6}
             theme="prime"
             poseMode="hover"
             showHalo={false}
             showCape={false}
             showRibbons={false}
-            showCards
+            showCards={false}
             showParticles={false}
             cameraPreset="prime"
             panelLayout="circular"
             modelSource="male_body"
-            hologramSkinOpacity={0.65}
-            hologramNetworkIntensity={0.6}
-            hologramNodesBrightness={0.3}
+            hologramSkinOpacity={0}
+            hologramNetworkIntensity={0}
+            hologramNodesBrightness={0}
             hologramFlowSpeed={1}
-            hologramChestCoreRadiance={1.3}
+            hologramChestCoreRadiance={0}
             showHologramAura={false}
-            showHologramScanline
+            showHologramScanline={false}
             entityForm={entityForm}
             onEntityFormChange={setEntityForm}
             autoTransform
@@ -79,7 +82,16 @@ export default function Home() {
 
         {/* Hero content slot: left side on desktop, top on mobile.
             Add the logo, countdown timer and Register Now button here. */}
-        <div className={styles.heroContent}></div>
+        <div className={styles.heroContent}>
+          <Image
+            src="/tnx_logo_trimmed.webp"
+            alt="TECHNEX 2026 — 19th to 20th December 2026, St. Vincent Pallotti College of Engineering and Technology, Nagpur. Imagination turning into reality."
+            width={465}
+            height={256}
+            priority
+            className={styles.heroLogo}
+          />
+        </div>
 
         <UIOverlay />
         <ComicModal

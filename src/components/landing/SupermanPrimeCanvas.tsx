@@ -11,6 +11,8 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { ComicCardData } from './ComicModal';
 import { buildHolographicHumanoid, HolographicLayers } from './HolographicHumanoid';
+import { buildParticleForm, buildParticleCloud, ParticleForm } from './ParticleForm';
+import { generateParticleHuman } from './ParticleHuman';
 export type EntityForm = 'humanoid' | 'flying_machine' | 'watercraft' | 'neural_network';
 
 interface LandingDebugWindow extends Window {
@@ -52,18 +54,58 @@ interface SupermanPrimeCanvasProps {
 }
 
 // Mobile camera sits farther back than desktop so the entity renders smaller.
+const ENABLE_BLOOM = false;
 const MOBILE_CAMERA_POS = new THREE.Vector3(-6.9, 4.85, 13.8);
 
 /**
  * Frames the entity away from the hero content:
  * desktop shifts it to the right, mobile shifts it down.
  */
+// Landing background (/assets/bg/tnx-cave-art-bg.webp) and where its stage sits in it.
+// Keep BG_POS_X_* in sync with background-position in src/app/landing.module.css.
+const BG_W = 1670;
+const BG_H = 941;
+const STAGE_X = 1312; // centre of the top tier, in image pixels
+const STAGE_Y = 738; // rear part of the top tier's surface, in image pixels (entity sits a little back)
+const BG_POS_X_DESKTOP = 0.5;
+const BG_POS_X_MOBILE = 0.85;
+const ENTITY_HEIGHT = 2.1; // approximate world-space height of the humanoid
+const FORM_SCALE_HUMANOID = 1.15; // humanoid container base scale (FORM_BASE_SCALE[0])
+const STAGE_CAMERA_DIST = 9.5; // fixed camera distance; the entity is scaled to fit the stage instead
+const STAGE_LOOK = new THREE.Vector3(0, 1.0, 0);
+// Uniform scale for the entity group so it fills the stage; updated by applyHeroFraming
+let stageEntityScale = 1;
+// Stage centre as a fraction of the viewport width; used to aim the cursor-follow
+let stageScreenFracX = 0.75;
+const STAGE_VIEW_DIR = new THREE.Vector3(0, Math.sin(0.12), Math.cos(0.12)); // slight downward look, matching the stage
+
+// Places the camera so the entity stands on the stage painted in the CSS background,
+// at a size proportional to the stage. The camera is fixed: no orbit, no zoom.
 function applyHeroFraming(camera: THREE.PerspectiveCamera, w: number, h: number) {
-  if (w > 860) {
-    camera.setViewOffset(w, h, -w * 0.2, 0, w, h);
-  } else {
-    camera.setViewOffset(w, h, 0, -h * 0.12, w, h);
-  }
+  const isMob = w <= 860;
+  const s = Math.max(w / BG_W, h / BG_H);
+  const ox = (w - BG_W * s) * (isMob ? BG_POS_X_MOBILE : BG_POS_X_DESKTOP);
+  const oy = (h - BG_H * s) * 0.5;
+  const stageX = ox + STAGE_X * s;
+  const stageY = oy + STAGE_Y * s;
+  stageScreenFracX = stageX / w;
+
+  // Desired on-screen height of the entity, in CSS pixels
+  const targetPx = Math.min(330 * s, h * (isMob ? 0.34 : 0.46));
+  const worldPerPx = (2 * STAGE_CAMERA_DIST * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))) / h;
+  stageEntityScale = (targetPx * worldPerPx) / ENTITY_HEIGHT;
+
+  camera.clearViewOffset();
+  camera.position.copy(STAGE_LOOK).addScaledVector(STAGE_VIEW_DIR, STAGE_CAMERA_DIST);
+  camera.lookAt(STAGE_LOOK);
+  camera.updateProjectionMatrix();
+  camera.updateMatrixWorld(true);
+
+  // Where do the feet (world origin) land without an offset?
+  const feet = new THREE.Vector3(0, 0, 0).project(camera);
+  const fx = (feet.x * 0.5 + 0.5) * w;
+  const fy = (-feet.y * 0.5 + 0.5) * h;
+  camera.setViewOffset(w, h, fx - stageX, fy - stageY, w, h);
   camera.updateProjectionMatrix();
 }
 
@@ -285,6 +327,8 @@ export default function SupermanPrimeCanvas({
   const ribbonsGroupRef = useRef<THREE.Group | null>(null);
   const cardsGroupRef = useRef<THREE.Group | null>(null);
   const portalGroupRef = useRef<THREE.Group | null>(null);
+  // Particle version of each form, indexed like FORMS_SEQUENCE (humanoid, flying machine, watercraft, neural network)
+  const particleFormsRef = useRef<(ParticleForm | null)[]>([null, null, null, null]);
   const particlesGroupRef = useRef<THREE.Points | null>(null);
   const chestCoreLightRef = useRef<THREE.PointLight | null>(null);
   const customUniformsRef = useRef<{
@@ -383,11 +427,11 @@ export default function SupermanPrimeCanvas({
     let metalness = 0.95;
 
     switch (themeName) {
-      case 'prime': // Champagne gold deity
-        colorHex = 0xd9ad62;
-        emissiveHex = 0x442200;
-        roughness = 0.16;
-        metalness = 0.95;
+      case 'prime': // Satin titanium steel-blue
+        colorHex = 0x5f86ad;
+        emissiveHex = 0x05080c;
+        roughness = 0.42;
+        metalness = 0.6;
         break;
       case 'supernova': // Pure white gold
         colorHex = 0xfffae0;
@@ -414,6 +458,11 @@ export default function SupermanPrimeCanvas({
       mat.emissive.setHex(emissiveHex);
       mat.roughness = roughness;
       mat.metalness = metalness;
+      if (themeName === 'prime' && (mat as THREE.MeshPhysicalMaterial).isMeshPhysicalMaterial) {
+        const pm = mat as THREE.MeshPhysicalMaterial;
+        pm.clearcoat = 0;
+        pm.envMapIntensity = 0.9;
+      }
       mat.needsUpdate = true;
     });
 
@@ -558,18 +607,17 @@ export default function SupermanPrimeCanvas({
 
       const isMobile = typeof window !== 'undefined' && window.innerWidth <= 860;
 
+      if (preset === 'prime') {
+        const el = cam as THREE.PerspectiveCamera;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        applyHeroFraming(el, w, h);
+        ctrl.target.copy(STAGE_LOOK);
+        cameraTransitionRef.current = null;
+        return;
+      }
+
       switch (preset) {
-        case 'prime': // Finalized panoramic amphitheater view
-          if (isMobile) {
-            targetPos.copy(MOBILE_CAMERA_POS);
-            targetLook.set(0, 1.25, 0);
-          } else {
-            targetPos.set(-4.95, 3.55, 7.55);
-            targetLook.set(0.15, 1.25, 0);
-          }
-          ctrl.autoRotate = false;
-          ctrl.enabled = true;
-          break;
         case 'closeup': // Heroic chest & halo portrait
           targetPos.set(0, 1.9, isMobile ? 3.0 : 2.1);
           targetLook.set(0, 1.85, 0);
@@ -733,18 +781,20 @@ export default function SupermanPrimeCanvas({
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.enableZoom = true;
-    controls.enablePan = false; // Disable panning so two-finger pinch strictly moves forward/backward without drifting
+    // Camera is locked in place so the entity stays on the background stage
+    controls.enableZoom = false;
+    controls.enableRotate = false;
+    controls.enablePan = false;
     controls.zoomSpeed = 1.35;
-    renderer.domElement.style.touchAction = 'none';
+    renderer.domElement.style.touchAction = 'pan-y';
 
     if (isMobile) {
-      controls.target.set(0, 1.25, 0);
+      controls.target.copy(STAGE_LOOK);
       controls.minDistance = 2.0;
       controls.maxDistance = 35.0;
       controls.zoomSpeed = 1.5;
     } else {
-      controls.target.set(0.15, 1.25, 0);
+      controls.target.copy(STAGE_LOOK);
       controls.minDistance = 1.2;
       controls.maxDistance = 28;
     }
@@ -813,9 +863,10 @@ export default function SupermanPrimeCanvas({
       }
     };
 
-    renderer.domElement.addEventListener('touchstart', handlePinchStart, { passive: false });
-    renderer.domElement.addEventListener('touchmove', handlePinchMove, { passive: false });
-    renderer.domElement.addEventListener('touchend', handlePinchEnd, { passive: true });
+    // Pinch-to-zoom is intentionally disabled: the camera is fixed on the stage.
+    void handlePinchStart;
+    void handlePinchMove;
+    void handlePinchEnd;
 
     controls.autoRotate = false;
     controls.autoRotateSpeed = 1.8;
@@ -838,7 +889,7 @@ export default function SupermanPrimeCanvas({
 
     // Desktop hover reaction: the entity turns toward the cursor while it is over
     // the entity's side of the screen, and eases back to an idle sway otherwise.
-    const hoverState = { x: 0, active: false, dragging: false, rotY: 0, lift: 0, glow: 0, bobPhase: 0 };
+    const hoverState = { x: 0, y: 0, active: false, dragging: false, rotY: 0, rotX: 0, lift: 0, glow: 0, bobPhase: 0 };
     const handleHoverMove = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse') return;
       // While the user drags to orbit the camera, freeze the cursor-follow so the
@@ -852,10 +903,12 @@ export default function SupermanPrimeCanvas({
       }
       const nx = (e.clientX - rect.left) / rect.width;
       const ny = (e.clientY - rect.top) / rect.height;
-      // Entity is framed at ~70% of the width (see applyHeroFraming)
-      const centerX = 0.7;
-      hoverState.active = nx >= 0.42 && nx <= 1 && ny >= 0 && ny <= 1;
-      hoverState.x = THREE.MathUtils.clamp((nx - centerX) / (1 - centerX), -1, 1);
+      // Entity stands on the background stage (see applyHeroFraming)
+      const centerX = stageScreenFracX;
+      hoverState.active = nx >= 0 && nx <= 1 && ny >= 0 && ny <= 1;
+      const span = nx < centerX ? centerX : 1 - centerX;
+      hoverState.x = THREE.MathUtils.clamp((nx - centerX) / Math.max(0.1, span), -1, 1);
+      hoverState.y = THREE.MathUtils.clamp(ny * 2 - 1, -1, 1);
     };
     const handleHoverLeave = () => {
       hoverState.active = false;
@@ -950,18 +1003,27 @@ export default function SupermanPrimeCanvas({
       composerRef.current = null;
     }
 
+    // Bloom disabled: on the transparent canvas it produced an over-bright glow and a dark halo
+    // disc around the entity. Render directly instead.
+    if (!ENABLE_BLOOM && composer) {
+      composer.dispose();
+      composer = null;
+      composerRef.current = null;
+      bloomPassRef.current = null;
+    }
+
     // 6. Lighting: Tuned for dramatic muscular definition and golden specular luster
     // Subtle neutral dark ambient
-    const ambientLight = new THREE.AmbientLight(0x151515, 0.4);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
     scene.add(ambientLight);
 
     // Warm golden key light from upper right
-    const sunLight = new THREE.DirectionalLight(0xffe28a, 1.4);
+    const sunLight = new THREE.DirectionalLight(0xffffff, 1.6);
     sunLight.position.set(2.5, 3.8, 3.2);
     scene.add(sunLight);
 
     // Deep amber rim light from rear left to carve out muscular silhouette
-    const rimLight = new THREE.DirectionalLight(0xff9900, 1.7);
+    const rimLight = new THREE.DirectionalLight(0xbcd4e6, 0.9);
     rimLight.position.set(-3.0, 2.5, -2.8);
     scene.add(rimLight);
 
@@ -971,7 +1033,7 @@ export default function SupermanPrimeCanvas({
     scene.add(fillLight);
 
     // Ground portal upward glow (gentle, no blowout)
-    const portalLight = new THREE.PointLight(0xffaa00, 0.6, 3.5, 1.2);
+    const portalLight = new THREE.PointLight(0xffffff, 0.0, 3.5, 1.2);
     portalLight.position.set(0, 0.15, 0);
     scene.add(portalLight);
 
@@ -982,10 +1044,8 @@ export default function SupermanPrimeCanvas({
       console.warn('Environment map generation warning:', err);
     }
 
-    // 8. Ground Energy Portal (Concentric Rings under feet)
-    const portalGroup = createPortalRings();
-    scene.add(portalGroup);
-    portalGroupRef.current = portalGroup;
+    // 8. Ground Energy Portal removed (background image provides the pedestal)
+    portalGroupRef.current = null;
 
     // 10. Ribbons: Handled by React Bits InterferenceRibbons component in DOM layer behind entity
     ribbonsGroupRef.current = null;
@@ -994,9 +1054,13 @@ export default function SupermanPrimeCanvas({
     camera.lookAt(controls.target);
     camera.updateMatrixWorld(true);
     camera.updateProjectionMatrix();
-    const cardsGroup = createFloatingComicPanels(scene, onSelectComic, camera, renderer.domElement);
-    scene.add(cardsGroup);
-    cardsGroupRef.current = cardsGroup;
+    if (showCards) {
+      const cardsGroup = createFloatingComicPanels(scene, onSelectComic, camera, renderer.domElement);
+      scene.add(cardsGroup);
+      cardsGroupRef.current = cardsGroup;
+    } else {
+      cardsGroupRef.current = null;
+    }
 
     // 12. Solar Embers (Permanently removed)
     particlesGroupRef.current = null;
@@ -1015,27 +1079,27 @@ export default function SupermanPrimeCanvas({
 
     // Create golden materials with custom Fresnel & pulse shader injection
     const goldBodyMaterial = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0xd49a18),
-      emissive: new THREE.Color(0x1f1001),
-      roughness: 0.18,
-      metalness: 0.95,
-      clearcoat: 0.9,
-      clearcoatRoughness: 0.08,
-      reflectivity: 1.0,
-      envMapIntensity: 2.0,
+      color: new THREE.Color(0xd6d9de),
+      emissive: new THREE.Color(0x000000),
+      roughness: 0.72,
+      metalness: 0.25,
+      clearcoat: 0.0,
+      clearcoatRoughness: 0.5,
+      reflectivity: 0.3,
+      envMapIntensity: 0.4,
       transparent: true,
       opacity: hologramSkinOpacity,
     });
 
     const goldJointsMaterial = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0xd49a18),
-      emissive: new THREE.Color(0x1f1001),
-      roughness: 0.18,
-      metalness: 0.95,
-      clearcoat: 0.9,
-      clearcoatRoughness: 0.08,
-      reflectivity: 1.0,
-      envMapIntensity: 2.0,
+      color: new THREE.Color(0xd6d9de),
+      emissive: new THREE.Color(0x000000),
+      roughness: 0.72,
+      metalness: 0.25,
+      clearcoat: 0.0,
+      clearcoatRoughness: 0.5,
+      reflectivity: 0.3,
+      envMapIntensity: 0.4,
       transparent: true,
       opacity: hologramSkinOpacity,
     });
@@ -1176,6 +1240,12 @@ export default function SupermanPrimeCanvas({
       const debugWindow = window as LandingDebugWindow;
       debugWindow.__scene = scene;
       debugWindow.__flyingMachine = flyingMachineContainer;
+      // Dev helper: window.__setAutoTransform(false) holds the current form for inspection
+      if (process.env.NODE_ENV !== 'production') {
+        (debugWindow as unknown as { __setAutoTransform: (v: boolean) => void }).__setAutoTransform = (v) => {
+          autoTransformRef.current = v;
+        };
+      }
       debugWindow.__watercraft = watercraftContainer;
       debugWindow.__neuralNetwork = neuralNetworkContainer;
       debugWindow.__humanoid = humanoidContainer;
@@ -1383,11 +1453,9 @@ export default function SupermanPrimeCanvas({
     }, 10000);
 
     // Load humanoid primary model first for instant non-blocking initial render with automatic fallback
-    const loadHumanoidModel = (targetPath: string, isFallback: boolean = false) => {
+    const loadHumanoidModel = (targetPath: string, isFallback: boolean = false, skipDownload: boolean = false) => {
       setLoadingProgress(25);
-      gltfLoader.load(
-        targetPath,
-        (humanoidGltf) => {
+      const onHumanoidLoaded = (humanoidGltf: { scene: THREE.Group; animations: THREE.AnimationClip[] }) => {
           if (isCancelled) return;
           setLoadingProgress(90);
 
@@ -1465,6 +1533,20 @@ export default function SupermanPrimeCanvas({
               } catch (holoErr) {
                 console.warn('Holographic shader layers generation warning:', holoErr);
               }
+            }
+
+            try {
+              // Hand-built floating figure made of points (replaces the male_body mesh)
+              const human = generateParticleHuman(16000);
+              const figure = new THREE.Group();
+              figure.scale.setScalar(ENTITY_HEIGHT / 1.8 / FORM_SCALE_HUMANOID);
+              figure.rotation.y = 0.28; // slight three-quarter turn, like the reference
+              humanoidContainer.add(figure);
+              particleFormsRef.current[0] = buildParticleCloud(
+                figure, human.positions, human.colors, human.count, renderer.getPixelRatio(), 0.9, 0.9,
+              );
+            } catch (pErr) {
+              console.warn('Humanoid particle form warning:', pErr);
             }
 
             capeGroupRef.current = null;
@@ -1550,60 +1632,75 @@ export default function SupermanPrimeCanvas({
               // 2. SETUP FLYING MACHINE MODEL (/models/flying_machine-compressed.glb)
               const machineWrapper = setupEntityModel(
                 machineGltf.scene,
-                4.5,
+                2.8,
                 flyingMachineMaterialsRef.current,
                 flyingMachineWireMeshesRef.current,
                 flyingMachineNodesRef.current
               );
-              machineWrapper.position.set(0, 1.70, 0);
+              machineWrapper.position.set(0, 0.95, 0);
               machineWrapper.rotation.y = -Math.PI / 2;
               machineWrapper.rotation.x = 0.38;
 
               const machineUnderGlow = new THREE.PointLight(0xffea60, 0.7, 4.0, 1.5);
-              machineUnderGlow.position.set(0, 0.95, 0);
+              machineUnderGlow.position.set(0, 0.4, 0);
               flyingMachineContainer.add(machineUnderGlow);
               flyingMachineGlowLightsRef.current.push(machineUnderGlow);
 
               flyingMachineContainer.add(machineWrapper);
               flyingMachineWrapperRef.current = machineWrapper;
+              try {
+                particleFormsRef.current[1] = buildParticleForm(machineWrapper, 40000, renderer.getPixelRatio());
+              } catch (pErr) {
+                console.warn('Particle form warning:', pErr);
+              }
 
               // 3. SETUP WATERCRAFT MODEL (/models/paddle_boat-compressed.glb)
               const boatWrapper = setupEntityModel(
                 boatGltf.scene,
-                2.2,
+                1.7,
                 watercraftMaterialsRef.current,
                 watercraftWireMeshesRef.current,
                 watercraftNodesRef.current
               );
-              boatWrapper.position.set(0, 1.95, 0);
+              boatWrapper.position.set(0, 0.85, 0);
               boatWrapper.rotation.y = -0.35;
 
               const boatUnderGlow = new THREE.PointLight(0xffea60, 0.6, 3.5, 1.5);
-              boatUnderGlow.position.set(0, 1.20, 0);
+              boatUnderGlow.position.set(0, 0.35, 0);
               watercraftContainer.add(boatUnderGlow);
               watercraftGlowLightsRef.current.push(boatUnderGlow);
 
               watercraftContainer.add(boatWrapper);
               watercraftWrapperRef.current = boatWrapper;
+              try {
+                particleFormsRef.current[2] = buildParticleForm(boatWrapper, 38000, renderer.getPixelRatio(), 0.45);
+              } catch (pErr) {
+                console.warn('Particle form warning:', pErr);
+              }
 
               // 4. SETUP NEURAL NETWORK MODEL (/models/artificial_neural_network_ann-compressed.glb)
               const annWrapper = setupEntityModel(
                 annGltf.scene,
-                2.0,
+                1.5,
                 neuralNetworkMaterialsRef.current,
                 neuralNetworkWireMeshesRef.current,
                 neuralNetworkNodesRef.current
               );
-              annWrapper.position.set(0, 2.00, 0);
+              annWrapper.position.set(0, 0.95, 0);
               annWrapper.rotation.x = 0.25;
 
               const annUnderGlow = new THREE.PointLight(0xffea60, 0.7, 3.5, 1.5);
-              annUnderGlow.position.set(0, 1.25, 0);
+              annUnderGlow.position.set(0, 0.4, 0);
               neuralNetworkContainer.add(annUnderGlow);
               neuralNetworkGlowLightsRef.current.push(annUnderGlow);
 
               neuralNetworkContainer.add(annWrapper);
               neuralNetworkWrapperRef.current = annWrapper;
+              try {
+                particleFormsRef.current[3] = buildParticleForm(annWrapper, 32000, renderer.getPixelRatio());
+              } catch (pErr) {
+                console.warn('Particle form warning:', pErr);
+              }
 
               secondaryModelsLoadedRef.current = true;
               applyThemeRef.current(themeRef.current);
@@ -1611,7 +1708,17 @@ export default function SupermanPrimeCanvas({
             .catch((err) => {
               console.warn('Background secondary models stream warning:', err);
             });
-        },
+      };
+
+      // The male_body humanoid is now a procedural particle figure, so its model file is not needed
+      if (skipDownload) {
+        onHumanoidLoaded({ scene: new THREE.Group(), animations: [] });
+        return;
+      }
+
+      gltfLoader.load(
+        targetPath,
+        onHumanoidLoaded,
         (xhr) => {
           if (xhr.total > 0) {
             const pct = Math.round(25 + (xhr.loaded / xhr.total) * 65);
@@ -1632,7 +1739,7 @@ export default function SupermanPrimeCanvas({
       );
     };
 
-    loadHumanoidModel(modelPath);
+    loadHumanoidModel(modelPath, false, isMaleBody);
 
     // Resize handler
     const handleResize = () => {
@@ -2010,6 +2117,13 @@ export default function SupermanPrimeCanvas({
 
       const [alphaHolo, alphaFly, alphaBoat, alphaAnn] = alphas;
 
+      // Particle forms scatter away / gather in with each form's alpha
+      particleFormsRef.current.forEach((pf, idx) => {
+        if (!pf) return;
+        pf.setReveal(alphas[idx]);
+        pf.update(time);
+      });
+
       // 1. Update Humanoid
       if (humanoidContainerRef.current) {
         humanoidContainerRef.current.visible = alphaHolo > 0.001;
@@ -2106,7 +2220,7 @@ export default function SupermanPrimeCanvas({
         flyingMachineGlowLightsRef.current
       );
       if (flyingMachineWrapperRef.current && alphaFly > 0.001) {
-        flyingMachineWrapperRef.current.position.y = 1.70 + Math.sin(time * 1.4) * 0.06;
+        flyingMachineWrapperRef.current.position.y = 0.95 + Math.sin(time * 1.4) * 0.06;
         flyingMachineWrapperRef.current.rotation.x = 0.38 + Math.sin(time * 0.8) * 0.03;
         flyingMachineWrapperRef.current.rotation.y = -Math.PI / 2 + Math.sin(time * 0.7) * 0.04;
         flyingMachineWrapperRef.current.rotation.z = Math.sin(time * 1.1) * 0.035;
@@ -2122,7 +2236,7 @@ export default function SupermanPrimeCanvas({
         watercraftGlowLightsRef.current
       );
       if (watercraftWrapperRef.current && alphaBoat > 0.001) {
-        watercraftWrapperRef.current.position.y = 1.95 + Math.sin(time * 1.3) * 0.05;
+        watercraftWrapperRef.current.position.y = 0.85 + Math.sin(time * 1.3) * 0.05;
         watercraftWrapperRef.current.rotation.x = Math.sin(time * 1.1) * 0.04;
         watercraftWrapperRef.current.rotation.z = Math.sin(time * 0.95 + 1.0) * 0.04;
         watercraftWrapperRef.current.rotation.y = Math.sin(time * 0.35) * 0.08 - 0.25;
@@ -2138,7 +2252,7 @@ export default function SupermanPrimeCanvas({
         neuralNetworkGlowLightsRef.current
       );
       if (neuralNetworkWrapperRef.current && alphaAnn > 0.001) {
-        neuralNetworkWrapperRef.current.position.y = 2.00 + Math.sin(time * 1.2) * 0.05;
+        neuralNetworkWrapperRef.current.position.y = 0.95 + Math.sin(time * 1.2) * 0.05;
         neuralNetworkWrapperRef.current.rotation.y = time * 0.22;
         neuralNetworkWrapperRef.current.rotation.x = 0.25 + Math.sin(time * 0.6) * 0.04;
         neuralNetworkWrapperRef.current.rotation.z = Math.sin(time * 0.8) * 0.03;
@@ -2160,16 +2274,21 @@ export default function SupermanPrimeCanvas({
           // Slow, critically-damped easing so the turn never overshoots or jitters
           const k = 1 - Math.exp(-delta * 2.2);
           const follow = hoverState.active && !hoverState.dragging;
-          const targetRotY = follow ? hoverState.x * 0.5 : 0;
+          // Turn toward the cursor and lean slightly with its height
+          const targetRotY = follow ? hoverState.x * 0.6 : 0;
+          const targetRotX = follow ? hoverState.y * 0.06 : 0;
           hoverState.rotY += (targetRotY - hoverState.rotY) * k;
-          hoverState.lift += ((follow ? 0.1 : 0) - hoverState.lift) * k;
-          hoverState.glow += ((follow ? 1 : 0) - hoverState.glow) * k;
+          hoverState.rotX += (targetRotX - hoverState.rotX) * k;
+          hoverState.lift += ((follow ? 0.06 : 0) - hoverState.lift) * k;
+          hoverState.glow = 0;
           // Accumulate the bob phase so a changing bob speed can't make it jump
-          hoverState.bobPhase += delta * 1.5;
+          hoverState.bobPhase += delta * 1.2;
+          // Float just above the stage, like a figure of star-dust
           characterGroupRef.current.position.y =
-            0.08 + hoverState.lift + Math.sin(hoverState.bobPhase) * 0.05;
+            (0.18 + hoverState.lift + Math.sin(hoverState.bobPhase) * 0.04) * stageEntityScale;
+          characterGroupRef.current.scale.setScalar(stageEntityScale);
           characterGroupRef.current.rotation.y = hoverState.rotY;
-          characterGroupRef.current.rotation.x = 0;
+          characterGroupRef.current.rotation.x = hoverState.rotX;
           if (holographicLayersRef.current) {
             holographicLayersRef.current.setChestCoreRadiance(
               hologramChestCoreRadianceRef.current * (1 + hoverState.glow * 0.6),
@@ -2307,6 +2426,8 @@ export default function SupermanPrimeCanvas({
       if (cardsGroupRef.current?.userData?.dispose) {
         cardsGroupRef.current.userData.dispose();
       }
+      particleFormsRef.current.forEach((pf) => pf?.dispose());
+      particleFormsRef.current = [null, null, null, null];
       controls.removeEventListener('start', handleControlsStart);
       controls.dispose();
       if (composerRef.current) {
@@ -2330,7 +2451,7 @@ export default function SupermanPrimeCanvas({
         position: 'relative',
         overflow: 'hidden',
         backgroundColor: 'transparent',
-        cursor: 'grab',
+        cursor: 'default',
       }}
     >
       {/* Static fallback when the device/browser has no WebGL 2 (e.g. hardware acceleration off) */}
@@ -2954,6 +3075,7 @@ function createGoldenCape(): THREE.Group {
 /**
  * Creates Concentric Energy Portal Platform (exact liquid-gold ripples beneath feet)
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function createPortalRings(): THREE.Group {
   const portal = new THREE.Group();
   portal.position.set(0, 0.015, 0);
