@@ -285,7 +285,7 @@
 }
 
 .cyber-avatar-tag {
-  font-family: 'Rajdhani', 'Orbitron', -apple-system, sans-serif;
+  font-family: var(--font-barge), var(--font-barge), -apple-system, sans-serif;
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.22em;
@@ -343,7 +343,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
-  font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-barge), var(--font-barge), var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 800;
   text-transform: none;
   letter-spacing: 0.03em;
@@ -365,7 +365,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
-  font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-barge), var(--font-barge), var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700;
   text-transform: none;
   color: #fde047;
@@ -432,7 +432,7 @@
   justify-content: center;
   gap: 6px;
   white-space: nowrap;
-  font-family: 'Rajdhani', 'Orbitron', -apple-system, sans-serif;
+  font-family: var(--font-barge), var(--font-barge), -apple-system, sans-serif;
   font-size: clamp(9px, 3.8cqi, 11px);
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -571,7 +571,7 @@
 }
 
 .cyber-back-unit-label {
-  font-family: var(--font-display, 'Michroma', 'Orbitron', sans-serif);
+  font-family: var(--font-display, var(--font-barge), var(--font-barge), sans-serif);
   font-size: 6px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -635,7 +635,7 @@
 }
 
 .cyber-back-no-socials-tag {
-  font-family: var(--font-display, 'Michroma', sans-serif);
+  font-family: var(--font-display, var(--font-barge), sans-serif);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.18em;

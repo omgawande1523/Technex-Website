@@ -337,12 +337,12 @@ export default function EventsExperience() {
           text-overflow: ellipsis; white-space: nowrap;
           text-align: left; font-size: 12.5px !important;
           letter-spacing: .045em !important;
-          font-family: var(--font-redaction), "Redaction 20", system-ui, sans-serif !important;
+          font-family: var(--font-redaction), var(--font-body), system-ui, sans-serif !important;
         }
         .ev-stage .ev-jump-num {
           flex: 0 0 auto; color: #e7bf73 !important;
           font-size: 12px !important;
-          font-family: var(--font-redaction), "Redaction 20", system-ui, sans-serif !important;
+          font-family: var(--font-redaction), var(--font-body), system-ui, sans-serif !important;
         }
         /* Keep the entire content group slightly left of the event selector. */
         @media (min-width: 1101px) {
@@ -432,10 +432,10 @@ export default function EventsExperience() {
           .ev-stage .ev-num {
             font-size: clamp(27px, 8vw, 40px) !important;
             line-height: 1 !important;
-            font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+            font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
           }
           .ev-stage .ev-title {
-            font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+            font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
             font-size: clamp(16px, 4.6vw, 21px) !important;
             line-height: 1.08 !important;
             margin: 5px 0 0 !important;
@@ -499,8 +499,8 @@ export default function EventsExperience() {
         @media (max-width: 760px) and (max-height: 690px) {
           .ev-stage .ev-panel { gap: 6px !important; top: calc(50% - 18px) !important; }
           .ev-stage .ev-flip { height: clamp(110px, 24dvh, 180px) !important; }
-          .ev-stage .ev-num { font-size: 26px !important; font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important; }
-          .ev-stage .ev-title { font-size: 17px !important; font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important; }
+          .ev-stage .ev-num { font-size: 26px !important; font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important; }
+          .ev-stage .ev-title { font-size: 17px !important; font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important; }
           .ev-stage .ev-btns-m .ev-cta { height: 34px !important; }
         }
         @media (prefers-reduced-motion: reduce) {

@@ -3,7 +3,6 @@
    Permanent Golden Nebula Cosmic Theme
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Rajdhani:wght@600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 .technex-team-page {
   position: relative;
@@ -17,7 +16,7 @@
 }
 
 .technex-team-page :not(svg) {
-  font-family: var(--font-redaction), "Redaction 20", sans-serif;
+  font-family: var(--font-redaction), var(--font-body), sans-serif;
 }
 
 .technex-team-page h1:not(svg),
@@ -26,24 +25,24 @@
 .technex-team-page h4:not(svg),
 .technex-team-page h5:not(svg),
 .technex-team-page h6:not(svg) {
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
 }
 
 .technex-team-page .section-heading-banner-title:not(svg) {
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
   font-weight: 900 !important;
   -webkit-text-stroke: 0.55px currentColor !important;
 }
 
 .technex-team-page .cyber-front-name:not(svg) {
-  font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+  font-family: var(--font-redaction), var(--font-body), sans-serif !important;
   font-weight: 800 !important;
   -webkit-text-stroke: 0.35px currentColor !important;
   text-transform: none !important;
 }
 
 .technex-team-page .cyber-front-role:not(svg) {
-  font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+  font-family: var(--font-redaction), var(--font-body), sans-serif !important;
   font-weight: 700 !important;
   -webkit-text-stroke: 0.25px currentColor !important;
   text-transform: none !important;

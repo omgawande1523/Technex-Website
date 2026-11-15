@@ -1,24 +1,8 @@
 import type { Metadata } from "next";
 import SiteChrome from "@/components/navigation/SiteChrome";
-import {
-  eventDisplayFont,
-  eventTextFont,
-  landingBodyFont,
-  metalManiaFont,
-} from "@/app/event-fonts";
-import { Geist, Geist_Mono } from "next/font/google";
+import { bodyFont, displayFont } from "@/app/fonts";
 import "./globals.css";
 import "@/components/technex-ai/technex-chatbot.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "TECHNEX 2026",
@@ -39,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${eventDisplayFont.variable} ${eventTextFont.variable} ${landingBodyFont.variable} ${metalManiaFont.variable} h-full antialiased`}
+      className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <SiteChrome />

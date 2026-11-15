@@ -92,7 +92,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Rajdhani', 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-barge), var(--font-barge), var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: clamp(13px, 2.0vw, 18px);
   font-weight: 900;
   text-transform: uppercase;

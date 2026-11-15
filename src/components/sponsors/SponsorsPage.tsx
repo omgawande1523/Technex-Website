@@ -1,14 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Metal_Mania } from 'next/font/google';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 
-const metalMania = Metal_Mania({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-});
 import {
   TitleSponsor,
   SectionHeading,
@@ -69,15 +63,15 @@ const SponsorsPage: React.FC = () => {
           {/* Main Title - Metal Mania Google Font */}
           <motion.h1
             variants={heroItemVariants}
-            className={`mt-4 text-4xl sm:text-6xl md:text-7xl font-normal tracking-wider ${metalMania.className}`}
+            className={`mt-4 text-4xl sm:text-6xl md:text-7xl font-normal tracking-wider`}
             style={{
-              fontFamily: `${metalMania.style.fontFamily}, var(--font-metal-mania), 'Metal Mania', cursive, sans-serif`,
+              fontFamily: `var(--font-metal-mania), var(--font-barge), cursive, sans-serif`,
             }}
           >
             <span
               className="text-[#ffffff] drop-shadow-[0_2px_12px_rgba(255,255,255,0.4)]"
               style={{
-                fontFamily: `${metalMania.style.fontFamily}, var(--font-metal-mania), 'Metal Mania', cursive, sans-serif`,
+                fontFamily: `var(--font-metal-mania), var(--font-barge), cursive, sans-serif`,
               }}
             >
               OUR{' '}
@@ -85,7 +79,7 @@ const SponsorsPage: React.FC = () => {
             <span
               className="bg-gradient-to-r from-white via-yellow-100 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(254,240,138,0.4)]"
               style={{
-                fontFamily: `${metalMania.style.fontFamily}, var(--font-metal-mania), 'Metal Mania', cursive, sans-serif`,
+                fontFamily: `var(--font-metal-mania), var(--font-barge), cursive, sans-serif`,
               }}
             >
               SPONSORS

@@ -1,63 +1,52 @@
-@import url("https://fonts.googleapis.com/css2?family=Metal+Mania&family=Redaction+20&display=swap");
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Metal Mania";
-  src: url("/fonts/MetalMania-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Redaction 20";
-  src: url("/fonts/Redaction20-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Barge";
-  src: url("/fonts/Barge-Black.otf") format("opentype");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Barge";
-  src: url("/fonts/Barge-BlackItalic.otf") format("opentype");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
 * {
   box-sizing: border-box;
 }
+
+/*
+ * INKARNATE tokens. Dark only: gold ink on black paper.
+ * Two type families, loaded by next/font/local in src/app/fonts.ts.
+ * Every legacy font variable used by older routes is aliased to one of them.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-barge: "Barge", "Outfit", sans-serif;
-  --font-metal-mania: "Metal Mania", cursive, sans-serif;
-  --font-redaction: "Redaction 20", system-ui, sans-serif;
+  color-scheme: dark;
+  --ink-gold: #d9ad62;
+  --ink-gold-soft: #f2d9a6;
+  --ink-gold-dim: rgba(217, 173, 98, 0.35);
+  --ink-paper: #0b0906;
+  --ink-paper-2: #15110b;
+  --ink-bone: #f4ead6;
+  --ink-red: #c2412d;
+  --background: var(--ink-paper);
+  --foreground: var(--ink-bone);
+
+  --font-barge: var(--font-ink-display), "Arial Black", Impact, sans-serif;
+  --font-body: var(--font-ink-body), system-ui, "Segoe UI", sans-serif;
+  /* legacy aliases */
+  --font-display: var(--font-barge);
+  --font-metal-mania: var(--font-barge);
+  --font-text: var(--font-body);
+  --font-outfit: var(--font-body);
+  --font-redaction: var(--font-body);
+  --font-geist-sans: var(--font-body);
+  --font-geist-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-ink-gold: var(--ink-gold);
+  --color-ink-paper: var(--ink-paper);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-barge);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 
 .sidebar-icon-btn:hover {
@@ -83,7 +72,7 @@ body {
 }
 
 .nav-link-btn {
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
   font-size: 20px;
   letter-spacing: 0.08em;
   padding: 6px 14px !important;
@@ -101,11 +90,11 @@ body {
 }
 
 .site-top-nav {
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif;
+  font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif;
 }
 
 .site-top-nav .brand-text {
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
 }
 
 .site-main-navigation {

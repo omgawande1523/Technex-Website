@@ -988,7 +988,7 @@ export default function EventDetail({
           background: linear-gradient(115deg, #fff2d0 0%, #f2cb82 38%, #dba04a 72%, #c68635 100%) !important;
           box-shadow: none !important;
           color: #1f1306 !important;
-          font-family: "Redaction 20", sans-serif;
+          font-family: var(--font-body), sans-serif;
           font-size: clamp(0.8rem, 1vw, 0.98rem);
           font-weight: 700;
           letter-spacing: .16em;
@@ -1426,7 +1426,7 @@ export default function EventDetail({
             border: 1px solid rgba(227, 185, 92, 0.4) !important;
             border-radius: 10px !important;
             color: var(--gold-hi) !important;
-            font-family: var(--font-redaction), "Redaction 20", sans-serif !important;
+            font-family: var(--font-redaction), var(--font-body), sans-serif !important;
             font-size: 0.82rem !important;
             font-weight: 700 !important;
             letter-spacing: 0.04em !important;
@@ -1601,7 +1601,7 @@ export default function EventDetail({
           body.event-detail-scroll-enabled .page .panel h3,
           body.event-detail-scroll-enabled .page .perks h3,
           body.event-detail-scroll-enabled .page .perks .who strong {
-            font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+            font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
           }
 
           body.event-detail-scroll-enabled .page .tabs button {
@@ -1643,7 +1643,7 @@ export default function EventDetail({
           body.event-detail-scroll-enabled .page .rules .card strong,
           body.event-detail-scroll-enabled .page .rules .card p,
           body.event-detail-scroll-enabled .page .btn.line {
-            font-family: var(--font-redaction), "Redaction 20", system-ui, sans-serif !important;
+            font-family: var(--font-redaction), var(--font-body), system-ui, sans-serif !important;
           }
 
           body.event-detail-scroll-enabled .page .faq button {

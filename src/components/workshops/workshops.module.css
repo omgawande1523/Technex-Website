@@ -32,7 +32,7 @@
 .header h1 {
   margin: 0;
   color: #fff;
-  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-family: var(--font-barge), "Arial Black", sans-serif;
   font-size: clamp(2.2rem, 8vw, 5rem);
   font-weight: 900;
   letter-spacing: 0.2em;
@@ -266,7 +266,7 @@
 .workshopTitle {
   margin: 0;
   color: #fff;
-  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-family: var(--font-barge), "Arial Black", sans-serif;
   font-size: clamp(14px, 2vw, 26px);
   font-weight: 900;
   letter-spacing: 0.025em;
@@ -289,7 +289,7 @@
   margin: 7px 0 0;
   overflow: hidden;
   color: #e5e7eb;
-  font-family: "Rajdhani", "Arial Narrow", sans-serif;
+  font-family: var(--font-barge), "Arial Narrow", sans-serif;
   font-size: clamp(10px, 1.1vw, 14px);
   font-weight: 500;
   line-height: 1.35;
@@ -312,7 +312,7 @@
   padding: 0 4px;
   clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
   cursor: pointer;
-  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-family: var(--font-barge), "Arial Black", sans-serif;
   font-size: clamp(8px, 0.85vw, 11px);
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -368,7 +368,7 @@
   padding: 0 4px 6px;
   border-bottom: 1px solid rgb(0 240 255 / 30%);
   color: #fff;
-  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-family: var(--font-barge), "Arial Black", sans-serif;
   font-size: clamp(11px, 1.3vw, 17px);
   font-weight: 700;
   overflow-wrap: anywhere;
@@ -378,7 +378,7 @@
   max-width: 95%;
   margin: auto;
   color: #f3f4f6;
-  font-family: "Rajdhani", "Arial Narrow", sans-serif;
+  font-family: var(--font-barge), "Arial Narrow", sans-serif;
   font-size: clamp(12px, 1.5vw, 19px);
   line-height: 1.45;
 }

@@ -241,7 +241,7 @@ export default function MobileBottomNav() {
               />
               <span
                 style={{
-                  fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif',
+                  fontFamily: 'var(--font-redaction), var(--font-body), system-ui, sans-serif',
                   fontSize: '9.5px',
                   fontWeight: isActive ? 600 : 500,
                   letterSpacing: '0.02em',
@@ -365,7 +365,7 @@ export default function MobileBottomNav() {
         {/* Micro-label below circle, aligned with other nav labels */}
         <span
           style={{
-            fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif',
+            fontFamily: 'var(--font-redaction), var(--font-body), system-ui, sans-serif',
             fontSize: '9px',
             fontWeight: 600,
             letterSpacing: '0.04em',
@@ -431,7 +431,7 @@ export default function MobileBottomNav() {
               />
               <span
                 style={{
-                  fontFamily: 'var(--font-redaction), "Redaction 20", system-ui, sans-serif',
+                  fontFamily: 'var(--font-redaction), var(--font-body), system-ui, sans-serif',
                   fontSize: '9.5px',
                   fontWeight: isActive ? 600 : 500,
                   letterSpacing: '0.02em',

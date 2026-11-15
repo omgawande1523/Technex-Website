@@ -105,7 +105,7 @@
 }
 
 .stageTag {
-  font-family: var(--font-redaction), "DM Sans", sans-serif;
+  font-family: var(--font-redaction), var(--font-body), sans-serif;
   font-size: 8.5px;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -117,7 +117,7 @@
 
 .cardName {
   margin: 0;
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
   font-size: clamp(16px, 2.2vw, 20px);
   color: #fff;
   letter-spacing: 0.05em;
@@ -134,7 +134,7 @@
 }
 
 .hpValue {
-  font-family: "Cinzel", "Metal Mania", Georgia, serif;
+  font-family: var(--font-barge), var(--font-barge), Georgia, serif;
   font-size: 15px;
   font-weight: 700;
   color: #fce8a6;
@@ -418,7 +418,7 @@
   border-top: 1px solid rgba(212, 175, 55, 0.4);
   border-bottom: 1px solid rgba(212, 175, 55, 0.4);
   padding: 3px 6px;
-  font-family: var(--font-redaction), "DM Sans", sans-serif;
+  font-family: var(--font-redaction), var(--font-body), sans-serif;
   font-size: 8.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -507,7 +507,7 @@
 }
 
 .moveName {
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
   font-size: 13.5px;
   font-weight: 400;
   letter-spacing: 0.04em;
@@ -517,7 +517,7 @@
 }
 
 .moveDamage {
-  font-family: "Cinzel", "Metal Mania", Georgia, serif;
+  font-family: var(--font-barge), var(--font-barge), Georgia, serif;
   font-size: 15px;
   font-weight: 800;
   color: #ffd875;
@@ -526,7 +526,7 @@
 
 .moveDesc {
   margin: 0;
-  font-family: var(--font-redaction), "DM Sans", sans-serif;
+  font-family: var(--font-redaction), var(--font-body), sans-serif;
   font-size: 9.5px;
   line-height: 1.35;
   color: #b7b0c3;
@@ -659,7 +659,7 @@
 
 .backTitle {
   margin: 0 0 4px;
-  font-family: var(--font-metal-mania), "Metal Mania", cursive, sans-serif !important;
+  font-family: var(--font-metal-mania), var(--font-barge), cursive, sans-serif !important;
   font-size: 19px;
   color: #fff;
   text-shadow: 0 0 10px var(--theme-primary, #d4af37);
@@ -667,7 +667,7 @@
 
 .backCategory {
   margin: 0;
-  font-family: var(--font-redaction), "DM Sans", sans-serif;
+  font-family: var(--font-redaction), var(--font-body), sans-serif;
   font-size: 10px;
   font-weight: 700;
   color: #d4af37;
@@ -676,7 +676,7 @@
 
 .backDescription {
   margin: 16px 0;
-  font-family: var(--font-redaction), "DM Sans", sans-serif;
+  font-family: var(--font-redaction), var(--font-body), sans-serif;
   font-size: 12px;
   line-height: 1.6;
   color: #d5d0e2;
