@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { teamSections } from './data/teamData.js';
+import { teamSections } from './data/teamData';
 import TeamSection from './TeamSection.jsx';
 import './TeamPage.css';
 

@@ -27,8 +27,8 @@ const otherEvents: EventItem[] = [
   ],
 
   "source": {
-    "title": "Iron Man — Marvel Comics",
-    "text": "Tony Stark's powered armour represents the integration of hardware engineering, electronics, robotics and intelligent systems."
+    "title": "The Powered Exosuit — Sci-Fi Archetype",
+    "text": "The classic sci-fi powered exosuit represents the integration of hardware engineering, electronics, robotics and intelligent systems."
   },
 
   "innovation": {
@@ -147,7 +147,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "",
 
   "shape": "ship",
-  "image": "/assets/events/Hack the hardware.jpeg",
+  "image": "/assets/events/Hack the hardware.webp",
 
   "highlights": [
     {
@@ -510,7 +510,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "/rulebooks/VORTEX_2026_Official_Rulebook.pdf",
 
   "shape": "ship",
-  "image": "/assets/events/vortex.jpeg",
+  "image": "/assets/events/vortex.webp",
 
   "highlights": [
     {
@@ -694,7 +694,7 @@ const otherEvents: EventItem[] = [
   "rulebookUrl": "/rulebooks/Rule book(Gamer Conquest).pdf",
 
   "shape": "ship",
-  "image": "/assets/events/Gamer Conquest.jpeg",
+  "image": "/assets/events/Gamer Conquest.webp",
 
   "highlights": [
     {
@@ -1676,7 +1676,7 @@ const otherEvents: EventItem[] = [
     "title": "Sherlock Holmes — Arthur Conan Doyle",
     "text": "A fictional detective who solves mysteries through observation, deduction and clues."
   },
-  "image": "/assets/events/TechQuest.jpeg",
+  "image": "/assets/events/TechQuest.webp",
   "shape": "ship",
  registerUrl: "/register/techquest",
   "rulebookUrl": "/rulebooks/TECHQUEST 2k26 (Rule book).pdf"
@@ -1826,7 +1826,7 @@ const otherEvents: EventItem[] = [
   },
   "number": "12",
   "source": {
-    "title": "J.A.R.V.I.S. — Marvel’s Iron Man",
+    "title": "The AI Companion — Sci-Fi Archetype",
     "text": "An intelligent AI assistant that understands commands, analyses information and helps execute complex tasks."
   },
   "image": "",

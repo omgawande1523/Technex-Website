@@ -66,7 +66,7 @@ export const PARTICLE_CONFIG = {
   reducedMotionDuration: 0.6, // seconds
 
   // Assets
-  backgroundImage: '/images/cave-bg.jpg',
+  backgroundImage: '/assets/bg/cave-bg.webp',
   humanModelPath: '/models/male_body-compressed.glb',
 };
 
@@ -89,7 +89,7 @@ export const FORMS: FormConfig[] = [
     eventNumber: '01',
     title: 'Hack The Hardware',
     tag: 'Hardware',
-    source: 'Tony Stark’s powered armour — Marvel Comics',
+    source: 'The Powered Exosuit — Sci-Fi Archetype',
     concept: 'Segmented kinetic plates, a glowing arc chest core, and a smooth streamlined faceplate.',
     innovation: 'Robotic exoskeletons, wearable electronics, embedded systems and powered prosthetics.',
     description: 'Original biomechanical power armour with articulating shoulder pauldron plates, glowing micro-reactor core, and sleek visor.',
@@ -210,7 +210,7 @@ export const FORMS: FormConfig[] = [
     eventNumber: '12',
     title: 'Agentic Arena',
     tag: 'AI',
-    source: 'J.A.R.V.I.S. — Marvel’s Iron Man',
+    source: 'The AI Companion — Sci-Fi Archetype',
     concept: 'Synaptic artificial neural core with multi-layered perceptron node lattice, geodesic tensor web, and pulsating synaptic axons.',
     innovation: 'Autonomous LLM agent swarms, transformer attention graph execution, neuromorphic computing.',
     description: 'Geodesic spherical neural network core with concentric layer nodes interconnected by glowing axon light pathways.',

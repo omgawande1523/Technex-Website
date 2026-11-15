@@ -24,7 +24,7 @@ interface LandingDebugWindow extends Window {
   __entityGroup?: THREE.Group;
 }
 
-interface SupermanPrimeCanvasProps {
+interface InkHologramCanvasProps {
   onSelectComic: (card: ComicCardData) => void;
   bloomStrength: number;
   glowIntensity: number;
@@ -38,7 +38,7 @@ interface SupermanPrimeCanvasProps {
   cameraPreset: 'prime' | 'closeup' | 'full' | 'lowangle' | 'orbit';
   cameraTrigger?: number;
   panelLayout?: 'circular' | 'horizontal_ring' | 'helical' | 'orbit';
-  modelSource?: 'male_body' | 'superman_prime';
+  modelSource?: 'male_body';
   onCaptureRef?: React.MutableRefObject<(() => void) | null>;
   hologramSkinOpacity?: number;
   hologramNetworkIntensity?: number;
@@ -116,7 +116,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: "Leonardo da Vinci's Mechanical Wings (1485)",
     innovation: 'Supersonic Aircraft & Reusable Orbital Shuttles',
     era: '1485 — Modern Aerospace',
-    image: '/comics/panel_alien_world.webp',
+    image: '/comics/hack-the-hardware.svg',
     caption: 'Aerospace & Atmospheric Flight',
     lore: 'In 1485, Leonardo da Vinci conceived the "Codex on the Flight of Birds", drafting mechanical wings and aerial screws. For centuries this vision lived only on parchment, until modern aerodynamics, jet turbine propulsion, and orbital rocketry fulfilled humanity’s ancient dream of crossing skies and exploring the cosmos.',
   },
@@ -126,7 +126,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Biological Synaptic Neural Pathways',
     innovation: 'Artificial Deep Neural Networks & Machine Cognition',
     era: 'Biological Neurons — Machine Intelligence',
-    image: '/comics/panel_city.webp',
+    image: '/comics/hackathon.svg',
     caption: 'Cognitive Computing & Synthetic Intelligence',
     lore: 'The biological human brain, powered by 86 billion interconnected neurons and electrochemical synaptic gaps, was nature’s greatest computing marvel. Inspired by biological cognition, scientists engineered artificial neural networks, tensor microchips, and transformer architectures that now decode languages, generate art, and power autonomous discovery.',
   },
@@ -136,7 +136,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Polynesian Outriggers & Ancient Papyrus Boats',
     innovation: 'Autonomous Mega-Vessels & Nuclear Arctic Fleets',
     era: 'Ancient Ocean Voyages — Global Maritime',
-    image: '/comics/panel_classic.webp',
+    image: '/comics/envision.svg',
     caption: 'Oceanic Navigation & Deep Sea Engineering',
     lore: 'Humanity first navigated the perilous oceans on dugout logs and Polynesian outrigger canoes guided solely by constellations. That primal desire to cross the horizon has evolved into 400-meter autonomous container mega-ships, nuclear icebreakers, and satellite-synchronized global fleets navigating the high seas.',
   },
@@ -146,7 +146,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: "Counting Abacus & Babbage's Analytical Engine",
     innovation: 'Cryogenic Superconducting Quantum Processors',
     era: 'Mechanical Gears — Quantum Computing',
-    image: '/comics/panel_explosion.webp',
+    image: '/comics/vortex.svg',
     caption: 'Computational Evolution & Quantum Architecture',
     lore: 'From tactile beads on a counting abacus to Blaise Pascal’s geared Pascaline (1642) and Charles Babbage’s steam-driven Analytical Engine, humankind relentlessly sought to mechanize thought. Today, quantum processors utilize entangled qubits in cryogenic superposition to calculate solutions far beyond classical supercomputers.',
   },
@@ -156,7 +156,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: "Galileo's Handheld Optical Spyglass (1609)",
     innovation: 'The James Webb Space Telescope & Interstellar Probes',
     era: '1609 Optical Lens — Deep Space Observatories',
-    image: '/comics/panel_helmet.webp',
+    image: '/comics/gamer-conquest.svg',
     caption: 'Astrophysics & Cosmic Exploration',
     lore: 'In 1609, Galileo Galilei trained a handmade brass spyglass toward Jupiter, discovering celestial moons and forever transforming humanity’s cosmic worldview. Four centuries later, the James Webb Space Telescope unfurls 18 gold-coated beryllium hexagons 1.5 million kilometers into space to witness the dawn of the cosmos.',
   },
@@ -166,7 +166,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: "Ancient Fire Torches & Edison's Incandescent Lamp",
     innovation: 'Magnetic Confinement Fusion Tokamaks',
     era: 'First Spark — Artificial Sun Fusion Energy',
-    image: '/comics/panel_legion.webp',
+    image: '/comics/ctf.svg',
     caption: 'Energy Systems & Magnetic Plasma Physics',
     lore: 'The spark of a wooden torch half a million years ago gave our ancestors warmth, security, and toolmaking, followed millennia later by Thomas Edison’s carbon filament lamp. Today, humankind is harnessing the power of the stars themselves through magnetic confinement fusion tokamaks—producing boundless, clean energy on Earth.',
   },
@@ -176,7 +176,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Hilltop Smoke Signals, Pigeon Post & Morse Telegraph',
     innovation: 'Low-Earth Orbit Satellite Laser Constellations',
     era: 'Tribal Signals — Quantum Global Mesh',
-    image: '/comics/panel_nebula.webp',
+    image: '/comics/coastal-clash.svg',
     caption: 'Global Telecommunications & Laser Photonics',
     lore: 'When distance separated civilizations, messages were relayed through hilltop smoke signals, homing pigeons, and early Morse electric telegraphs. Today, dense constellations of low-Earth orbit satellites linked by infrared laser beams wrap our planet in a seamless web, transmitting billions of gigabytes across continents in mere milliseconds.',
   },
@@ -186,7 +186,7 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Herbal Botany & Mortar-and-Pestle Apothecary',
     innovation: 'CRISPR-Cas9 Molecular Precision Gene Editing',
     era: 'Botanical Healers — Nanomedicine & Genome Editing',
-    image: '/comics/panel_starship.webp',
+    image: '/comics/robo-sumo.svg',
     caption: 'Biotechnology & Genomic Precision',
     lore: 'For millennia, ancient healers turned to willow bark and alchemical distillations to treat human illness. Today, molecular biologists operate directly upon the 3-billion-base-pair genetic code with CRISPR-Cas9 molecular scissors, reprogramming disease vectors, tailoring mRNA vaccines, and engineering cellular nanorobots.',
   },
@@ -196,13 +196,13 @@ export const COMIC_CARDS_DATA: ComicCardData[] = [
     idea: 'Mesopotamian Solid Wooden Wheel & Sumerian Chariot',
     innovation: 'Supersonic Vacuum Maglev & Planetary Rovers',
     era: '3500 BCE Wheel — Interplanetary Mobility',
-    image: '/comics/panel_supersun.webp',
+    image: '/comics/overdrive.svg',
     caption: 'Kinetic Mobility & High-Speed Transit',
     lore: 'Invented in ancient Mesopotamia around 3500 BCE, the wooden wheel fundamentally unlocked human trade and mobility across continents. That foundational invention now propels 1000 km/h frictionless vacuum maglev capsules in enclosed transit tubes and autonomous robotic rovers traversing Martian dunes.',
   },
 ];
 
-export default function SupermanPrimeCanvas({
+export default function InkHologramCanvas({
   onSelectComic,
   bloomStrength,
   glowIntensity,
@@ -229,7 +229,7 @@ export default function SupermanPrimeCanvas({
   onEntityFormChange,
   autoTransform = true,
   onUserInteraction,
-}: SupermanPrimeCanvasProps) {
+}: InkHologramCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const onUserInteractionRef = useRef(onUserInteraction);
   useEffect(() => {
@@ -387,7 +387,7 @@ export default function SupermanPrimeCanvas({
           ctx.drawImage(rendererRef.current.domElement, 0, 0);
           const dataUrl = canvas.toDataURL('image/png');
           const link = document.createElement('a');
-          link.download = `superman-prime-one-million-${Date.now()}.png`;
+          link.download = `technex-ink-hologram-${Date.now()}.png`;
           link.href = dataUrl;
           link.click();
         }
@@ -1075,7 +1075,7 @@ export default function SupermanPrimeCanvas({
     }
 
     const isMaleBody = (modelSource || 'male_body') === 'male_body';
-    const modelPath = isMaleBody ? '/models/male_body-compressed.glb' : '/models/superman_prime.glb';
+    const modelPath = '/models/male_body-compressed.glb';
 
     // Create golden materials with custom Fresnel & pulse shader injection
     const goldBodyMaterial = new THREE.MeshPhysicalMaterial({
@@ -1460,7 +1460,7 @@ export default function SupermanPrimeCanvas({
           setLoadingProgress(90);
 
           // ---------------------------------------------------------------------
-          // 1. SETUP HUMANOID MODEL (male_body.glb / superman_prime.glb)
+          // 1. SETUP HUMANOID MODEL (male_body.glb)
           // ---------------------------------------------------------------------
           const model = humanoidGltf.scene;
 
@@ -1728,13 +1728,8 @@ export default function SupermanPrimeCanvas({
         (err) => {
           if (isCancelled) return;
           console.error(`Failed to load humanoid model from ${targetPath}:`, err);
-          if (!isFallback && targetPath !== '/models/superman_prime.glb') {
-            console.info('Attempting fallback to /models/superman_prime.glb');
-            loadHumanoidModel('/models/superman_prime.glb', true);
-          } else {
-            isLoadedRef.current = true;
-            setIsLoaded(true);
-          }
+          isLoadedRef.current = true;
+          setIsLoaded(true);
         }
       );
     };
@@ -1895,7 +1890,7 @@ export default function SupermanPrimeCanvas({
         }
       }
 
-      // Animate floating comic panels in 3D orbit around Superman Prime
+      // Animate floating comic panels in 3D orbit around the central entity
       if (cardsGroupRef.current) {
         const pivot = cardsGroupRef.current.userData.pivotGroup as THREE.Group | undefined;
         const isDragging = cardsGroupRef.current.userData.isDragging;
@@ -2746,7 +2741,7 @@ function createCelestialEnvironmentMap(renderer: THREE.WebGLRenderer, scene: THR
 }
 
 /**
- * Creates sculpted celestial golden hair with Superman's iconic swept-back crest
+ * Creates sculpted celestial golden hair with a swept-back crest
  */
 function createHeroicHair(): THREE.Group {
   const hair = new THREE.Group();
@@ -2765,7 +2760,7 @@ function createHeroicHair(): THREE.Group {
   const topMesh = new THREE.Mesh(topGeom, hairMat);
   hair.add(topMesh);
 
-  // Classic Superman front curl / crest
+  // Front curl / crest
   const curlGeom = new THREE.TorusGeometry(0.03, 0.009, 12, 24, Math.PI * 1.3);
   const curlMesh = new THREE.Mesh(curlGeom, hairMat);
   curlMesh.position.set(0.015, 0.135, 0.095);
@@ -3723,7 +3718,7 @@ function getCardTransforms(
   totalCount: number,
   layout: 'circular' | 'horizontal_ring' | 'helical' | 'orbit'
 ): { position: THREE.Vector3; rotation: THREE.Euler; scale: number } {
-  const R = 2.10; // Cylinder orbit radius encircling Superman Prime (tighter amphitheater framing)
+  const R = 2.10; // Cylinder orbit radius encircling the central entity (tighter amphitheater framing)
 
   if (layout === 'horizontal_ring') {
     // Exact continuous 360-degree cylinder ring at uniform horizon height (Image 2 raw)
@@ -3758,7 +3753,7 @@ function getCardTransforms(
     };
   }
 
-  // DEFAULT: 'circular' (3D Circular Amphitheater with closer, cohesive spacing encircling Superman Prime)
+  // DEFAULT: 'circular' (3D Circular Amphitheater with closer, cohesive spacing encircling the central entity)
   const circularConfigs: Record<string, { phiDeg: number; y: number; scale: number }> = {
     // Lower Foreground Flanks (framing central entity, leaving front unobstructed)
     flight:      { phiDeg: -25,  y: 0.72, scale: 0.98 },
@@ -3850,7 +3845,7 @@ function createCardTrailCurve(
 
 /**
  * Creates Floating Multiverse Comic Panels arranged in a true 3D circular cylinder carousel
- * around Superman Prime (entity in center), matching Image 2
+ * around the central entity (entity in center), matching Image 2
  */
 function createFloatingComicPanels(
   scene: THREE.Scene,
@@ -3869,7 +3864,7 @@ function createFloatingComicPanels(
   const defaultLayout = 'circular';
   const CHIME_PITCHES = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50, 1174.66];
 
-  // Subtle celestial orbit guide ring at base (y = 0.55) so it never occludes Superman Prime
+  // Subtle celestial orbit guide ring at base (y = 0.55) so it never occludes the central entity
   const R = 2.10;
   const orbitRingGeom = new THREE.TorusGeometry(R, 0.003, 12, 96);
   orbitRingGeom.rotateX(Math.PI / 2);

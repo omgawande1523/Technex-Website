@@ -203,7 +203,7 @@
   transform: translateY(1px);
 }
 
-/* Split Layout: Left Logo & Sidebar, Right SupermanPrime Canvas */
+/* Split Layout: Left Logo & Sidebar, Right InkHologram Canvas */
 .landing {
   --sidebar-width: 480px;
 }

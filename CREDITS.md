@@ -10,7 +10,6 @@ This project combines scanned 3D GLB models with original algorithmic procedural
 | `artificial_neural_network_ann-compressed.glb` | Layered Artificial Neural Network Lattice | Sketchfab (adapted for WebGL real-time sampling) | Creative Commons Attribution (CC-BY 4.0) |
 | `flying_machine-compressed.glb` | Leonardo da Vinci Ornithopter / Flying Machine | Da Vinci Collection (Sketchfab/Poly Pizza) | Creative Commons Attribution (CC-BY 4.0) |
 | `paddle_boat-compressed.glb` | Renaissance Marine Watercraft | Da Vinci Engineering Collection | Creative Commons Attribution (CC-BY 4.0) |
-| `superman_prime.glb` | High-fidelity anatomical silhouette | Sketchfab 3D Scan Archive | Creative Commons Attribution-NonCommercial |
 
 ## Original Procedural Form Generators
 The following 10 forms are custom-authored procedural geometries designed specifically to be fully original (with no existing trademarked film/comic designs):

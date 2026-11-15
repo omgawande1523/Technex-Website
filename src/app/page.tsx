@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ComicModal, { type ComicCardData } from "@/components/landing/ComicModal";
-import SupermanPrimeCanvas, { COMIC_CARDS_DATA } from "@/components/landing/SupermanPrimeCanvas";
+import InkHologramCanvas, { COMIC_CARDS_DATA } from "@/components/landing/InkHologramCanvas";
 import UIOverlay from "@/components/landing/UIOverlay";
 import StardustLayer from "@/components/landing/StardustLayer";
 import styles from "./landing.module.css";
@@ -51,7 +51,7 @@ export default function Home() {
             height: "100vh",
           }}
         >
-          <SupermanPrimeCanvas
+          <InkHologramCanvas
             onSelectComic={setSelectedComic}
             bloomStrength={0.34}
             glowIntensity={0.6}
