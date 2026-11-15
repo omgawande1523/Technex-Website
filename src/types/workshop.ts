@@ -22,4 +22,6 @@ export interface Workshop {
   attacks?: WorkshopAttack[];
   weakness?: string;
   resistance?: string;
+  /** Festival day (1-based). TODO: confirm value — not in the repo yet, so unset for every workshop. */
+  day?: number | null;
 }

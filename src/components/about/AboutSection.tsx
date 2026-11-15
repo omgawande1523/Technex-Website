@@ -18,6 +18,7 @@ import {
 import MaterializedFrame from "./MaterializedFrame";
 import AftermoviePlayer from "./AftermoviePlayer";
 import styles from "./about.module.css";
+import { chiefGuest, previousGuests } from "@/data/speakers";
 
 interface StatItem {
   title: string;
@@ -55,65 +56,8 @@ const STATS: StatItem[] = [
   },
 ];
 
-const CHIEF_GUEST: DignitaryItem = {
-  name: "Dr. Shankar S Mantha",
-  title: "Chancellor of Ramdeobaba University, Nagpur & Former Chairman, AICTE",
-  role: "Honorary Chief Guest",
-  image: "/SS-Mantha.webp",
-  quote: "Technological symposiums like TECHNEX are the crucibles where raw talent transforms into national innovation and leadership.",
-};
-
-const PREVIOUS_GUESTS: DignitaryItem[] = [
-  {
-    name: "Shri. Nitin Gadkari",
-    title: "Minister of Road Transport and Highways of India",
-    role: "Distinguished Chief Guest",
-    image: "/nitin-gadkari.webp",
-    quote: "Very good institution, giving good education and character to the students.",
-  },
-  {
-    name: "Dr. Kavi Arya",
-    title: "Founder, E-Yantra & Professor, IIT Bombay",
-    role: "Keynote Speaker",
-    image: "/kavi-arya.webp",
-    quote: "Pallotti College's E-Yantra robotics lab ranks among the top 13 laboratories in India.",
-  },
-  {
-    name: "Dr. Vishnu Vardhan",
-    title: "Founder & CEO, Vizzy Multiomics, Bengaluru",
-    role: "Guest of Honour",
-    image: "/Dr-Vishnu-Vardhan.webp",
-    quote: "I am very impressed by the research laboratories and the progressive vision of the institution.",
-  },
-  {
-    name: "Dr. Ritu Jain Gaurav",
-    title: "CTO, U2U Systems, Singapore",
-    role: "Global Tech Luminary",
-    image: "/riitu_jain.webp",
-    quote: "I admire the exceptional discipline of St. Vincent Pallotti College; it is a true honour to be here.",
-  },
-  {
-    name: "Dr. Pratap Khanwilkar",
-    title: "CEO, Ignition Key, USA",
-    role: "International Keynote",
-    image: "/Dr-Pratap-Khanwilkar.webp",
-    quote: "Dream big, execute, make real things and help people. We are all here to make each other healthier and stronger.",
-  },
-  {
-    name: "Mr. Shrikant Sarda",
-    title: "Managing Director, Accenture Technology, Pune",
-    role: "Industry Leader",
-    image: "/Mr-Shrikant-Sarda.webp",
-    quote: "It is my honour to be standing here. I am impressed by the students, their academic rigour, and institution discipline.",
-  },
-  {
-    name: "Dr. Ravinder Singhal",
-    title: "Additional Director General of Police (ADGP)",
-    role: "Special Guest",
-    image: "/Dr-Ravinder-Singhal.webp",
-    quote: "Technology driven by youth is the backbone of modern progress and security.",
-  },
-];
+const CHIEF_GUEST: DignitaryItem = chiefGuest;
+const PREVIOUS_GUESTS: DignitaryItem[] = previousGuests;
 
 export default function AboutSection() {
   const [currentGuest, setCurrentGuest] = useState(0);
@@ -291,7 +235,7 @@ export default function AboutSection() {
                 />
               </div>
               <div className="text-center sm:text-left">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide dignitary-name" style={{ fontFamily: "var(--font-redaction), 'Redaction 20', sans-serif" }}>
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide dignitary-name" style={{ fontFamily: "var(--font-redaction), var(--font-body), sans-serif" }}>
                   Dr. Fr. Paul Chandrankunnel
                 </h3>
                 <p className="text-[#d9ad62] font-mono text-xs sm:text-sm mt-0.5">
@@ -327,7 +271,7 @@ export default function AboutSection() {
                 />
               </div>
               <div className="text-center sm:text-left">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide dignitary-name" style={{ fontFamily: "var(--font-redaction), 'Redaction 20', sans-serif" }}>
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide dignitary-name" style={{ fontFamily: "var(--font-redaction), var(--font-body), sans-serif" }}>
                   Dr. Vijay Wadhai
                 </h3>
                 <p className="text-[#d9ad62] font-mono text-xs sm:text-sm mt-0.5">
@@ -380,7 +324,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white dignitary-name" style={{ fontFamily: "var(--font-redaction), 'Redaction 20', sans-serif" }}>
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-white dignitary-name" style={{ fontFamily: "var(--font-redaction), var(--font-body), sans-serif" }}>
             {CHIEF_GUEST.name}
           </h3>
           <p className="text-[#d9ad62] font-mono text-xs sm:text-sm mt-1.5 font-semibold">
@@ -440,7 +384,7 @@ export default function AboutSection() {
                   {guest.role}
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white dignitary-name" style={{ fontFamily: "var(--font-redaction), 'Redaction 20', sans-serif" }}>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white dignitary-name" style={{ fontFamily: "var(--font-redaction), var(--font-body), sans-serif" }}>
                   {guest.name}
                 </h3>
                 <p className="text-gray-300 text-xs sm:text-sm font-mono mt-1 max-w-lg">
