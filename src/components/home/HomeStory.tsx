@@ -3,6 +3,8 @@
 import { homeScenes } from "@/lib/content";
 import SceneShell from "./SceneShell";
 import Hero from "./scenes/Hero";
+import Portal from "./scenes/Portal";
+import Worlds from "./scenes/Worlds";
 
 /** The home scroll story: one SceneShell per scene, in homeScenes() order. */
 export default function HomeStory() {
@@ -11,6 +13,12 @@ export default function HomeStory() {
     <main className="home-story">
       <SceneShell id="hero" hud={hud.hero} eager>
         <Hero />
+      </SceneShell>
+      <SceneShell id="portal" hud={hud.portal}>
+        <Portal />
+      </SceneShell>
+      <SceneShell id="worlds" hud={hud.worlds}>
+        <Worlds />
       </SceneShell>
     </main>
   );

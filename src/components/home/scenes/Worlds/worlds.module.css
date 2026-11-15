@@ -1,0 +1,164 @@
+.worlds {
+  position: relative;
+  min-height: 100svh;
+  padding: 104px clamp(16px, 4vw, 64px) 56px;
+  background: var(--ink-paper-2);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 4vh, 44px);
+  overflow: hidden;
+}
+.worlds::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(217, 173, 98, 0.12) 1px, transparent 1.3px);
+  background-size: 8px 8px;
+  mask-image: linear-gradient(180deg, #000, transparent 70%);
+  pointer-events: none;
+}
+.head {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.kicker {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ink-gold);
+}
+.title {
+  margin: 0;
+  font-family: var(--font-barge);
+  font-size: clamp(48px, 9vw, 150px);
+  line-height: 0.85;
+  color: var(--ink-bone);
+}
+
+.grid {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 28px);
+  flex: 1;
+  perspective: 1200px;
+}
+.cell {
+  display: flex;
+}
+.card {
+  --hex: polygon(50% 0, 100% 12%, 100% 88%, 50% 100%, 0 88%, 0 12%);
+  position: relative;
+  flex: 1;
+  min-height: clamp(360px, 58svh, 560px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 18% 12% 20%;
+  text-align: center;
+  text-decoration: none;
+  color: var(--ink-bone);
+  background: var(--ink-gold);
+  clip-path: var(--hex);
+  transform-style: preserve-3d;
+  isolation: isolate;
+}
+/* Inner paper, inset 2px so the gold behind reads as a hexagon outline. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  clip-path: var(--hex);
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(217, 173, 98, 0.16), transparent 60%),
+    var(--ink-paper);
+  z-index: -1;
+  transition: background 0.4s ease;
+}
+.card:hover::before,
+.card:focus-visible::before {
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(217, 173, 98, 0.34), transparent 65%),
+    var(--ink-paper);
+}
+.index {
+  position: absolute;
+  top: 15%;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: var(--ink-gold);
+}
+.art {
+  width: 72%;
+  max-width: 220px;
+  color: var(--ink-gold);
+  margin-bottom: auto;
+  margin-top: 8%;
+  filter: drop-shadow(0 0 10px rgba(217, 173, 98, 0.35));
+}
+.cardTitle {
+  font-family: var(--font-barge);
+  font-size: clamp(24px, 2.4vw, 40px);
+  line-height: 1;
+}
+.count {
+  font-family: var(--font-barge);
+  font-size: 20px;
+  color: var(--ink-gold);
+}
+.count small {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(244, 234, 214, 0.6);
+}
+.labels {
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  color: rgba(244, 234, 214, 0.6);
+  max-width: 24ch;
+}
+
+.expanded {
+  position: fixed !important;
+  inset: 0 !important;
+  min-height: 0 !important;
+  z-index: 90;
+  --hex: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 0 100%, 0 0);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .card {
+    min-height: clamp(300px, 44svh, 420px);
+  }
+}
+@media (max-width: 767px) {
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .grid {
+    gap: 10px;
+  }
+  .card {
+    min-height: 260px;
+    padding: 16% 8% 18%;
+  }
+  .labels {
+    display: none;
+  }
+}
