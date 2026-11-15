@@ -5,6 +5,7 @@ import SceneShell from "./SceneShell";
 import Hero from "./scenes/Hero";
 import Portal from "./scenes/Portal";
 import Worlds from "./scenes/Worlds";
+import GamerConquest from "./scenes/GamerConquest";
 
 /** The home scroll story: one SceneShell per scene, in homeScenes() order. */
 export default function HomeStory() {
@@ -20,6 +21,11 @@ export default function HomeStory() {
       <SceneShell id="worlds" hud={hud.worlds}>
         <Worlds />
       </SceneShell>
+      {hud["gamer-conquest"] && (
+        <SceneShell id="gamer-conquest" hud={hud["gamer-conquest"]}>
+          <GamerConquest />
+        </SceneShell>
+      )}
     </main>
   );
 }
