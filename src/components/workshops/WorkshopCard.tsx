@@ -1,8 +1,8 @@
-
 "use client";
 
 import Link from "next/link";
 import type { Workshop } from "@/types/workshop";
+import { WorkshopHoloCard } from "./WorkshopHoloCard";
 
 interface WorkshopCardProps {
   workshop: Workshop;
@@ -14,19 +14,8 @@ export default function WorkshopCard({ workshop }: WorkshopCardProps) {
 
   return (
     <article className={`workshop-card accent-${workshop.accent}`}>
-      <div className="card-art">
-        <div className="card-art__wrapper">
-          <img
-            className="card-art__cover"
-            src={workshop.cover}
-            alt={workshop.title}
-          />
-        </div>
-        <img
-          className="card-art__character"
-          src={workshop.character}
-          alt={`${workshop.title} feature cutout`}
-        />
+      <div className="shader-frame">
+        <WorkshopHoloCard workshop={workshop} />
       </div>
       <div className="workshop-footer">
         <h2 className="workshop-title">{workshop.title}</h2>
