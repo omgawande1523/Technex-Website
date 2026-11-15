@@ -31,7 +31,6 @@ export class TechnexParticleSystem {
 
   // Background
   private bgMesh: THREE.Mesh;
-  private bgMaterial: THREE.ShaderMaterial;
 
   // GPGPU
   private gpuCompute!: GPUComputationRenderer;
