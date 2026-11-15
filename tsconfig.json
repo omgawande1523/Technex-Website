@@ -3,9 +3,11 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-"paths": {
-  "@/*": ["./src/*"]
-},
+    "paths": {
+      "@/*": ["./src/*"],
+      "@designcodeio/threeui": ["./src/shaders/dark-souls-holo-card/DarkSoulsHoloCard.tsx"],
+      "@designcodeio/threeui/*": ["./src/shaders/*"]
+    },
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
