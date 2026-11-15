@@ -1,12 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "@/components/navigation/Navbar";
-import LeftSidebar from "@/components/landing/LeftSidebar";
-import RightSidebar from "@/components/landing/RightSidebar";
-import MobileBottomNav from "@/components/navigation/MobileBottomNav";
+import Hud from "@/components/chrome/Hud";
+import Preloader from "@/components/chrome/Preloader";
+import InkTransition from "@/components/chrome/InkTransition";
+import InkCursor from "@/components/chrome/InkCursor";
 import TechnexChatbot from "@/components/technex-ai/TechnexChatbot";
 
+/** Shared chrome for every public route. Admin pages render their own shell. */
 export default function SiteChrome() {
   const pathname = usePathname();
 
@@ -16,10 +17,10 @@ export default function SiteChrome() {
 
   return (
     <>
-      <Navbar />
-      <LeftSidebar />
-      <RightSidebar />
-      <MobileBottomNav />
+      <Preloader />
+      <Hud />
+      <InkTransition />
+      <InkCursor />
       <TechnexChatbot />
     </>
   );
