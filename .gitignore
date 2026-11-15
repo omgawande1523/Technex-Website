@@ -41,3 +41,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# originals kept by scripts/optimize-models.mjs
+/.cache/models-original/
