@@ -3,13 +3,23 @@ import SiteChrome from "@/components/navigation/SiteChrome";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import { gateScript } from "@/components/chrome/gateScript";
 import { bodyFont, displayFont } from "@/app/fonts";
+import { festival, siteDescription, siteName, siteUrl } from "@/lib/content";
 import "./globals.css";
 import "@/components/technex-ai/technex-chatbot.css";
 
 export const metadata: Metadata = {
-  title: "TECHNEX 2026",
-  description:
-    "Explore the TECHNEX 2026 multiverse innovation experience at SVPCET Nagpur.",
+  metadataBase: new URL(siteUrl()),
+  title: { default: `${siteName()} · ${festival.theme}`, template: `%s · ${siteName()}` },
+  description: siteDescription(),
+  applicationName: siteName(),
+  openGraph: {
+    type: "website",
+    siteName: siteName(),
+    locale: "en_IN",
+    title: `${siteName()} · ${festival.theme}`,
+    description: siteDescription(),
+  },
+  twitter: { card: "summary_large_image" },
   icons: {
     icon: [
       { url: "/favicon.png", type: "image/png" },

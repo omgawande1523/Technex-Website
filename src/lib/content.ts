@@ -381,3 +381,79 @@ export function homeScenes(): SceneMeta[] {
     { id: "finale", hud: `SEE YOU AT ${festival.name}` },
   ];
 }
+
+/* ---- Routes & SEO selectors ---- */
+
+/**
+ * Absolute origin used for metadataBase, sitemap, robots and JSON-LD.
+ * TODO: confirm value — set NEXT_PUBLIC_SITE_URL to the production domain.
+ */
+export function siteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000";
+  return raw.replace(/\/+$/, "");
+}
+
+/** "TECHNEX 26-27" — used in page titles. */
+export const siteName = () => `${festival.name} ${festival.edition}`;
+
+/** Default description built only from festival data. */
+export const siteDescription = () =>
+  `${festival.name} ${festival.edition} · ${festival.theme} — ${festival.tagline} ${festivalDates().label}, ${festival.host}, ${festival.city}.`;
+
+/** Events that can be registered for here (/register/<slug>) or through their own external form. */
+export const registrableEvents = () =>
+  EVENTS.filter((e) => e.registerHref.startsWith("/register/") || e.registerIsExternal);
+
+/** Events with / without a campus map pin (extras.mapPin). */
+export const placedEvents = () => EVENTS.filter((e) => !!e.extras.mapPin);
+export const unplacedEvents = () => EVENTS.filter((e) => !e.extras.mapPin);
+
+/** Festival day numbers present in the data (1-based), for the /events day chips. */
+export const festivalDays = () => [...new Set(EVENTS.flatMap((e) => e.extras.days))].sort((a, b) => a - b);
+
+/** schema.org Event JSON-LD for one event. Unknown fields are omitted, not guessed. */
+export function eventJsonLd(ev: EventSummary) {
+  const url = `${siteUrl()}${ev.href}`;
+  const hybrid = ev.stats.some((s) => /hybrid|online/i.test(`${s.value} ${s.sub ?? ""}`));
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: ev.name,
+    description: ev.about || ev.tagline,
+    url,
+    image: [`${url}/opengraph-image`, ...(ev.image ? [`${siteUrl()}${encodeURI(ev.image)}`] : [])],
+    // Festival window; per-event start times are not in the data (extras.time). TODO: confirm value
+    startDate: festival.startsAt,
+    endDate: festival.endsAt,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: hybrid
+      ? "https://schema.org/MixedEventAttendanceMode"
+      : "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: festival.host,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: festival.address,
+        addressLocality: festival.city,
+        addressCountry: "IN",
+      },
+      geo: { "@type": "GeoCoordinates", latitude: festival.coordinates.lat, longitude: festival.coordinates.lng },
+    },
+    organizer: {
+      "@type": "Organization",
+      name: `${festival.name} · ${festival.hostShort}`,
+      url: festival.socials.find((s) => s.kind === "website")?.href,
+      email: festival.email,
+    },
+    superEvent: { "@type": "Event", name: siteName(), startDate: festival.startsAt, endDate: festival.endsAt },
+    offers: {
+      "@type": "Offer",
+      url: ev.registerIsExternal ? ev.registerHref : `${siteUrl()}${ev.registerHref}`,
+      availability: "https://schema.org/InStock",
+    },
+  };
+}
+
+/** JSON for a <script type="application/ld+json"> tag, safe against closing-tag injection. */
+export const jsonLdString = (data: unknown) => JSON.stringify(data).replace(/</g, "\\u003c");
