@@ -11,6 +11,26 @@ export const workshops: Workshop[] = [
     cover: "/assets/workshops/hackathon_cover.webp",
     character: "/assets/workshops/hackathon_avatar1.webp",
     accent: "violet",
+    element: "TECH",
+    elementIcon: "tech",
+    hp: 160,
+    holoNumber: "001 / 005",
+    attacks: [
+      {
+        name: "Prompt Injection",
+        cost: ["tech", "tech"],
+        damage: 50,
+        description: "Disrupts opponent models and deploys self-healing serverless clusters.",
+      },
+      {
+        name: "Production Overdrive",
+        cost: ["tech", "tech", "tech"],
+        damage: 130,
+        description: "Compiles full-stack architecture with zero downtime and instant deployment.",
+      },
+    ],
+    weakness: "🔥 ×2",
+    resistance: "⚡ -30",
   },
   {
     id: "coastal-clash",
@@ -22,6 +42,26 @@ export const workshops: Workshop[] = [
     cover: "/assets/workshops/coastal_cover.webp",
     character: "/assets/workshops/coastal_avatar.webp",
     accent: "blue",
+    element: "HYDRO",
+    elementIcon: "hydro",
+    hp: 150,
+    holoNumber: "002 / 005",
+    attacks: [
+      {
+        name: "Hydrofoil Surge",
+        cost: ["hydro", "hydro"],
+        damage: 45,
+        description: "Accelerates high-speed RC boat hulls over turbulent waters with zero drag.",
+      },
+      {
+        name: "Tsunami Protocol",
+        cost: ["hydro", "hydro", "hydro"],
+        damage: 125,
+        description: "Generates hydrodynamic shockwaves across the watercourse, overtaking rivals.",
+      },
+    ],
+    weakness: "⚡ ×2",
+    resistance: "🌊 -30",
   },
   {
     id: "envision",
@@ -33,6 +73,26 @@ export const workshops: Workshop[] = [
     cover: "/assets/workshops/envision_cover.webp",
     character: "/assets/workshops/envision_avatar.webp",
     accent: "green",
+    element: "DATA",
+    elementIcon: "data",
+    hp: 140,
+    holoNumber: "003 / 005",
+    attacks: [
+      {
+        name: "Feature Extraction",
+        cost: ["data", "data"],
+        damage: 40,
+        description: "Scans multidimensional data vectors and exposes hidden correlations.",
+      },
+      {
+        name: "Deep Neural Vision",
+        cost: ["data", "data", "data"],
+        damage: 120,
+        description: "Synthesizes real-time analytics graphs, blinding adversaries with insights.",
+      },
+    ],
+    weakness: "⚙️ ×2",
+    resistance: "👁️ -25",
   },
   {
     id: "designx",
@@ -43,9 +103,28 @@ export const workshops: Workshop[] = [
       "Discover digital design practices for creating efficient infrastructure models.",
     cover: "/assets/workshops/designx_cover.webp",
     character: "/assets/workshops/designx_avatar.webp",
-    accent: "blue",
+    accent: "cyan",
+    element: "SPATIAL",
+    elementIcon: "spatial",
+    hp: 145,
+    holoNumber: "004 / 005",
+    attacks: [
+      {
+        name: "Parametric Mesh",
+        cost: ["spatial", "spatial"],
+        damage: 50,
+        description: "Constructs generative geometric lattice with aerospace load tolerance.",
+      },
+      {
+        name: "Topology Collapse",
+        cost: ["spatial", "spatial", "spatial"],
+        damage: 115,
+        description: "Deforms space-time CAD coordinates into an optimized structural singularity.",
+      },
+    ],
+    weakness: "💥 ×2",
+    resistance: "📐 -30",
   },
-
   {
     id: "apex-ctf",
     slug: "apex-ctf",
@@ -56,6 +135,25 @@ export const workshops: Workshop[] = [
     cover: "/assets/workshops/ctf_cover.webp",
     character: "/assets/workshops/ctf_avatar.webp",
     accent: "red",
+    element: "CYBER",
+    elementIcon: "cyber",
+    hp: 170,
+    holoNumber: "005 / 005",
+    attacks: [
+      {
+        name: "Buffer Overflow",
+        cost: ["cyber", "cyber"],
+        damage: 60,
+        description: "Corrupts return pointer stack and intercepts elevated root credentials.",
+      },
+      {
+        name: "Zero-Day Exploit",
+        cost: ["cyber", "cyber", "cyber"],
+        damage: 150,
+        description: "Deploys undetectable memory-resident payload that unlocks the master flag.",
+      },
+    ],
+    weakness: "⚡ ×2",
+    resistance: "🛡️ -40",
   },
- 
 ];

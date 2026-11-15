@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "vite:dev": "vite",
+    "vite:build": "vite build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -36,6 +38,7 @@
     "eslint-config-next": "16.4.5",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^8.3.8"
   }
 }
