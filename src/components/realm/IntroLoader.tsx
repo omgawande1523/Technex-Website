@@ -72,10 +72,12 @@ export default function IntroLoader({ worldReady }: { worldReady: boolean }) {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const tl = gsap.timeline({ delay: seen ? 0.6 : 0.15 });
     tl.call(() => setUi({ phase: "dive" }));
-    tl.to(`.${styles.introBar}`, { autoAlpha: 0, duration: 0.4 }, 0);
+    const bar = root.current?.querySelector(`.${styles.introBar}`);
+    if (bar) tl.to(bar, { autoAlpha: 0, duration: 0.4 }, 0);
     // push through the logo: scale the last frame up while the world fades in
-    tl.to([video.current, still.current], { scale: 2.6, duration: 1.6, ease: "power3.in", transformOrigin: "50% 46%" }, 0);
-    tl.to(root.current, { autoAlpha: 0, duration: 1.0, ease: "power2.in" }, 0.55);
+    const media = [video.current, still.current].filter((el): el is HTMLVideoElement | HTMLImageElement => !!el);
+    if (media.length) tl.to(media, { scale: 2.6, duration: 1.6, ease: "power3.in", transformOrigin: "50% 46%" }, 0);
+    if (root.current) tl.to(root.current, { autoAlpha: 0, duration: 1.0, ease: "power2.in" }, 0.55);
     tl.to(realm, { dive: 1, duration: reduce ? 0.01 : 2.8, ease: "power3.out" }, 0.45);
     tl.call(
       () => {
