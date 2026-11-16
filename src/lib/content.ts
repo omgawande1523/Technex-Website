@@ -463,3 +463,14 @@ export function eventJsonLd(ev: EventSummary) {
 
 /** JSON for a <script type="application/ld+json"> tag, safe against closing-tag injection. */
 export const jsonLdString = (data: unknown) => JSON.stringify(data).replace(/</g, "\\u003c");
+
+/* ---- Home scene helpers ---- */
+
+/**
+ * Smaller rendition of a gallery photo. Cloudinary URLs get an on-the-fly
+ * resize (w_<width>, auto format/quality); anything else is returned as is.
+ */
+export function galleryThumb(src: string, width: number) {
+  const m = src.match(/^(https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)(.*)$/);
+  return m ? `${m[1]}w_${width},c_limit,f_auto,q_auto/${m[2]}` : src;
+}
