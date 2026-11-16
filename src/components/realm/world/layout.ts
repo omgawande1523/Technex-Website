@@ -14,7 +14,7 @@ export const SPOTS = {
   realm: new THREE.Vector3(0, 3.2, -34),
   events: new THREE.Vector3(22, 4.6, -46),
   workshops: new THREE.Vector3(0, 4.6, -80),
-  register: new THREE.Vector3(0, 4.6, -112),
+  register: new THREE.Vector3(2.8, 4.6, -112),
 };
 
 type Stop = [number, number, number, number];
@@ -51,7 +51,7 @@ export const HERO_AT: Stop[] = [
   [1, 0, 4.4, -34],
   [2, 22, 4.2, -44.5],
   [3, 0, 4.7, -80],
-  [4, 0, 4.7, -112],
+  [4, 2.8, 4.7, -112],
 ];
 
 /** Background / fog colour per chapter. */

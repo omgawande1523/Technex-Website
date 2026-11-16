@@ -45,39 +45,32 @@ export function useTextTexture(text: string, opts: { height?: number; font?: str
   }, [text, opts.height, opts.font, opts.stroke, opts.repeat]);
 }
 
-function TypeRing({ text, radius, y, speed, tilt, height }: { text: string; radius: number; y: number; speed: number; tilt: number; height: number }) {
-  const tex = useTextTexture(text, { repeat: 3 });
+/** Kora-style kinetic type: three huge rows behind the hero, drifting in opposite directions. */
+function TextRow({ text, y, speed, stroke, opacity }: { text: string; y: number; speed: number; stroke: boolean; opacity: number }) {
+  const tex = useTextTexture(text, { height: 512, stroke, repeat: 1.6 });
   const ref = useRef<THREE.Mesh>(null);
   useFrame((_, dt) => {
     if (!ref.current) return;
-    tex.offset.x = (tex.offset.x + dt * speed * (1 + Math.abs(realm.velocity) * 2)) % 1;
+    tex.offset.x = (tex.offset.x + dt * speed * (1 + Math.abs(realm.velocity) * 3)) % 1;
     const m = ref.current.material as THREE.MeshBasicMaterial;
-    m.opacity = near(realm.progress, 1, 0.85);
+    m.opacity = near(realm.progress, 1, 0.85) * opacity;
     ref.current.visible = m.opacity > 0.01;
   });
   return (
-    <mesh ref={ref} position={[SPOTS.realm.x, SPOTS.realm.y + y, SPOTS.realm.z]} rotation={[tilt, 0, tilt * 0.6]}>
-      <cylinderGeometry args={[radius, radius, height, 160, 1, true]} />
-      <meshBasicMaterial map={tex} transparent side={THREE.DoubleSide} toneMapped={false} depthWrite={false} />
+    <mesh ref={ref} position={[SPOTS.realm.x, y, SPOTS.realm.z - 9]}>
+      <planeGeometry args={[64, 5.2]} />
+      <meshBasicMaterial map={tex} transparent toneMapped={false} depthWrite={false} />
     </mesh>
   );
 }
 
 function TextWall() {
-  const tex = useTextTexture("INKARNATE • IMAGINATION MEETS REALITY • ", { height: 512, stroke: true, repeat: 1.4 });
-  const ref = useRef<THREE.Mesh>(null);
-  useFrame((_, dt) => {
-    if (!ref.current) return;
-    tex.offset.x = (tex.offset.x + dt * 0.02) % 1;
-    const m = ref.current.material as THREE.MeshBasicMaterial;
-    m.opacity = near(realm.progress, 1, 0.9) * 0.28;
-    ref.current.visible = m.opacity > 0.01;
-  });
   return (
-    <mesh ref={ref} position={[0, 7, -56]}>
-      <planeGeometry args={[72, 12]} />
-      <meshBasicMaterial map={tex} transparent toneMapped={false} depthWrite={false} />
-    </mesh>
+    <group>
+      <TextRow text="INKARNATE  ·  TECHNEX 26  ·  " y={9.4} speed={0.018} stroke opacity={0.5} />
+      <TextRow text="IMAGINATION  ·  REALITY  ·  " y={4.6} speed={-0.026} stroke={false} opacity={0.22} />
+      <TextRow text="INKARNATE  ·  TECHNEX 26  ·  " y={-0.2} speed={0.022} stroke opacity={0.5} />
+    </group>
   );
 }
 
@@ -140,8 +133,6 @@ export default function Realm() {
   return (
     <group>
       <Rocks />
-      <TypeRing text="INKARNATE • TECHNEX 26 • " radius={3.6} y={1.0} speed={0.03} tilt={0.14} height={0.42} />
-      <TypeRing text="IMAGINATION TO REALITY • " radius={4.6} y={-0.2} speed={-0.02} tilt={-0.12} height={0.3} />
       <TextWall />
       <pointLight position={[SPOTS.realm.x + 3, SPOTS.realm.y + 4, SPOTS.realm.z + 4]} intensity={60} distance={22} color="#ffcf8a" />
       <pointLight position={[SPOTS.realm.x - 5, SPOTS.realm.y + 1, SPOTS.realm.z - 3]} intensity={40} distance={18} color="#8a5cff" />

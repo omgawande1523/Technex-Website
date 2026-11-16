@@ -185,6 +185,7 @@ export default function Hero() {
 
     // glide along the path, one slow turn while travelling
     heroPosition(p, tmpV);
+    if (realm.quality === 0) tmpV.x -= near(p, 4, 1) * 2.8; // phones: keep the finale centred
     tmpV.y += Math.sin(t * 0.9) * 0.08;
     g.position.copy(tmpV);
     const frac = p - Math.floor(p);

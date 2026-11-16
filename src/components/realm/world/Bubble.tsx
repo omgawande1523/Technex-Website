@@ -23,7 +23,7 @@ export default function Bubble() {
     m.rotation.set(t * 0.07, t * 0.11, 0);
   });
   return (
-    <group position={[SPOTS.register.x, SPOTS.register.y + 0.2, SPOTS.register.z]}>
+    <group position={[realm.quality === 0 ? 0 : SPOTS.register.x, SPOTS.register.y + 0.2, SPOTS.register.z]}>
       <mesh ref={ref}>
         <icosahedronGeometry args={[1, 24]} />
         {realm.quality > 0 ? (
