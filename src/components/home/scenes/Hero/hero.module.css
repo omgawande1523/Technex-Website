@@ -49,7 +49,7 @@
   text-align: center;
   white-space: nowrap;
   color: var(--ink-gold);
-  background-image: url("/ink/flow.svg"), linear-gradient(100deg, #b98a3f, #f2d9a6 40%, #d9ad62 70%, #8e6a2e);
+  background-image: url("/ink/flow.webp"), linear-gradient(100deg, #b98a3f, #f2d9a6 40%, #d9ad62 70%, #8e6a2e);
   background-size: 1200px 600px, 100% 100%;
   background-blend-mode: screen;
   -webkit-background-clip: text;

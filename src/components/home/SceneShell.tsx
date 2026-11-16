@@ -40,10 +40,27 @@ export default function SceneShell({ id, hud, placeholderHeight = "100svh", eage
     return () => io.disconnect();
   }, [mounted]);
 
+  // Scene code arrives as its own chunk, so its height (and pins) settle a
+  // moment after mounting. Re-measure ScrollTrigger whenever it changes.
   useEffect(() => {
-    if (!mounted) return;
+    const el = ref.current;
+    if (!mounted || !el) return;
+    let last = el.offsetHeight;
+    let timer: number | undefined;
+    const ro = new ResizeObserver(() => {
+      const h = el.offsetHeight;
+      if (Math.abs(h - last) < 2) return;
+      last = h;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+    });
+    ro.observe(el);
     const id = requestAnimationFrame(() => ScrollTrigger.refresh());
-    return () => cancelAnimationFrame(id);
+    return () => {
+      ro.disconnect();
+      window.clearTimeout(timer);
+      cancelAnimationFrame(id);
+    };
   }, [mounted]);
 
   return (

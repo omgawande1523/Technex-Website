@@ -2,18 +2,21 @@
 
 import { homeScenes } from "@/lib/content";
 import SceneShell from "./SceneShell";
+import dynamic from "next/dynamic";
 import Hero from "./scenes/Hero";
-import Portal from "./scenes/Portal";
-import Worlds from "./scenes/Worlds";
-import GamerConquest from "./scenes/GamerConquest";
-import Overdrive from "./scenes/Overdrive";
-import RoboSumo from "./scenes/RoboSumo";
-import InkDissolve from "./scenes/InkDissolve";
-import Conclave from "./scenes/Conclave";
-import WorkshopsCanvas from "./scenes/WorkshopsCanvas";
-import MemoryLane from "./scenes/MemoryLane";
-import Sponsors from "./scenes/Sponsors";
-import Finale from "./scenes/Finale";
+
+// Every scene after the hero is its own chunk, fetched when SceneShell mounts it.
+const Portal = dynamic(() => import("./scenes/Portal"));
+const Worlds = dynamic(() => import("./scenes/Worlds"));
+const GamerConquest = dynamic(() => import("./scenes/GamerConquest"));
+const Overdrive = dynamic(() => import("./scenes/Overdrive"));
+const RoboSumo = dynamic(() => import("./scenes/RoboSumo"));
+const InkDissolve = dynamic(() => import("./scenes/InkDissolve"));
+const Conclave = dynamic(() => import("./scenes/Conclave"));
+const WorkshopsCanvas = dynamic(() => import("./scenes/WorkshopsCanvas"));
+const MemoryLane = dynamic(() => import("./scenes/MemoryLane"));
+const Sponsors = dynamic(() => import("./scenes/Sponsors"));
+const Finale = dynamic(() => import("./scenes/Finale"));
 
 /** The home scroll story: one SceneShell per scene, in homeScenes() order. */
 export default function HomeStory() {

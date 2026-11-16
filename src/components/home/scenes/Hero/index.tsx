@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { coordinatesLabel, festival, festivalDates, registerHref } from "@/lib/content";
@@ -19,11 +19,25 @@ export default function Hero() {
   const dates = festivalDates();
   useHeroTimeline(ref, { reduced, mobile, start: hydrated && gateOpen });
 
+  // Mount the WebGL hologram once the main thread is idle, so three.js never
+  // competes with the first paint of the wordmark (LCP). On phones wait for
+  // the Enter gate too: three.js boot + model decode would otherwise block
+  // the main thread during first load.
+  const [canvasReady, setCanvasReady] = useState(false);
+  const allowCanvas = hydrated && (!mobile || gateOpen);
+  useEffect(() => {
+    if (!allowCanvas) return;
+    const ric = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
+    const cancel = window.cancelIdleCallback ?? window.clearTimeout;
+    const id = ric(() => setCanvasReady(true), { timeout: 1500 });
+    return () => cancel(id);
+  }, [allowCanvas]);
+
   return (
     <div ref={ref} className={styles.hero} data-reduced={reduced}>
       <div className={styles.paper} aria-hidden="true" />
       <div className={styles.canvas}>
-        {hydrated && <InkHologramCanvas mobile={mobile} reduced={reduced} offsetX={mobile ? 0 : 1.2} />}
+        {hydrated && canvasReady && <InkHologramCanvas mobile={mobile} reduced={reduced} offsetX={mobile ? 0 : 1.2} />}
       </div>
 
       <div className={styles.inner}>
