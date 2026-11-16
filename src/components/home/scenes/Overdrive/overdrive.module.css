@@ -1,0 +1,243 @@
+.cinema {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink-paper);
+  color: var(--ink-bone);
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(11, 9, 6, 0.85) 0%, rgba(11, 9, 6, 0) 38%, rgba(11, 9, 6, 0) 58%, rgba(11, 9, 6, 0.9) 100%),
+    linear-gradient(0deg, rgba(11, 9, 6, 0.9) 0%, rgba(11, 9, 6, 0) 22%);
+}
+
+.titleBlock {
+  position: absolute;
+  left: clamp(16px, 4vw, 64px);
+  top: clamp(96px, 16vh, 160px);
+  max-width: 40vw;
+}
+.kicker {
+  margin: 0 0 12px;
+  font-size: 12px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--ink-gold);
+}
+.title {
+  margin: 0;
+  font-family: var(--font-barge);
+  font-size: clamp(48px, 8vw, 140px);
+  line-height: 0.86;
+}
+.quote {
+  margin: 14px 0 0;
+  font-family: var(--font-barge);
+  font-size: clamp(18px, 1.8vw, 26px);
+  color: var(--ink-gold);
+}
+
+.sheet {
+  position: absolute;
+  right: clamp(16px, 4vw, 64px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(420px, 36vw);
+  padding: 22px 24px;
+  background: rgba(11, 9, 6, 0.78);
+  border: 1px solid var(--ink-gold-dim);
+  backdrop-filter: blur(6px);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+.sheetHead {
+  margin: 0 0 14px;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-gold);
+  border-bottom: 1px dashed var(--ink-gold-dim);
+  padding-bottom: 10px;
+}
+.sheet dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.row dt {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(244, 234, 214, 0.55);
+}
+.row dd {
+  margin: 2px 0 0;
+  min-height: 1.3em;
+  font-size: 15px;
+  color: var(--ink-bone);
+}
+.row .sub {
+  font-size: 12px;
+  color: rgba(244, 234, 214, 0.65);
+}
+.cta {
+  display: inline-flex;
+  margin-top: 18px;
+  align-items: center;
+  height: 46px;
+  padding: 0 22px;
+  font-family: var(--font-barge);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-paper);
+  background: var(--ink-gold);
+  clip-path: polygon(2% 10%, 97% 0, 100% 86%, 5% 100%, 0 54%);
+}
+
+.chip {
+  position: absolute;
+  left: 50%;
+  bottom: 84px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 10px 18px;
+  border: 1px solid var(--ink-gold-dim);
+  border-radius: 999px;
+  background: rgba(11, 9, 6, 0.7);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-gold-soft);
+}
+.chipDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-gold);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    transform: scale(0.5);
+    opacity: 0.4;
+  }
+}
+.placeholder,
+.loading {
+  position: absolute;
+  top: 84px;
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(244, 234, 214, 0.55);
+}
+.placeholder {
+  right: clamp(16px, 4vw, 64px);
+}
+.loading {
+  left: 50%;
+  transform: translateX(-50%);
+  font-variant-numeric: tabular-nums;
+}
+
+.marquee {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--ink-gold);
+  color: var(--ink-paper);
+}
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee 26s linear infinite;
+}
+.marqueeGroup {
+  display: flex;
+  flex: none;
+}
+.marqueeGroup span {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  padding-right: 22px;
+  font-family: var(--font-barge);
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.marqueeGroup i {
+  font-style: normal;
+  opacity: 0.6;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 767px) {
+  .titleBlock {
+    max-width: none;
+    right: 16px;
+    top: 84px;
+  }
+  .sheet {
+    top: auto;
+    bottom: 76px;
+    transform: none;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    padding: 14px 16px;
+  }
+  .sheet dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 14px;
+  }
+  .row .sub {
+    display: none;
+  }
+  .chip {
+    bottom: auto;
+    top: 46%;
+  }
+  .placeholder {
+    top: auto;
+    bottom: 50px;
+    right: 16px;
+  }
+  .marquee {
+    height: 44px;
+  }
+  .marqueeGroup span {
+    font-size: 16px;
+  }
+}
+
+.cinema[data-reduced="true"] .marqueeTrack,
+.cinema[data-reduced="true"] .chipDot {
+  animation: none;
+}

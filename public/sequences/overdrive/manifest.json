@@ -1,0 +1,10 @@
+{
+  "name": "overdrive",
+  "frames": 150,
+  "mobileFrames": 75,
+  "width": 1280,
+  "height": 720,
+  "placeholder": true,
+  "pattern": "frame_{n}.webp",
+  "generatedAt": "2026-11-16"
+}
