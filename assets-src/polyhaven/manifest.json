@@ -1,0 +1,23 @@
+{
+  "license": "CC0 1.0 (Poly Haven)",
+  "source": "https://polyhaven.com",
+  "hdri": [
+    "studio_small_09",
+    "moonless_golf",
+    "kloppenheim_02",
+    "satara_night_no_lamps",
+    "dikhololo_night"
+  ],
+  "models": [
+    "moon_rock_01",
+    "moon_rock_03",
+    "moon_rock_05",
+    "rock_07",
+    "namaqualand_boulder_02"
+  ],
+  "textures": [
+    "rock_face_03",
+    "marble_01",
+    "concrete_floor_worn_001"
+  ]
+}
