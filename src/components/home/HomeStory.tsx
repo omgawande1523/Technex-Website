@@ -7,6 +7,8 @@ import Portal from "./scenes/Portal";
 import Worlds from "./scenes/Worlds";
 import GamerConquest from "./scenes/GamerConquest";
 import Overdrive from "./scenes/Overdrive";
+import RoboSumo from "./scenes/RoboSumo";
+import InkDissolve from "./scenes/InkDissolve";
 
 /** The home scroll story: one SceneShell per scene, in homeScenes() order. */
 export default function HomeStory() {
@@ -31,6 +33,16 @@ export default function HomeStory() {
         <SceneShell id="overdrive" hud={hud.overdrive}>
           <Overdrive />
         </SceneShell>
+      )}
+      {hud["robo-sumo"] && (
+        <>
+          <SceneShell id="robo-sumo" hud={hud["robo-sumo"]}>
+            <RoboSumo />
+          </SceneShell>
+          <SceneShell id="ink-dissolve" hud={hud.conclave}>
+            <InkDissolve from={hud["robo-sumo"]} to={hud.conclave} />
+          </SceneShell>
+        </>
       )}
     </main>
   );
