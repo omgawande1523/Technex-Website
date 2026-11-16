@@ -67,8 +67,8 @@ Behaviour reference only: pinned scenes, portals, mini-game, scrubbed video, dra
 ## Order of work
 
 1. Clean-up (copyright, junk) ✔
-2. Stack (`src/lib/gsap.ts`, Lenis, fonts, globals) → `content.ts`
-3. Global systems (preloader, HUD, transitions, cursor)
-4. Scenes 1 → 12, one commit each, `npm run build` + `npm run lint` + browser check at 1440 and 390 px
-5. Functional routes, SEO
-6. GLB re-compression, Lighthouse, `INKARNATE_NOTES.md`
+2. Stack (`src/lib/gsap.ts`, Lenis, fonts, globals) → `content.ts` ✔
+3. Global systems (preloader, HUD, transitions, cursor) ✔
+4. Scenes 1 → 12, one commit each, `npm run build` + `npm run lint` + browser check at 1440 and 390 px ✔
+5. Functional routes, SEO ✔ (built on `feat/inkarnate-routes`, merged)
+6. GLB re-compression, Lighthouse, `INKARNATE_NOTES.md` ✔ — results and open TODOs are in `INKARNATE_NOTES.md`
