@@ -1,6 +1,6 @@
 "use client";
 
-/* eslint-disable react-hooks/immutability -- three.js objects and uniforms are mutated inside useFrame (per frame, outside React render), which is how react-three-fiber is meant to be used. */
+ 
 
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
@@ -38,35 +38,6 @@ function cover(tex: THREE.Texture) {
   return tex;
 }
 
-const screenFrag = /* glsl */ `
-uniform sampler2D map;
-uniform vec2 uRepeat;
-uniform vec2 uOffset;
-uniform float uTime;
-uniform float uHover;
-uniform float uSeed;
-varying vec2 vUv;
-float rand(vec2 c) { return fract(sin(dot(c, vec2(12.9898, 78.233))) * 43758.5453); }
-void main() {
-  vec2 uv = vUv * uRepeat + uOffset;
-  // slight CRT barrel
-  vec2 cc = vUv - 0.5;
-  uv += cc * dot(cc, cc) * 0.04 * uRepeat;
-  vec3 col = texture2D(map, uv).rgb;
-  float scan = 0.9 + 0.1 * sin(vUv.y * 900.0 + uTime * 6.0);
-  float n = rand(vUv * 400.0 + floor(uTime * 24.0) + uSeed) * 0.08;
-  col = col * scan + n;
-  col *= mix(0.55, 1.15, uHover);
-  float vig = smoothstep(0.85, 0.35, length(cc));
-  col *= mix(0.6, 1.0, vig);
-  gl_FragColor = vec4(col, 1.0);
-  #include <colorspace_fragment>
-}`;
-
-const screenVert = /* glsl */ `
-varying vec2 vUv;
-void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
-
 function Screen({ item, tex, pos, rotY, seed }: { item: ScreenItem; tex: THREE.Texture; pos: THREE.Vector3; rotY: number; seed: number }) {
   const { scene } = useGLTF(SCREEN_URL);
   const router = useRouter();
@@ -74,38 +45,31 @@ function Screen({ item, tex, pos, rotY, seed }: { item: ScreenItem; tex: THREE.T
   const hover = useRef(0);
   const hovered = useRef(false);
 
-  const { model, uniforms } = useMemo(() => {
+  const { model, surface } = useMemo(() => {
     const model = scene.clone(true);
     cover(tex);
-    const uniforms = {
-      map: { value: tex },
-      uRepeat: { value: tex.repeat.clone() },
-      uOffset: { value: tex.offset.clone() },
-      uTime: { value: 0 },
-      uHover: { value: 0 },
-      uSeed: { value: seed },
-    };
+    const surface = new THREE.MeshBasicMaterial({ map: tex, toneMapped: false, color: new THREE.Color(0.7, 0.7, 0.7) });
     model.traverse((o) => {
       const m = o as THREE.Mesh;
       if (!m.isMesh) return;
       if (o.name.startsWith("Screen_Surface")) {
-        m.material = new THREE.ShaderMaterial({ uniforms, vertexShader: screenVert, fragmentShader: screenFrag, toneMapped: false });
+        m.material = surface;
+        m.renderOrder = 1;
       } else {
         const mat = (m.material as THREE.MeshStandardMaterial).clone();
         mat.envMapIntensity = 2;
         m.material = mat;
       }
     });
-    return { model, uniforms };
-  }, [scene, tex, seed]);
+    return { model, surface };
+  }, [scene, tex]);
 
   useFrame((s, dt) => {
     const g = group.current;
     if (!g) return;
     const t = s.clock.elapsedTime;
-    uniforms.uTime.value = t;
     hover.current = THREE.MathUtils.damp(hover.current, hovered.current ? 1 : 0, 6, dt);
-    uniforms.uHover.value = hover.current;
+    surface.color.setScalar(0.72 + hover.current * 0.45 + Math.sin(t * 7 + seed) * 0.015);
     const show = near(realm.progress, 2, 1.0);
     g.visible = show > 0.01;
     g.position.set(pos.x, pos.y + Math.sin(t * 0.6 + seed) * 0.12 - (1 - show) * 3, pos.z);

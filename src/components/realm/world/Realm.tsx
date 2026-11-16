@@ -46,7 +46,7 @@ export function useTextTexture(text: string, opts: { height?: number; font?: str
 }
 
 function TypeRing({ text, radius, y, speed, tilt, height }: { text: string; radius: number; y: number; speed: number; tilt: number; height: number }) {
-  const tex = useTextTexture(text, { repeat: 2 });
+  const tex = useTextTexture(text, { repeat: 3 });
   const ref = useRef<THREE.Mesh>(null);
   useFrame((_, dt) => {
     if (!ref.current) return;
@@ -70,7 +70,7 @@ function TextWall() {
     if (!ref.current) return;
     tex.offset.x = (tex.offset.x + dt * 0.02) % 1;
     const m = ref.current.material as THREE.MeshBasicMaterial;
-    m.opacity = near(realm.progress, 1, 0.9) * 0.55;
+    m.opacity = near(realm.progress, 1, 0.9) * 0.28;
     ref.current.visible = m.opacity > 0.01;
   });
   return (
@@ -96,7 +96,7 @@ function Rocks() {
     const out: { pos: [number, number, number]; scale: number; rot: [number, number, number]; i: number; speed: number }[] = [];
     // the island Inky stands on
     out.push({ pos: [SPOTS.realm.x, SPOTS.realm.y - 1.15, SPOTS.realm.z], scale: 1.6, rot: [0, 0.4, 0], i: 0, speed: 0.6 });
-    out.push({ pos: [22, 1.2, -40.5], scale: 1.15, rot: [0, 1.2, 0], i: 3, speed: 0.5 });
+    out.push({ pos: [22, 0.95, -44.5], scale: 1.15, rot: [0, 1.2, 0], i: 3, speed: 0.5 });
     for (let k = 0; k < 34; k++) {
       const z = -10 - rnd() * 100;
       const side = rnd() > 0.5 ? 1 : -1;
@@ -111,6 +111,16 @@ function Rocks() {
     }
     return out;
   }, []);
+  useMemo(() => {
+    rocks.forEach((r) => {
+      const m = r.material as THREE.MeshStandardMaterial;
+      if (m && !m.userData.tinted) {
+        m.color.multiplyScalar(0.42);
+        m.envMapIntensity = 0.6;
+        m.userData.tinted = true;
+      }
+    });
+  }, [rocks]);
   if (!rocks.length) return null;
   return (
     <group>
@@ -130,8 +140,8 @@ export default function Realm() {
   return (
     <group>
       <Rocks />
-      <TypeRing text="INKARNATE • TECHNEX 26 • " radius={4.2} y={0.9} speed={0.03} tilt={0.12} height={0.9} />
-      <TypeRing text="IMAGINATION MEETS REALITY • " radius={5.4} y={-0.4} speed={-0.02} tilt={-0.1} height={0.6} />
+      <TypeRing text="INKARNATE • TECHNEX 26 • " radius={3.4} y={0.15} speed={0.03} tilt={0.14} height={0.42} />
+      <TypeRing text="IMAGINATION MEETS REALITY • " radius={4.6} y={-0.55} speed={-0.02} tilt={-0.12} height={0.3} />
       <TextWall />
       <pointLight position={[SPOTS.realm.x + 3, SPOTS.realm.y + 4, SPOTS.realm.z + 4]} intensity={60} distance={22} color="#ffcf8a" />
       <pointLight position={[SPOTS.realm.x - 5, SPOTS.realm.y + 1, SPOTS.realm.z - 3]} intensity={40} distance={18} color="#8a5cff" />

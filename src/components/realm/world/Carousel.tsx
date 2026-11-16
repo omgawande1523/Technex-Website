@@ -81,11 +81,11 @@ export default function Carousel({ items }: { items: ScreenItem[] }) {
                   if (Math.abs(realm.progress - 3) < 0.2) router.push(item.href);
                 }}
               >
-                <meshBasicMaterial map={textures[k]} side={THREE.DoubleSide} toneMapped={false} />
+                <meshBasicMaterial map={textures[k]} toneMapped={false} />
               </mesh>
               {/* gold edge */}
               <mesh geometry={geo} position={[0, 0, -0.04]} scale={[1.03, 1.06, 1]}>
-                <meshStandardMaterial color="#d9ad62" metalness={1} roughness={0.25} envMapIntensity={2} side={THREE.DoubleSide} />
+                <meshStandardMaterial color="#7a5a26" metalness={1} roughness={0.3} envMapIntensity={1.6} side={THREE.DoubleSide} />
               </mesh>
             </group>
           </group>

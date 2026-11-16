@@ -116,7 +116,7 @@ function Letters() {
   });
 
   return (
-    <group ref={group} position={[0, 9.3, -0.6]} scale={1.65}>
+    <group ref={group} position={[0, 8.75, -0.6]} scale={1.45}>
       <primitive object={scene} />
     </group>
   );
@@ -183,6 +183,10 @@ export default function Gate() {
 
 /** Thin gold lines radiating on the floor, fading into the fog. */
 function GoldGrid() {
+  const ref = useRef<THREE.LineSegments>(null);
+  useFrame(() => {
+    if (ref.current) ref.current.visible = realm.progress < 0.9;
+  });
   const geo = useMemo(() => {
     const pts: number[] = [];
     for (let i = 0; i < 48; i++) {
@@ -201,7 +205,7 @@ function GoldGrid() {
     return g;
   }, []);
   return (
-    <lineSegments geometry={geo}>
+    <lineSegments ref={ref} geometry={geo}>
       <lineBasicMaterial color="#d9ad62" transparent opacity={0.22} toneMapped={false} />
     </lineSegments>
   );
