@@ -537,7 +537,8 @@
     bottom: 96px;
     right: 20px;
   }
-  .gateCopy p {
+  .gateCopy p,
+  .gateCopy h1 {
     display: none;
   }
   .coords {
