@@ -411,6 +411,12 @@ export const unplacedEvents = () => EVENTS.filter((e) => !e.extras.mapPin);
 /** Festival day numbers present in the data (1-based), for the /events day chips. */
 export const festivalDays = () => [...new Set(EVENTS.flatMap((e) => e.extras.days))].sort((a, b) => a - b);
 
+/** "Day 1 · 19 DEC" for festival day N (1-based), from festival.startsAt. */
+export function festivalDayLabel(day: number) {
+  const d = istParts(new Date(Date.parse(festival.startsAt) + (day - 1) * 86_400_000).toISOString());
+  return `Day ${day} · ${d.day} ${MONTHS[d.month]}`;
+}
+
 /** schema.org Event JSON-LD for one event. Unknown fields are omitted, not guessed. */
 export function eventJsonLd(ev: EventSummary) {
   const url = `${siteUrl()}${ev.href}`;
