@@ -2,11 +2,13 @@
 import type { Metadata } from "next";
 import WorkshopCard from "@/components/workshops/WorkshopCard";
 import { workshops } from "@/constants/workshops";
+import { allWorkshops, siteName } from "@/lib/content";
 import "./workshops.css";
 
 export const metadata: Metadata = {
-  title: "Workshops | TECHNEX",
-  description: "Explore the hands-on workshops at TECHNEX.",
+  title: "Workshops",
+  description: `Hands-on workshops at ${siteName()}: ${allWorkshops().map((w) => w.title).join(", ")}.`,
+  alternates: { canonical: "/workshops" },
 };
 
 export default function WorkshopsPage() {
