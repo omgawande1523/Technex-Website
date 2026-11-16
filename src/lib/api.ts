@@ -315,6 +315,32 @@ export async function verifyPayment(
   return result.data;
 }
 
+/** Public registration record, as served to the /registration/[code] confirmation page. */
+export type PublicRegistration = {
+  registrationCode: string;
+  status: string;
+  totalAmountPaise: number;
+  item?: { name?: string; slug?: string; itemType?: "event" | "workshop" } | null;
+  event?: { name?: string; slug?: string } | null;
+  eventName?: string;
+  workshop?: { name?: string; slug?: string } | null;
+  workshopName?: string;
+  teamName?: string | null;
+  participants?: { name: string; role: string }[];
+  payments?: { amountPaise: number; currency: string; status: string; method?: string | null }[];
+};
+
+// Look up one registration by its code (same endpoint as the confirmation page).
+// TODO: backend /me registrations endpoint — there is no "list my registrations" API yet.
+export async function getRegistration(code: string): Promise<PublicRegistration> {
+  const result = await apiRequest<PublicRegistration | { registration: PublicRegistration }>(
+    `/api/public/registrations/${encodeURIComponent(code)}`,
+    { method: "GET", cache: "no-store" },
+  );
+  const data = result.data;
+  return "registration" in data ? data.registration : data;
+}
+
 // --------------------------------------------------
 // Admin Analytics API
 // --------------------------------------------------
