@@ -2,9 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Hud from "@/components/chrome/Hud";
-import Preloader from "@/components/chrome/Preloader";
-import InkTransition from "@/components/chrome/InkTransition";
-import InkCursor from "@/components/chrome/InkCursor";
+import PageTransition from "@/components/chrome/PageTransition";
 import TechnexChatbot from "@/components/technex-ai/TechnexChatbot";
 
 /** Shared chrome for every public route. Admin pages render their own shell. */
@@ -15,11 +13,11 @@ export default function SiteChrome() {
     return null;
   }
 
-  // The realm home brings its own intro, top bar and cursor.
+  // The realm home brings its own intro and top bar.
   if (pathname === "/") {
     return (
       <>
-        <InkTransition />
+        <PageTransition />
         <TechnexChatbot />
       </>
     );
@@ -27,10 +25,8 @@ export default function SiteChrome() {
 
   return (
     <>
-      <Preloader />
       <Hud />
-      <InkTransition />
-      <InkCursor />
+      <PageTransition />
       <TechnexChatbot />
     </>
   );

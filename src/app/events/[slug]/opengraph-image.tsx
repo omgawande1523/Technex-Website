@@ -16,7 +16,7 @@ const GOLD = "#d9ad62";
 const PAPER = "#0b0906";
 const BONE = "#f4ead6";
 
-/** Ink-style share card per event: black paper, gold ink, halftone, brush stroke. Next 16: params is a Promise. */
+/** Share card per event: black and gold, dotted grain. Next 16: params is a Promise. */
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const ev = getEvent(slug);

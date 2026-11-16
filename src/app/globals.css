@@ -101,32 +101,24 @@ html.lenis body {
 ::view-transition-new(site-hud) {
   animation: none;
 }
-::view-transition-old(.ink-out) {
-  animation: 700ms cubic-bezier(0.7, 0, 0.2, 1) both ink-sink;
+::view-transition-old(.page-out) {
+  animation: 520ms cubic-bezier(0.7, 0, 0.2, 1) both page-out;
 }
-::view-transition-new(.ink-in) {
-  -webkit-mask: url("/ink/splash.svg") no-repeat;
-  mask: url("/ink/splash.svg") no-repeat;
-  -webkit-mask-position: var(--ink-x, 50%) var(--ink-y, 50%);
-  mask-position: var(--ink-x, 50%) var(--ink-y, 50%);
-  animation: 900ms cubic-bezier(0.7, 0, 0.2, 1) both ink-bloom;
+::view-transition-new(.page-in) {
+  animation: 820ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both page-in;
 }
-@keyframes ink-bloom {
+@keyframes page-out {
+  to {
+    opacity: 0;
+    filter: blur(8px) brightness(0.6);
+    transform: scale(0.965);
+  }
+}
+@keyframes page-in {
   from {
-    -webkit-mask-size: 0vmax;
-    mask-size: 0vmax;
-    filter: sepia(1) brightness(0.6);
-  }
-  to {
-    -webkit-mask-size: 420vmax;
-    mask-size: 420vmax;
-    filter: none;
-  }
-}
-@keyframes ink-sink {
-  to {
-    filter: brightness(0.35) blur(2px);
-    transform: scale(0.97);
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(28px) scale(1.01);
   }
 }
 @media (prefers-reduced-motion: reduce) {

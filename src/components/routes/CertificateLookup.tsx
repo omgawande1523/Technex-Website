@@ -69,7 +69,7 @@ export default function CertificateLookup({ contactEmail }: { contactEmail: stri
                   <h3 className={styles.cardTitle}>{c.itemName}</h3>
                   <p className={styles.meta}>{c.participantName}</p>
                   <div className={styles.cardActions}>
-                    <a href={c.downloadUrl} className={styles.button} download data-no-ink>
+                    <a href={c.downloadUrl} className={styles.button} download data-no-transition>
                       Download
                     </a>
                   </div>

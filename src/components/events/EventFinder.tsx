@@ -78,7 +78,7 @@ export default function EventFinder({ events, categories, days }: Props) {
   return (
     <>
       {!inView && (
-        <a href="#find-events" className={styles.jump} data-no-ink>
+        <a href="#find-events" className={styles.jump} data-no-transition>
           Find an event ↓
         </a>
       )}

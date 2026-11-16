@@ -418,21 +418,14 @@
 }
 
 /* ============ Route wipe fallback ============ */
-.inkOverlay {
+.pageOverlay {
   position: fixed;
   inset: 0;
-  z-index: 95;
+  z-index: 9998;
   pointer-events: none;
-  visibility: hidden;
+  background: #050403;
   opacity: 0;
-  background: var(--ink-paper);
-  --ink-size: 0vmax;
-  -webkit-mask: url("/ink/splash.svg") no-repeat;
-  mask: url("/ink/splash.svg") no-repeat;
-  -webkit-mask-position: var(--ink-x, 50%) var(--ink-y, 50%);
-  mask-position: var(--ink-x, 50%) var(--ink-y, 50%);
-  -webkit-mask-size: var(--ink-size);
-  mask-size: var(--ink-size);
+  visibility: hidden;
 }
 
 /* ============ Enter gate ============ */
