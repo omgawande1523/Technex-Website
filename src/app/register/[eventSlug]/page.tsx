@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 
 import RegistrationForm from "./registration-form";
 import "./registration.css";
@@ -8,6 +9,8 @@ type PageProps = {
     eventSlug: string;
   }>;
 };
+
+export const metadata: Metadata = { title: "Register", robots: { index: false, follow: true } };
 
 export default async function RegisterPage({ params }: PageProps) {
   const { eventSlug } = await params;

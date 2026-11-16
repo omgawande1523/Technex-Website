@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import WorkshopRegistrationForm from "./workshop-registration-form";
 import "@/app/register/[eventSlug]/registration.css";
 import { getEventTheme } from "@/lib/event-themes";
@@ -7,6 +8,8 @@ type PageProps = {
     workshopSlug: string;
   }>;
 };
+
+export const metadata: Metadata = { title: "Register", robots: { index: false, follow: true } };
 
 export default async function WorkshopRegisterPage({
   params,
