@@ -9,6 +9,7 @@ import GamerConquest from "./scenes/GamerConquest";
 import Overdrive from "./scenes/Overdrive";
 import RoboSumo from "./scenes/RoboSumo";
 import InkDissolve from "./scenes/InkDissolve";
+import Conclave from "./scenes/Conclave";
 
 /** The home scroll story: one SceneShell per scene, in homeScenes() order. */
 export default function HomeStory() {
@@ -44,6 +45,9 @@ export default function HomeStory() {
           </SceneShell>
         </>
       )}
+      <SceneShell id="conclave" hud={hud.conclave}>
+        <Conclave />
+      </SceneShell>
     </main>
   );
 }
