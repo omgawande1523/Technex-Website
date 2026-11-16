@@ -11,11 +11,13 @@ export const expoSponsors: Sponsor[] = [
     id: 'expo-audi',
     name: 'Audi',
     logo: '/sponsors/audi.svg',
+    onDark: true,
   },
   {
     id: 'expo-skoda',
     name: 'Škoda',
     logo: '/sponsors/skoda.png',
+    onDark: true,
   },
   {
     id: 'expo-hyundai',
@@ -36,6 +38,7 @@ export const expoSponsors: Sponsor[] = [
     id: 'expo-mg',
     name: 'MG',
     logo: '/sponsors/mg.png',
+    onDark: true,
   },
 ];
 
