@@ -53,6 +53,20 @@ function Screen({ item, tex, pos, rotY, seed }: { item: ScreenItem; tex: THREE.T
       const m = o as THREE.Mesh;
       if (!m.isMesh) return;
       if (o.name.startsWith("Screen_Surface")) {
+        // the optimiser drops UVs on untextured meshes: rebuild 0..1 from the quad's bounds
+        const g = m.geometry.clone();
+        g.computeBoundingBox();
+        const bb = g.boundingBox!;
+        const pos = g.attributes.position;
+        const uv = new Float32Array(pos.count * 2);
+        const w = bb.max.x - bb.min.x || 1;
+        const h = bb.max.y - bb.min.y || 1;
+        for (let k = 0; k < pos.count; k++) {
+          uv[k * 2] = (pos.getX(k) - bb.min.x) / w;
+          uv[k * 2 + 1] = (pos.getY(k) - bb.min.y) / h;
+        }
+        g.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
+        m.geometry = g;
         m.material = surface;
         m.renderOrder = 1;
       } else {
