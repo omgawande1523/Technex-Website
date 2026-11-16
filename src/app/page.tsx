@@ -1,5 +1,5 @@
-import HomeStory from "@/components/home/HomeStory";
+import RealmHome from "@/components/realm/RealmHome";
 
 export default function Home() {
-  return <HomeStory />;
+  return <RealmHome />;
 }

@@ -19,7 +19,7 @@ export const useLenis = () => useContext(LenisContext);
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [lenis, setLenis] = useState<Lenis | null>(null);
-  const disabled = pathname.startsWith("/admin");
+  const disabled = pathname.startsWith("/admin") || pathname === "/";
 
   useEffect(() => {
     if (disabled || prefersReducedMotion()) return;

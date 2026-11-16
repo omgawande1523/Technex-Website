@@ -15,6 +15,16 @@ export default function SiteChrome() {
     return null;
   }
 
+  // The realm home brings its own intro, top bar and cursor.
+  if (pathname === "/") {
+    return (
+      <>
+        <InkTransition />
+        <TechnexChatbot />
+      </>
+    );
+  }
+
   return (
     <>
       <Preloader />

@@ -44,3 +44,5 @@ next-env.d.ts
 
 # originals kept by scripts/optimize-models.mjs
 /.cache/models-original/
+*.blend1
+assets-src/blender/raw/
