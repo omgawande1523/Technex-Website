@@ -576,3 +576,10 @@
     animation: none;
   }
 }
+
+/* portrait screens: show the whole landscape intro, letterboxed */
+@media (max-aspect-ratio: 1/1) {
+  .introMedia {
+    object-fit: contain;
+  }
+}
