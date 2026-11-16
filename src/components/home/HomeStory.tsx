@@ -11,6 +11,9 @@ import RoboSumo from "./scenes/RoboSumo";
 import InkDissolve from "./scenes/InkDissolve";
 import Conclave from "./scenes/Conclave";
 import WorkshopsCanvas from "./scenes/WorkshopsCanvas";
+import MemoryLane from "./scenes/MemoryLane";
+import Sponsors from "./scenes/Sponsors";
+import Finale from "./scenes/Finale";
 
 /** The home scroll story: one SceneShell per scene, in homeScenes() order. */
 export default function HomeStory() {
@@ -51,6 +54,15 @@ export default function HomeStory() {
       </SceneShell>
       <SceneShell id="workshops-canvas" hud={hud["workshops-canvas"]}>
         <WorkshopsCanvas />
+      </SceneShell>
+      <SceneShell id="memory-lane" hud={hud["memory-lane"]}>
+        <MemoryLane />
+      </SceneShell>
+      <SceneShell id="sponsors" hud={hud.sponsors}>
+        <Sponsors />
+      </SceneShell>
+      <SceneShell id="finale" hud={hud.finale}>
+        <Finale />
       </SceneShell>
     </main>
   );

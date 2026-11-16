@@ -46,6 +46,7 @@
     "@types/three": "^0.187.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
+    "opentype.js": "^1.3.4",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5",
