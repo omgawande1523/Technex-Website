@@ -9,7 +9,7 @@ import { MeshTransmissionMaterial } from "@react-three/drei";
 import { realm, near } from "../store";
 import { SPOTS } from "./layout";
 
-/** The register chapter: Inky floats inside an iridescent ink bubble. */
+/** The register chapter: the hero floats inside an iridescent glass bubble. */
 export default function Bubble() {
   const ref = useRef<THREE.Mesh>(null);
   useFrame((s) => {

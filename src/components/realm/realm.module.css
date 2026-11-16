@@ -464,91 +464,25 @@
   inset: 0;
   z-index: 20;
   background: #000;
-  display: grid;
-  place-items: center;
-  perspective: 1400px;
+  overflow: hidden;
 }
-.stack {
+.introMedia {
   position: absolute;
   inset: 0;
-  clip-path: inset(0 0 0 0 round 0px);
-  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s linear;
+  will-change: transform;
 }
-.card {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transform-origin: 0% 50%;
-  opacity: 0;
-  visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, filter;
-}
-.tint {
-  position: absolute;
-  inset: 0;
-  z-index: 100;
-  background: linear-gradient(115deg, #b0781f 0%, #e0b25c 45%, #8a3b14 100%);
-  mix-blend-mode: multiply;
-  opacity: 0.55;
-  pointer-events: none;
-}
-.logo {
-  position: relative;
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  opacity: 0;
-  visibility: hidden;
-  will-change: transform, opacity;
-}
-.logoBlock {
-  background: linear-gradient(180deg, #f2c978 0%, #d39a43 55%, #a86d26 100%);
-  padding: clamp(8px, 1.1vw, 16px) clamp(16px, 2.2vw, 30px) clamp(4px, 0.6vw, 8px);
-  box-shadow: 0 30px 120px rgba(217, 160, 70, 0.35);
-}
-.logoBlock span {
-  display: block;
-  font-family: var(--font-ink-display), "Arial Black", sans-serif;
-  font-size: clamp(54px, 11vw, 170px);
-  line-height: 0.9;
-  letter-spacing: -0.01em;
-  color: #fffaf0;
-}
-.logoBars {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  color: #f4ead8;
-}
-.logoBars i {
-  display: block;
-  width: clamp(60px, 12vw, 180px);
-  height: 2px;
-  background: #f4ead8;
-}
-.logoBars b {
-  font-family: var(--font-ink-display), sans-serif;
-  font-size: clamp(22px, 3vw, 40px);
-  letter-spacing: 0.3em;
-  font-weight: 900;
-}
-.logoEdition {
-  font-size: clamp(10px, 1vw, 13px);
-  letter-spacing: 0.6em;
-  color: rgba(244, 234, 216, 0.75);
-}
-.loadRow {
+.introBar {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 42px;
+  bottom: 30px;
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
   gap: 16px;
   font-size: 11px;
   letter-spacing: 0.42em;
@@ -558,25 +492,33 @@
   font-family: var(--font-ink-display), sans-serif;
   letter-spacing: 0.16em;
   color: var(--gold-hi);
-  font-size: 14px;
+  font-size: 13px;
 }
 .loadPct {
   font-variant-numeric: tabular-nums;
 }
-.skip {
-  position: absolute;
-  z-index: 300;
-  right: 28px;
-  bottom: 34px;
+.loadWait {
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  background: none;
+}
+.skip {
+  position: absolute;
+  right: 28px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(244, 234, 216, 0.25);
-  color: rgba(244, 234, 216, 0.7);
+  color: rgba(244, 234, 216, 0.75);
   padding: 9px 14px;
   border-radius: 999px;
   cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+.skip:hover {
+  border-color: var(--gold);
+  color: #fff;
 }
 
 /* ------------------------------------------------------------------ mobile */

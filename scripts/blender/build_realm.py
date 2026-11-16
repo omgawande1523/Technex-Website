@@ -589,13 +589,61 @@ def build_rocks():
     return col
 
 
+# --------------------------------------------------------------------------- Bust (hero)
+def import_normalised(rid, col, name, height):
+    path = os.path.join(PH, rid, f"{rid}.gltf")
+    if not os.path.exists(path):
+        print("missing", rid)
+        return None
+    before = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=path)
+    new = [o for o in bpy.data.objects if o not in before]
+    meshes = [o for o in new if o.type == "MESH"]
+    meshes.sort(key=lambda o: len(o.data.vertices), reverse=True)
+    o = meshes[0]
+    for extra in new:
+        if extra is not o:
+            bpy.data.objects.remove(extra)
+    link(o, col)
+    o.parent = None
+    o.name = name
+    bpy.context.view_layer.update()
+    s = height / o.dimensions.z if o.dimensions.z else 1.0
+    o.scale = (o.scale[0] * s, o.scale[1] * s, o.scale[2] * s)
+    bpy.context.view_layer.objects.active = o
+    bpy.ops.object.select_all(action="DESELECT")
+    o.select_set(True)
+    bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+    bpy.ops.object.origin_set(type="ORIGIN_GEOMETRY", center="BOUNDS")
+    o.location = (0, 0, 0)
+    shade_smooth(o)
+    return o
+
+
+def build_bust():
+    """The hero: Poly Haven's CC0 Marble Bust 01, 3 m tall, centred, facing -Y (web +Z)."""
+    col = collection("Bust")
+    import_normalised("marble_bust_01", col, "Hero_Bust", 3.0)
+    export(col, "bust.glb")
+    return col
+
+
+def build_heads():
+    """Gilded sculpture heads that crown the gate obelisks."""
+    col = collection("Heads")
+    for rid, name in (("lion_head", "Head_Lion"), ("horse_head", "Head_Horse")):
+        import_normalised(rid, col, name, 0.9)
+    export(col, "heads.glb")
+    return col
+
+
 # --------------------------------------------------------------------------- preview
 def preview_scene():
     """Arrange everything in one scene for a quick render (docs/realm-preview.png)."""
     scene = bpy.context.scene
-    inky = bpy.data.objects["Inky"]
-    inky.location = (0, -2.2, 1.65)
-    inky.scale = (0.8, 0.8, 0.8)
+    bust = bpy.data.objects.get("Hero_Bust")
+    if bust:
+        bust.location = (0, -1.2, 4.0)
     letters = [o for o in bpy.data.objects if o.name.startswith("Letter_") or o.name == "Edition_26"]
     for o in letters:
         o.location.y += 1.5
@@ -647,10 +695,10 @@ def preview_scene():
 
 if __name__ == "__main__":
     reset()
-    build_inky()
     build_portal()
     build_letters()
     build_screen()
     build_rocks()
+    build_bust()
     preview_scene()
     print("REALM BUILD OK")

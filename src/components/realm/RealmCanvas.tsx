@@ -10,7 +10,8 @@ import { Bloom, ChromaticAberration, EffectComposer, Noise, Vignette } from "@re
 import { BlendFunction } from "postprocessing";
 import { realm, clamp } from "./store";
 import { cameraPosition, cameraTarget, skyColor } from "./world/layout";
-import Inky from "./world/Inky";
+import Hero from "./world/Hero";
+import FlyWords from "./world/FlyWords";
 import Gate from "./world/Gate";
 import Realm from "./world/Realm";
 import Screens, { type ScreenItem } from "./world/Screens";
@@ -132,7 +133,7 @@ export default function RealmCanvas({ events, workshops, onReady }: { events: Sc
       <Suspense fallback={null}>
         <Environment files="/realm/hdr/studio_small_09_1k.hdr" environmentIntensity={0.9} />
         <Gate />
-        <Inky />
+        <Hero />
         <Ready onReady={onReady} />
         <Precompile />
       </Suspense>
@@ -150,6 +151,9 @@ export default function RealmCanvas({ events, workshops, onReady }: { events: Sc
       </Suspense>
       <Suspense fallback={null}>
         <Bubble />
+      </Suspense>
+      <Suspense fallback={null}>
+        <FlyWords />
       </Suspense>
       <Dust />
 

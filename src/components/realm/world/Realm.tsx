@@ -94,9 +94,9 @@ function Rocks() {
       return () => ((s = (s * 16807) % 2147483647) / 2147483647);
     })();
     const out: { pos: [number, number, number]; scale: number; rot: [number, number, number]; i: number; speed: number }[] = [];
-    // the island Inky stands on
-    out.push({ pos: [SPOTS.realm.x, SPOTS.realm.y - 1.15, SPOTS.realm.z], scale: 1.6, rot: [0, 0.4, 0], i: 0, speed: 0.6 });
-    out.push({ pos: [22, 0.95, -44.5], scale: 1.15, rot: [0, 1.2, 0], i: 3, speed: 0.5 });
+    // the island under the hero
+    out.push({ pos: [SPOTS.realm.x, 1.0, SPOTS.realm.z], scale: 1.6, rot: [0, 0.4, 0], i: 0, speed: 0.6 });
+    out.push({ pos: [22, 1.2, -44.5], scale: 1.25, rot: [0, 1.2, 0], i: 3, speed: 0.5 });
     for (let k = 0; k < 34; k++) {
       const z = -10 - rnd() * 100;
       const side = rnd() > 0.5 ? 1 : -1;
@@ -140,8 +140,8 @@ export default function Realm() {
   return (
     <group>
       <Rocks />
-      <TypeRing text="INKARNATE • TECHNEX 26 • " radius={3.4} y={0.15} speed={0.03} tilt={0.14} height={0.42} />
-      <TypeRing text="IMAGINATION MEETS REALITY • " radius={4.6} y={-0.55} speed={-0.02} tilt={-0.12} height={0.3} />
+      <TypeRing text="INKARNATE • TECHNEX 26 • " radius={3.6} y={1.0} speed={0.03} tilt={0.14} height={0.42} />
+      <TypeRing text="IMAGINATION TO REALITY • " radius={4.6} y={-0.2} speed={-0.02} tilt={-0.12} height={0.3} />
       <TextWall />
       <pointLight position={[SPOTS.realm.x + 3, SPOTS.realm.y + 4, SPOTS.realm.z + 4]} intensity={60} distance={22} color="#ffcf8a" />
       <pointLight position={[SPOTS.realm.x - 5, SPOTS.realm.y + 1, SPOTS.realm.z - 3]} intensity={40} distance={18} color="#8a5cff" />

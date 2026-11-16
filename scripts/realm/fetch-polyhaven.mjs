@@ -16,7 +16,7 @@ import { dirname, join } from "node:path";
 const API = "https://api.polyhaven.com/files/";
 const ROOT = process.cwd();
 
-const HDRIS = ["studio_small_09", "moonless_golf", "kloppenheim_02", "satara_night_no_lamps", "dikhololo_night"];
+const HDRIS = ["studio_small_09", "moonless_golf"];
 const MODELS = ["moon_rock_01", "moon_rock_03", "moon_rock_05", "rock_07", "namaqualand_boulder_02", "marble_bust_01", "lion_head", "horse_head"];
 const TEXTURES = ["rock_face_03", "marble_01", "black_marble", "concrete_floor_worn_001"];
 

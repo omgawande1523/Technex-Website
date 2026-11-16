@@ -13,7 +13,7 @@ import {
   navRoutes,
   registerHref,
 } from "@/lib/content";
-import MarvelIntro from "./MarvelIntro";
+import IntroLoader from "./IntroLoader";
 import { CHAPTERS, LAST, realm, setUi, useUi } from "./store";
 import type { ScreenItem } from "./world/Screens";
 import styles from "./realm.module.css";
@@ -60,7 +60,6 @@ export default function RealmHome() {
     () => allWorkshops().filter((w) => w.cover).map((w) => ({ key: w.slug, title: w.title, image: w.cover, href: w.href })),
     [],
   );
-  const montage = useMemo(() => [...events.map((e) => e.image), ...workshops.map((w) => w.image)].slice(0, 18), [events, workshops]);
 
   const onReady = useCallback(() => setWorldReady(true), []);
 
@@ -167,7 +166,7 @@ export default function RealmHome() {
       </div>
       <div ref={flash} className={styles.flash} aria-hidden />
 
-      <MarvelIntro images={montage} worldReady={worldReady} edition={festival.edition.split("-")[0]} />
+      <IntroLoader worldReady={worldReady} />
 
       {/* ---------- HTML layer ---------- */}
       <header className={`${styles.top} ${showUi ? styles.in : ""}`}>
@@ -191,9 +190,9 @@ export default function RealmHome() {
       {/* chapter 0: gate copy (Tathva-style side block) */}
       <section className={`${styles.gateCopy} ${showUi && chapter === 0 ? styles.in : ""}`} aria-hidden={chapter !== 0}>
         <h1>
-          Different realities.
+          Imagination.
           <br />
-          One ink.
+          Into reality.
         </h1>
         <p>{festival.tagline} {festival.host}, {festival.city}.</p>
         <div className={styles.count} aria-label="Countdown to TECHNEX">
@@ -223,7 +222,7 @@ export default function RealmHome() {
       <section className={`${styles.finale} ${showUi && chapter === LAST ? styles.in : ""}`} aria-hidden={chapter !== LAST}>
         <p className={styles.kicker}>Register · {festival.name}</p>
         <h2>
-          Let&apos;s make <em>ink move.</em>
+          Let&apos;s make it <em>real.</em>
         </h2>
         <div className={styles.ctaRow}>
           <Link href={registerHref} className={styles.cta}>

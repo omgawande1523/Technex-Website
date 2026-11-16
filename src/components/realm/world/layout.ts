@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 /**
- * World layout, in metres. The camera, Inky and the fog are all pure functions
+ * World layout, in metres. The camera, the hero and the fog are all pure functions
  * of `progress` (0 … 4). Stops are [progress, ...xyz].
  *
  * Portal numbers mirror scripts/blender/build_realm.py (ring centre 4.06 m,
@@ -45,13 +45,13 @@ export const CAMERA_LOOK: Stop[] = [
   [4, 0, 4.6, -112],
 ];
 
-/** Where Inky stands in each chapter (feet on the ground). */
-export const INKY_AT: Stop[] = [
-  [0, 0, 1.5, 2.1],
-  [1, 0, 3.05, -34],
-  [2, 22, 2.3, -44.5],
-  [3, 0, 3.9, -80],
-  [4, 0, 4.25, -112],
+/** Where the hero bust floats in each chapter (centre of the 3 m bust). */
+export const HERO_AT: Stop[] = [
+  [0, 0, 4.05, 0.7],
+  [1, 0, 4.4, -34],
+  [2, 22, 4.2, -44.5],
+  [3, 0, 4.7, -80],
+  [4, 0, 4.7, -112],
 ];
 
 /** Background / fog colour per chapter. */
@@ -74,7 +74,7 @@ function curveFrom(stops: Stop[]) {
 
 const camPosCurve = curveFrom(CAMERA_POS);
 const camLookCurve = curveFrom(CAMERA_LOOK);
-const inkyCurve = curveFrom(INKY_AT);
+const heroCurve = curveFrom(HERO_AT);
 
 /** Map progress to a curve parameter so each stop sits at its own progress. */
 function paramFor(p: number, stops: Stop[]) {
@@ -91,7 +91,7 @@ function paramFor(p: number, stops: Stop[]) {
 
 export const cameraPosition = (p: number, out: THREE.Vector3) => camPosCurve.getPoint(paramFor(p, CAMERA_POS), out);
 export const cameraTarget = (p: number, out: THREE.Vector3) => camLookCurve.getPoint(paramFor(p, CAMERA_LOOK), out);
-export const inkyPosition = (p: number, out: THREE.Vector3) => inkyCurve.getPoint(paramFor(p, INKY_AT), out);
+export const heroPosition = (p: number, out: THREE.Vector3) => heroCurve.getPoint(paramFor(p, HERO_AT), out);
 
 const c0 = new THREE.Color();
 const c1 = new THREE.Color();

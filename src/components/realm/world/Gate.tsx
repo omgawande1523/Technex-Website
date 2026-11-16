@@ -39,21 +39,26 @@ void main() {
   vec2 p = vUv - 0.5;
   float r = length(p) * 2.0;
   float ang = atan(p.y, p.x);
-  // swirling ink, pulled towards the centre
-  float swirl = ang + r * 3.2 - uTime * 0.35;
-  vec2 q = vec2(cos(swirl), sin(swirl)) * r * 2.4;
-  float ink = fbm(q * 1.6 + uTime * 0.08);
-  float veins = smoothstep(0.52, 0.56, ink) - smoothstep(0.56, 0.62, ink);
-  vec3 gold = vec3(1.0, 0.72, 0.32);
-  vec3 deep = vec3(0.035, 0.02, 0.06);
-  vec3 col = mix(deep, vec3(0.18, 0.08, 0.28), smoothstep(0.2, 0.9, ink));
-  col += gold * veins * (1.2 + uOpen * 2.0);
-  // bright core that opens as the camera approaches
-  float core = smoothstep(0.9, 0.0, r) * (0.15 + uOpen * 1.6);
-  col += gold * core * core;
-  float rim = smoothstep(0.82, 1.0, r);
-  col += gold * rim * 1.4;
-  float alpha = smoothstep(1.0, 0.96, r) * (0.92 + 0.08 * uOpen);
+  // a calm nebula of light: imagination on the other side
+  vec2 q = p * 3.0;
+  float cloud = fbm(q + vec2(uTime * 0.03, -uTime * 0.02));
+  float cloud2 = fbm(q * 2.1 - vec2(uTime * 0.05, uTime * 0.01) + cloud);
+  vec3 deep = vec3(0.02, 0.015, 0.04);
+  vec3 violet = vec3(0.22, 0.12, 0.42);
+  vec3 gold = vec3(1.0, 0.74, 0.38);
+  vec3 col = mix(deep, violet, smoothstep(0.35, 0.85, cloud2));
+  col = mix(col, gold * 0.9, smoothstep(0.62, 0.95, cloud2) * 0.55);
+  // stars
+  vec2 g = floor(vUv * 160.0);
+  float star = step(0.992, hash(g)) * (0.5 + 0.5 * sin(uTime * 2.0 + hash(g + 3.0) * 30.0));
+  col += vec3(1.0, 0.95, 0.85) * star * smoothstep(1.0, 0.3, r);
+  // god-rays from the centre, opening as you approach
+  float rays = pow(abs(sin(ang * 9.0 + uTime * 0.15)), 18.0) * smoothstep(1.0, 0.1, r);
+  col += gold * rays * (0.15 + uOpen * 0.6);
+  float core = smoothstep(0.85, 0.0, r);
+  col += vec3(1.0, 0.85, 0.6) * core * core * (0.12 + uOpen * 1.8);
+  col += gold * smoothstep(0.86, 1.0, r) * 1.1;
+  float alpha = smoothstep(1.0, 0.97, r);
   gl_FragColor = vec4(col, alpha);
 }`;
 

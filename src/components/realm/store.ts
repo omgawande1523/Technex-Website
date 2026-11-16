@@ -9,10 +9,10 @@ import { useSyncExternalStore } from "react";
 
 export const CHAPTERS = [
   { id: "gate", label: "The Gate", caption: "Imagination turning into reality." },
-  { id: "realm", label: "INKARNATE", caption: "Step through. The ink is alive." },
+  { id: "realm", label: "INKARNATE", caption: "Where imagination becomes real." },
   { id: "events", label: "Events", caption: "Selected events. Built to leave a mark." },
   { id: "workshops", label: "Workshops", caption: "Learn from the people who build." },
-  { id: "register", label: "Register", caption: "Your story is written in ink." },
+  { id: "register", label: "Register", caption: "Your idea. Made real." },
 ] as const;
 
 export const LAST = CHAPTERS.length - 1;
