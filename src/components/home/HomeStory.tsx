@@ -10,6 +10,7 @@ import Overdrive from "./scenes/Overdrive";
 import RoboSumo from "./scenes/RoboSumo";
 import InkDissolve from "./scenes/InkDissolve";
 import Conclave from "./scenes/Conclave";
+import WorkshopsCanvas from "./scenes/WorkshopsCanvas";
 
 /** The home scroll story: one SceneShell per scene, in homeScenes() order. */
 export default function HomeStory() {
@@ -47,6 +48,9 @@ export default function HomeStory() {
       )}
       <SceneShell id="conclave" hud={hud.conclave}>
         <Conclave />
+      </SceneShell>
+      <SceneShell id="workshops-canvas" hud={hud["workshops-canvas"]}>
+        <WorkshopsCanvas />
       </SceneShell>
     </main>
   );

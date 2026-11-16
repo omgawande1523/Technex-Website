@@ -1,0 +1,223 @@
+.scene {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--ink-paper);
+  color: var(--ink-bone);
+}
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 300px;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--ink-paper) 45%, rgba(11, 9, 6, 0));
+}
+.contours {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.head {
+  position: absolute;
+  z-index: 4;
+  left: clamp(16px, 4vw, 64px);
+  right: clamp(16px, 4vw, 64px);
+  top: 88px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  pointer-events: none;
+}
+.head > * {
+  pointer-events: auto;
+}
+.kicker {
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--ink-gold);
+}
+.title {
+  margin: 0;
+  font-family: var(--font-barge);
+  font-size: clamp(36px, 5vw, 80px);
+  line-height: 0.9;
+}
+.tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid var(--ink-gold-dim);
+  border-radius: 999px;
+  background: rgba(11, 9, 6, 0.75);
+}
+.tab {
+  padding: 9px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-gold-soft);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.tab[aria-selected="true"] {
+  background: var(--ink-gold);
+  color: var(--ink-paper);
+}
+
+.viewport {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+}
+.viewport[data-dragging="true"] {
+  cursor: grabbing;
+}
+.viewport:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ink-gold);
+}
+.world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5400px;
+  height: 3300px;
+  will-change: transform;
+}
+/* "Handwritten" names: Barge italic, slightly rotated, with an ink underline. */
+.name {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-barge);
+  font-style: italic;
+  line-height: 0.95;
+  color: var(--ink-bone);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: color 0.25s ease;
+}
+.name small {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-gold);
+  margin-bottom: 4px;
+}
+.name::after {
+  content: "";
+  height: 5px;
+  margin-top: 4px;
+  background: var(--ink-gold);
+  border-radius: 6px 2px 8px 1px;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.4s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.name:hover,
+.name:focus-visible {
+  color: var(--ink-gold-soft);
+}
+.name:hover::after,
+.name:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.preview {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 4;
+  width: 260px;
+  margin: -170px 0 0 30px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform-origin: 50% 0;
+}
+.preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 2px solid var(--ink-gold);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  filter: sepia(0.35) contrast(1.1);
+}
+.preview span {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-gold);
+}
+
+/* Mobile: native horizontal scroller. */
+.strip {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  display: flex;
+  gap: 14px;
+  margin: 0;
+  padding: 0 16px 8px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+.strip li {
+  flex: none;
+  width: 62vw;
+  scroll-snap-align: start;
+}
+.stripItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--ink-bone);
+  text-decoration: none;
+}
+.stripItem img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 2px solid var(--ink-gold);
+}
+.stripKind {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-gold);
+}
+.stripName {
+  font-family: var(--font-barge);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
